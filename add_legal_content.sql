@@ -1,0 +1,7 @@
+-- Insère le contenu par défaut pour les pages légales
+
+INSERT INTO site_content (key, label, value) VALUES
+('legal_mentions', 'Mentions Légales', 'EDITEUR DU SITE\nLe site na-coaching.com est édité par [VOTRE NOM], micro-entrepreneur, immatriculé sous le numéro SIRET [VOTRE SIRET], dont le siège social est situé au [VOTRE ADRESSE].\n\nDirecteur de la publication : [VOTRE NOM]\nContact : [VOTRE EMAIL]\n\nHÉBERGEMENT\nLe site est hébergé par Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA.\n\nPROPRIÉTÉ INTELLECTUELLE\nL’ensemble de ce site relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés.'),
+
+('privacy_policy', 'Politique de Confidentialité', 'COLLECTE DES DONNÉES\nLes informations recueillies via le formulaire de contact ou l''inscription à la newsletter sont enregistrées dans un fichier informatisé par NA Coaching. Elles sont conservées pendant 3 ans et sont destinées à la gestion de la clientèle.\n\nDROIT D''ACCÈS\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d''accès aux données vous concernant et les faire rectifier en contactant : [VOTRE EMAIL].\n\nCOOKIES\nCe site utilise des cookies pour améliorer l''expérience utilisateur et réaliser des statistiques de visites anonymes via Supabase et Vercel Analytics.')
+ON CONFLICT (key) DO NOTHING;

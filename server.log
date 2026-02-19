@@ -1,0 +1,22 @@
+
+> na-coaching@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.14:3000
+- Environments: .env.local
+
+✓ Starting...
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to /var/folders/f4/pk4sypls3z54k7btwky0nwph0000gn/T/next-panic-488b5f958595a29180d77d35f0d1b969.log.
+
+To help make Turbopack better, report this error by ]8;;https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20Not%20a%20directory%20%28os%20error%2020%29&body=Turbopack%20version%3A%20%6023c464985%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0ANot%20a%20directory%20%28os%20error%2020%29%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+Error [TurbopackInternalError]: Not a directory (os error 20)
+    at <unknown> (TurbopackInternalError: Not a directory (os error 20)) {
+  location: undefined
+}
+[?25h
