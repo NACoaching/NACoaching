@@ -54,6 +54,12 @@ export async function POST(request) {
                 },
             ],
             mode: 'payment',
+            invoice_creation: {
+                enabled: true, // Forces Stripe to collect email to send an invoice
+            },
+            phone_number_collection: {
+                enabled: false,
+            },
             success_url: `${request.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${request.headers.get('origin')}/boutique/${product.id}`,
             metadata: {
