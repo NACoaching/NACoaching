@@ -28,9 +28,11 @@ function SuccessContent() {
                                 <Mail size={24} />
                             </div>
                             <div>
-                                <h3 className="font-bold text-sm uppercase mb-1 text-zinc-900">Vérifiez vos emails</h3>
+                                <h3 className="font-bold text-sm uppercase mb-1 text-zinc-900">Vérifiez vos emails (et spams !)</h3>
                                 <p className="text-xs text-zinc-700 font-medium">
-                                    Nous venons de vous envoyer votre lien de téléchargement sécurisé. Il est valable 24h.
+                                    Nous vous avons envoyé un lien de téléchargement sécurisé. <br />
+                                    <strong>Attention : ce lien n'est valable que 7 jours.</strong><br />
+                                    Si vous ne recevez rien, pensez à vérifier vos courriers indésirables.
                                 </p>
                             </div>
                         </div>

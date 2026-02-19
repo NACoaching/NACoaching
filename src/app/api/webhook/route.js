@@ -60,7 +60,7 @@ export async function POST(req) {
             const { data: signedUrlData, error: signError } = await supabaseAdmin
                 .storage
                 .from('secure_products')
-                .createSignedUrl(product.file_path, 60 * 60 * 24); // 24 hours
+                .createSignedUrl(product.file_path, 60 * 60 * 24 * 7); // 7 days
 
             if (signError || !signedUrlData) {
                 console.error('Error generating signed URL:', signError);
@@ -77,7 +77,7 @@ export async function POST(req) {
                 html: `
           <h1>Merci pour votre achat !</h1>
           <p>Voici votre lien de téléchargement pour <strong>${product.title}</strong>.</p>
-          <p>Ce lien est valide pendant 24 heures.</p>
+          <p>Ce lien est valide pendant 7 jours.</p>
           <a href="${downloadLink}" style="background-color: #FF6B00; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Télécharger mon programme</a>
           <p>Si le bouton ne fonctionne pas, copiez ce lien : ${downloadLink}</p>
           <p>Bon entraînement !<br/>L'équipe NA Coaching</p>
