@@ -36,8 +36,14 @@ export async function POST(req) {
         console.log(`Processing payment for product ${productId} by ${customerEmail}`);
 
         try {
-            // 1. Get Product Details (File Path)
-            const { data: product, error: productError } = await supabase
+            // Instantiate admin client with Service Role Key for full access (Storage & DB)
+            const supabaseAdmin = createClient(
+                process.env.NEXT_PUBLIC_SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY
+            );
+
+            // 1. Get Product Details (File Path) using Admin Client
+            const { data: product, error: productError } = await supabaseAdmin
                 .from('products')
                 .select('title, file_path')
                 .eq('id', productId)
@@ -49,8 +55,9 @@ export async function POST(req) {
                 return NextResponse.json({ error: 'Product Error' }, { status: 500 });
             }
 
-            // 2. Generate Signed URL (Valid for 24h)
-            const { data: signedUrlData, error: signError } = await supabase
+            // 2. Generate Signed URL (Valid for 24h) using Admin Client
+            // This is crucial as the bucket is private and we need admin rights to sign URLs
+            const { data: signedUrlData, error: signError } = await supabaseAdmin
                 .storage
                 .from('secure_products')
                 .createSignedUrl(product.file_path, 60 * 60 * 24); // 24 hours
@@ -85,17 +92,7 @@ export async function POST(req) {
             console.log('Email sent successfully:', emailData);
 
             // 4. Record Order in Supabase
-            // We use the service_role key if available to bypass RLS, but here we are in an API route
-            // which usually uses a service role client if configured, but 'supabase' imported from @/lib/supabaseClient
-            // is likely using the ANON key. 
-            // However, we just enabled RLS on 'orders' without policies, so ANON key CANNOT insert.
-            // We need to use a Service Role client here.
-
-            const supabaseAdmin = createClient(
-                process.env.NEXT_PUBLIC_SUPABASE_URL,
-                process.env.SUPABASE_SERVICE_ROLE_KEY
-            );
-
+            // Use same admin client
             const { error: orderError } = await supabaseAdmin
                 .from('orders')
                 .insert([
