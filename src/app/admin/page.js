@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { ArrowLeft, Plus, Save, Trash2, Lock, ShoppingBag, FileText, Mail, Activity, Edit, Star } from 'lucide-react';
 import Link from 'next/link';
@@ -16,7 +16,9 @@ export default function AdminPage() {
     const [comments, setComments] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
-    const [analytics, setAnalytics] = useState([]);
+    const [rawPageViews, setRawPageViews] = useState([]);
+    const [analyticsFilter, setAnalyticsFilter] = useState('all'); // 'today', '7d', '30d', 'all', 'custom'
+    const [customDate, setCustomDate] = useState('');
     const [loading, setLoading] = useState(true);
     const [uploadStatus, setUploadStatus] = useState(null);
     const [editingItem, setEditingItem] = useState(null); // { type: 'article' | 'product', id: '...' }
@@ -89,17 +91,7 @@ export default function AdminPage() {
         if (commentsRes.data) setComments(commentsRes.data);
         if (subscribersRes.data) setSubscribers(subscribersRes.data);
         if (reviewsRes.data) setReviews(reviewsRes.data);
-        if (analyticsRes.data) {
-            // Aggregate views by path
-            const viewsByPath = analyticsRes.data.reduce((acc, curr) => {
-                acc[curr.page_path] = (acc[curr.page_path] || 0) + 1;
-                return acc;
-            }, {});
-            const sorted = Object.entries(viewsByPath)
-                .map(([path, count]) => ({ path, count }))
-                .sort((a, b) => b.count - a.count);
-            setAnalytics(sorted);
-        }
+        if (analyticsRes.data) setRawPageViews(analyticsRes.data);
         setLoading(false);
     };
 
@@ -398,6 +390,38 @@ export default function AdminPage() {
         );
     }
 
+    // Compute filtered analytics
+    const now = new Date();
+    let filteredViews = rawPageViews;
+
+    if (analyticsFilter === 'today') {
+        const todayStr = now.toISOString().split('T')[0];
+        filteredViews = rawPageViews.filter(v => v.created_at && v.created_at.startsWith(todayStr));
+    } else if (analyticsFilter === '7d') {
+        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        filteredViews = rawPageViews.filter(v => new Date(v.created_at) >= sevenDaysAgo);
+    } else if (analyticsFilter === '30d') {
+        const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        filteredViews = rawPageViews.filter(v => new Date(v.created_at) >= thirtyDaysAgo);
+    } else if (analyticsFilter === 'custom' && customDate) {
+        filteredViews = rawPageViews.filter(v => v.created_at && v.created_at.startsWith(customDate));
+    }
+
+    const viewsByPath = filteredViews.reduce((acc, curr) => {
+        acc[curr.page_path] = (acc[curr.page_path] || 0) + 1;
+        return acc;
+    }, {});
+    const analytics = Object.entries(viewsByPath)
+        .map(([path, count]) => ({ path, count }))
+        .sort((a, b) => b.count - a.count);
+
+    const totalViews = filteredViews.length;
+    const filterLabel = analyticsFilter === 'today' ? "Aujourd'hui"
+        : analyticsFilter === '7d' ? '7 derniers jours'
+            : analyticsFilter === '30d' ? '30 derniers jours'
+                : analyticsFilter === 'custom' && customDate ? `Le ${new Date(customDate + 'T00:00:00').toLocaleDateString('fr-FR')}`
+                    : 'Depuis le début';
+
     return (
         <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900">
             <nav className="bg-black text-white py-4 px-6 mb-8 flex justify-between items-center">
@@ -471,17 +495,47 @@ export default function AdminPage() {
 
                 {activeTab === 'analytics' ? (
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-xl font-black uppercase">Top Pages</h2>
-                            <span className="text-xs font-bold text-zinc-400 bg-zinc-100 px-2 py-1 rounded">Total vues: {analytics.reduce((acc, curr) => acc + curr.count, 0)}</span>
+                        <div className="flex flex-col gap-4 mb-6">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-xl font-black uppercase">Top Pages</h2>
+                                <span className="text-xs font-bold text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{filterLabel} — {totalViews} vues</span>
+                            </div>
+
+                            {/* Date Filter Buttons */}
+                            <div className="flex flex-wrap gap-2 items-center">
+                                {[
+                                    { key: 'today', label: "Aujourd'hui" },
+                                    { key: '7d', label: '7 jours' },
+                                    { key: '30d', label: '30 jours' },
+                                    { key: 'all', label: 'Tout' },
+                                ].map(opt => (
+                                    <button
+                                        key={opt.key}
+                                        onClick={() => { setAnalyticsFilter(opt.key); setCustomDate(''); }}
+                                        className={`px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition ${analyticsFilter === opt.key
+                                            ? 'bg-[#FF6B00] text-black'
+                                            : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200'
+                                            }`}
+                                    >
+                                        {opt.label}
+                                    </button>
+                                ))}
+                                <div className="flex items-center gap-2 ml-2">
+                                    <input
+                                        type="date"
+                                        value={customDate}
+                                        onChange={(e) => { setCustomDate(e.target.value); setAnalyticsFilter('custom'); }}
+                                        className="px-3 py-2 rounded border border-zinc-200 text-xs font-bold text-zinc-600 bg-zinc-50 focus:outline-none focus:border-[#FF6B00]"
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div className="space-y-6">
                             {analytics.length === 0 ? (
-                                <p className="text-zinc-500 italic">Pas encore assez de données.</p>
+                                <p className="text-zinc-500 italic">Pas de données pour cette période.</p>
                             ) : (
                                 <div className="space-y-4">
                                     {analytics.map((page, index) => {
-                                        // Try to find article title if it's a blog post
                                         let pageLabel = page.path;
                                         if (page.path === '/') pageLabel = '🏠 Accueil';
                                         else if (page.path === '/labo') pageLabel = '🧪 Le Labo';
@@ -491,6 +545,8 @@ export default function AdminPage() {
                                             const article = articles.find(a => a.id.toString() === articleId);
                                             if (article) pageLabel = `📄 Article : ${article.title}`;
                                         }
+                                        else if (page.path.startsWith('/outils/')) pageLabel = `🔧 ${page.path.split('/').pop()}`;
+                                        else if (page.path.startsWith('/boutique/')) pageLabel = `🛍️ Produit`;
 
                                         return (
                                             <div key={page.path} className="flex items-center gap-4">
