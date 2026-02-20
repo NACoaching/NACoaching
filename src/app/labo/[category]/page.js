@@ -34,24 +34,21 @@ export default async function LaboCategoryPage({ params }) {
     // Next.js gives us the decoded category name in params
     const category = decodeURIComponent((await params).category);
 
-    // Exact match first, then case-insensitive fallback
-    let { data: articles } = await supabase
-        .from('articles')
-        .select('*')
-        .eq('category', category)
-        .order('created_at', { ascending: false });
+    // Fetch articles + all categories for the navigation bar in parallel
+    const [articlesRes, allCatsRes] = await Promise.all([
+        supabase.from('articles').select('*').eq('category', category).order('created_at', { ascending: false }),
+        supabase.from('articles').select('category'),
+    ]);
 
-    // Fallback: try case-insensitive match (handles lowercase slugs)
-    if (!articles || articles.length === 0) {
-        const { data: fallback } = await supabase
-            .from('articles')
-            .select('*')
-            .ilike('category', category)
-            .order('created_at', { ascending: false });
-        articles = fallback || [];
+    let articlesList = articlesRes.data || [];
+
+    // Fallback: case-insensitive match
+    if (articlesList.length === 0) {
+        const { data: fallback } = await supabase.from('articles').select('*').ilike('category', category).order('created_at', { ascending: false });
+        articlesList = fallback || [];
     }
 
-    const articlesList = articles || [];
+    const allCategories = [...new Set((allCatsRes.data || []).map(a => a.category).filter(Boolean))];
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -87,10 +84,29 @@ export default async function LaboCategoryPage({ params }) {
                             <span className="text-[#FF6B00] text-sm font-black uppercase tracking-widest">Catégorie</span>
                         </div>
                         <h1 className="text-5xl font-black uppercase text-black mb-4">{category}</h1>
-                        <p className="text-zinc-500 mb-12 max-w-xl">
+                        <p className="text-zinc-500 mb-8 max-w-xl">
                             {articlesList.length} article{articlesList.length > 1 ? 's' : ''} sur cette thématique — basés sur la science et l'expertise d'un Master EOPS.
                         </p>
                     </AnimWrapper>
+
+                    {/* CATEGORY NAVIGATION */}
+                    <div className="flex flex-wrap gap-3 mb-10">
+                        <Link href="/labo" className="px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 bg-zinc-100 text-zinc-600 hover:border-[#FF6B00] hover:text-[#FF6B00] transition">
+                            Tous
+                        </Link>
+                        {allCategories.map(cat => (
+                            <Link
+                                key={cat}
+                                href={`/labo/${cat}`}
+                                className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition ${cat === category
+                                    ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
+                                    : 'bg-zinc-100 text-zinc-600 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00]'
+                                    }`}
+                            >
+                                {cat}
+                            </Link>
+                        ))}
+                    </div>
 
                     {articlesList.length === 0 ? (
                         <div className="text-center py-20">
