@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabaseClient';
-import { ArrowLeft, Activity } from 'lucide-react';
+import { Activity } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CommentsSection from '@/components/CommentsSection';
@@ -7,6 +7,7 @@ import ShareButtons from '@/components/ShareButtons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ReadingProgress from '@/components/ReadingProgress';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export async function generateMetadata({ params }) {
     const { id } = await params;
@@ -96,14 +97,14 @@ export default async function ArticlePage({ params }) {
             <ReadingProgress />
             <section className="py-20 bg-white min-h-screen">
                 <div className="max-w-3xl mx-auto px-6">
-                    <Link
-                        href="/labo"
-                        className="flex items-center gap-2 text-zinc-400 font-bold hover:text-black mb-8 transition"
-                    >
-                        <ArrowLeft size={18} /> Retour au Labo
-                    </Link>
+                    <Breadcrumb items={[
+                        { label: 'Accueil', href: '/' },
+                        { label: 'Le Labo', href: '/labo' },
+                        { label: article.category, href: `/labo?category=${encodeURIComponent(article.category)}` },
+                        { label: article.title },
+                    ]} />
 
-                    <div className="text-[#FF6B00] text-sm font-black uppercase tracking-widest mb-4">{article.category}</div>
+                    <div className="text-[#FF6B00] text-sm font-black uppercase tracking-widest mb-4 mt-6">{article.category}</div>
                     <h1 className="text-4xl md:text-5xl font-black uppercase leading-tight mb-8 italic border-l-8 border-[#FF6B00] pl-6 text-black">
                         {article.title}
                     </h1>

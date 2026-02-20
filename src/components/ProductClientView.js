@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
-import { ArrowLeft, ShoppingBag, Check, ChevronRight, Loader2, Star, ChevronDown } from 'lucide-react';
+import { Check, ChevronRight, Loader2, Star, ChevronDown } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 import ProductGallery from '@/components/ProductGallery';
 import ReviewForm from '@/components/ReviewForm';
 import ReviewList from '@/components/ReviewList';
 import { supabase } from '@/lib/supabaseClient';
+import Breadcrumb from '@/components/Breadcrumb';
 
-export default function ProductClientView({ initialProduct, initialReviews, siteContentMap, relatedArticles = [] }) {
+export default function ProductClientView({ initialProduct, initialReviews, siteContentMap, relatedArticles = [], breadcrumbItems = [] }) {
     const [product] = useState(initialProduct);
     const [reviews, setReviews] = useState(initialReviews);
     const [checkoutLoading, setCheckoutLoading] = useState(false);
@@ -64,9 +65,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
         <section className="pt-32 pb-20 bg-zinc-50 min-h-screen text-zinc-900">
             <div className="max-w-6xl mx-auto px-6">
                 <AnimWrapper>
-                    <Link href="/boutique" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mb-8 font-bold uppercase text-sm">
-                        <ArrowLeft size={16} /> {getContent('product_page_back_link', 'Retour à la boutique')}
-                    </Link>
+                    <Breadcrumb items={breadcrumbItems} />
                 </AnimWrapper>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">

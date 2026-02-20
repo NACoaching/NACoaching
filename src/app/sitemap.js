@@ -4,7 +4,7 @@ export default async function sitemap() {
     const baseUrl = 'https://na-coaching.com';
 
     // Get all articles
-    const { data: articles } = await supabase.from('articles').select('id, created_at');
+    const { data: articles } = await supabase.from('articles').select('id, category, created_at');
 
     const blogUrls = articles?.map((article) => ({
         url: `${baseUrl}/blog/${article.id}`,
@@ -12,6 +12,15 @@ export default async function sitemap() {
         changeFrequency: 'weekly',
         priority: 0.8,
     })) || [];
+
+    // Get unique categories for Labo category pages
+    const categories = [...new Set((articles || []).map(a => a.category).filter(Boolean))];
+    const categoryUrls = categories.map(category => ({
+        url: `${baseUrl}/labo/${encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.75,
+    }));
 
     // Get all products
     const { data: products } = await supabase.from('products').select('id, created_at');
@@ -98,5 +107,6 @@ export default async function sitemap() {
         },
         ...blogUrls,
         ...productUrls,
+        ...categoryUrls,
     ];
 }

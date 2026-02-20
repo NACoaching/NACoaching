@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabaseClient';
 import { notFound } from 'next/navigation';
 import ProductClientView from '@/components/ProductClientView';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const revalidate = 0;
 
@@ -106,11 +107,32 @@ export default async function ProductPage({ params }) {
         };
     }
 
+    const breadcrumbItems = [
+        { label: 'Accueil', href: '/' },
+        { label: 'Boutique', href: '/boutique' },
+        { label: product.title },
+    ];
+
+    const breadcrumbJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbItems.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.label,
+            item: item.href ? `https://na-coaching.com${item.href}` : undefined,
+        }))
+    };
+
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             {faqJsonLd && (
                 <script
@@ -123,6 +145,7 @@ export default async function ProductPage({ params }) {
                 initialReviews={reviews}
                 siteContentMap={siteContentMap}
                 relatedArticles={relatedArticles}
+                breadcrumbItems={breadcrumbItems}
             />
         </>
     );
