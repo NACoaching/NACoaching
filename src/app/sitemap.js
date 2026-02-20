@@ -13,11 +13,21 @@ export default async function sitemap() {
         priority: 0.8,
     })) || [];
 
+    // Get all products
+    const { data: products } = await supabase.from('products').select('id, created_at');
+
+    const productUrls = products?.map((product) => ({
+        url: `${baseUrl}/boutique/${product.id}`,
+        lastModified: new Date(product.created_at),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+    })) || [];
+
     return [
         {
             url: baseUrl,
             lastModified: new Date(),
-            changeFrequency: 'yearly',
+            changeFrequency: 'weekly',
             priority: 1,
         },
         {
@@ -33,10 +43,46 @@ export default async function sitemap() {
             priority: 0.9,
         },
         {
+            url: `${baseUrl}/outils`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/outils/calculateur-1rm`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/outils/besoins-caloriques`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/outils/frequence-cardiaque`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/outils/vma-vo2`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/outils/convertisseur-vitesse`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
             url: `${baseUrl}/contact`,
             lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.5,
+            changeFrequency: 'monthly',
+            priority: 0.7,
         },
         {
             url: `${baseUrl}/mentions-legales`,
@@ -51,5 +97,6 @@ export default async function sitemap() {
             priority: 0.1,
         },
         ...blogUrls,
+        ...productUrls,
     ];
 }
