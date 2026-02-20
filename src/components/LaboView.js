@@ -42,17 +42,24 @@ export default function LaboView({ articles, siteContent }) {
                 {/* FILTERS */}
                 <AnimWrapper delay={0.2}>
                     <div className="flex flex-wrap gap-4 mb-12">
-                        {["Tous", ...new Set(articles.map(a => a.category))].map(category => (
-                            <button
+                        <button
+                            onClick={() => setSelectedCategory("Tous")}
+                            className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 transition ${selectedCategory === "Tous"
+                                ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
+                                : 'bg-zinc-100 text-zinc-600 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00]'
+                                }`}
+                        >
+                            Tous
+                        </button>
+                        {[...new Set(articles.map(a => a.category))].map(category => (
+                            <Link
                                 key={category}
+                                href={`/labo/${encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))}`}
+                                className="px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 transition bg-zinc-100 text-zinc-600 hover:border-[#FF6B00] hover:text-[#FF6B00] hover:bg-white"
                                 onClick={() => setSelectedCategory(category)}
-                                className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 transition ${selectedCategory === category
-                                    ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
-                                    : 'bg-zinc-100 text-zinc-600 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00]'
-                                    }`}
                             >
                                 {category}
-                            </button>
+                            </Link>
                         ))}
                     </div>
                 </AnimWrapper>
