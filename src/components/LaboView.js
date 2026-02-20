@@ -54,7 +54,7 @@ export default function LaboView({ articles, siteContent }) {
                         {[...new Set(articles.map(a => a.category))].map(category => (
                             <Link
                                 key={category}
-                                href={`/labo/${category.toLowerCase().replace(/ /g, '-')}`}
+                                href={`/labo/${category}`}
                                 className="px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 transition bg-zinc-100 text-zinc-600 hover:border-[#FF6B00] hover:text-[#FF6B00] hover:bg-white"
                                 onClick={() => setSelectedCategory(category)}
                             >

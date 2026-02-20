@@ -4,76 +4,73 @@ import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import AnimWrapper from '@/components/AnimWrapper';
 
-// Tell Next.js to render this page dynamically (categories come from the DB)
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600;
 
-// Generate static paths for all existing categories at build time
+// Use the exact category name from the DB as the static param
 export async function generateStaticParams() {
     const { data } = await supabase.from('articles').select('category');
     if (!data) return [];
     const categories = [...new Set(data.map(a => a.category).filter(Boolean))];
-    // Return the raw lowercase slug - Next.js handles URL encoding automatically
-    return categories.map(category => ({
-        category: category.toLowerCase().replace(/ /g, '-'),
-    }));
+    // Pass the exact category name - Next.js will URL-encode it in the path automatically
+    return categories.map(category => ({ category }));
 }
 
-// Generate SEO metadata dynamically per category
 export async function generateMetadata({ params }) {
-    const { category } = await params;
-    // Next.js decodes params automatically
-    const categoryName = category.replace(/-/g, ' ');
-    const displayName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+    // Next.js always gives us the decoded value in params
+    const category = decodeURIComponent((await params).category);
 
     return {
-        title: `${displayName} - Le Labo NA Coaching`,
-        description: `Tous les articles scientifiques de NA Coaching sur la thématique "${displayName}". Découvrez les conseils d'expert d'un Master EOPS.`,
+        title: `${category} - Le Labo NA Coaching`,
+        description: `Tous les articles scientifiques de NA Coaching sur la thématique "${category}". Découvrez les conseils d'expert d'un Master EOPS.`,
         openGraph: {
-            title: `${displayName} - Le Labo NA Coaching`,
-            description: `Tous les articles NA Coaching sur : ${displayName}.`,
-            url: `https://na-coaching.com/labo/${category}`,
+            title: `${category} - Le Labo NA Coaching`,
+            description: `Tous les articles NA Coaching sur : ${category}.`,
             type: 'website',
-        },
-        alternates: {
-            canonical: `https://na-coaching.com/labo/${category}`,
         },
     };
 }
 
 export default async function LaboCategoryPage({ params }) {
-    // Next.js automatically decodes URL params, so no need for decodeURIComponent
-    const { category } = await params;
-    const categoryName = category.replace(/-/g, ' ');
+    // Next.js gives us the decoded category name in params
+    const category = decodeURIComponent((await params).category);
 
-    // Fetch all articles, filter by category (case-insensitive)
-    const { data: articles } = await supabase
+    // Exact match first, then case-insensitive fallback
+    let { data: articles } = await supabase
         .from('articles')
         .select('*')
-        .ilike('category', categoryName)
+        .eq('category', category)
         .order('created_at', { ascending: false });
+
+    // Fallback: try case-insensitive match (handles lowercase slugs)
+    if (!articles || articles.length === 0) {
+        const { data: fallback } = await supabase
+            .from('articles')
+            .select('*')
+            .ilike('category', category)
+            .order('created_at', { ascending: false });
+        articles = fallback || [];
+    }
 
     const articlesList = articles || [];
 
-    // JSON-LD CollectionPage structured data
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: `${categoryName} - Le Labo NA Coaching`,
-        description: `Articles scientifiques sur la thématique ${categoryName} par NA Coaching.`,
-        url: `https://na-coaching.com/labo/${category}`,
+        name: `${category} - Le Labo NA Coaching`,
+        description: `Articles scientifiques sur la thématique ${category} par NA Coaching.`,
+        url: `https://na-coaching.com/labo/${encodeURIComponent(category)}`,
         hasPart: articlesList.map(article => ({
             '@type': 'Article',
             headline: article.title,
             url: `https://na-coaching.com/blog/${article.id}`,
             image: article.image,
-            description: article.excerpt,
         })),
     };
 
     const breadcrumbItems = [
         { label: 'Accueil', href: '/' },
         { label: 'Le Labo', href: '/labo' },
-        { label: categoryName.charAt(0).toUpperCase() + categoryName.slice(1) },
+        { label: category },
     ];
 
     return (
@@ -89,9 +86,7 @@ export default async function LaboCategoryPage({ params }) {
                         <div className="mt-6 mb-4">
                             <span className="text-[#FF6B00] text-sm font-black uppercase tracking-widest">Catégorie</span>
                         </div>
-                        <h1 className="text-5xl font-black uppercase text-black mb-4">
-                            {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
-                        </h1>
+                        <h1 className="text-5xl font-black uppercase text-black mb-4">{category}</h1>
                         <p className="text-zinc-500 mb-12 max-w-xl">
                             {articlesList.length} article{articlesList.length > 1 ? 's' : ''} sur cette thématique — basés sur la science et l'expertise d'un Master EOPS.
                         </p>
