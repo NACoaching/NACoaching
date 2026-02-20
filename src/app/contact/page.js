@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import { Mail, Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
-import { supabase } from '@/lib/supabaseClient';
 
 export default function ContactPage() {
     const [status, setStatus] = useState('idle'); // idle, loading, success, error
@@ -20,11 +19,7 @@ export default function ContactPage() {
         };
 
         try {
-            // 1. Save to Database (Backup)
-            const { error: dbError } = await supabase.from('messages').insert([data]);
-            if (dbError) throw dbError;
-
-            // 2. Send Email via Resend
+            // Send via API (handles both email sending and DB saving)
             const res = await fetch('/api/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

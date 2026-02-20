@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -12,9 +13,25 @@ export async function POST(req) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
+        // Save message to database (using admin client to bypass RLS)
+        const supabaseAdmin = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL,
+            process.env.SUPABASE_SERVICE_ROLE_KEY
+        );
+
+        const { error: dbError } = await supabaseAdmin.from('messages').insert([{
+            name, email, phone, subject, message
+        }]);
+
+        if (dbError) {
+            console.error('Error saving message:', dbError);
+            // Don't fail the whole request, still try to send the email
+        }
+
+        // Send email notification
         const data = await resend.emails.send({
-            from: 'NA Coaching <onboarding@resend.dev>', // Default Resend testing domain
-            to: ['contact.nacoaching@gmail.com'], // Replace with your real email later
+            from: 'NA Coaching <contact@na-coaching.com>',
+            to: ['contact.nacoaching@gmail.com'],
             subject: `Nouveau Message: ${subject} de ${name}`,
             html: `
         <h1>Nouveau message du site NA Coaching</h1>
@@ -30,6 +47,7 @@ export async function POST(req) {
 
         return NextResponse.json(data);
     } catch (error) {
+        console.error('Send Error:', error);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
