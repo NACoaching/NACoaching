@@ -91,7 +91,7 @@ export default function OutilsPage() {
 
                 {/* SEO Text for the Hub Page */}
                 <div className="mt-20 max-w-4xl mx-auto prose prose-zinc text-center">
-                    <h2 className="text-3xl font-black uppercase mb-6 text-zinc-900">Pourquoi utiliser nos outils de coaching ?</h2>
+                    <h2 className="text-3xl font-black uppercase mb-6 text-zinc-900">Pourquoi utiliser mes outils de coaching ?</h2>
                     <p className="text-zinc-600">
                         La progression sportive ne doit rien au hasard. Que vous soyez pratiquant de musculation, coureur à pied ou athlète hybride,
                         la quantification de la charge et l'ajustement de l'intensité sont les clés de la réussite.
