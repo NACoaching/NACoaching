@@ -119,7 +119,7 @@ export default function ContactPage() {
             <section className="py-20 min-h-screen bg-white">
                 <div className="max-w-3xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-5xl font-black uppercase mb-4">Me <span className="text-[#FF6B00]">Contacter</span></h2>
+                        <h2 className="text-5xl font-black uppercase mb-4 text-black">Me <span className="text-[#FF6B00]">Contacter</span></h2>
                         <p className="text-zinc-500 max-w-xl mx-auto">
                             Une question sur un programme ou une demande de coaching ? Remplissez le formulaire ci-dessous.
                         </p>
@@ -168,7 +168,7 @@ export default function ContactPage() {
                     {/* FAQ Section */}
                     <div className="mt-20">
                         <div className="text-center mb-10">
-                            <h2 className="text-3xl font-black uppercase mb-3">Questions <span className="text-[#FF6B00]">Fréquentes</span></h2>
+                            <h2 className="text-3xl font-black uppercase mb-3 text-black">Questions <span className="text-[#FF6B00]">Fréquentes</span></h2>
                             <p className="text-zinc-500 text-sm">Les réponses aux questions les plus posées</p>
                         </div>
 
