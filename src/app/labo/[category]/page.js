@@ -48,7 +48,7 @@ export default async function LaboCategoryPage({ params }) {
         articlesList = fallback || [];
     }
 
-    const allCategories = [...new Set((allCatsRes.data || []).map(a => a.category).filter(Boolean))];
+    const allCategories = [...new Set((allCatsRes.data || []).map(a => a.category).filter(Boolean))].sort();
 
     const jsonLd = {
         '@context': 'https://schema.org',

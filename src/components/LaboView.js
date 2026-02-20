@@ -51,7 +51,7 @@ export default function LaboView({ articles, siteContent }) {
                         >
                             Tous
                         </button>
-                        {[...new Set(articles.map(a => a.category))].map(category => (
+                        {[...new Set(articles.map(a => a.category))].sort().map(category => (
                             <Link
                                 key={category}
                                 href={`/labo/${category}`}
