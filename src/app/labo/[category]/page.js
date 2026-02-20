@@ -12,16 +12,17 @@ export async function generateStaticParams() {
     const { data } = await supabase.from('articles').select('category');
     if (!data) return [];
     const categories = [...new Set(data.map(a => a.category).filter(Boolean))];
+    // Return the raw lowercase slug - Next.js handles URL encoding automatically
     return categories.map(category => ({
-        category: encodeURIComponent(category.toLowerCase().replace(/ /g, '-')),
+        category: category.toLowerCase().replace(/ /g, '-'),
     }));
 }
 
 // Generate SEO metadata dynamically per category
 export async function generateMetadata({ params }) {
     const { category } = await params;
-    const categoryName = decodeURIComponent(category).replace(/-/g, ' ');
-    // Capitalize first letter
+    // Next.js decodes params automatically
+    const categoryName = category.replace(/-/g, ' ');
     const displayName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
     return {
@@ -40,8 +41,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function LaboCategoryPage({ params }) {
+    // Next.js automatically decodes URL params, so no need for decodeURIComponent
     const { category } = await params;
-    const categoryName = decodeURIComponent(category).replace(/-/g, ' ');
+    const categoryName = category.replace(/-/g, ' ');
 
     // Fetch all articles, filter by category (case-insensitive)
     const { data: articles } = await supabase
