@@ -133,7 +133,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <AnimWrapper>
             <div className="flex justify-between items-end mb-12">
-              <h2 className="text-4xl font-black uppercase text-black">Nos Outils <span className="text-[#FF6B00]">Gratuits</span></h2>
+              <h2 className="text-4xl font-black uppercase text-black">Mes Outils <span className="text-[#FF6B00]">Gratuits</span></h2>
               <Link href="/outils" className="text-[#FF6B00] font-bold hover:underline">Voir tout →</Link>
             </div>
           </AnimWrapper>
