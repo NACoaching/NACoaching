@@ -137,7 +137,7 @@ export default async function LaboCategoryPage({ params }) {
                                         </div>
                                         <div className="flex flex-col flex-grow">
                                             <span className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{article.category}</span>
-                                            <h2 className="text-xl font-black uppercase leading-tight mb-3 group-hover:text-[#FF6B00] transition">{article.title}</h2>
+                                            <h2 className="text-xl font-black uppercase leading-tight mb-3 text-black group-hover:text-[#FF6B00] transition">{article.title}</h2>
                                             <p className="text-zinc-500 text-sm line-clamp-3 flex-grow">{article.excerpt}</p>
                                             <div className="mt-4 text-xs font-black uppercase text-zinc-400 group-hover:text-[#FF6B00] transition">
                                                 Lire l'article →
