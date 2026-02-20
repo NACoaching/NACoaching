@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { ArrowLeft, Plus, Save, Trash2, Lock, ShoppingBag, FileText, Mail, Activity, Edit } from 'lucide-react';
+import { ArrowLeft, Plus, Save, Trash2, Lock, ShoppingBag, FileText, Mail, Activity, Edit, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -14,6 +14,7 @@ export default function AdminPage() {
     const [siteContent, setSiteContent] = useState([]);
     const [messages, setMessages] = useState([]);
     const [comments, setComments] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
     const [analytics, setAnalytics] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -70,14 +71,15 @@ export default function AdminPage() {
 
     const fetchData = async () => {
         setLoading(true);
-        const [articlesRes, productsRes, contentRes, messagesRes, commentsRes, subscribersRes, analyticsRes] = await Promise.all([
+        const [articlesRes, productsRes, contentRes, messagesRes, commentsRes, subscribersRes, analyticsRes, reviewsRes] = await Promise.all([
             supabase.from('articles').select('*').order('created_at', { ascending: false }),
             supabase.from('products').select('*').order('created_at', { ascending: false }),
             supabase.from('site_content').select('*').order('key'),
             supabase.from('messages').select('*').order('created_at', { ascending: false }),
             supabase.from('comments').select('*').order('created_at', { ascending: false }),
             supabase.from('subscribers').select('*').order('created_at', { ascending: false }),
-            supabase.from('page_views').select('*') // GetAll views to aggregate locally (simple for small scale)
+            supabase.from('page_views').select('*'), // GetAll views to aggregate locally (simple for small scale)
+            supabase.from('reviews').select('*').order('created_at', { ascending: false })
         ]);
 
         if (articlesRes.data) setArticles(articlesRes.data);
@@ -86,6 +88,7 @@ export default function AdminPage() {
         if (messagesRes.data) setMessages(messagesRes.data);
         if (commentsRes.data) setComments(commentsRes.data);
         if (subscribersRes.data) setSubscribers(subscribersRes.data);
+        if (reviewsRes.data) setReviews(reviewsRes.data);
         if (analyticsRes.data) {
             // Aggregate views by path
             const viewsByPath = analyticsRes.data.reduce((acc, curr) => {
@@ -447,6 +450,12 @@ export default function AdminPage() {
                         <FileText size={20} /> Commentaires {comments.filter(c => !c.is_approved).length > 0 && <span className="bg-red-500 text-white text-[10px] px-2 rounded-full">{comments.filter(c => !c.is_approved).length}</span>}
                     </button>
                     <button
+                        onClick={() => setActiveTab('reviews')}
+                        className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'reviews' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}
+                    >
+                        <Star size={20} /> Avis {reviews.length > 0 && <span className="bg-zinc-800 text-white text-[10px] px-2 rounded-full">{reviews.length}</span>}
+                    </button>
+                    <button
                         onClick={() => setActiveTab('newsletter')}
                         className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'newsletter' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}
                     >
@@ -562,6 +571,50 @@ export default function AdminPage() {
                                             </button>
                                             <button
                                                 onClick={() => deleteItem('comments', comment.id)}
+                                                className="text-red-500 text-xs font-bold hover:underline flex items-center gap-1"
+                                            >
+                                                <Trash2 size={12} /> Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                ) : activeTab === 'reviews' ? (
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
+                        <h2 className="text-xl font-black mb-6 uppercase">Gestion des Avis ({reviews.length})</h2>
+                        <div className="space-y-4">
+                            {reviews.length === 0 ? (
+                                <p className="text-zinc-500 italic">Aucun avis client pour le moment.</p>
+                            ) : (
+                                reviews.map(review => (
+                                    <div key={review.id} className="border-l-4 border-yellow-500 p-4 rounded bg-zinc-50">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <span className="font-black uppercase text-sm">{review.author_name}</span>
+                                                <span className="text-zinc-400 text-xs ml-2">
+                                                    sur {products.find(p => p.id === review.product_id)?.title || 'Produit inconnu'}
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <div className="flex">
+                                                    {[1, 2, 3, 4, 5].map(star => (
+                                                        <Star
+                                                            key={star}
+                                                            size={14}
+                                                            fill={review.rating >= star ? '#FF6B00' : 'transparent'}
+                                                            color={review.rating >= star ? '#FF6B00' : '#D1D5DB'}
+                                                        />
+                                                    ))}
+                                                </div>
+                                                <span className="text-zinc-400 text-xs">{new Date(review.created_at).toLocaleDateString()}</span>
+                                            </div>
+                                        </div>
+                                        {review.comment && <p className="text-zinc-600 text-sm mb-4">{review.comment}</p>}
+                                        <div className="flex gap-4 border-t border-zinc-200 pt-3">
+                                            <button
+                                                onClick={() => deleteItem('reviews', review.id)}
                                                 className="text-red-500 text-xs font-bold hover:underline flex items-center gap-1"
                                             >
                                                 <Trash2 size={12} /> Supprimer
