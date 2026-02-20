@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getToolArticle } from "@/lib/getToolArticle";
 
+export const revalidate = 0;
+
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/calculateur-1rm');
     return {
