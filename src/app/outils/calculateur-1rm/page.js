@@ -4,6 +4,7 @@ import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getToolArticle } from "@/lib/getToolArticle";
+import ToolArticleContent from "@/components/ToolArticleContent";
 
 export const revalidate = 0;
 
@@ -56,10 +57,7 @@ export default async function Calculator1RMPage() {
                     </div>
 
                     {/* SEO Content */}
-                    <article
-                        className="prose prose-zinc max-w-none text-zinc-900"
-                        dangerouslySetInnerHTML={{ __html: article.content }}
-                    />
+                    <ToolArticleContent content={article.content} />
                 </AnimWrapper>
             </div>
         </section>
