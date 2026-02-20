@@ -3,38 +3,20 @@ import CalculatorCalories from "@/components/tools/CalculatorCalories";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-
-// Fetch content from Supabase
-async function getToolContent() {
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
-
-    const keys = ['tool_calories_title', 'tool_calories_intro', 'tool_calories_content'];
-    const { data } = await supabase.from('site_content').select('*').in('key', keys);
-
-    const content = {};
-    keys.forEach(key => {
-        content[key] = data?.find(item => item.key === key)?.value || '';
-    });
-
-    return content;
-}
+import { getToolArticle } from "@/lib/getToolArticle";
 
 export async function generateMetadata() {
-    const content = await getToolContent();
+    const article = await getToolArticle('/outils/besoins-caloriques');
     return {
-        title: `${content.tool_calories_title || 'Calculateur de Calories'} | NA Coaching`,
-        description: content.tool_calories_intro || 'Calculez vos besoins caloriques journaliers.',
+        title: `${article.title || 'Calculateur de Besoins Caloriques'} | NA Coaching`,
+        description: article.intro || 'Calculez vos besoins caloriques journaliers.',
     }
 }
 
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    'name': 'Calculateur Calories NA Coaching',
+    'name': 'Calculateur Besoins Caloriques NA Coaching',
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
     'offers': {
@@ -42,11 +24,11 @@ const jsonLd = {
         'price': '0',
         'priceCurrency': 'EUR'
     },
-    'description': 'Outil gratuit pour calculer ses besoins caloriques journaliers et son métabolisme de base.'
+    'description': 'Outil gratuit pour calculer ses besoins caloriques journaliers (TDEE).'
 };
 
 export default async function CalculatorCaloriesPage() {
-    const content = await getToolContent();
+    const article = await getToolArticle('/outils/besoins-caloriques');
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -61,10 +43,10 @@ export default async function CalculatorCaloriesPage() {
                     </Link>
 
                     <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {content.tool_calories_title || 'Calculateur de Calories'}
+                        {article.title || 'Calculateur de Besoins Caloriques Journaliers (TDEE)'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {content.tool_calories_intro || "Déterminez vos besoins énergétiques précis pour la perte de poids, la maintenance ou la prise de masse."}
+                        {article.intro || "Estimez précisément votre dépense énergétique totale quotidienne."}
                     </p>
 
                     <div className="mb-16">
@@ -74,7 +56,7 @@ export default async function CalculatorCaloriesPage() {
                     {/* SEO Content */}
                     <article
                         className="prose prose-zinc max-w-none text-zinc-900"
-                        dangerouslySetInnerHTML={{ __html: content.tool_calories_content }}
+                        dangerouslySetInnerHTML={{ __html: article.content }}
                     />
                 </AnimWrapper>
             </div>

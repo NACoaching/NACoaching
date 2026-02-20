@@ -3,31 +3,13 @@ import CalculatorHeartRate from "@/components/tools/CalculatorHeartRate";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-
-// Fetch content from Supabase
-async function getToolContent() {
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
-
-    const keys = ['tool_hr_title', 'tool_hr_intro', 'tool_hr_content'];
-    const { data } = await supabase.from('site_content').select('*').in('key', keys);
-
-    const content = {};
-    keys.forEach(key => {
-        content[key] = data?.find(item => item.key === key)?.value || '';
-    });
-
-    return content;
-}
+import { getToolArticle } from "@/lib/getToolArticle";
 
 export async function generateMetadata() {
-    const content = await getToolContent();
+    const article = await getToolArticle('/outils/frequence-cardiaque');
     return {
-        title: `${content.tool_hr_title || 'Zones de Fréquence Cardiaque'} | NA Coaching`,
-        description: content.tool_hr_intro || 'Calculez vos zones d\'intensité.',
+        title: `${article.title || 'Zones de Fréquence Cardiaque'} | NA Coaching`,
+        description: article.intro || 'Calculez vos zones d\'intensité.',
     }
 }
 
@@ -46,7 +28,7 @@ const jsonLd = {
 };
 
 export default async function CalculatorHeartRatePage() {
-    const content = await getToolContent();
+    const article = await getToolArticle('/outils/frequence-cardiaque');
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -61,10 +43,10 @@ export default async function CalculatorHeartRatePage() {
                     </Link>
 
                     <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {content.tool_hr_title || 'Zones de Fréquence Cardiaque'}
+                        {article.title || 'Zones de Fréquence Cardiaque'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {content.tool_hr_intro || "Optimisez votre entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
+                        {article.intro || "Optimisez votre entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
                     </p>
 
                     <div className="mb-16">
@@ -74,7 +56,7 @@ export default async function CalculatorHeartRatePage() {
                     {/* SEO Content */}
                     <article
                         className="prose prose-zinc max-w-none text-zinc-900"
-                        dangerouslySetInnerHTML={{ __html: content.tool_hr_content }}
+                        dangerouslySetInnerHTML={{ __html: article.content }}
                     />
                 </AnimWrapper>
             </div>

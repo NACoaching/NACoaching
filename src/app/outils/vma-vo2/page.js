@@ -3,31 +3,13 @@ import VmaVo2Converter from "@/components/tools/VmaVo2Converter";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-
-// Fetch content from Supabase
-async function getToolContent() {
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
-
-    const keys = ['tool_vma_title', 'tool_vma_intro', 'tool_vma_content'];
-    const { data } = await supabase.from('site_content').select('*').in('key', keys);
-
-    const content = {};
-    keys.forEach(key => {
-        content[key] = data?.find(item => item.key === key)?.value || '';
-    });
-
-    return content;
-}
+import { getToolArticle } from "@/lib/getToolArticle";
 
 export async function generateMetadata() {
-    const content = await getToolContent();
+    const article = await getToolArticle('/outils/vma-vo2');
     return {
-        title: `${content.tool_vma_title || 'Convertisseur VMA / VO2max'} | NA Coaching`,
-        description: content.tool_vma_intro || 'Estimez votre VMA et VO2max.',
+        title: `${article.title || 'Convertisseur VMA / VO2max'} | NA Coaching`,
+        description: article.intro || 'Estimez votre VMA et VO2max.',
     }
 }
 
@@ -46,7 +28,7 @@ const jsonLd = {
 };
 
 export default async function VmaVo2ConverterPage() {
-    const content = await getToolContent();
+    const article = await getToolArticle('/outils/vma-vo2');
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -61,10 +43,10 @@ export default async function VmaVo2ConverterPage() {
                     </Link>
 
                     <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {content.tool_vma_title || 'Convertisseur VMA / VO2max'}
+                        {article.title || 'Convertisseur VMA / VO2max'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {content.tool_vma_intro || "Analysez votre potentiel aérobie en reliant votre vitesse maximale à votre consommation d'oxygène."}
+                        {article.intro || "Analysez votre potentiel aérobie en reliant votre vitesse maximale à votre consommation d'oxygène."}
                     </p>
 
                     <div className="mb-16">
@@ -74,7 +56,7 @@ export default async function VmaVo2ConverterPage() {
                     {/* SEO Content */}
                     <article
                         className="prose prose-zinc max-w-none text-zinc-900"
-                        dangerouslySetInnerHTML={{ __html: content.tool_vma_content }}
+                        dangerouslySetInnerHTML={{ __html: article.content }}
                     />
                 </AnimWrapper>
             </div>
