@@ -8,7 +8,7 @@ export default function AdminPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [session, setSession] = useState(null);
-    const [activeTab, setActiveTab] = useState('articles'); // 'articles', 'products', 'content'
+    const [activeTab, setActiveTab] = useState('articles'); // 'articles', 'products', 'content', 'faq', 'messages'
     const [articles, setArticles] = useState([]);
     const [products, setProducts] = useState([]);
     const [siteContent, setSiteContent] = useState([]);
@@ -17,12 +17,21 @@ export default function AdminPage() {
     const [reviews, setReviews] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
     const [rawPageViews, setRawPageViews] = useState([]);
-    const [analyticsFilter, setAnalyticsFilter] = useState('all'); // 'today', '7d', '30d', 'all', 'custom'
+    const [analyticsFilter, setAnalyticsFilter] = useState('all');
     const [customDate, setCustomDate] = useState('');
     const [loading, setLoading] = useState(true);
     const [uploadStatus, setUploadStatus] = useState(null);
-    const [editingItem, setEditingItem] = useState(null); // { type: 'article' | 'product', id: '...' }
+    const [editingItem, setEditingItem] = useState(null);
     const [logoUrl, setLogoUrl] = useState("/logo.png");
+    // FAQ States
+    const [homeFaqs, setHomeFaqs] = useState([]);
+    const [productFaqs, setProductFaqs] = useState([]);
+    const [faqProduct, setFaqProduct] = useState(null); // product being edited
+    const [newFaqQ, setNewFaqQ] = useState('');
+    const [newFaqA, setNewFaqA] = useState('');
+    const [newProductFaqQ, setNewProductFaqQ] = useState('');
+    const [newProductFaqA, setNewProductFaqA] = useState('');
+    const [faqSaving, setFaqSaving] = useState(false);
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
@@ -86,7 +95,14 @@ export default function AdminPage() {
 
         if (articlesRes.data) setArticles(articlesRes.data);
         if (productsRes.data) setProducts(productsRes.data);
-        if (contentRes.data) setSiteContent(contentRes.data);
+        if (contentRes.data) {
+            setSiteContent(contentRes.data);
+            // Parse home FAQs
+            const faqItem = contentRes.data.find(c => c.key === 'site_faq');
+            if (faqItem && faqItem.value) {
+                try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs([]); }
+            }
+        }
         if (messagesRes.data) setMessages(messagesRes.data);
         if (commentsRes.data) setComments(commentsRes.data);
         if (subscribersRes.data) setSubscribers(subscribersRes.data);
@@ -460,6 +476,12 @@ export default function AdminPage() {
                         className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'content' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}
                     >
                         <FileText size={20} /> Contenu
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('faq')}
+                        className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'faq' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}
+                    >
+                        <FileText size={20} /> FAQs
                     </button>
                     <button
                         onClick={() => setActiveTab('messages')}
@@ -1051,6 +1073,151 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                ) : activeTab === 'faq' ? (
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200 space-y-12">
+                        {/* SECTION 1: Home FAQs */}
+                        <div>
+                            <h2 className="text-xl font-black mb-2 uppercase">FAQs Page d'Accueil</h2>
+                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur la page d'accueil juste avant le bouton "Me Contacter".</p>
+
+                            <div className="space-y-3 mb-6">
+                                {homeFaqs.map((faq, i) => (
+                                    <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
+                                        <div className="flex-grow">
+                                            <div className="font-bold text-sm">{faq.question}</div>
+                                            <div className="text-zinc-500 text-xs mt-1">{faq.answer}</div>
+                                        </div>
+                                        <button
+                                            onClick={async () => {
+                                                const updated = homeFaqs.filter((_, idx) => idx !== i);
+                                                setHomeFaqs(updated);
+                                                await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                            }}
+                                            className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </div>
+                                ))}
+                                {homeFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour le moment.</p>}
+                            </div>
+
+                            <div className="bg-zinc-50 p-4 rounded border border-zinc-200 space-y-3">
+                                <h3 className="font-bold text-sm uppercase text-zinc-500">Ajouter une question</h3>
+                                <input
+                                    value={newFaqQ}
+                                    onChange={e => setNewFaqQ(e.target.value)}
+                                    placeholder="Question (ex: Proposez-vous du coaching personnalisé ?)"
+                                    className="w-full border p-2 rounded text-sm"
+                                />
+                                <textarea
+                                    value={newFaqA}
+                                    onChange={e => setNewFaqA(e.target.value)}
+                                    placeholder="Réponse..."
+                                    className="w-full border p-2 rounded text-sm h-20"
+                                />
+                                <button
+                                    disabled={!newFaqQ || !newFaqA || faqSaving}
+                                    onClick={async () => {
+                                        if (!newFaqQ || !newFaqA) return;
+                                        setFaqSaving(true);
+                                        const updated = [...homeFaqs, { question: newFaqQ, answer: newFaqA }];
+                                        setHomeFaqs(updated);
+                                        await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                        setNewFaqQ('');
+                                        setNewFaqA('');
+                                        setFaqSaving(false);
+                                    }}
+                                    className="bg-black text-white px-6 py-2 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition disabled:opacity-50"
+                                >
+                                    {faqSaving ? 'Sauvegarde...' : '+ Ajouter'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* SECTION 2: Product FAQs */}
+                        <div>
+                            <h2 className="text-xl font-black mb-2 uppercase">FAQs des Produits</h2>
+                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur une page produit spécifique, avant la section Avis.</p>
+
+                            <div className="mb-4">
+                                <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Choisir un produit</label>
+                                <select
+                                    onChange={async (e) => {
+                                        const p = products.find(p => p.id === parseInt(e.target.value));
+                                        setFaqProduct(p);
+                                        if (p && p.faqs) {
+                                            setProductFaqs(Array.isArray(p.faqs) ? p.faqs : JSON.parse(p.faqs));
+                                        } else {
+                                            setProductFaqs([]);
+                                        }
+                                    }}
+                                    className="border p-2 rounded text-sm w-full"
+                                >
+                                    <option value="">-- Sélectionner un produit --</option>
+                                    {products.map(p => (
+                                        <option key={p.id} value={p.id}>{p.title}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {faqProduct && (
+                                <div className="space-y-3 mb-6">
+                                    {productFaqs.map((faq, i) => (
+                                        <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
+                                            <div className="flex-grow">
+                                                <div className="font-bold text-sm">{faq.question}</div>
+                                                <div className="text-zinc-500 text-xs mt-1">{faq.answer}</div>
+                                            </div>
+                                            <button
+                                                onClick={async () => {
+                                                    const updated = productFaqs.filter((_, idx) => idx !== i);
+                                                    setProductFaqs(updated);
+                                                    await supabase.from('products').update({ faqs: updated }).eq('id', faqProduct.id);
+                                                }}
+                                                className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {productFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour ce produit.</p>}
+
+                                    <div className="bg-zinc-50 p-4 rounded border border-zinc-200 space-y-3">
+                                        <h3 className="font-bold text-sm uppercase text-zinc-500">Ajouter une question à "{faqProduct.title}"</h3>
+                                        <input
+                                            value={newProductFaqQ}
+                                            onChange={e => setNewProductFaqQ(e.target.value)}
+                                            placeholder="Question..."
+                                            className="w-full border p-2 rounded text-sm"
+                                        />
+                                        <textarea
+                                            value={newProductFaqA}
+                                            onChange={e => setNewProductFaqA(e.target.value)}
+                                            placeholder="Réponse..."
+                                            className="w-full border p-2 rounded text-sm h-20"
+                                        />
+                                        <button
+                                            disabled={!newProductFaqQ || !newProductFaqA || faqSaving}
+                                            onClick={async () => {
+                                                if (!newProductFaqQ || !newProductFaqA) return;
+                                                setFaqSaving(true);
+                                                const updated = [...productFaqs, { question: newProductFaqQ, answer: newProductFaqA }];
+                                                setProductFaqs(updated);
+                                                await supabase.from('products').update({ faqs: updated }).eq('id', faqProduct.id);
+                                                setNewProductFaqQ('');
+                                                setNewProductFaqA('');
+                                                setFaqSaving(false);
+                                            }}
+                                            className="bg-black text-white px-6 py-2 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition disabled:opacity-50"
+                                        >
+                                            {faqSaving ? 'Sauvegarde...' : '+ Ajouter'}
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ) : activeTab === 'messages' ? (

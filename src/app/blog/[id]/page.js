@@ -40,6 +40,33 @@ export default async function ArticlePage({ params }) {
     const article = articleRes.data;
     const siteContent = contentRes.data || [];
 
+    // Fetch related articles
+    let relatedArticles = [];
+    if (article) {
+        const { data } = await supabase
+            .from('articles')
+            .select('id, title, category')
+            .neq('id', id)
+            .eq('category', article.category)
+            .limit(2);
+
+        relatedArticles = data || [];
+
+        // If not enough in same category, just get latest
+        if (relatedArticles.length < 2) {
+            const { data: fallbackData } = await supabase
+                .from('articles')
+                .select('id, title, category')
+                .neq('id', id)
+                .order('created_at', { ascending: false })
+                .limit(2 - relatedArticles.length);
+
+            if (fallbackData) {
+                relatedArticles = [...relatedArticles, ...fallbackData];
+            }
+        }
+    }
+
     const getContent = (key) => siteContent.find(c => c.key === key)?.value;
 
     if (!article) return <div className="p-20 text-center">Article introuvable.</div>;
@@ -158,6 +185,24 @@ export default async function ArticlePage({ params }) {
                             </Link>
                         </div>
                     )}
+
+                    {/* RELATED ARTICLES */}
+                    <div className="mt-20 pt-12 border-t border-zinc-200">
+                        <h3 className="text-2xl font-black uppercase mb-8 text-black text-center">Pour aller plus loin</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {relatedArticles.map((relatedArticle) => (
+                                <Link href={`/blog/${relatedArticle.id}`} key={relatedArticle.id} className="group block">
+                                    <div className="bg-zinc-50 rounded-lg p-6 border border-zinc-100 hover:border-[#FF6B00] hover:shadow-md transition-all h-full flex flex-col">
+                                        <div className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{relatedArticle.category}</div>
+                                        <h4 className="text-lg font-bold uppercase leading-snug mb-3 text-black group-hover:text-[#FF6B00] transition line-clamp-2">
+                                            {relatedArticle.title}
+                                        </h4>
+                                        <div className="mt-auto text-xs font-bold text-zinc-400 group-hover:text-black transition">Lire l'article →</div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
 
                     <CommentsSection articleId={article.id} />
                 </div>

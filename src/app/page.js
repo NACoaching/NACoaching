@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import AnimWrapper from '@/components/AnimWrapper';
 import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight } from 'lucide-react';
+import HomeFAQ from '@/components/HomeFAQ';
 
 export const revalidate = 0;
 
@@ -13,8 +14,63 @@ export default async function HomePage() {
 
   const siteContent = content || [];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: siteContent.find(c => c.key === 'site_title')?.value || 'NA Coaching',
+    image: 'https://na-coaching.com/logo.png', // Fallback, update if needed
+    description: siteContent.find(c => c.key === 'site_description')?.value || 'Coaching sportif et réathlétisation par un expert Master EOPS',
+    url: 'https://na-coaching.com',
+    telephone: siteContent.find(c => c.key === 'contact_phone')?.value || '',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'FR'
+    },
+    sameAs: [
+      siteContent.find(c => c.key === 'social_instagram')?.value,
+      siteContent.find(c => c.key === 'social_tiktok')?.value
+    ].filter(Boolean)
+  };
+
+  // Parse global FAQs if they exist
+  let globalFaqs = [];
+  const faqString = siteContent.find(c => c.key === 'site_faq')?.value;
+  if (faqString) {
+    try {
+      globalFaqs = JSON.parse(faqString);
+    } catch (e) {
+      console.error("Could not parse site_faq", e);
+    }
+  }
+
+  let faqJsonLd = null;
+  if (globalFaqs.length > 0) {
+    faqJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: globalFaqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer
+        }
+      }))
+    };
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       {/* HERO SECTION */}
       <section className="relative h-[80vh] flex items-center justify-center bg-zinc-900 text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-50">
@@ -161,6 +217,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ SECTION */}
+      <HomeFAQ faqData={globalFaqs} />
 
       {/* CONTACT CTA */}
       <section className="py-24 bg-zinc-900 text-white text-center">
