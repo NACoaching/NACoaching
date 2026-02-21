@@ -5,7 +5,6 @@ import Image from 'next/image';
 import AnimWrapper from '@/components/AnimWrapper';
 import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight } from 'lucide-react';
 import HomeFAQ from '@/components/HomeFAQ';
-import Marquee from '@/components/Marquee';
 
 export const revalidate = 0;
 
@@ -108,13 +107,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* PREMIUM MARQUEE */}
-      <Marquee
-        items={["Science", "Performance", "Réathlétisation", "Data-Driven", "Physiologie", "Biomécanique"]}
-        speed={15}
-        className="bg-[#FF6B00] border-none"
-      />
-
       {/* EXPERTISE BAR */}
       <section className="bg-zinc-100 py-8 md:py-12 border-b border-zinc-200">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -143,10 +135,10 @@ export default async function HomePage() {
             </div>
           </AnimWrapper>
         </div>
-      </section>
+      </section >
 
       {/* QUICK BLOG PREVIEW (LE LABO) - MOVED TO TOP */}
-      <section className="py-16 md:py-24 bg-white border-b border-zinc-200">
+      < section className="py-16 md:py-24 bg-white border-b border-zinc-200" >
         <div className="max-w-7xl mx-auto px-6">
           <AnimWrapper>
             <div className="flex justify-between items-end mb-12">
@@ -190,10 +182,10 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* FEATURED TOOLS PREVIEW - MOVED BELOW LABO */}
-      <section className="py-16 bg-zinc-50 border-b border-zinc-200">
+      < section className="py-16 bg-zinc-50 border-b border-zinc-200" >
         <div className="max-w-7xl mx-auto px-6">
           <AnimWrapper>
             <div className="flex justify-between items-end mb-12">
@@ -224,13 +216,13 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* FAQ SECTION */}
-      <HomeFAQ faqData={globalFaqs} />
+      < HomeFAQ faqData={globalFaqs} />
 
       {/* CONTACT CTA */}
-      <section className="py-24 bg-zinc-900 text-white text-center">
+      < section className="py-24 bg-zinc-900 text-white text-center" >
         <div className="max-w-3xl mx-auto px-6">
           <AnimWrapper>
             <h2 className="text-4xl font-black uppercase mb-6">{siteContent.find(c => c.key === 'contact_cta_title')?.value || "Prêt à passer au niveau supérieur ?"}</h2>
@@ -245,7 +237,7 @@ export default async function HomePage() {
             </Link>
           </AnimWrapper>
         </div>
-      </section>
+      </section >
     </>
   );
 }
