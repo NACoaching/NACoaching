@@ -54,6 +54,7 @@ export default function AdminPage() {
         coach_philosophy_title: 'Ma Philosophie',
         coach_cta_title: 'Prêt à Progresser ?',
         coach_cta_desc: "Que tu cherches à progresser en musculation, en running ou à récupérer d'une blessure, il existe un programme fait pour toi.",
+        coach_image: '',
     });
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -128,7 +129,7 @@ export default function AdminPage() {
                 try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs([]); }
             }
             // Load Coach data
-            const coachKeys = ['coach_name', 'coach_badge', 'coach_tagline', 'coach_description', 'coach_meta_desc', 'coach_philosophy_title', 'coach_cta_title', 'coach_cta_desc'];
+            const coachKeys = ['coach_name', 'coach_badge', 'coach_tagline', 'coach_description', 'coach_meta_desc', 'coach_philosophy_title', 'coach_cta_title', 'coach_cta_desc', 'coach_image'];
             const newBasics = {};
             coachKeys.forEach(k => {
                 const found = contentRes.data.find(c => c.key === k);
@@ -1269,6 +1270,47 @@ export default function AdminPage() {
                                         <input value={coachBasics[key] || ''} onChange={e => setCoachBasics(prev => ({ ...prev, [key]: e.target.value }))} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm focus:border-[#FF6B00] outline-none" />
                                     </div>
                                 ))}
+
+                                {/* PHOTO DU COACH */}
+                                <div className="md:col-span-2 border-t border-zinc-100 pt-6 mt-2">
+                                    <label className="block text-xs font-black uppercase text-[#FF6B00] mb-4">Photo Professionnelle (Hero)</label>
+                                    <div className="flex flex-col md:flex-row gap-6 items-start">
+                                        <div className="w-32 h-44 bg-zinc-100 rounded-lg overflow-hidden border border-zinc-200 relative group flex items-center justify-center">
+                                            {coachBasics.coach_image ? (
+                                                <img src={coachBasics.coach_image} className="w-full h-full object-cover" alt="Coach" />
+                                            ) : (
+                                                <span className="text-2xl font-black text-zinc-300">NA</span>
+                                            )}
+                                        </div>
+                                        <div className="flex-1 space-y-4">
+                                            <p className="text-xs text-zinc-500 leading-relaxed">
+                                                Télécharge une photo de face, idéalement avec un fond sombre pour respecter l'esthétique "Premium Dark" de la page Coach.
+                                            </p>
+                                            <div className="flex items-center gap-4">
+                                                <label className="cursor-pointer bg-black text-white px-4 py-2 rounded text-xs font-bold uppercase hover:bg-[#FF6B00] hover:text-black transition flex items-center gap-2">
+                                                    <Plus size={16} /> {coachBasics.coach_image ? 'Changer la photo' : 'Uploader une photo'}
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => handleImageUpload(e, (data) => setCoachBasics(prev => ({ ...prev, coach_image: data.image })), {})}
+                                                        className="hidden"
+                                                    />
+                                                </label>
+                                                {uploadStatus && <p className="text-xs text-[#FF6B00] font-bold animate-pulse">{uploadStatus}</p>}
+                                                {coachBasics.coach_image && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setCoachBasics(prev => ({ ...prev, coach_image: '' }))}
+                                                        className="text-red-500 text-xs font-bold uppercase hover:underline"
+                                                    >
+                                                        Supprimer
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {[['coach_description', 'Description hero (paragraphe)'], ['coach_cta_desc', 'Texte du CTA']].map(([key, label]) => (
                                     <div key={key} className="md:col-span-2">
                                         <label className="block text-xs font-black uppercase text-zinc-500 mb-1">{label}</label>

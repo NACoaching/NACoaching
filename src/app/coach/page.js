@@ -60,6 +60,8 @@ export default async function CoachPage() {
     const valRaw = get('coach_values', '');
     if (valRaw) { try { values = JSON.parse(valRaw); } catch { } }
 
+    const coachImage = get('coach_image', '');
+
     const personJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Person',
@@ -67,7 +69,7 @@ export default async function CoachPage() {
         jobTitle: 'Coach Sportif Expert',
         description: get('coach_meta_desc', 'Coach sportif certifié Master EOPS.'),
         url: 'https://na-coaching.com/coach',
-        image: 'https://na-coaching.com/logo.png',
+        image: coachImage || 'https://na-coaching.com/logo.png',
         sameAs: ['https://www.instagram.com/na_coaching_'],
         knowsAbout: ['Musculation', 'Course à pied', 'Préparation physique hybride', 'Réathlétisation', 'Physiologie du sport', 'Biomécanique'],
         alumniOf: { '@type': 'EducationalOrganization', name: 'Master EOPS — Entraînement et Optimisation de la Performance Sportive' },
@@ -100,12 +102,23 @@ export default async function CoachPage() {
                             </div>
                         </AnimWrapper>
                         <AnimWrapper delay={0.2} className="flex justify-center lg:justify-end">
-                            <div className="relative w-72 h-96 lg:w-96 lg:h-[500px]">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 rounded-xl" />
-                                <div className="absolute -inset-1 bg-[#FF6B00]/20 rounded-xl blur-xl" />
-                                <div className="relative w-full h-full bg-zinc-800 rounded-xl overflow-hidden border border-zinc-700 flex items-center justify-center">
-                                    <span className="text-8xl font-black text-zinc-600 select-none">NA</span>
-                                </div>
+                            <div className="relative w-72 h-96 lg:w-96 lg:h-[600px]">
+                                {coachImage ? (
+                                    <>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+                                        <div className="absolute -inset-1 bg-[#FF6B00]/20 rounded-xl blur-xl" />
+                                        <img
+                                            src={coachImage}
+                                            alt={name}
+                                            className="relative w-full h-full object-cover rounded-xl border border-zinc-700 shadow-2xl"
+                                        />
+                                    </>
+                                ) : (
+                                    <div className="relative w-full h-full bg-zinc-800 rounded-xl overflow-hidden border border-zinc-700 flex items-center justify-center">
+                                        <div className="absolute -inset-1 bg-[#FF6B00]/20 rounded-xl blur-xl" />
+                                        <span className="text-8xl font-black text-zinc-600 select-none">NA</span>
+                                    </div>
+                                )}
                             </div>
                         </AnimWrapper>
                     </div>
