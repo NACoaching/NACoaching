@@ -1,0 +1,58 @@
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
+import RacePredictor from '@/components/tools/RacePredictor';
+import { getToolArticle } from '@/lib/getToolArticle';
+
+export const revalidate = 0;
+
+export async function generateMetadata() {
+    const article = await getToolArticle('race-predictor');
+    return {
+        title: `${article.title || 'Prédicteur de Performance'} | NA Coaching`,
+        description: article.intro || "Prédisez vos temps sur 5km, 10km, Semi-Marathon et Marathon à partir d'un chrono de référence. Utilisez la formule de Riegel pour vos objectifs.",
+    };
+}
+
+export default async function RacePredictorPage() {
+    const article = await getToolArticle('race-predictor');
+
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": article.title || "Prédicteur de Performance Running",
+        "description": article.intro,
+        "applicationCategory": "FitnessApplication",
+        "operatingSystem": "Web"
+    };
+
+    return (
+        <div className="min-h-screen bg-zinc-50 pt-32 pb-20">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+            <div className="max-w-7xl mx-auto px-6">
+                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-400 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
+                    <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
+                </Link>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    <div className="lg:col-span-7">
+                        <RacePredictor />
+                    </div>
+
+                    <div className="lg:col-span-5">
+                        <div className="prose prose-zinc max-w-none">
+                            <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
+                                {article.title || "Prédicteur de Performance"}
+                            </h1>
+                            <p className="text-zinc-500 text-lg mb-8 leading-relaxed">
+                                {article.intro}
+                            </p>
+                            <div className="h-px bg-zinc-200 mb-8" />
+                            <div className="text-zinc-600 leading-relaxed space-y-4" dangerouslySetInnerHTML={{ __html: article.content }} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

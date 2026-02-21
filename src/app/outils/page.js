@@ -1,6 +1,6 @@
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
-import { ChevronRight, Dumbbell, Flame, Gauge, Activity, Heart, Sparkles, Apple, BarChart3, HelpCircle, Target, Layers, Timer } from "lucide-react";
+import { ChevronRight, Dumbbell, Flame, Gauge, Activity, Heart, Sparkles, Apple, BarChart3, HelpCircle, Target, Layers, Timer, Trophy } from "lucide-react";
 import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
@@ -22,6 +22,7 @@ const iconMap = {
     '/outils/rpe-1rm': { icon: Target, color: "text-blue-600", bg: "bg-blue-50" },
     '/outils/volume-effectif': { icon: Layers, color: "text-emerald-600", bg: "bg-emerald-50" },
     '/outils/test-demi-cooper': { icon: Timer, color: "text-orange-600", bg: "bg-orange-50" },
+    '/outils/predictateur-performance': { icon: Trophy, color: "text-blue-500", bg: "bg-blue-50" },
 };
 
 export default async function OutilsPage() {
