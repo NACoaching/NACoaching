@@ -37,6 +37,7 @@ export default function Navbar() {
                     <Link href="/labo" className={`hover:text-[#FF6B00] transition ${isActive('/labo') || pathname.startsWith('/blog') ? 'text-[#FF6B00]' : ''}`}>Le Labo</Link>
                     <Link href="/outils" className={`hover:text-[#FF6B00] transition ${isActive('/outils') ? 'text-[#FF6B00]' : ''}`}>Outils</Link>
                     <Link href="/boutique" className={`hover:text-[#FF6B00] transition ${isActive('/boutique') ? 'text-[#FF6B00]' : ''}`}>Boutique</Link>
+                    <Link href="/coach" className={`hover:text-[#FF6B00] transition ${isActive('/coach') ? 'text-[#FF6B00]' : ''}`}>Le Coach</Link>
                     <Link href="/contact" className={`hover:text-[#FF6B00] transition ${isActive('/contact') ? 'text-[#FF6B00]' : ''}`}>Contact</Link>
                 </div>
 
@@ -66,6 +67,7 @@ export default function Navbar() {
                         <Link href="/labo" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Le Labo</Link>
                         <Link href="/outils" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Outils</Link>
                         <Link href="/boutique" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Boutique</Link>
+                        <Link href="/coach" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Le Coach</Link>
                         <Link href="/contact" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Contact</Link>
 
                         <div className="pt-8">
