@@ -87,7 +87,8 @@ export default function AdminPage() {
     });
 
     const [productForm, setProductForm] = useState({
-        title: '', price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: ''
+        title: '', price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: '',
+        category: 'Programmes'
     });
 
     const handleLogin = async (e) => {
@@ -1472,6 +1473,7 @@ export default function AdminPage() {
                                 ) : (
                                     <form onSubmit={handleProductSubmit} className="space-y-4">
                                         <input required name="title" value={productForm.title} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="Nom du produit" />
+                                        <input required name="category" value={productForm.category} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="Catégorie (ex: Programmes, Nutrition)" />
                                         <input required name="price" value={productForm.price} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="Prix (ex: 39€)" />
                                         <textarea required name="description" value={productForm.description} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Description" />
                                         <textarea required name="features" value={productForm.features} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Caractéristiques (séparées par une virgule)" />
@@ -1651,6 +1653,7 @@ export default function AdminPage() {
                                             </div>
                                             <div className="flex justify-between items-center mb-2">
                                                 <span className="text-2xl font-black italic text-[#FF6B00]">{product.price}</span>
+                                                <span className="text-[10px] font-black uppercase text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{product.category || 'Programmes'}</span>
                                             </div>
                                             <h3 className="text-xl font-black uppercase">{product.title}</h3>
                                             <p className="text-zinc-500 text-sm mt-2">{product.description}</p>

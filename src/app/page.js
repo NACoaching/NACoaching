@@ -5,6 +5,7 @@ import Image from 'next/image';
 import AnimWrapper from '@/components/AnimWrapper';
 import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight } from 'lucide-react';
 import HomeFAQ from '@/components/HomeFAQ';
+import Marquee from '@/components/Marquee';
 
 export const revalidate = 0;
 
@@ -106,6 +107,13 @@ export default async function HomePage() {
           </AnimWrapper>
         </div>
       </section>
+
+      {/* PREMIUM MARQUEE */}
+      <Marquee
+        items={["Science", "Performance", "Réathlétisation", "Data-Driven", "Physiologie", "Biomécanique"]}
+        speed={15}
+        className="bg-[#FF6B00] border-none"
+      />
 
       {/* EXPERTISE BAR */}
       <section className="bg-zinc-100 py-8 md:py-12 border-b border-zinc-200">

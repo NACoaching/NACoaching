@@ -72,19 +72,19 @@ export default function LaboView({ articles, siteContent }) {
 
                         return (
                             <AnimWrapper key={article.id} delay={index * 0.1}>
-                                <Link href={href} className="group cursor-pointer flex flex-col h-full">
+                                <Link href={href} className="group cursor-pointer flex flex-col h-full bg-white p-6 rounded-xl border border-zinc-100 hover:border-[#FF6B00] transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05),0_0_20px_rgba(255,107,0,0.05)]">
                                     <div className="aspect-[4/3] bg-zinc-200 mb-6 overflow-hidden relative rounded-lg">
                                         {article.image ? (
                                             <Image
                                                 src={article.image}
                                                 alt={article.title}
                                                 fill
-                                                className="object-cover group-hover:scale-105 transition duration-500"
+                                                className="object-cover group-hover:scale-105 transition duration-700 ease-out"
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             />
                                         ) : isTool ? (
                                             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800">
-                                                <span className="text-7xl">{getToolIcon(article.cta)}</span>
+                                                <span className="text-7xl group-hover:scale-110 transition-transform duration-500">{getToolIcon(article.cta)}</span>
                                             </div>
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center bg-zinc-100 text-zinc-300">
@@ -95,12 +95,12 @@ export default function LaboView({ articles, siteContent }) {
                                     <div className="flex-grow">
                                         <div className="text-[#FF6B00] text-xs font-black uppercase mb-2 tracking-widest">{article.category}</div>
                                         <h3 className="text-2xl font-black uppercase leading-none mb-4 text-black group-hover:text-[#FF6B00] transition">{article.title}</h3>
-                                        <p className="text-zinc-600 leading-relaxed mb-4">{article.excerpt}</p>
+                                        <p className="text-zinc-600 leading-relaxed mb-4 line-clamp-3">{article.excerpt}</p>
                                     </div>
                                     <div className="pt-4 border-t border-zinc-100 flex justify-between items-center text-xs font-bold text-zinc-400">
                                         <span>{article.date}</span>
-                                        <span className="group-hover:text-[#FF6B00]">
-                                            {isTool ? 'Utiliser l\'outil →' : 'Lire l\'article →'}
+                                        <span className="group-hover:text-[#FF6B00] transition-colors flex items-center gap-1">
+                                            {isTool ? 'Utiliser l\'outil' : 'Lire l\'article'} →
                                         </span>
                                     </div>
                                 </Link>
