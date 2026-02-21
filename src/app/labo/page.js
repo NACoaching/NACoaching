@@ -15,7 +15,7 @@ export const metadata = {
 export const revalidate = 0; // Disable static caching for dynamic content
 
 export default async function LaboPage() {
-    const { data: articles } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
+    const { data: articles } = await supabase.from('articles').select('*').eq('is_published', true).order('created_at', { ascending: false });
     const { data: content } = await supabase.from('site_content').select('*');
 
     const siteContent = {};

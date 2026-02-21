@@ -44,7 +44,7 @@ export default async function LaboCategoryPage({ params }) {
 
     // Fallback: case-insensitive match
     if (articlesList.length === 0) {
-        const { data: fallback } = await supabase.from('articles').select('*').ilike('category', category).order('created_at', { ascending: false });
+        const { data: fallback } = await supabase.from('articles').select('*').ilike('category', category).eq('is_published', true).order('created_at', { ascending: false });
         articlesList = fallback || [];
     }
 

@@ -54,6 +54,7 @@ export default async function ProductPage({ params }) {
     const { data: relatedArticlesData } = await supabase
         .from('articles')
         .select('id, title, category')
+        .eq('is_published', true)
         .order('created_at', { ascending: false })
         .limit(3);
 
