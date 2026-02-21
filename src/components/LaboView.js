@@ -24,44 +24,74 @@ function getToolIcon(cta) {
 
 export default function LaboView({ articles, siteContent }) {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
+    const [searchQuery, setSearchQuery] = useState("");
 
-    const filteredArticles = articles.filter(article =>
-        (article.is_published !== false) &&
-        (selectedCategory === "Tous" ? true : article.category === selectedCategory)
-    );
+    const filteredArticles = articles.filter(article => {
+        const matchesCategory = selectedCategory === "Tous" ? true : article.category === selectedCategory;
+        const matchesSearch = (article.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            article.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()));
+        return (article.is_published !== false) && matchesCategory && matchesSearch;
+    });
 
     return (
         <section className="py-20 min-h-screen bg-white">
             <div className="max-w-7xl mx-auto px-6">
                 <AnimWrapper>
                     <h2 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">{siteContent?.about_title || 'Le Labo'}</h2>
-                    <p className="text-zinc-500 mb-8 max-w-xl">
+                    <p className="text-zinc-500 mb-12 max-w-xl">
                         {siteContent?.about_text || 'Vulgarisation scientifique et conseils.'}
                     </p>
                 </AnimWrapper>
 
-                {/* FILTERS */}
+                {/* SEARCH & FILTERS */}
                 <AnimWrapper delay={0.2}>
-                    <div className="flex flex-wrap gap-4 mb-12">
-                        <button
-                            onClick={() => setSelectedCategory("Tous")}
-                            className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 transition ${selectedCategory === "Tous"
-                                ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
-                                : 'bg-zinc-100 text-zinc-600 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00]'
-                                }`}
-                        >
-                            Tous
-                        </button>
-                        {[...new Set(articles.filter(a => a.is_published !== false).map(a => a.category))].sort().map(category => (
-                            <Link
-                                key={category}
-                                href={`/labo/${category}`}
-                                className="px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-200 transition bg-zinc-100 text-zinc-600 hover:border-[#FF6B00] hover:text-[#FF6B00] hover:bg-white"
-                                onClick={() => setSelectedCategory(category)}
+                    <div className="mb-12 space-y-6">
+                        {/* Search Input */}
+                        <div className="relative max-w-2xl">
+                            <input
+                                type="text"
+                                placeholder="Rechercher un article (ex: Musculation, Sommeil...)"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-6 py-4 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:border-transparent transition-all shadow-sm pl-14"
+                            />
+                            <div className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            </div>
+                            {searchQuery && (
+                                <button
+                                    onClick={() => setSearchQuery("")}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black transition"
+                                >
+                                    Effacer
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Category Pills */}
+                        <div className="flex flex-wrap gap-3">
+                            <button
+                                onClick={() => setSelectedCategory("Tous")}
+                                className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${selectedCategory === "Tous"
+                                    ? 'bg-[#FF6B00] text-black border-[#FF6B00] shadow-[0_4px_12px_rgba(255,107,0,0.2)]'
+                                    : 'bg-white text-zinc-500 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
+                                    }`}
                             >
-                                {category}
-                            </Link>
-                        ))}
+                                Tous
+                            </button>
+                            {[...new Set(articles.filter(a => a.is_published !== false).map(a => a.category))].sort().map(category => (
+                                <button
+                                    key={category}
+                                    onClick={() => setSelectedCategory(category)}
+                                    className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${selectedCategory === category
+                                        ? 'bg-[#FF6B00] text-black border-[#FF6B00] shadow-[0_4px_12px_rgba(255,107,0,0.2)]'
+                                        : 'bg-white text-zinc-500 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
+                                        }`}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </AnimWrapper>
 
