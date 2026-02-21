@@ -32,6 +32,29 @@ export default function AdminPage() {
     const [newProductFaqQ, setNewProductFaqQ] = useState('');
     const [newProductFaqA, setNewProductFaqA] = useState('');
     const [faqSaving, setFaqSaving] = useState(false);
+    // Coach States
+    const [coachSaving, setCoachSaving] = useState(false);
+    const [coachCredentials, setCoachCredentials] = useState([
+        { icon: 'Award', title: 'Master EOPS', desc: "Master Entraînement et Optimisation de la Performance Sportive." },
+        { icon: 'HeartPulse', title: 'Expert Sport-Santé', desc: 'Spécialiste en réathlétisation.' },
+        { icon: 'Activity', title: 'Prépa Physique Hybride', desc: 'Maîtrise des disciplines hybrides.' },
+        { icon: 'BookOpen', title: 'Vulgarisation Scientifique', desc: 'Traduction des données scientifiques en protocoles concrets.' },
+    ]);
+    const [coachValues, setCoachValues] = useState([
+        { number: '01', title: 'La Science avant tout', desc: 'Chaque conseil est ancré dans la littérature scientifique.' },
+        { number: '02', title: "L'Individualisation", desc: 'Chaque athlète mérite une approche sur-mesure.' },
+        { number: '03', title: 'La Durabilité', desc: 'Performer sur le long terme sans se blesser.' },
+    ]);
+    const [coachBasics, setCoachBasics] = useState({
+        coach_name: 'Nolwen Albanesi',
+        coach_badge: 'Le Coach',
+        coach_tagline: 'Master EOPS · Coach Sportif Expert · Spécialiste Performance & Réathlétisation',
+        coach_description: "Ma mission : appliquer les données de la science du sport pour t'aider à progresser durablement, sans te blesser.",
+        coach_meta_desc: 'Coach sportif certifié Master EOPS, spécialiste en musculation, course à pied, préparation physique hybride et réathlétisation.',
+        coach_philosophy_title: 'Ma Philosophie',
+        coach_cta_title: 'Prêt à Progresser ?',
+        coach_cta_desc: "Que tu cherches à progresser en musculation, en running ou à récupérer d'une blessure, il existe un programme fait pour toi.",
+    });
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
@@ -102,6 +125,18 @@ export default function AdminPage() {
             if (faqItem && faqItem.value) {
                 try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs([]); }
             }
+            // Load Coach data
+            const coachKeys = ['coach_name', 'coach_badge', 'coach_tagline', 'coach_description', 'coach_meta_desc', 'coach_philosophy_title', 'coach_cta_title', 'coach_cta_desc'];
+            const newBasics = {};
+            coachKeys.forEach(k => {
+                const found = contentRes.data.find(c => c.key === k);
+                if (found) newBasics[k] = found.value;
+            });
+            if (Object.keys(newBasics).length > 0) setCoachBasics(prev => ({ ...prev, ...newBasics }));
+            const credItem = contentRes.data.find(c => c.key === 'coach_credentials');
+            if (credItem && credItem.value) { try { setCoachCredentials(JSON.parse(credItem.value)); } catch { } }
+            const valItem = contentRes.data.find(c => c.key === 'coach_values');
+            if (valItem && valItem.value) { try { setCoachValues(JSON.parse(valItem.value)); } catch { } }
         }
         if (messagesRes.data) setMessages(messagesRes.data);
         if (commentsRes.data) setComments(commentsRes.data);
@@ -477,11 +512,11 @@ export default function AdminPage() {
                     >
                         <FileText size={20} /> Contenu
                     </button>
-                    <button
-                        onClick={() => setActiveTab('faq')}
-                        className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'faq' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}
-                    >
+                    <button onClick={() => setActiveTab('faq')} className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'faq' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}>
                         <FileText size={20} /> FAQs
+                    </button>
+                    <button onClick={() => setActiveTab('coach')} className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'coach' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}>
+                        <Star size={20} /> Coach
                     </button>
                     <button
                         onClick={() => setActiveTab('messages')}
@@ -1218,6 +1253,113 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                             )}
+                        </div>
+                    </div>
+                ) : activeTab === 'coach' ? (
+                    <div className="space-y-8">
+                        {/* INFOS PRINCIPALES */}
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
+                            <h2 className="text-xl font-black mb-6 uppercase">Infos Principales</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {[['coach_name', 'Nom complet'], ['coach_badge', 'Badge (ex: Le Coach)'], ['coach_tagline', 'Tagline (sous le nom)'], ['coach_meta_desc', 'Description SEO'], ['coach_philosophy_title', 'Titre section Philosophie'], ['coach_cta_title', 'Titre section CTA']].map(([key, label]) => (
+                                    <div key={key}>
+                                        <label className="block text-xs font-black uppercase text-zinc-500 mb-1">{label}</label>
+                                        <input value={coachBasics[key] || ''} onChange={e => setCoachBasics(prev => ({ ...prev, [key]: e.target.value }))} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm focus:border-[#FF6B00] outline-none" />
+                                    </div>
+                                ))}
+                                {[['coach_description', 'Description hero (paragraphe)'], ['coach_cta_desc', 'Texte du CTA']].map(([key, label]) => (
+                                    <div key={key} className="md:col-span-2">
+                                        <label className="block text-xs font-black uppercase text-zinc-500 mb-1">{label}</label>
+                                        <textarea rows={3} value={coachBasics[key] || ''} onChange={e => setCoachBasics(prev => ({ ...prev, [key]: e.target.value }))} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm focus:border-[#FF6B00] outline-none" />
+                                    </div>
+                                ))}
+                            </div>
+                            <button onClick={async () => {
+                                setCoachSaving(true);
+                                for (const [key, value] of Object.entries(coachBasics)) {
+                                    await supabase.from('site_content').upsert({ key, value, label: key }, { onConflict: 'key' });
+                                }
+                                setCoachSaving(false);
+                                alert('Infos coach sauvegardées !');
+                            }} className="mt-4 bg-[#FF6B00] text-black px-6 py-2 rounded font-black uppercase text-sm hover:bg-black hover:text-white transition">
+                                {coachSaving ? 'Sauvegarde...' : 'Sauvegarder'}
+                            </button>
+                        </div>
+
+                        {/* EXPERTISES */}
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
+                            <h2 className="text-xl font-black mb-6 uppercase">Expertises & Formations</h2>
+                            <div className="space-y-4 mb-6">
+                                {coachCredentials.map((cred, idx) => (
+                                    <div key={idx} className="border border-zinc-100 rounded-lg p-4 flex gap-4 items-start">
+                                        <div className="flex-1 space-y-2">
+                                            <div className="flex gap-3">
+                                                <div className="flex-1">
+                                                    <label className="block text-xs font-black uppercase text-zinc-400 mb-1">Titre</label>
+                                                    <input value={cred.title} onChange={e => { const updated = [...coachCredentials]; updated[idx] = { ...updated[idx], title: e.target.value }; setCoachCredentials(updated); }} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm" />
+                                                </div>
+                                                <div className="w-36">
+                                                    <label className="block text-xs font-black uppercase text-zinc-400 mb-1">Icône</label>
+                                                    <select value={cred.icon} onChange={e => { const updated = [...coachCredentials]; updated[idx] = { ...updated[idx], icon: e.target.value }; setCoachCredentials(updated); }} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm">
+                                                        {['Award', 'HeartPulse', 'Activity', 'BookOpen', 'Dumbbell', 'Target', 'Zap', 'Shield', 'Star'].map(ic => <option key={ic} value={ic}>{ic}</option>)}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-black uppercase text-zinc-400 mb-1">Description</label>
+                                                <textarea rows={2} value={cred.desc} onChange={e => { const updated = [...coachCredentials]; updated[idx] = { ...updated[idx], desc: e.target.value }; setCoachCredentials(updated); }} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm" />
+                                            </div>
+                                        </div>
+                                        <button onClick={() => setCoachCredentials(coachCredentials.filter((_, i) => i !== idx))} className="text-zinc-300 hover:text-red-500 transition mt-1"><Trash2 size={16} /></button>
+                                    </div>
+                                ))}
+                            </div>
+                            <button onClick={() => setCoachCredentials([...coachCredentials, { icon: 'Award', title: '', desc: '' }])} className="text-sm font-black uppercase text-[#FF6B00] hover:underline mb-4 block">+ Ajouter une expertise</button>
+                            <button onClick={async () => {
+                                setCoachSaving(true);
+                                await supabase.from('site_content').upsert({ key: 'coach_credentials', label: 'Coach Expertises', value: JSON.stringify(coachCredentials) }, { onConflict: 'key' });
+                                setCoachSaving(false);
+                                alert('Expertises sauvegardées !');
+                            }} className="bg-[#FF6B00] text-black px-6 py-2 rounded font-black uppercase text-sm hover:bg-black hover:text-white transition">
+                                Sauvegarder les expertises
+                            </button>
+                        </div>
+
+                        {/* PHILOSOPHIE */}
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
+                            <h2 className="text-xl font-black mb-6 uppercase">Philosophie (3 Piliers)</h2>
+                            <div className="space-y-4 mb-6">
+                                {coachValues.map((val, idx) => (
+                                    <div key={idx} className="border border-zinc-100 rounded-lg p-4 flex gap-4 items-start">
+                                        <div className="flex-1 space-y-2">
+                                            <div className="flex gap-3">
+                                                <div className="w-20">
+                                                    <label className="block text-xs font-black uppercase text-zinc-400 mb-1">N°</label>
+                                                    <input value={val.number} onChange={e => { const updated = [...coachValues]; updated[idx] = { ...updated[idx], number: e.target.value }; setCoachValues(updated); }} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm" />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <label className="block text-xs font-black uppercase text-zinc-400 mb-1">Titre</label>
+                                                    <input value={val.title} onChange={e => { const updated = [...coachValues]; updated[idx] = { ...updated[idx], title: e.target.value }; setCoachValues(updated); }} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-black uppercase text-zinc-400 mb-1">Description</label>
+                                                <textarea rows={2} value={val.desc} onChange={e => { const updated = [...coachValues]; updated[idx] = { ...updated[idx], desc: e.target.value }; setCoachValues(updated); }} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm" />
+                                            </div>
+                                        </div>
+                                        <button onClick={() => setCoachValues(coachValues.filter((_, i) => i !== idx))} className="text-zinc-300 hover:text-red-500 transition mt-1"><Trash2 size={16} /></button>
+                                    </div>
+                                ))}
+                            </div>
+                            <button onClick={() => setCoachValues([...coachValues, { number: `0${coachValues.length + 1}`, title: '', desc: '' }])} className="text-sm font-black uppercase text-[#FF6B00] hover:underline mb-4 block">+ Ajouter un pilier</button>
+                            <button onClick={async () => {
+                                setCoachSaving(true);
+                                await supabase.from('site_content').upsert({ key: 'coach_values', label: 'Coach Philosophie', value: JSON.stringify(coachValues) }, { onConflict: 'key' });
+                                setCoachSaving(false);
+                                alert('Philosophie sauvegardée !');
+                            }} className="bg-[#FF6B00] text-black px-6 py-2 rounded font-black uppercase text-sm hover:bg-black hover:text-white transition">
+                                Sauvegarder la philosophie
+                            </button>
                         </div>
                     </div>
                 ) : activeTab === 'messages' ? (
