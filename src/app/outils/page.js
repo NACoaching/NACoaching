@@ -1,56 +1,36 @@
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
-import { ChevronRight, Dumbbell, Flame, Gauge, Activity, Heart } from "lucide-react";
+import { ChevronRight, Dumbbell, Flame, Gauge, Activity, Heart, Sparkles, Apple, BarChart3, HelpCircle } from "lucide-react";
+import { supabase } from '@/lib/supabaseClient';
+
+export const revalidate = 0;
 
 export const metadata = {
     title: 'Outils & Calculateurs Sportifs Gratuits | NA Coaching',
     description: 'Accédez à nos outils gratuits pour optimiser votre entraînement : Calculateur 1RM, Besoins Caloriques, VMA, Zones Cardiaques et plus encore.',
 };
 
-const tools = [
-    {
-        title: "Calculateur 1RM",
-        description: "Estimez votre charge maximale (1RM) pour calibrer vos séances de force.",
-        href: "/outils/calculateur-1rm",
-        icon: Dumbbell,
-        color: "text-blue-500",
-        bg: "bg-blue-50"
-    },
-    {
-        title: "Calculateur Calories (TDEE)",
-        description: "Définissez vos besoins journaliers pour perdre du gras ou prendre du muscle.",
-        href: "/outils/besoins-caloriques",
-        icon: Flame,
-        color: "text-orange-500",
-        bg: "bg-orange-50"
-    },
-    {
-        title: "Convertisseur Vitesse / Allure",
-        description: "Passez facilement des km/h aux min/km pour vos séances de fractionné.",
-        href: "/outils/convertisseur-vitesse",
-        icon: Gauge,
-        color: "text-green-500",
-        bg: "bg-green-50"
-    },
-    {
-        title: "VMA & VO2max",
-        description: "Estimez votre potentiel aérobie et vos prédictions de performance.",
-        href: "/outils/vma-vo2",
-        icon: Activity,
-        color: "text-purple-500",
-        bg: "bg-purple-50"
-    },
-    {
-        title: "Zones Fréquence Cardiaque",
-        description: "Calculez vos zones d'intensité (Karvonen) pour un entraînement ciblé.",
-        href: "/outils/frequence-cardiaque",
-        icon: Heart,
-        color: "text-red-500",
-        bg: "bg-red-50"
-    }
-];
+const iconMap = {
+    '/outils/calculateur-1rm': { icon: Dumbbell, color: "text-blue-500", bg: "bg-blue-50" },
+    '/outils/besoins-caloriques': { icon: Flame, color: "text-orange-500", bg: "bg-orange-50" },
+    '/outils/convertisseur-vitesse': { icon: Gauge, color: "text-green-500", bg: "bg-green-50" },
+    '/outils/vma-vo2': { icon: Activity, color: "text-purple-500", bg: "bg-purple-50" },
+    '/outils/frequence-cardiaque': { icon: Heart, color: "text-red-500", bg: "bg-red-50" },
+    '/outils/acwr': { icon: BarChart3, color: "text-indigo-500", bg: "bg-indigo-50" },
+    '/outils/score-recuperation': { icon: Sparkles, color: "text-[#FF6B00]", bg: "bg-[#FF6B00]/5" },
+    '/outils/macros-avancees': { icon: Apple, color: "text-emerald-500", bg: "bg-emerald-50" },
+};
 
-export default function OutilsPage() {
+export default async function OutilsPage() {
+    const { data: dbTools } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('category', 'Outils')
+        .eq('is_published', true)
+        .order('created_at', { ascending: true });
+
+    const tools = dbTools || [];
+
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
             <div className="max-w-7xl mx-auto px-6">
@@ -64,29 +44,34 @@ export default function OutilsPage() {
                 </AnimWrapper>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {tools.map((tool, index) => (
-                        <AnimWrapper key={index} delay={index * 0.1}>
-                            <Link href={tool.href} className="group block h-full">
-                                <div className="bg-white text-zinc-900 p-8 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col hover:-translate-y-1">
-                                    <div className={`w-14 h-14 ${tool.bg} ${tool.color} rounded-xl flex items-center justify-center mb-6 text-2xl`}>
-                                        <tool.icon size={28} strokeWidth={1.5} />
+                    {tools.map((tool, index) => {
+                        const config = iconMap[tool.cta] || { icon: HelpCircle, color: "text-zinc-400", bg: "bg-zinc-100" };
+                        const Icon = config.icon;
+
+                        return (
+                            <AnimWrapper key={tool.id} delay={index * 0.1}>
+                                <Link href={tool.cta || '#'} className="group block h-full">
+                                    <div className="bg-white text-zinc-900 p-8 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col hover:-translate-y-1">
+                                        <div className={`w-14 h-14 ${config.bg} ${config.color} rounded-xl flex items-center justify-center mb-6 text-2xl`}>
+                                            <Icon size={28} strokeWidth={1.5} />
+                                        </div>
+
+                                        <h3 className="text-2xl font-black uppercase mb-3 text-zinc-900 group-hover:text-[#FF6B00] transition-colors">
+                                            {tool.title}
+                                        </h3>
+
+                                        <p className="text-zinc-500 mb-6 flex-grow leading-relaxed line-clamp-3">
+                                            {tool.excerpt}
+                                        </p>
+
+                                        <div className="flex items-center gap-2 font-bold uppercase text-sm text-zinc-900 group-hover:gap-3 transition-all">
+                                            Utiliser l'outil <ChevronRight size={16} className="text-[#FF6B00]" />
+                                        </div>
                                     </div>
-
-                                    <h3 className="text-2xl font-black uppercase mb-3 text-zinc-900 group-hover:text-[#FF6B00] transition-colors">
-                                        {tool.title}
-                                    </h3>
-
-                                    <p className="text-zinc-500 mb-6 flex-grow leading-relaxed">
-                                        {tool.description}
-                                    </p>
-
-                                    <div className="flex items-center gap-2 font-bold uppercase text-sm text-zinc-900 group-hover:gap-3 transition-all">
-                                        Utiliser l'outil <ChevronRight size={16} className="text-[#FF6B00]" />
-                                    </div>
-                                </div>
-                            </Link>
-                        </AnimWrapper>
-                    ))}
+                                </Link>
+                            </AnimWrapper>
+                        );
+                    })}
                 </div>
 
                 {/* SEO Text for the Hub Page */}
@@ -102,3 +87,4 @@ export default function OutilsPage() {
         </section>
     );
 }
+
