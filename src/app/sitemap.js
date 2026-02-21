@@ -3,8 +3,8 @@ import { supabase } from '@/lib/supabaseClient';
 export default async function sitemap() {
     const baseUrl = 'https://na-coaching.com';
 
-    // Get all articles
-    const { data: articles } = await supabase.from('articles').select('id, category, created_at');
+    // Get all articles (only published for sitemap)
+    const { data: articles } = await supabase.from('articles').select('id, category, created_at').eq('is_published', true);
 
     const blogUrls = articles?.map((article) => ({
         url: `${baseUrl}/blog/${article.id}`,

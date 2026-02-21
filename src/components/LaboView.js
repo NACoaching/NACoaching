@@ -25,9 +25,10 @@ function getToolIcon(cta) {
 export default function LaboView({ articles, siteContent }) {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
 
-    const filteredArticles = selectedCategory === "Tous"
-        ? articles
-        : articles.filter(article => article.category === selectedCategory);
+    const filteredArticles = articles.filter(article =>
+        (article.is_published !== false) &&
+        (selectedCategory === "Tous" ? true : article.category === selectedCategory)
+    );
 
     return (
         <section className="py-20 min-h-screen bg-white">

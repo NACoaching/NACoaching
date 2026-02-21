@@ -8,7 +8,7 @@ export const revalidate = 3600;
 
 // Use the exact category name from the DB as the static param
 export async function generateStaticParams() {
-    const { data } = await supabase.from('articles').select('category');
+    const { data } = await supabase.from('articles').select('category').eq('is_published', true);
     if (!data) return [];
     const categories = [...new Set(data.map(a => a.category).filter(Boolean))];
     // Pass the exact category name - Next.js will URL-encode it in the path automatically
@@ -36,8 +36,8 @@ export default async function LaboCategoryPage({ params }) {
 
     // Fetch articles + all categories for the navigation bar in parallel
     const [articlesRes, allCatsRes] = await Promise.all([
-        supabase.from('articles').select('*').eq('category', category).order('created_at', { ascending: false }),
-        supabase.from('articles').select('category'),
+        supabase.from('articles').select('*').eq('category', category).eq('is_published', true).order('created_at', { ascending: false }),
+        supabase.from('articles').select('category').eq('is_published', true),
     ]);
 
     let articlesList = articlesRes.data || [];

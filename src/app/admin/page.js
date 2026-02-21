@@ -82,6 +82,7 @@ export default function AdminPage() {
     // Forms Data
     const [articleForm, setArticleForm] = useState({
         title: '', category: '', excerpt: '', content: '', image: '', cta: '',
+        is_published: true,
         date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
     });
 
@@ -1448,6 +1449,17 @@ export default function AdminPage() {
                                         <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="CTA (Produit lié - Optionnel)" />
                                         <input required name="date" value={articleForm.date} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" />
 
+                                        <div className="flex items-center gap-2 px-1">
+                                            <input
+                                                type="checkbox"
+                                                id="is_published"
+                                                checked={articleForm.is_published}
+                                                onChange={(e) => setArticleForm({ ...articleForm, is_published: e.target.checked })}
+                                                className="w-4 h-4 accent-[#FF6B00]"
+                                            />
+                                            <label htmlFor="is_published" className="text-xs font-bold uppercase text-zinc-600 cursor-pointer">Publier l'article</label>
+                                        </div>
+
                                         <div className="flex gap-2">
                                             {editingItem && (
                                                 <button type="button" onClick={cancelEdit} className="w-full bg-zinc-200 text-zinc-600 font-bold py-3 rounded uppercase hover:bg-zinc-300 transition">Annuler</button>
@@ -1587,7 +1599,12 @@ export default function AdminPage() {
                                         <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200'}`}>
                                             <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100" />
                                             <div className="flex-grow">
-                                                <span className="text-[10px] font-black uppercase text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{article.category}</span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[10px] font-black uppercase text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{article.category}</span>
+                                                    {!article.is_published && (
+                                                        <span className="bg-zinc-100 text-zinc-400 text-[10px] px-2 py-0.5 rounded font-black border border-zinc-200 uppercase tracking-tighter">Brouillon</span>
+                                                    )}
+                                                </div>
                                                 <h3 className="font-bold text-lg mt-2 leading-tight">{article.title}</h3>
                                                 <div className="flex gap-4 mt-2">
                                                     <button onClick={() => handleEdit(article, 'article')} className="text-blue-500 text-xs font-bold hover:underline flex items-center gap-1"><Edit size={12} /> Modifier</button>
