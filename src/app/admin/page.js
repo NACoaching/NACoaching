@@ -573,6 +573,11 @@ export default function AdminPage() {
                                     <span className="text-xs font-bold text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{uniqueVisitors} visiteurs uniques</span>
                                 </div>
                             </div>
+                            {totalViews > 0 && uniqueVisitors === 0 && (
+                                <p className="text-[10px] text-zinc-400 italic">
+                                    Note : Le comptage des visiteurs uniques a débuté aujourd'hui. Les vues antérieures n'ont pas d'identifiant.
+                                </p>
+                            )}
 
                             {/* Date Filter Buttons */}
                             <div className="flex flex-wrap gap-2 items-center">
