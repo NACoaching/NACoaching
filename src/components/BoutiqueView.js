@@ -41,8 +41,8 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition ${selectedCategory === category
-                                        ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
-                                        : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-[#FF6B00] hover:text-[#FF6B00]'
+                                    ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
+                                    : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-[#FF6B00] hover:text-[#FF6B00]'
                                     }`}
                             >
                                 {category}
@@ -58,8 +58,22 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                             <AnimWrapper key={product.id} delay={index * 0.1} className="h-full">
                                 <div className="bg-zinc-900 p-10 border border-zinc-800 hover:border-[#FF6B00] transition-all group flex flex-col h-full hover:shadow-[0_0_30px_rgba(255,107,0,0.1)]">
                                     <div className="flex justify-between items-start mb-6">
-                                        <ShoppingBag className="text-[#FF6B00] group-hover:scale-110 transition-transform" size={40} />
-                                        <span className="text-3xl font-black italic">{product.price}</span>
+                                        <div className="flex flex-col gap-2">
+                                            <ShoppingBag className="text-[#FF6B00] group-hover:scale-110 transition-transform" size={40} />
+                                            {product.discount_price && (
+                                                <span className="bg-[#FF6B00] text-black text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-tighter w-fit">PROMO</span>
+                                            )}
+                                        </div>
+                                        <div className="flex flex-col items-end">
+                                            {product.discount_price ? (
+                                                <>
+                                                    <span className="text-3xl font-black italic text-[#FF6B00]">{product.discount_price}</span>
+                                                    <span className="text-sm font-bold text-zinc-500 line-through opacity-70">{product.price}</span>
+                                                </>
+                                            ) : (
+                                                <span className="text-3xl font-black italic">{product.price}</span>
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="mb-4">
                                         <span className="text-[10px] font-black uppercase tracking-widest text-[#FF6B00]/60">{product.category || 'Programmes'}</span>

@@ -118,7 +118,17 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                             <p className="text-xl text-zinc-600 mb-8 leading-relaxed font-medium">{product.description}</p>
 
                             <div className="flex items-center gap-6 mb-8 pb-8 border-b border-zinc-200">
-                                <div className="text-4xl font-black italic text-[#FF6B00]">{product.price}</div>
+                                {product.discount_price ? (
+                                    <div className="flex flex-col">
+                                        <div className="flex items-center gap-4">
+                                            <div className="text-4xl font-black italic text-[#FF6B00]">{product.discount_price}</div>
+                                            <div className="text-xl font-bold text-zinc-400 line-through opacity-70">{product.price}</div>
+                                        </div>
+                                        <span className="text-[10px] font-black uppercase text-[#FF6B00] tracking-widest mt-1">Offre Spéciale</span>
+                                    </div>
+                                ) : (
+                                    <div className="text-4xl font-black italic text-[#FF6B00]">{product.price}</div>
+                                )}
                                 <button
                                     onClick={handleCheckout}
                                     disabled={checkoutLoading}
@@ -196,7 +206,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                     disabled={checkoutLoading}
                                     className="bg-[#FF6B00] text-black w-full px-8 py-4 rounded font-black uppercase tracking-widest hover:bg-black hover:text-white transition text-center flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    {checkoutLoading ? <Loader2 className="animate-spin" /> : `Acheter ${product.price}`}
+                                    {checkoutLoading ? <Loader2 className="animate-spin" /> : `Acheter ${product.discount_price || product.price}`}
                                 </button>
                             </div>
                         </div>

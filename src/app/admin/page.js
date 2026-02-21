@@ -88,7 +88,7 @@ export default function AdminPage() {
     });
 
     const [productForm, setProductForm] = useState({
-        title: '', price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: '',
+        title: '', price: '', discount_price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: '',
         category: 'Programmes'
     });
 
@@ -234,7 +234,7 @@ export default function AdminPage() {
             });
         } else {
             setProductForm({
-                title: item.title, price: item.price, description: item.description,
+                title: item.title, price: item.price, discount_price: item.discount_price || '', description: item.description,
                 features: item.features ? item.features.join(', ') : '', stripeurl: item.stripeurl, image: item.image,
                 images: item.images || (item.image ? [item.image] : []),
                 content: item.content || '',
@@ -250,7 +250,7 @@ export default function AdminPage() {
             date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
         });
         setProductForm({
-            title: '', price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: ''
+            title: '', price: '', discount_price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: ''
         });
     };
 
@@ -1534,7 +1534,16 @@ export default function AdminPage() {
                                     <form onSubmit={handleProductSubmit} className="space-y-4">
                                         <input required name="title" value={productForm.title} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="Nom du produit" />
                                         <input required name="category" value={productForm.category} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="Catégorie (ex: Programmes, Nutrition)" />
-                                        <input required name="price" value={productForm.price} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="Prix (ex: 39€)" />
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Prix Normal (ex: 39€)</label>
+                                                <input required name="price" value={productForm.price} onChange={handleProductChange} className="w-full border p-2 rounded text-sm" placeholder="39€" />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase text-[#FF6B00] mb-1">Prix Promo (Optionnel)</label>
+                                                <input name="discount_price" value={productForm.discount_price} onChange={handleProductChange} className="w-full border p-2 rounded text-sm border-[#FF6B00]/30 focus:border-[#FF6B00]" placeholder="29€" />
+                                            </div>
+                                        </div>
                                         <textarea required name="description" value={productForm.description} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Description" />
                                         <textarea required name="features" value={productForm.features} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Caractéristiques (séparées par une virgule)" />
 

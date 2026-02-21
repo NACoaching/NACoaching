@@ -23,16 +23,15 @@ export async function POST(request) {
         }
 
         // 2. Validate Price
-        // Ensure price is a number. Attempt to parse "XX€" or similar if needed, 
-        // but ultimately we should probably store a clean numeric price or price_id.
-        // For now, let's assume we extract numbers from the string if it's not a direct number.
-        // Replace comma with dot for decimal parsing, then remove other non-numeric chars except dot
-        const cleanPrice = product.price.replace(',', '.').replace(/[^0-9.]/g, '');
+        // Priority: discount_price > price
+        const priceToUse = (product.discount_price && product.discount_price.trim() !== '')
+            ? product.discount_price
+            : product.price;
+
+        const cleanPrice = String(priceToUse).replace(',', '.').replace(/[^0-9.]/g, '');
         let numericPrice = parseFloat(cleanPrice);
 
         if (isNaN(numericPrice)) {
-            // Fallback or error if price isn't parseable. 
-            // Ideally, the admin should ensure this, or we rely on a stored stripe_price_id.
             return NextResponse.json({ error: 'Invalid price format' }, { status: 400 });
         }
 
