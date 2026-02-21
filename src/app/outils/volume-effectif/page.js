@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import EffectiveVolume from '@/components/tools/EffectiveVolume';
 import { getToolArticle } from '@/lib/getToolArticle';
+import RelatedArticles from '@/components/RelatedArticles';
+import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
 
@@ -9,12 +11,16 @@ export async function generateMetadata() {
     const article = await getToolArticle('volume-effectif');
     return {
         title: `${article.title} | NA Coaching`,
-        description: article.intro || "Analysez votre volume d'entraînement hebdomadaire par groupe musculaire. Optimisez votre hypertrophie avec la science du volume effectif.",
+        description: article.intro || "Calculez votre volume d'entraînement hebdomadaire par groupe musculaire. Identifiez vos zones de maintenance, de progression et de sur-reaching.",
     };
 }
 
 export default async function VolumePage() {
-    const article = await getToolArticle('volume-effectif');
+    const [article, { data: relatedArticlesData }] = await Promise.all([
+        getToolArticle('volume-effectif'),
+        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
+    ]);
+    const relatedArticles = relatedArticlesData || [];
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -52,6 +58,13 @@ export default async function VolumePage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Related Articles */}
+                <RelatedArticles
+                    articles={relatedArticles}
+                    title="Hypertrophie & Science"
+                    subtitle="Maximise tes gains avec les meilleurs conseils du Labo"
+                />
             </div>
         </div>
     );

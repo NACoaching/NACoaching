@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getToolArticle } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
+import RelatedArticles from "@/components/RelatedArticles";
+import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
 
@@ -31,7 +33,11 @@ const jsonLd = {
 };
 
 export default async function SpeedConverterPage() {
-    const article = await getToolArticle('/outils/convertisseur-vitesse');
+    const [article, { data: relatedArticlesData }] = await Promise.all([
+        getToolArticle('/outils/convertisseur-vitesse'),
+        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
+    ]);
+    const relatedArticles = relatedArticlesData || [];
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -58,6 +64,13 @@ export default async function SpeedConverterPage() {
 
                     {/* SEO Content */}
                     <ToolArticleContent content={article.content} />
+
+                    {/* Related Articles */}
+                    <RelatedArticles
+                        articles={relatedArticles}
+                        title="Vitesse & Entraînement"
+                        subtitle="Optimise tes allures avec les conseils du Labo"
+                    />
                 </AnimWrapper>
             </div>
         </section>

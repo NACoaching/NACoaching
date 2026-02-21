@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import HalfCooperTest from '@/components/tools/HalfCooperTest';
 import { getToolArticle } from '@/lib/getToolArticle';
+import RelatedArticles from '@/components/RelatedArticles';
+import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
 
@@ -9,12 +11,16 @@ export async function generateMetadata() {
     const article = await getToolArticle('test-demi-cooper');
     return {
         title: `${article.title} | NA Coaching`,
-        description: article.intro || "Calculez votre VMA et votre VO2max avec le test de terrain de 6 minutes (demi-cooper). Obtenez vos allures d'entraînement personnalisées.",
+        description: article.intro || "Évaluez votre VMA et votre VO2max avec le test du demi-cooper (6 minutes). Obtenez vos allures d'entraînement personnalisées pour le running.",
     };
 }
 
-export default async function CooperPage() {
-    const article = await getToolArticle('test-demi-cooper');
+export default async function DemiCooperPage() {
+    const [article, { data: relatedArticlesData }] = await Promise.all([
+        getToolArticle('test-demi-cooper'),
+        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
+    ]);
+    const relatedArticles = relatedArticlesData || [];
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -52,6 +58,13 @@ export default async function CooperPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Related Articles */}
+                <RelatedArticles
+                    articles={relatedArticles}
+                    title="VMA & Performance"
+                    subtitle="Comprends la physiologie de l'effort avec le Labo"
+                />
             </div>
         </div>
     );

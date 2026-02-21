@@ -15,7 +15,17 @@ export default function PageTracker() {
             const { data: { session } } = await supabase.auth.getSession();
             if (session) return;
 
-            await supabase.from('page_views').insert([{ page_path: pathname }]);
+            // Get or generate visitor_id
+            let visitorId = localStorage.getItem('na_visitor_id');
+            if (!visitorId) {
+                visitorId = crypto.randomUUID();
+                localStorage.setItem('na_visitor_id', visitorId);
+            }
+
+            await supabase.from('page_views').insert([{
+                page_path: pathname,
+                visitor_id: visitorId
+            }]);
         }
 
         trackView();

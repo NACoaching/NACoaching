@@ -57,6 +57,9 @@ export async function generateMetadata() {
     icons: {
       icon: '/favicon.ico', // Ensure you have a favicon
     },
+    alternates: {
+      canonical: siteUrl,
+    },
   };
 }
 

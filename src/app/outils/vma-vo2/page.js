@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getToolArticle } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
+import RelatedArticles from "@/components/RelatedArticles";
 
 export const revalidate = 0;
 
@@ -31,7 +32,11 @@ const jsonLd = {
 };
 
 export default async function VmaVo2ConverterPage() {
-    const article = await getToolArticle('/outils/vma-vo2');
+    const [article, { data: relatedArticlesData }] = await Promise.all([
+        getToolArticle('/outils/vma-vo2'),
+        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
+    ]);
+    const relatedArticles = relatedArticlesData || [];
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -58,6 +63,13 @@ export default async function VmaVo2ConverterPage() {
 
                     {/* SEO Content */}
                     <ToolArticleContent content={article.content} />
+
+                    {/* Related Articles */}
+                    <RelatedArticles
+                        articles={relatedArticles}
+                        title="La Science de l'Endurance"
+                        subtitle="Optimise ton potentiel aérobie avec le Labo"
+                    />
                 </AnimWrapper>
             </div>
         </section>

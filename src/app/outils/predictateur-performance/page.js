@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import RacePredictor from '@/components/tools/RacePredictor';
 import { getToolArticle } from '@/lib/getToolArticle';
+import RelatedArticles from '@/components/RelatedArticles';
+import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
 
@@ -14,7 +16,11 @@ export async function generateMetadata() {
 }
 
 export default async function RacePredictorPage() {
-    const article = await getToolArticle('race-predictor');
+    const [article, { data: relatedArticlesData }] = await Promise.all([
+        getToolArticle('race-predictor'),
+        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
+    ]);
+    const relatedArticles = relatedArticlesData || [];
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -52,6 +58,13 @@ export default async function RacePredictorPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Related Articles */}
+                <RelatedArticles
+                    articles={relatedArticles}
+                    title="Running & Science"
+                    subtitle="Progresse plus vite avec nos articles spécialisés"
+                />
             </div>
         </div>
     );

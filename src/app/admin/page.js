@@ -461,15 +461,25 @@ export default function AdminPage() {
         filteredViews = rawPageViews.filter(v => v.created_at && v.created_at.startsWith(customDate));
     }
 
-    const viewsByPath = filteredViews.reduce((acc, curr) => {
-        acc[curr.page_path] = (acc[curr.page_path] || 0) + 1;
+    const statsByPath = filteredViews.reduce((acc, curr) => {
+        if (!acc[curr.page_path]) {
+            acc[curr.page_path] = { count: 0, uniqueIds: new Set() };
+        }
+        acc[curr.page_path].count += 1;
+        if (curr.visitor_id) acc[curr.page_path].uniqueIds.add(curr.visitor_id);
         return acc;
     }, {});
-    const analytics = Object.entries(viewsByPath)
-        .map(([path, count]) => ({ path, count }))
+
+    const analytics = Object.entries(statsByPath)
+        .map(([path, stats]) => ({
+            path,
+            count: stats.count,
+            uniqueCount: stats.uniqueIds.size
+        }))
         .sort((a, b) => b.count - a.count);
 
     const totalViews = filteredViews.length;
+    const uniqueVisitors = new Set(filteredViews.map(v => v.visitor_id).filter(Boolean)).size;
     const filterLabel = analyticsFilter === 'today' ? "Aujourd'hui"
         : analyticsFilter === '7d' ? '7 derniers jours'
             : analyticsFilter === '30d' ? '30 derniers jours'
@@ -558,7 +568,10 @@ export default function AdminPage() {
                         <div className="flex flex-col gap-4 mb-6">
                             <div className="flex justify-between items-center">
                                 <h2 className="text-xl font-black uppercase">Top Pages</h2>
-                                <span className="text-xs font-bold text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{filterLabel} — {totalViews} vues</span>
+                                <div className="flex gap-2">
+                                    <span className="text-xs font-bold text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{filterLabel} — {totalViews} vues</span>
+                                    <span className="text-xs font-bold text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{uniqueVisitors} visiteurs uniques</span>
+                                </div>
                             </div>
 
                             {/* Date Filter Buttons */}
@@ -614,7 +627,7 @@ export default function AdminPage() {
                                                 <div className="flex-grow">
                                                     <div className="flex justify-between text-xs font-bold mb-2 uppercase text-zinc-600">
                                                         <span>{pageLabel}</span>
-                                                        <span>{page.count}</span>
+                                                        <span>{page.uniqueCount} u. / {page.count} vues</span>
                                                     </div>
                                                     <div className="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
                                                         <div
