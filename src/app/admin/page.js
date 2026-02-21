@@ -1412,7 +1412,7 @@ export default function AdminPage() {
                                         <div className="relative">
                                             <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-40 font-mono text-xs" placeholder="Contenu (Markdown supporté)" />
                                             <div className="text-[10px] text-zinc-400 mt-1 flex justify-between items-center">
-                                                <span>**Gras**, *Italique*, # Titre, - Liste</span>
+                                                <span>**Gras**, *Italique*, # Titre, - Liste, --- Séparateur, &gt; [!TIP] Bulle Info</span>
                                                 <label className="cursor-pointer text-[#FF6B00] hover:underline flex items-center gap-1">
                                                     <Plus size={10} /> Insérer Image
                                                     <input
@@ -1467,7 +1467,7 @@ export default function AdminPage() {
                                         <div className="relative">
                                             <textarea name="content" value={productForm.content} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-40 font-mono text-xs" placeholder="Description détaillée (Page Produit) - Markdown supporté" />
                                             <div className="text-[10px] text-zinc-400 mt-1 flex justify-between items-center">
-                                                <span>**Gras**, *Italique*, # Titre, - Liste</span>
+                                                <span>**Gras**, *Italique*, # Titre, - Liste, --- Séparateur, &gt; [!TIP] Bulle Info</span>
                                                 <label className="cursor-pointer text-[#FF6B00] hover:underline flex items-center gap-1">
                                                     <Plus size={10} /> Insérer Image
                                                     <input
