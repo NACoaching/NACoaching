@@ -1595,24 +1595,53 @@ export default function AdminPage() {
 
                             <div className="space-y-4">
                                 {activeTab === 'articles' ? (
-                                    articles.map(article => (
-                                        <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200'}`}>
-                                            <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100" />
-                                            <div className="flex-grow">
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-[10px] font-black uppercase text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{article.category}</span>
-                                                    {!article.is_published && (
-                                                        <span className="bg-zinc-100 text-zinc-400 text-[10px] px-2 py-0.5 rounded font-black border border-zinc-200 uppercase tracking-tighter">Brouillon</span>
-                                                    )}
+                                    <div className="space-y-8">
+                                        {/* SECTION: PUBLISHED */}
+                                        <div className="space-y-4">
+                                            <h3 className="text-xs font-black uppercase tracking-widest text-[#FF6B00] bg-[#FF6B00]/5 p-2 rounded flex justify-between items-center">
+                                                <span>✓ Articles Publiés</span>
+                                                <span className="bg-[#FF6B00] text-black px-2 py-0.5 rounded-full text-[10px]">{articles.filter(a => a.is_published !== false).length}</span>
+                                            </h3>
+                                            {articles.filter(a => a.is_published !== false).map(article => (
+                                                <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200'}`}>
+                                                    <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100" />
+                                                    <div className="flex-grow">
+                                                        <span className="text-[10px] font-black uppercase text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{article.category}</span>
+                                                        <h3 className="font-bold text-lg mt-2 leading-tight">{article.title}</h3>
+                                                        <div className="flex gap-4 mt-2">
+                                                            <button onClick={() => handleEdit(article, 'article')} className="text-blue-500 text-xs font-bold hover:underline flex items-center gap-1"><Edit size={12} /> Modifier</button>
+                                                            <button onClick={() => deleteItem('articles', article.id)} className="text-red-500 text-xs font-bold hover:underline flex items-center gap-1"><Trash2 size={12} /> Supprimer</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <h3 className="font-bold text-lg mt-2 leading-tight">{article.title}</h3>
-                                                <div className="flex gap-4 mt-2">
-                                                    <button onClick={() => handleEdit(article, 'article')} className="text-blue-500 text-xs font-bold hover:underline flex items-center gap-1"><Edit size={12} /> Modifier</button>
-                                                    <button onClick={() => deleteItem('articles', article.id)} className="text-red-500 text-xs font-bold hover:underline flex items-center gap-1"><Trash2 size={12} /> Supprimer</button>
-                                                </div>
-                                            </div>
+                                            ))}
                                         </div>
-                                    ))
+
+                                        {/* SECTION: DRAFTS */}
+                                        <div className="space-y-4">
+                                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400 bg-zinc-50 p-2 rounded flex justify-between items-center">
+                                                <span>✍️ Brouillons</span>
+                                                <span className="bg-zinc-200 text-zinc-600 px-2 py-0.5 rounded-full text-[10px]">{articles.filter(a => a.is_published === false).length}</span>
+                                            </h3>
+                                            {articles.filter(a => a.is_published === false).length === 0 ? (
+                                                <p className="text-zinc-400 text-[10px] italic px-2">Aucun brouillon en cours.</p>
+                                            ) : (
+                                                articles.filter(a => a.is_published === false).map(article => (
+                                                    <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200 opacity-75'}`}>
+                                                        <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100 grayscale" />
+                                                        <div className="flex-grow">
+                                                            <span className="text-[10px] font-black uppercase text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{article.category}</span>
+                                                            <h3 className="font-bold text-lg mt-2 leading-tight text-zinc-500 italic">{article.title}</h3>
+                                                            <div className="flex gap-4 mt-2">
+                                                                <button onClick={() => handleEdit(article, 'article')} className="text-blue-500 text-xs font-bold hover:underline flex items-center gap-1"><Edit size={12} /> Modifier</button>
+                                                                <button onClick={() => deleteItem('articles', article.id)} className="text-red-500 text-xs font-bold hover:underline flex items-center gap-1"><Trash2 size={12} /> Supprimer</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
+                                    </div>
                                 ) : (
                                     products.map(product => (
                                         <div key={product.id} className={`bg-white p-6 rounded-lg shadow-sm border relative ${editingItem?.id === product.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200'}`}>
