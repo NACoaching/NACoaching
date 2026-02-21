@@ -47,11 +47,7 @@ export async function POST(req) {
                     product_id: productId,
                     rating,
                     comment,
-                    author_name: name,
-                    // We could store email in reviews if we schema supported it, but it's not in the original plan/schema for display.
-                    // We can keep it private or just use it for verification.
-                    // If we want to store it, we need to alter 'reviews' table.
-                    // For now, we just use it for verification.
+                    author_name: name
                 }
             ]);
 

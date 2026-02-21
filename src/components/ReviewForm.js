@@ -97,6 +97,7 @@ export default function ReviewForm({ productId, onReviewSubmitted }) {
                     </div>
                 </div>
 
+
                 {/* Name Input */}
                 <div>
                     <label htmlFor="author_name" className="block text-sm font-bold text-zinc-700 mb-1">Nom</label>

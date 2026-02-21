@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { User } from 'lucide-react';
+
 
 export default function CommentsSection({ articleId }) {
     const [comments, setComments] = useState([]);
@@ -50,12 +52,17 @@ export default function CommentsSection({ articleId }) {
                     <p className="text-zinc-500 italic">Aucun commentaire pour le moment. Soyez le premier !</p>
                 ) : (
                     comments.map(comment => (
-                        <div key={comment.id} className="bg-zinc-50 p-6 rounded border border-zinc-100">
-                            <div className="flex justify-between items-start mb-2">
-                                <span className="font-bold uppercase text-sm">{comment.author_name}</span>
-                                <span className="text-[10px] text-zinc-400 uppercase tracking-widest">{new Date(comment.created_at).toLocaleDateString()}</span>
+                        <div key={comment.id} className="bg-zinc-50 p-6 rounded border border-zinc-100 flex gap-4">
+                            <div className="w-10 h-10 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-zinc-400 flex-shrink-0">
+                                <User size={20} />
                             </div>
-                            <p className="text-zinc-600 text-sm leading-relaxed">{comment.content}</p>
+                            <div className="flex-grow">
+                                <div className="flex justify-between items-start mb-2">
+                                    <span className="font-bold uppercase text-sm">{comment.author_name}</span>
+                                    <span className="text-[10px] text-zinc-400 uppercase tracking-widest">{new Date(comment.created_at).toLocaleDateString()}</span>
+                                </div>
+                                <p className="text-zinc-600 text-sm leading-relaxed">{comment.content}</p>
+                            </div>
                         </div>
                     ))
                 )}
@@ -65,9 +72,11 @@ export default function CommentsSection({ articleId }) {
             <div className="bg-zinc-900 p-8 rounded text-white">
                 <h4 className="font-bold uppercase tracking-widest mb-6 text-[#FF6B00]">Laisser un commentaire</h4>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Nom / Pseudo</label>
-                        <input required name="name" className="w-full bg-zinc-800 border border-zinc-700 p-3 rounded text-sm focus:border-[#FF6B00] outline-none" placeholder="Votre nom" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Nom / Pseudo</label>
+                            <input required name="name" className="w-full bg-zinc-800 border border-zinc-700 p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-white" placeholder="Votre nom" />
+                        </div>
                     </div>
                     <div>
                         <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Message</label>
