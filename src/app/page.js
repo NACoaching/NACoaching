@@ -10,7 +10,7 @@ import Marquee from '@/components/Marquee';
 export const revalidate = 0;
 
 export default async function HomePage() {
-  const { data: articles } = await supabase.from('articles').select('*').order('created_at', { ascending: false }).limit(3);
+  const { data: articles } = await supabase.from('articles').select('*').eq('is_published', true).order('created_at', { ascending: false }).limit(3);
   const { data: content } = await supabase.from('site_content').select('*');
 
   const siteContent = content || [];
