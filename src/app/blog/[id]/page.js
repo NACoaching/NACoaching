@@ -11,7 +11,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 
 export async function generateMetadata({ params }) {
     const { id } = await params;
-    const { data: article } = await supabase.from('articles').select('*').eq('id', id).single();
+    const { data: article } = await supabase.from('articles').select('*').eq('id', id).eq('is_published', true).single();
 
     if (!article) {
         return {
@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }) {
     const { id } = await params;
 
     const [articleRes, contentRes] = await Promise.all([
-        supabase.from('articles').select('*').eq('id', id).single(),
+        supabase.from('articles').select('*').eq('id', id).eq('is_published', true).single(),
         supabase.from('site_content').select('*')
     ]);
 
@@ -49,6 +49,7 @@ export default async function ArticlePage({ params }) {
             .select('id, title, category')
             .neq('id', id)
             .eq('category', article.category)
+            .eq('is_published', true)
             .limit(2);
 
         relatedArticles = data || [];
@@ -59,6 +60,7 @@ export default async function ArticlePage({ params }) {
                 .from('articles')
                 .select('id, title, category')
                 .neq('id', id)
+                .eq('is_published', true)
                 .order('created_at', { ascending: false })
                 .limit(2 - relatedArticles.length);
 
