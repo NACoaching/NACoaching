@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
-import { Check, ChevronRight, Loader2, Star, ChevronDown } from 'lucide-react';
+import { Star, ChevronRight, Loader2, Check, ArrowLeft, ShieldCheck, Zap, Lock, Award, ChevronDown } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 import ProductGallery from '@/components/ProductGallery';
 import ReviewForm from '@/components/ReviewForm';
@@ -117,7 +117,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
 
                             <p className="text-xl text-zinc-600 mb-8 leading-relaxed font-medium">{product.description}</p>
 
-                            <div className="flex items-center gap-6 mb-10 pb-10 border-b border-zinc-200">
+                            <div className="flex items-center gap-6 mb-8 pb-8 border-b border-zinc-200">
                                 <div className="text-4xl font-black italic text-[#FF6B00]">{product.price}</div>
                                 <button
                                     onClick={handleCheckout}
@@ -130,6 +130,34 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                         </>
                                     )}
                                 </button>
+                            </div>
+
+                            {/* Trust Badges */}
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+                                <div className="flex flex-col items-center text-center gap-2">
+                                    <div className="text-[#FF6B00]">
+                                        <Lock size={20} strokeWidth={2.5} />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Paiement 100% Sécurisé</span>
+                                </div>
+                                <div className="flex flex-col items-center text-center gap-2">
+                                    <div className="text-[#FF6B00]">
+                                        <Zap size={20} strokeWidth={2.5} />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Accès Immédiat après achat</span>
+                                </div>
+                                <div className="flex flex-col items-center text-center gap-2">
+                                    <div className="text-[#FF6B00]">
+                                        <Award size={20} strokeWidth={2.5} />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Master EOPS & Expertise</span>
+                                </div>
+                                <div className="flex flex-col items-center text-center gap-2">
+                                    <div className="text-[#FF6B00]">
+                                        <ShieldCheck size={20} strokeWidth={2.5} />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Garantie & Support Réactif</span>
+                                </div>
                             </div>
 
                             {/* MARKDOWN CONTENT */}
