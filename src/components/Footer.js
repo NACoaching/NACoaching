@@ -45,7 +45,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
                     <div>
-                        {siteContent.logo_url ? <Image src={siteContent.logo_url} alt="NA Coaching" width={48} height={48} className="mb-6 object-contain" /> : <div className="mb-6 font-bold text-xl">NA COACHING</div>}
+                        {siteContent.logo_url ? <Image src={siteContent.logo_url} alt="NA Coaching" width={48} height={48} className="mb-6 object-contain rounded-sm" style={{ mixBlendMode: 'screen', filter: 'contrast(1.5) brightness(1.2)' }} /> : <div className="mb-6 font-bold text-xl">NA COACHING</div>}
                         <p className="text-zinc-500 text-sm leading-relaxed">
                             {siteContent.footer_text || "Expertise scientifique au service de la performance sportive et de la santé."}
                         </p>
