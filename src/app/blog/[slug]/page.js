@@ -9,9 +9,20 @@ import remarkGfm from 'remark-gfm';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumb from '@/components/Breadcrumb';
 
+import { redirect } from 'next/navigation';
+
 export async function generateMetadata({ params }) {
-    const { id } = await params;
-    const { data: article } = await supabase.from('articles').select('*').eq('id', id).eq('is_published', true).single();
+    const { slug } = await params;
+    const isId = /^\d+$/.test(slug);
+
+    let query = supabase.from('articles').select('*').eq('is_published', true);
+    if (isId) {
+        query = query.eq('id', slug);
+    } else {
+        query = query.eq('slug', slug);
+    }
+
+    const { data: article } = await query.single();
 
     if (!article) {
         return {
@@ -31,10 +42,18 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ArticlePage({ params }) {
-    const { id } = await params;
+    const { slug } = await params;
+    const isId = /^\d+$/.test(slug);
+
+    let query = supabase.from('articles').select('*').eq('is_published', true);
+    if (isId) {
+        query = query.eq('id', slug);
+    } else {
+        query = query.eq('slug', slug);
+    }
 
     const [articleRes, contentRes] = await Promise.all([
-        supabase.from('articles').select('*').eq('id', id).eq('is_published', true).single(),
+        query.single(),
         supabase.from('site_content').select('*')
     ]);
 
@@ -46,8 +65,8 @@ export default async function ArticlePage({ params }) {
     if (article) {
         const { data } = await supabase
             .from('articles')
-            .select('id, title, category')
-            .neq('id', id)
+            .select('id, slug, title, category')
+            .neq('id', article.id)
             .eq('category', article.category)
             .eq('is_published', true)
             .limit(2);
@@ -58,8 +77,8 @@ export default async function ArticlePage({ params }) {
         if (relatedArticles.length < 2) {
             const { data: fallbackData } = await supabase
                 .from('articles')
-                .select('id, title, category')
-                .neq('id', id)
+                .select('id, slug, title, category')
+                .neq('id', article.id)
                 .eq('is_published', true)
                 .order('created_at', { ascending: false })
                 .limit(2 - relatedArticles.length);
@@ -74,7 +93,11 @@ export default async function ArticlePage({ params }) {
 
     if (!article) return <div className="p-20 text-center">Article introuvable.</div>;
 
-    const currentUrl = `https://na-coaching.com/blog/${article.id}`;
+    if (isId && article.slug) {
+        redirect(`/blog/${article.slug}`);
+    }
+
+    const currentUrl = `https://na-coaching.com/blog/${article.slug || article.id}`;
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -219,7 +242,7 @@ export default async function ArticlePage({ params }) {
                         <h3 className="text-2xl font-black uppercase mb-8 text-black text-center">Pour aller plus loin</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {relatedArticles.map((relatedArticle) => (
-                                <Link href={`/blog/${relatedArticle.id}`} key={relatedArticle.id} className="group block">
+                                <Link href={`/blog/${relatedArticle.slug || relatedArticle.id}`} key={relatedArticle.id} className="group block">
                                     <div className="bg-zinc-50 rounded-lg p-6 border border-zinc-100 hover:border-[#FF6B00] hover:shadow-md transition-all h-full flex flex-col">
                                         <div className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{relatedArticle.category}</div>
                                         <h4 className="text-lg font-bold uppercase leading-snug mb-3 text-black group-hover:text-[#FF6B00] transition line-clamp-2">

@@ -40,8 +40,9 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-black text-white pt-24 pb-12 border-t-8 border-[#FF6B00]">
-            <div className="max-w-7xl mx-auto px-6">
+        <footer className="bg-zinc-950 text-white pt-24 pb-12 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF6B00]/50 to-transparent"></div>
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
                     <div>
                         {siteContent.logo_url ? <Image src={siteContent.logo_url} alt="NA Coaching" width={48} height={48} className="mb-6 object-contain" /> : <div className="mb-6 font-bold text-xl">NA COACHING</div>}
@@ -52,15 +53,15 @@ export default function Footer() {
                     <div>
                         <h4 className="font-black uppercase tracking-widest mb-6 text-[#FF6B00]">{siteContent.footer_newsletter_title || 'Newsletter'}</h4>
                         <p className="text-xs text-zinc-500 mb-4 italic">{siteContent.footer_newsletter_text || 'Recevez mes analyses scientifiques hebdomadaires (Gratuit).'}</p>
-                        <form onSubmit={handleSubscribe} className="flex">
+                        <form onSubmit={handleSubscribe} className="flex gap-2">
                             <input
                                 required
                                 type="email"
                                 name="email"
                                 placeholder="votre@email.com"
-                                className="bg-zinc-900 border border-zinc-800 p-3 flex-grow text-sm focus:outline-none focus:border-[#FF6B00]"
+                                className="bg-white/5 border border-white/10 rounded-full px-4 py-3 flex-grow text-sm focus:outline-none focus:border-[#FF6B00] transition-colors"
                             />
-                            <button type="submit" className="bg-[#FF6B00] text-black font-black px-4 uppercase text-xs">OK</button>
+                            <button type="submit" className="bg-[#FF6B00] text-white font-semibold px-6 py-3 rounded-full uppercase text-xs hover:bg-[#e66000] transition-colors">OK</button>
                         </form>
                     </div>
                     <div className="flex flex-col items-end">

@@ -72,172 +72,205 @@ export default async function HomePage() {
         />
       )}
       {/* HERO SECTION */}
-      <section className="relative h-[80vh] flex items-center justify-center bg-zinc-900 text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-50">
+      <section className="relative min-h-[90vh] flex items-center justify-center bg-zinc-900 text-white overflow-hidden pb-12 pt-24">
+        <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
             alt="Background"
             fill
-            className="object-cover grayscale"
+            className="object-cover opacity-40 mix-blend-luminosity"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-zinc-900/50" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <AnimWrapper>
-            <h1 className="text-4xl md:text-7xl font-black mb-6 uppercase tracking-tighter">
+            <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium text-zinc-200 tracking-wide">
+              Expertise & Performance
+            </div>
+          </AnimWrapper>
+          <AnimWrapper delay={0.1}>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white drop-shadow-lg leading-tight">
               {siteContent.find(c => c.key === 'hero_title')?.value || "La science au service de ton potentiel"}
             </h1>
           </AnimWrapper>
-          <AnimWrapper delay={0.2}>
-            <p className="text-xl md:text-2xl text-zinc-300 mb-10 font-light max-w-2xl mx-auto">
+          <AnimWrapper delay={0.3}>
+            <p className="text-lg md:text-2xl text-zinc-300 mb-10 font-medium max-w-2xl mx-auto leading-relaxed">
               {siteContent.find(c => c.key === 'hero_subtitle')?.value || "Coaching sportif haut de gamme basé sur la physiologie et la biomécanique."}
             </p>
           </AnimWrapper>
-          <AnimWrapper delay={0.4}>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Link href="/labo" className="bg-[#FF6B00] text-black px-8 py-4 rounded font-black uppercase tracking-widest hover:bg-white transition flex items-center gap-2 justify-center group">
+          <AnimWrapper delay={0.5}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/labo" className="bg-[#FF6B00] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#e66000] hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.4)] flex items-center gap-2 group">
                 {siteContent.find(c => c.key === 'hero_cta_primary_v2')?.value || "Découvrir le Labo"} <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/outils" className="bg-transparent border-2 border-white px-8 py-4 rounded font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">
+              <Link href="/outils" className="bg-white/10 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-black hover:scale-105 transition-all duration-300">
                 {siteContent.find(c => c.key === 'hero_cta_secondary_v2')?.value || "Mes outils pour toi"}
+              </Link>
+            </div>
+          </AnimWrapper>
+        </div>
+
+        {/* Decorative elements */}
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      </section>
+
+      {/* EXPERTISE BAR */}
+      <section className="bg-zinc-50 py-16 md:py-24 relative z-10 -mt-8">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { icon: Award, title: siteContent.find(c => c.key === 'expertise_1')?.value || "Master EOPS", desc: "Expertise universitaire" },
+              { icon: Activity, title: siteContent.find(c => c.key === 'expertise_2')?.value || "Expert Sport-Santé", desc: "Suivi médicalisé" },
+              { icon: UserCheck, title: siteContent.find(c => c.key === 'expertise_3')?.value || "Brevet Football", desc: "Spécialiste tactique" },
+              { icon: HeartPulse, title: siteContent.find(c => c.key === 'expertise_4')?.value || "Licence STAPS", desc: "Base scientifique" }
+            ].map((exp, i) => (
+              <AnimWrapper key={i} delay={i * 0.1}>
+                <div className="bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-zinc-100 flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full">
+                  <div className="w-16 h-16 rounded-2xl bg-orange-50/80 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-orange-100 transition-all duration-300">
+                    <exp.icon className="text-[#FF6B00]" size={28} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 text-lg mb-1">{exp.title}</h3>
+                  <p className="text-zinc-500 text-sm">{exp.desc}</p>
+                </div>
+              </AnimWrapper>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QUICK BLOG PREVIEW (LE LABO) */}
+      <section className="py-20 md:py-32 bg-white relative overflow-hidden">
+        {/* Soft background glow */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-50/50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <AnimWrapper>
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+              <div className="max-w-2xl">
+                <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 tracking-tight mb-4">
+                  {siteContent.find(c => c.key === 'about_title')?.value || 'Le Labo'}
+                </h2>
+                <p className="text-zinc-600 text-lg">Découvrez les dernières avancées scientifiques appliquées à l'entraînement, la nutrition et la récupération.</p>
+              </div>
+              <Link href="/labo" className="inline-flex items-center text-[#FF6B00] font-semibold text-lg hover:text-[#e66000] border-b-2 border-transparent hover:border-[#FF6B00] pb-1 transition-all">
+                Explorer les articles <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </div>
+          </AnimWrapper>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {articles && articles.map((article, index) => (
+              <AnimWrapper key={article.id} delay={index * 0.1}>
+                <Link href={`/blog/${article.slug || article.id}`} className="group block h-full">
+                  <div className="bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 h-full flex flex-col hover:-translate-y-2 border border-zinc-100/50">
+                    <div className="relative h-64 overflow-hidden w-full m-2 rounded-t-[1.75rem] rounded-b-xl">
+                      <Image
+                        src={article.image || "/api/placeholder/400/320"}
+                        alt={article.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-white/90 backdrop-blur-sm text-zinc-900 text-xs font-bold px-4 py-1.5 rounded-full tracking-wide shadow-sm">
+                          {article.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="px-8 pt-6 pb-8 flex flex-col flex-grow">
+                      <h3 className="text-2xl font-bold mb-3 leading-tight text-zinc-900 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-zinc-500 text-base mb-6 line-clamp-3 flex-grow leading-relaxed">
+                        {article.excerpt}
+                      </p>
+                      <div className="flex items-center text-[#FF6B00] text-sm font-semibold mt-auto">
+                        Lire l'article <ArrowRight size={16} className="ml-2 group-hover:translate-x-2 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </AnimWrapper>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED TOOLS PREVIEW */}
+      <section className="py-20 md:py-32 bg-zinc-900 relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimWrapper>
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+                Mes Outils <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-300">Gratuits</span>
+              </h2>
+              <p className="text-zinc-400 text-lg">Des calculateurs fiables basés sur la littérature scientifique pour optimiser ton entraînement.</p>
+            </div>
+          </AnimWrapper>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "Calculateur 1RM", desc: "Estime ta force max théorique selon la méthode Brzycki ou Epley.", icon: "💪", href: "/outils" },
+              { title: "Besoins Caloriques", desc: "Défini ton métabolisme de base et tes dépenses journalières.", icon: "🔥", href: "/outils" },
+              { title: "VMA & VO2max", desc: "Évalue tes capacités aérobies pour mieux cibler tes efforts.", icon: "🏃‍♂️", href: "/outils" },
+              { title: "Zones Cardiaques", desc: "Cible tes 5 zones d'entraînement via la méthode Karvonen.", icon: "🫀", href: "/outils" }
+            ].map((tool, i) => (
+              <AnimWrapper key={i} delay={i * 0.1}>
+                <Link href={tool.href} className="block group h-full">
+                  <div className="bg-zinc-800/50 backdrop-blur-sm p-8 rounded-3xl border border-zinc-700/50 hover:border-[#FF6B00]/50 transition-all duration-300 h-full flex flex-col hover:bg-zinc-800 hover:-translate-y-2">
+                    <div className="text-4xl mb-6 bg-zinc-900 w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner">{tool.icon}</div>
+                    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-[#FF6B00] transition-colors">{tool.title}</h3>
+                    <p className="text-zinc-400 text-sm mb-6 leading-relaxed flex-grow">{tool.desc}</p>
+                    <div className="mt-auto text-sm font-semibold text-[#FF6B00] flex items-center gap-2">
+                      Utiliser l'outil <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0" />
+                    </div>
+                  </div>
+                </Link>
+              </AnimWrapper>
+            ))}
+          </div>
+
+          <AnimWrapper delay={0.4}>
+            <div className="mt-12 text-center">
+              <Link href="/outils" className="inline-flex items-center text-white font-medium hover:text-[#FF6B00] transition-colors">
+                Voir tous les outils <ChevronRight className="ml-1" size={20} />
               </Link>
             </div>
           </AnimWrapper>
         </div>
       </section>
 
-      {/* EXPERTISE BAR */}
-      <section className="bg-zinc-100 py-8 md:py-12 border-b border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <AnimWrapper delay={0.1}>
-            <div className="flex flex-col items-center text-center group">
-              <Award className="text-[#FF6B00] mb-3 group-hover:scale-110 transition" size={32} />
-              <span className="font-bold text-sm uppercase text-black">{siteContent.find(c => c.key === 'expertise_1')?.value || "Master EOPS"}</span>
-            </div>
-          </AnimWrapper>
-          <AnimWrapper delay={0.2}>
-            <div className="flex flex-col items-center text-center group">
-              <Activity className="text-[#FF6B00] mb-3 group-hover:scale-110 transition" size={32} />
-              <span className="font-bold text-sm uppercase text-black">{siteContent.find(c => c.key === 'expertise_2')?.value || "Expert Sport-Santé"}</span>
-            </div>
-          </AnimWrapper>
-          <AnimWrapper delay={0.3}>
-            <div className="flex flex-col items-center text-center group">
-              <UserCheck className="text-[#FF6B00] mb-3 group-hover:scale-110 transition" size={32} />
-              <span className="font-bold text-sm uppercase text-black">{siteContent.find(c => c.key === 'expertise_3')?.value || "Brevet Football"}</span>
-            </div>
-          </AnimWrapper>
-          <AnimWrapper delay={0.4}>
-            <div className="flex flex-col items-center text-center group">
-              <HeartPulse className="text-[#FF6B00] mb-3 group-hover:scale-110 transition" size={32} />
-              <span className="font-bold text-sm uppercase text-black">{siteContent.find(c => c.key === 'expertise_4')?.value || "Licence STAPS"}</span>
-            </div>
-          </AnimWrapper>
-        </div>
-      </section >
-
-      {/* QUICK BLOG PREVIEW (LE LABO) - MOVED TO TOP */}
-      < section className="py-16 md:py-24 bg-white border-b border-zinc-200" >
-        <div className="max-w-7xl mx-auto px-6">
-          <AnimWrapper>
-            <div className="flex justify-between items-end mb-12">
-              <h2 className="text-4xl font-black uppercase text-[#FF6B00]">{siteContent.find(c => c.key === 'about_title')?.value || 'Le Labo'}</h2>
-              <Link href="/labo" className="text-[#FF6B00] font-bold hover:underline">Voir tout →</Link>
-            </div>
-          </AnimWrapper>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article, index) => (
-              <AnimWrapper key={article.id} delay={index * 0.1}>
-                <Link href={`/blog/${article.id}`} className="group block h-full">
-                  <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full border border-zinc-100 flex flex-col">
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={article.image || "/api/placeholder/400/320"}
-                        alt={article.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-[#FF6B00] text-black text-xs font-black px-3 py-1 rounded uppercase tracking-wider">
-                          {article.category}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-black mb-3 uppercase leading-tight text-black group-hover:text-[#FF6B00] transition-colors line-clamp-2">
-                        {article.title}
-                      </h3>
-                      <p className="text-zinc-600 text-sm mb-4 line-clamp-3 flex-grow">
-                        {article.excerpt}
-                      </p>
-                      <div className="flex items-center text-[#FF6B00] text-xs font-bold uppercase tracking-widest mt-auto">
-                        Lire l'article <ArrowRight size={14} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </AnimWrapper>
-            ))}
-          </div>
-        </div>
-      </section >
-
-      {/* FEATURED TOOLS PREVIEW - MOVED BELOW LABO */}
-      < section className="py-16 bg-zinc-50 border-b border-zinc-200" >
-        <div className="max-w-7xl mx-auto px-6">
-          <AnimWrapper>
-            <div className="flex justify-between items-end mb-12">
-              <h2 className="text-4xl font-black uppercase text-black">Mes Outils <span className="text-[#FF6B00]">Gratuits</span></h2>
-              <Link href="/outils" className="text-[#FF6B00] font-bold hover:underline">Voir tout →</Link>
-            </div>
-          </AnimWrapper>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Calculateur 1RM", desc: "Estime ta force max théorique.", icon: "💪", href: "/outils" },
-              { title: "Calculateur Calories", desc: "Défini tes besoins journaliers.", icon: "🔥", href: "/outils" },
-              { title: "VMA / VO2max", desc: "Estime tes capacités aérobies.", icon: "🏃‍♂️", href: "/outils" },
-              { title: "Zones Cardiaques", desc: "Tes 5 zones d'entraînement.", icon: "🫀", href: "/outils" }
-            ].map((tool, i) => (
-              <AnimWrapper key={i} delay={i * 0.1}>
-                <Link href={tool.href} className="block group">
-                  <div className="bg-white p-6 rounded-lg border border-zinc-200 hover:border-[#FF6B00] transition h-full flex flex-col hover:shadow-lg">
-                    <div className="text-4xl mb-4">{tool.icon}</div>
-                    <h3 className="text-lg font-black uppercase mb-2 text-black group-hover:text-[#FF6B00] transition">{tool.title}</h3>
-                    <p className="text-zinc-900 text-sm mb-4 font-medium">{tool.desc}</p>
-                    <div className="mt-auto text-xs font-bold uppercase tracking-widest text-[#FF6B00] flex items-center gap-2">
-                      Utiliser <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              </AnimWrapper>
-            ))}
-          </div>
-        </div>
-      </section >
-
       {/* FAQ SECTION */}
-      < HomeFAQ faqData={globalFaqs} />
+      <div className="bg-white">
+        <HomeFAQ faqData={globalFaqs} />
+      </div>
 
       {/* CONTACT CTA */}
-      < section className="py-24 bg-zinc-900 text-white text-center" >
-        <div className="max-w-3xl mx-auto px-6">
+      <section className="py-32 bg-zinc-50 relative overflow-hidden">
+        {/* Soft geometric shapes */}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] bg-gradient-to-br from-orange-100 to-transparent rounded-full opacity-50 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-zinc-200 to-transparent rounded-full opacity-50 pointer-events-none"></div>
+
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <AnimWrapper>
-            <h2 className="text-4xl font-black uppercase mb-6">{siteContent.find(c => c.key === 'contact_cta_title')?.value || "Prêt à passer au niveau supérieur ?"}</h2>
-            <p className="text-zinc-400 mb-8 text-lg">
+            <span className="text-[#FF6B00] font-bold tracking-wider uppercase text-sm mb-4 block">Prêt à commencer ?</span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-zinc-900 tracking-tight leading-tight">
+              {siteContent.find(c => c.key === 'contact_cta_title')?.value || "Passe Master de ton propre entraînement."}
+            </h2>
+            <p className="text-zinc-600 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
               {siteContent.find(c => c.key === 'contact_cta_text')?.value || "Besoin d'un accompagnement personnalisé ou d'une question sur un programme ? N'hésitez pas à me contacter."}
             </p>
             <Link
               href="/contact"
-              className="bg-[#FF6B00] text-black font-black py-4 px-10 rounded-sm uppercase tracking-tighter hover:bg-white transition inline-block"
+              className="bg-zinc-900 text-white font-semibold py-4 px-12 rounded-full text-lg hover:bg-[#FF6B00] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 inline-block"
             >
               {siteContent.find(c => c.key === 'contact_cta_button')?.value || "Me Contacter"}
             </Link>
           </AnimWrapper>
         </div>
-      </section >
+      </section>
     </>
   );
 }

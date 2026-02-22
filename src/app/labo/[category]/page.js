@@ -59,7 +59,7 @@ export default async function LaboCategoryPage({ params }) {
         hasPart: articlesList.map(article => ({
             '@type': 'Article',
             headline: article.title,
-            url: `https://na-coaching.com/blog/${article.id}`,
+            url: `https://na-coaching.com/blog/${article.slug || article.id}`,
             image: article.image,
         })),
     };
@@ -119,7 +119,7 @@ export default async function LaboCategoryPage({ params }) {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                             {articlesList.map((article, index) => (
                                 <AnimWrapper key={article.id} delay={index * 0.1}>
-                                    <Link href={`/blog/${article.id}`} className="group cursor-pointer flex flex-col h-full">
+                                    <Link href={`/blog/${article.slug || article.id}`} className="group cursor-pointer flex flex-col h-full">
                                         <div className="aspect-[4/3] bg-zinc-200 mb-6 overflow-hidden relative rounded-lg">
                                             {article.image ? (
                                                 <Image

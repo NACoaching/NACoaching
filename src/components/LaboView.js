@@ -98,7 +98,7 @@ export default function LaboView({ articles, siteContent }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     {filteredArticles.map((article, index) => {
                         const isTool = article.category === 'Outils';
-                        const href = isTool && article.cta ? article.cta : `/blog/${article.id}`;
+                        const href = isTool && article.cta ? article.cta : `/blog/${article.slug || article.id}`;
 
                         return (
                             <AnimWrapper key={article.id} delay={index * 0.1}>

@@ -259,15 +259,27 @@ export default function AdminPage() {
         });
     };
 
+    const generateSlug = (title) => {
+        if (!title) return '';
+        return title
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)+/g, '');
+    };
+
     const handleArticleSubmit = async (e) => {
         e.preventDefault();
 
+        const dataToSave = { ...articleForm, slug: generateSlug(articleForm.title) };
+
         let error;
         if (editingItem && editingItem.type === 'article') {
-            const { error: err } = await supabase.from('articles').update(articleForm).eq('id', editingItem.id);
+            const { error: err } = await supabase.from('articles').update(dataToSave).eq('id', editingItem.id);
             error = err;
         } else {
-            const { error: err } = await supabase.from('articles').insert([articleForm]);
+            const { error: err } = await supabase.from('articles').insert([dataToSave]);
             error = err;
         }
 
@@ -624,8 +636,8 @@ export default function AdminPage() {
                                         else if (page.path === '/labo') pageLabel = '🧪 Le Labo';
                                         else if (page.path === '/boutique') pageLabel = '🛍️ Boutique';
                                         else if (page.path.startsWith('/blog/')) {
-                                            const articleId = page.path.split('/').pop();
-                                            const article = articles.find(a => a.id.toString() === articleId);
+                                            const articleIdOrSlug = page.path.split('/').pop();
+                                            const article = articles.find(a => a.id.toString() === articleIdOrSlug || a.slug === articleIdOrSlug);
                                             if (article) pageLabel = `📄 Article : ${article.title}`;
                                         }
                                         else if (page.path.startsWith('/outils/')) pageLabel = `🔧 ${page.path.split('/').pop()}`;

@@ -12,7 +12,7 @@ export default function RelatedArticles({ articles, title = "Articles du Labo li
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {articles.map((article) => (
-                    <Link href={`/blog/${article.id}`} key={article.id} className="group block">
+                    <Link href={`/blog/${article.slug || article.id}`} key={article.id} className="group block">
                         <div className="bg-white rounded-lg p-6 border border-zinc-200 hover:border-[#FF6B00] hover:shadow-md transition-all h-full flex flex-col">
                             <div className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{article.category}</div>
                             <h4 className="text-lg font-bold uppercase leading-snug mb-3 text-black group-hover:text-[#FF6B00] transition line-clamp-2">
