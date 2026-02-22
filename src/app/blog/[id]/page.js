@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabaseClient';
-import { Activity } from 'lucide-react';
+import { Activity, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CommentsSection from '@/components/CommentsSection';
@@ -167,6 +167,31 @@ export default async function ArticlePage({ params }) {
 
                         <ShareButtons url={currentUrl} title={article.title} />
                     </div>
+
+                    {/* AFFILIATE CARD */}
+                    {article.affiliate_link && (
+                        <div className="mt-12 p-8 rounded-xl border-2 border-dashed border-[#FF6B00]/30 bg-[#FF6B00]/5 flex flex-col md:flex-row items-center gap-8">
+                            <div className="flex-1 text-center md:text-left">
+                                <span className="inline-block px-3 py-1 bg-[#FF6B00] text-black text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
+                                    Recommandation de l'expert
+                                </span>
+                                <p className="text-zinc-800 font-medium text-lg leading-relaxed mb-6">
+                                    {article.affiliate_text || "Je vous recommande ce produit pour optimiser vos résultats et votre récupération."}
+                                </p>
+                                <a
+                                    href={article.affiliate_link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-block bg-black text-white font-black py-4 px-8 rounded-sm uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition shadow-lg"
+                                >
+                                    Découvrir le produit
+                                </a>
+                            </div>
+                            <div className="hidden md:block w-32 h-32 opacity-20">
+                                <ShoppingBag className="w-full h-full text-[#FF6B00]" />
+                            </div>
+                        </div>
+                    )}
 
                     {/* EXPERT BOX */}
                     {article.cta && (

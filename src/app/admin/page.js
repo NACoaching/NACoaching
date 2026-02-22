@@ -83,6 +83,7 @@ export default function AdminPage() {
     // Forms Data
     const [articleForm, setArticleForm] = useState({
         title: '', category: '', excerpt: '', content: '', image: '', cta: '',
+        affiliate_link: '', affiliate_text: '',
         is_published: true,
         date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
     });
@@ -230,7 +231,9 @@ export default function AdminPage() {
         if (type === 'article') {
             setArticleForm({
                 title: item.title, category: item.category, excerpt: item.excerpt,
-                content: item.content, image: item.image, cta: item.cta, date: item.date
+                content: item.content, image: item.image, cta: item.cta, date: item.date,
+                affiliate_link: item.affiliate_link || '',
+                affiliate_text: item.affiliate_text || ''
             });
         } else {
             setProductForm({
@@ -247,6 +250,7 @@ export default function AdminPage() {
         setEditingItem(null);
         setArticleForm({
             title: '', category: '', excerpt: '', content: '', image: '', cta: '',
+            affiliate_link: '', affiliate_text: '',
             date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
         });
         setProductForm({
@@ -1508,6 +1512,13 @@ export default function AdminPage() {
                                             <input type="hidden" name="image" value={articleForm.image} />
                                         </div>
                                         <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="CTA (Produit lié - Optionnel)" />
+
+                                        <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">
+                                            <h3 className="text-xs font-black uppercase text-[#FF6B00]">Affiliation (Optionnel)</h3>
+                                            <input name="affiliate_link" value={articleForm.affiliate_link} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Lien d'affiliation (URL)" />
+                                            <textarea name="affiliate_text" value={articleForm.affiliate_text} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white h-20" placeholder="Texte promotionnel (ex: Profitez de 10% avec le code NA10)" />
+                                        </div>
+
                                         <input required name="date" value={articleForm.date} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" />
 
                                         <div className="flex items-center gap-2 px-1">
