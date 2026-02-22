@@ -83,7 +83,7 @@ export default function AdminPage() {
 
     // Forms Data
     const [articleForm, setArticleForm] = useState({
-        title: '', category: '', excerpt: '', content: '', image: '', cta: '',
+        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
         affiliate_link: '', affiliate_text: '',
         is_published: true,
         date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -231,7 +231,7 @@ export default function AdminPage() {
         setEditingItem({ type, id: item.id });
         if (type === 'article') {
             setArticleForm({
-                title: item.title, category: item.category, excerpt: item.excerpt,
+                title: item.title, category: item.category, subcategory: item.subcategory || '', excerpt: item.excerpt,
                 content: item.content, image: item.image, cta: item.cta, date: item.date,
                 affiliate_link: item.affiliate_link || '',
                 affiliate_text: item.affiliate_text || ''
@@ -250,7 +250,7 @@ export default function AdminPage() {
     const cancelEdit = () => {
         setEditingItem(null);
         setArticleForm({
-            title: '', category: '', excerpt: '', content: '', image: '', cta: '',
+            title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
             affiliate_link: '', affiliate_text: '',
             date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
         });
@@ -1487,6 +1487,9 @@ export default function AdminPage() {
                                     <form onSubmit={handleArticleSubmit} className="space-y-4">
                                         <input required name="title" value={articleForm.title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Titre" />
                                         <input required name="category" value={articleForm.category} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Catégorie" />
+                                        {articleForm.category === 'Outils' && (
+                                            <input name="subcategory" value={articleForm.subcategory} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm shrink" placeholder="Sous-Catégorie (ex: Force, Endurance...)" />
+                                        )}
                                         <textarea required name="excerpt" value={articleForm.excerpt} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Extrait" />
                                         <div className="relative">
                                             <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-40 font-mono text-xs" placeholder="Contenu (Markdown supporté)" />
