@@ -288,6 +288,13 @@ export default function AdminPage() {
             alert(editingItem ? 'Article modifié !' : 'Article ajouté !');
             cancelEdit();
             fetchData();
+
+            // Revalidate cache
+            if (dataToSave.category === 'Outils') {
+                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/outils' }) });
+            } else {
+                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/labo' }) });
+            }
         }
     };
 
@@ -1727,7 +1734,7 @@ export default function AdminPage() {
                                                     <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200'}`}>
                                                         <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100" />
                                                         <div className="flex-grow">
-                                                            <span className="text-[10px] font-black uppercase text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{article.category}</span>
+                                                            <span className="text-[10px] font-black uppercase text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded">{article.category}{article.category === 'Outils' && article.subcategory ? ` • ${article.subcategory}` : ''}</span>
                                                             <h3 className="font-bold text-lg mt-2 leading-tight">{article.title}</h3>
                                                             <div className="flex gap-4 mt-2">
                                                                 <button onClick={() => handleEdit(article, 'article')} className="text-blue-500 text-xs font-bold hover:underline flex items-center gap-1"><Edit size={12} /> Modifier</button>
@@ -1758,7 +1765,7 @@ export default function AdminPage() {
                                                         <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200 opacity-75'}`}>
                                                             <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100 grayscale" />
                                                             <div className="flex-grow">
-                                                                <span className="text-[10px] font-black uppercase text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{article.category}</span>
+                                                                <span className="text-[10px] font-black uppercase text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{article.category}{article.category === 'Outils' && article.subcategory ? ` • ${article.subcategory}` : ''}</span>
                                                                 <h3 className="font-bold text-lg mt-2 leading-tight text-zinc-500 italic">{article.title}</h3>
                                                                 <div className="flex gap-4 mt-2">
                                                                     <button onClick={() => handleEdit(article, 'article')} className="text-blue-500 text-xs font-bold hover:underline flex items-center gap-1"><Edit size={12} /> Modifier</button>
