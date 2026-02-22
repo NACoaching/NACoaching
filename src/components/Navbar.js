@@ -7,17 +7,17 @@ import { Instagram, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
 
-export default function Navbar() {
+export default function Navbar({ initialLogoUrl = '/logo.png' }) {
     const pathname = usePathname();
-    const [logoUrl, setLogoUrl] = useState("/logo.png");
+    const [logoUrl, setLogoUrl] = useState(initialLogoUrl);
 
     useEffect(() => {
         async function fetchLogo() {
             const { data } = await supabase.from('site_content').select('value').eq('key', 'logo_url').single();
-            if (data) setLogoUrl(data.value);
+            if (data && data.value !== initialLogoUrl) setLogoUrl(data.value);
         }
         fetchLogo();
-    }, []);
+    }, [initialLogoUrl]);
 
     const isActive = (path) => pathname === path;
 

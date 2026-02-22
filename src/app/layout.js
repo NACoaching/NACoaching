@@ -63,12 +63,15 @@ export async function generateMetadata() {
   };
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const { data } = await supabase.from('site_content').select('value').eq('key', 'logo_url').single();
+  const initialLogoUrl = data?.value || '/logo.png';
+
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-50 font-sans text-zinc-900 selection:bg-orange-500 selection:text-white`}>
         <PageTracker />
-        <Navbar />
+        <Navbar initialLogoUrl={initialLogoUrl} />
         <main className="pt-16 min-h-screen">
           {children}
         </main>
