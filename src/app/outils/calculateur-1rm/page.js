@@ -3,6 +3,7 @@ import Calculator1RM from "@/components/tools/Calculator1RM";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { supabase } from '@/lib/supabaseClient';
 import { getToolArticle } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import RelatedArticles from "@/components/RelatedArticles";
