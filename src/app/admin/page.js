@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { ArrowLeft, Plus, Save, Trash2, Lock, ShoppingBag, FileText, Mail, Activity, Edit, Star } from 'lucide-react';
+import { ArrowLeft, Plus, Save, Trash2, Lock, ShoppingBag, FileText, Mail, Activity, Edit, Star, Search } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -1684,9 +1684,9 @@ export default function AdminPage() {
                                             placeholder="Rechercher un article..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-full text-sm focus:border-[#FF6B00] outline-none transition"
+                                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-full text-sm focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition shadow-sm"
                                         />
-                                        <Activity className="absolute left-3 top-2.5 text-zinc-400" size={16} />
+                                        <Search className="absolute left-3 top-2.5 text-zinc-400" size={16} />
                                     </div>
                                 )}
                             </div>
@@ -1702,7 +1702,11 @@ export default function AdminPage() {
                                             </h3>
                                             {articles
                                                 .filter(a => a.is_published !== false)
-                                                .filter(a => a.title.toLowerCase().includes(searchTerm.toLowerCase()) || a.category.toLowerCase().includes(searchTerm.toLowerCase()))
+                                                .filter(a => {
+                                                    const titleMatch = (a.title || '').toLowerCase().includes(searchTerm.toLowerCase());
+                                                    const catMatch = (a.category || '').toLowerCase().includes(searchTerm.toLowerCase());
+                                                    return titleMatch || catMatch;
+                                                })
                                                 .map(article => (
                                                     <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200'}`}>
                                                         <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100" />
@@ -1729,7 +1733,11 @@ export default function AdminPage() {
                                             ) : (
                                                 articles
                                                     .filter(a => a.is_published === false)
-                                                    .filter(a => a.title.toLowerCase().includes(searchTerm.toLowerCase()) || a.category.toLowerCase().includes(searchTerm.toLowerCase()))
+                                                    .filter(a => {
+                                                        const titleMatch = (a.title || '').toLowerCase().includes(searchTerm.toLowerCase());
+                                                        const catMatch = (a.category || '').toLowerCase().includes(searchTerm.toLowerCase());
+                                                        return titleMatch || catMatch;
+                                                    })
                                                     .map(article => (
                                                         <div key={article.id} className={`bg-white p-4 rounded-lg shadow-sm border flex gap-4 items-start ${editingItem?.id === article.id ? 'border-[#FF6B00] ring-1 ring-[#FF6B00]' : 'border-zinc-200 opacity-75'}`}>
                                                             <img src={article.image} className="w-24 h-24 object-cover rounded bg-zinc-100 grayscale" />
