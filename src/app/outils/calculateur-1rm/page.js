@@ -7,7 +7,7 @@ import { getToolArticle } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import RelatedArticles from "@/components/RelatedArticles";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/calculateur-1rm');

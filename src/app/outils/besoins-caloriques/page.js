@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { getToolArticle } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/besoins-caloriques');

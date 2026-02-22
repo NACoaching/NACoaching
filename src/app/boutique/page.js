@@ -13,7 +13,7 @@ export const metadata = {
     }
 };
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 import BoutiqueView from '@/components/BoutiqueView';
 

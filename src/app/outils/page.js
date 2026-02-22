@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight, Dumbbell, Flame, Gauge, Activity, Heart, Sparkles, Apple, BarChart3, HelpCircle, Target, Layers, Timer, Trophy } from "lucide-react";
 import { supabase } from '@/lib/supabaseClient';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export const metadata = {
     title: 'Outils & Calculateurs Sportifs Gratuits | NA Coaching',

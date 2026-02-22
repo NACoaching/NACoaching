@@ -6,7 +6,7 @@ import AnimWrapper from '@/components/AnimWrapper';
 import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight } from 'lucide-react';
 import HomeFAQ from '@/components/HomeFAQ';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const { data: articles } = await supabase.from('articles').select('*').eq('is_published', true).order('created_at', { ascending: false }).limit(3);

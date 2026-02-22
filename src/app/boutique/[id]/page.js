@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import ProductClientView from '@/components/ProductClientView';
 import Breadcrumb from '@/components/Breadcrumb';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 // Generate dynamic metadata for the product
 export async function generateMetadata({ params }) {

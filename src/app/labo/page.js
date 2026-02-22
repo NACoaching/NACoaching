@@ -12,7 +12,7 @@ export const metadata = {
     }
 };
 
-export const revalidate = 0; // Disable static caching for dynamic content
+export const revalidate = 3600; // Enable ISR (1 hour) for instant loads
 
 export default async function LaboPage() {
     const { data: articles } = await supabase.from('articles').select('*').eq('is_published', true).order('created_at', { ascending: false });
