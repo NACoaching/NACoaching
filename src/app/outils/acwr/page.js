@@ -11,7 +11,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('/outils/acwr');
     return {
         title: `${article.title || 'Calculateur ACWR'} | NA Coaching`,
-        description: article.intro || 'Surveille ta charge d\'entraînement pour prévenir les blessures.',
+        description: article.intro || 'Surveillez votre charge d\'entraînement pour prévenir les blessures.',
     }
 }
 
@@ -48,7 +48,7 @@ export default async function ACWRPage() {
                         {article.title || 'Calculateur ACWR (Fatigue/Charge)'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {article.intro || "Optimise ta progression et minimise les risques de blessures en surveillant ton ratio de charge aiguë / chronique."}
+                        {article.intro || "Optimisez votre progression et minimisez les risques de blessures en surveillant votre ratio de charge aiguë / chronique."}
                     </p>
 
                     <div className="mb-16">

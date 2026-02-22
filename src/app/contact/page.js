@@ -5,31 +5,31 @@ import { Mail, Loader2, CheckCircle, AlertTriangle, ChevronDown } from 'lucide-r
 const faqItems = [
     {
         question: "Comment fonctionne le coaching en ligne ?",
-        answer: "Le coaching en ligne se fait à distance. Après un échange initial pour comprendre tes objectifs, je t'envoie un programme personnalisé adapté à ton niveau et à ton matériel. Un suivi régulier par message permet d'ajuster le plan en fonction de tes retours et de ta progression."
+        answer: "Le coaching en ligne se fait à distance. Après un échange initial pour comprendre vos objectifs, je vous envoie un programme personnalisé adapté à votre niveau et à votre matériel. Un suivi régulier par message permet d'ajuster le plan en fonction de vos retours et de votre progression."
     },
     {
         question: "Quel est le délai de livraison des programmes ?",
-        answer: "Les programmes digitaux sont livrés instantanément par email après l'achat. Tu reçois un lien de téléchargement valide pendant 7 jours. Pour un coaching personnalisé, compte sur 48 à 72h après notre premier échange pour recevoir ton programme sur-mesure."
+        answer: "Les programmes digitaux sont livrés instantanément par email après l'achat. Vous recevez un lien de téléchargement valide pendant 7 jours. Pour un coaching personnalisé, comptez 48 à 72h après notre premier échange pour recevoir votre programme sur-mesure."
     },
     {
         question: "Les programmes sont-ils adaptés aux débutants ?",
-        answer: "Oui, chaque programme est conçu pour s'adapter à ton niveau. Que tu sois débutant ou athlète confirmé, les exercices, volumes et intensités sont ajustés. Les programmes incluent des descriptions détaillées des mouvements pour garantir une bonne exécution."
+        answer: "Oui, chaque programme est conçu pour s'adapter à votre niveau. Que vous soyez débutant ou athlète confirmé, les exercices, volumes et intensités sont ajustés. Les programmes incluent des descriptions détaillées des mouvements pour garantir une bonne exécution."
     },
     {
         question: "Puis-je obtenir un remboursement ?",
-        answer: "Les programmes digitaux étant des produits dématérialisés, ils ne sont pas remboursables une fois téléchargés. Si tu rencontres un problème technique pour accéder à ton programme, contacte-moi et je trouverai une solution rapidement."
+        answer: "Les programmes digitaux étant des produits dématérialisés, ils ne sont pas remboursables une fois téléchargés. Si vous rencontrez un problème technique pour accéder à votre programme, contactez-moi et je trouverai une solution rapidement."
     },
     {
         question: "Comment utiliser les outils gratuits du site ?",
-        answer: "Tous les outils (calculateur 1RM, besoins caloriques, zones de fréquence cardiaque, VMA/VO2max, convertisseur de vitesse) sont accessibles gratuitement depuis la section Outils. Il suffit d'entrer tes données et les résultats s'affichent instantanément. Tu peux même partager tes résultats."
+        answer: "Tous les outils (calculateur 1RM, besoins caloriques, zones de fréquence cardiaque, VMA/VO2max, convertisseur de vitesse) sont accessibles gratuitement depuis la section Outils. Il suffit d'entrer vos données et les résultats s'affichent instantanément. Vous pouvez même partager vos résultats."
     },
     {
         question: "Quel type de coaching proposez-vous ?",
-        answer: "Je propose du coaching en musculation, en course à pied et en préparation physique hybride. Chaque accompagnement est basé sur des données scientifiques et une approche individualisée. L'objectif est de te faire progresser durablement avec une méthode structurée."
+        answer: "Je propose du coaching en musculation, en course à pied et en préparation physique hybride. Chaque accompagnement est basé on des données scientifiques et une approche individualisée. L'objectif est de vous faire progresser durablement avec une méthode structurée."
     },
     {
         question: "Comment vous contacter pour une question ?",
-        answer: "Tu peux utiliser le formulaire de contact ci-dessus ou m'envoyer un message directement sur Instagram @na_coaching_. Je réponds généralement sous 24 à 48h."
+        answer: "Vous pouvez utiliser le formulaire de contact ci-dessus ou m'envoyer un message directement sur Instagram @na_coaching_. Je réponds généralement sous 24 à 48h."
     }
 ];
 
@@ -121,7 +121,7 @@ export default function ContactPage() {
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-black uppercase mb-4 text-black">Me <span className="text-[#FF6B00]">Contacter</span></h2>
                         <p className="text-zinc-500 max-w-xl mx-auto">
-                            Une question sur un programme ou une demande de coaching ? Remplis le formulaire ci-dessous.
+                            Une question sur un programme ou une demande de coaching ? Remplissez le formulaire ci-dessous.
                         </p>
                     </div>
 
@@ -129,11 +129,11 @@ export default function ContactPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Nom</label>
-                                <input required name="name" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="Ton nom" />
+                                <input required name="name" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="Votre nom" />
                             </div>
                             <div>
                                 <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Email</label>
-                                <input required type="email" name="email" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="ton@email.com" />
+                                <input required type="email" name="email" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="votre@email.com" />
                             </div>
                         </div>
                         <div>
@@ -146,7 +146,7 @@ export default function ContactPage() {
                         </div>
                         <div>
                             <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Message</label>
-                            <textarea required name="message" className="w-full border p-3 rounded text-sm h-40 focus:border-[#FF6B00] outline-none text-black" placeholder="Comment puis-je t'aider ?" />
+                            <textarea required name="message" className="w-full border p-3 rounded text-sm h-40 focus:border-[#FF6B00] outline-none text-black" placeholder="Comment puis-je vous aider ?" />
                         </div>
 
                         <button
@@ -162,7 +162,7 @@ export default function ContactPage() {
                             {status === 'error' && <><AlertTriangle /> Erreur, réessayez.</>}
                             {status === 'idle' && <>Envoyer le message <Mail size={18} /></>}
                         </button>
-                        {status === 'success' && <p className="text-center text-green-600 text-sm font-bold mt-2">Merci ! Je te répondrai dès que possible.</p>}
+                        {status === 'success' && <p className="text-center text-green-600 text-sm font-bold mt-2">Merci ! Je vous répondrai dès que possible.</p>}
                     </form>
 
                     {/* FAQ Section */}

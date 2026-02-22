@@ -11,7 +11,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('volume-effectif');
     return {
         title: `${article.title} | NA Coaching`,
-        description: article.intro || "Calcule ton volume d'entraînement hebdomadaire par groupe musculaire. Identifie tes zones de maintenance, de progression et de sur-reaching.",
+        description: article.intro || "Calculez votre volume d'entraînement hebdomadaire par groupe musculaire. Identifiez vos zones de maintenance, de progression et de sur-reaching.",
     };
 }
 

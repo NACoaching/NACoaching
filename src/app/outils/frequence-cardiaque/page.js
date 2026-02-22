@@ -14,7 +14,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('/outils/frequence-cardiaque');
     return {
         title: `${article.title || 'Zones de Fréquence Cardiaque'} | NA Coaching`,
-        description: article.intro || 'Calcule tes zones d\'intensité.',
+        description: article.intro || 'Calculez vos zones d\'intensité.',
     }
 }
 
@@ -55,7 +55,7 @@ export default async function CalculatorHeartRatePage() {
                         {article.title || 'Zones de Fréquence Cardiaque'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {article.intro || "Optimise ton entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
+                        {article.intro || "Optimisez votre entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
                     </p>
 
                     <div className="mb-16">

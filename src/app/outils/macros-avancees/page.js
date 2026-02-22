@@ -11,7 +11,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('/outils/macros-avancees');
     return {
         title: `${article.title || 'Macros Avancées'} | NA Coaching`,
-        description: article.intro || 'Calcule précisément tes besoins en protéines, lipides et glucides.',
+        description: article.intro || 'Calculez précisément vos besoins en protéines, lipides et glucides.',
     }
 }
 
@@ -48,7 +48,7 @@ export default async function MacrosAvanceesPage() {
                         {article.title || 'Calculateur de Macros Avancé'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {article.intro || "Va plus loin qu'un simple calcul de calories. Définis tes ratios de protéines et lipides selon ton poids de corps."}
+                        {article.intro || "Allez plus loin qu'un simple calcul de calories. Définissez vos ratios de protéines et lipides selon votre poids de corps."}
                     </p>
 
                     <div className="mb-16">
