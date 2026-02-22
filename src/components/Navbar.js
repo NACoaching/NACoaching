@@ -27,7 +27,7 @@ export default function Navbar({ initialLogoUrl = '/logo.png' }) {
         <nav className="fixed w-full z-50 bg-black/80 backdrop-blur-xl text-white py-4 px-6 border-b border-white/10">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <Link href="/" className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2 z-50 relative">
-                    {logoUrl ? <Image src={logoUrl} alt="NA Coaching" width={40} height={40} className="object-contain" priority /> : <span className="text-xl font-bold">NA</span>}
+                    {logoUrl ? <Image src={logoUrl} alt="NA Coaching" width={40} height={40} className="object-contain mix-blend-lighten rounded-sm" priority /> : <span className="text-xl font-bold">NA</span>}
                     <span className="hidden sm:inline">NA <span className="text-[#FF6B00]">COACHING</span></span>
                 </Link>
 
