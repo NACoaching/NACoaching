@@ -42,14 +42,14 @@ export default function CommentsSection({ articleId }) {
 
     return (
         <div className="mt-20 border-t border-zinc-200 pt-12">
-            <h3 className="text-2xl font-black uppercase mb-8 flex items-center gap-3">
+            <h3 className="text-2xl font-black uppercase mb-8 pl-1 text-black flex items-center gap-3">
                 Commentaires <span className="bg-zinc-100 text-zinc-500 text-xs px-2 py-1 rounded-full">{comments.length}</span>
             </h3>
 
             {/* COMMENT LIST */}
             <div className="space-y-8 mb-12">
                 {comments.length === 0 ? (
-                    <p className="text-zinc-500 italic">Aucun commentaire pour le moment. Soyez le premier !</p>
+                    <p className="text-zinc-600 italic">Aucun commentaire pour le moment. Soyez le premier !</p>
                 ) : (
                     comments.map(comment => (
                         <div key={comment.id} className="bg-zinc-50 p-6 rounded border border-zinc-100 flex gap-4">
