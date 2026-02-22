@@ -1464,7 +1464,7 @@ export default function AdminPage() {
                     <div className="grid lg:grid-cols-3 gap-8 items-start">
 
                         {/* LEFT COLUMN: FORM (STRETCHED TO VIEWPORT) */}
-                        <div className="lg:col-span-1 lg:sticky lg:top-24 lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto pr-2 custom-scrollbar">
+                        <div className="lg:col-span-1 lg:sticky lg:top-24 pr-2" style={{ maxHeight: 'calc(100vh - 120px)', overflowY: 'auto' }}>
                             <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
                                 <h2 className="text-xl font-black mb-6 flex items-center gap-2 uppercase">
                                     {editingItem ? <Edit className="text-[#FF6B00]" /> : <Plus className="text-[#FF6B00]" />}
@@ -1673,8 +1673,9 @@ export default function AdminPage() {
                         {/* RIGHT COLUMN: LIST */}
                         <div className="lg:col-span-2">
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                                <h2 className="text-xl font-black uppercase">
+                                <h2 className="text-xl font-black uppercase flex items-center gap-2">
                                     {activeTab === 'articles' ? `Articles (${articles.length})` : `Produits (${products.length})`}
+                                    <span className="text-[8px] bg-zinc-100 text-zinc-400 px-1 rounded">v1.1</span>
                                 </h2>
 
                                 {activeTab === 'articles' && (
@@ -1684,7 +1685,7 @@ export default function AdminPage() {
                                             placeholder="Rechercher un article..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-full text-sm focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition shadow-sm"
+                                            className="w-full pl-9 pr-4 py-2 bg-[#FF6B00]/5 border border-[#FF6B00]/20 rounded-full text-sm focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition shadow-sm"
                                         />
                                         <Search className="absolute left-3 top-2.5 text-zinc-400" size={16} />
                                     </div>
