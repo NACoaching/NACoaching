@@ -30,7 +30,7 @@ export default function OutilsView({ tools }) {
         return (tool.is_published !== false) && matchesCategory && matchesSearch;
     });
 
-    const categories = ["Tous", ...new Set(tools.filter(a => a.is_published !== false && a.subcategory).map(a => a.subcategory))].sort();
+    const categories = [...new Set(tools.filter(a => a.is_published !== false && a.subcategory).map(a => a.subcategory))].sort();
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -71,6 +71,15 @@ export default function OutilsView({ tools }) {
 
                         {/* Category Pills */}
                         <div className="flex flex-wrap justify-center gap-3">
+                            <button
+                                onClick={() => setSelectedCategory("Tous")}
+                                className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${selectedCategory === "Tous"
+                                    ? 'bg-[#FF6B00] text-black border-[#FF6B00] shadow-[0_4px_12px_rgba(255,107,0,0.2)]'
+                                    : 'bg-white text-zinc-500 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
+                                    }`}
+                            >
+                                Tous
+                            </button>
                             {categories.map(category => (
                                 <button
                                     key={category}
