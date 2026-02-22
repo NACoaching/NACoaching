@@ -31,10 +31,10 @@ export default function Footer() {
         const { error } = await supabase.from('subscribers').insert([{ email }]);
 
         if (error) {
-            if (error.code === '23505') alert('Vous êtes déjà inscrit !');
+            if (error.code === '23505') alert('Tu es déjà inscrit !');
             else alert('Erreur : ' + error.message);
         } else {
-            alert('Merci ! Vous êtes bien inscrit à la newsletter.');
+            alert('Merci ! Tu es bien inscrit à la newsletter.');
             e.target.reset();
         }
     };
@@ -57,7 +57,7 @@ export default function Footer() {
                                 required
                                 type="email"
                                 name="email"
-                                placeholder="votre@email.com"
+                                placeholder="ton@email.com"
                                 className="bg-zinc-900 border border-zinc-800 p-3 flex-grow text-sm focus:outline-none focus:border-[#FF6B00]"
                             />
                             <button type="submit" className="bg-[#FF6B00] text-black font-black px-4 uppercase text-xs">OK</button>

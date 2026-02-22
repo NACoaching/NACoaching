@@ -10,7 +10,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('rpe-1rm');
     return {
         title: `${article.title} | NA Coaching`,
-        description: article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
+        description: article.intro || "Calcule ton intensité relative (% de 1RM) à partir de ton RPE et de tes répétitions. L'outil indispensable pour la force athlétique.",
     };
 }
 

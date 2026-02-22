@@ -13,7 +13,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('/outils/calculateur-1rm');
     return {
         title: `${article.title || 'Calculateur 1RM'} | NA Coaching`,
-        description: article.intro || 'Estimez votre 1RM en musculation.',
+        description: article.intro || 'Estime ton 1RM en musculation.',
     }
 }
 
@@ -54,7 +54,7 @@ export default async function Calculator1RMPage() {
                         {article.title || 'Calculateur 1RM (Max Rep)'}
                     </h1>
                     <p className="text-xl text-zinc-600 mb-12">
-                        {article.intro || "Estimez votre charge maximale théorique pour calibrer vos entraînements de force et d'hypertrophie."}
+                        {article.intro || "Estime ta charge maximale théorique pour calibrer tes entraînements de force et d'hypertrophie."}
                     </p>
 
                     <div className="mb-16">

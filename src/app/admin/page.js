@@ -1721,7 +1721,16 @@ export default function AdminPage() {
                                                 <button onClick={() => deleteItem('products', product.id)} className="text-red-500 hover:bg-red-50 p-2 rounded"><Trash2 size={18} /></button>
                                             </div>
                                             <div className="flex justify-between items-center mb-2">
-                                                <span className="text-2xl font-black italic text-[#FF6B00]">{product.price}</span>
+                                                <div className="flex items-center gap-2">
+                                                    {product.discount_price ? (
+                                                        <>
+                                                            <span className="text-2xl font-black italic text-[#FF6B00]">{product.discount_price}</span>
+                                                            <span className="text-sm font-bold text-zinc-400 line-through opacity-50">{product.price}</span>
+                                                        </>
+                                                    ) : (
+                                                        <span className="text-2xl font-black italic text-[#FF6B00]">{product.price}</span>
+                                                    )}
+                                                </div>
                                                 <span className="text-[10px] font-black uppercase text-zinc-400 bg-zinc-100 px-2 py-1 rounded">{product.category || 'Programmes'}</span>
                                             </div>
                                             <h3 className="text-xl font-black uppercase">{product.title}</h3>
