@@ -42,10 +42,10 @@ export default function Footer() {
     return (
         <footer className="bg-zinc-950 text-white pt-24 pb-12 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF6B00]/50 to-transparent"></div>
-            <div className="max-w-7xl mx-auto px-6 relative z-10" style={{ mixBlendMode: 'lighten' }}>
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
                     <div>
-                        {siteContent.logo_url ? <Image src={siteContent.logo_url} alt="NA Coaching" width={48} height={48} className="mb-6 object-contain rounded-sm" style={{ filter: 'contrast(1.2)' }} /> : <div className="mb-6 font-bold text-xl">NA COACHING</div>}
+                        {siteContent.logo_url ? <Image src={siteContent.logo_url} alt="NA Coaching" width={48} height={48} className="mb-6 object-contain" /> : <div className="mb-6 font-bold text-xl">NA COACHING</div>}
                         <p className="text-zinc-500 text-sm leading-relaxed">
                             {siteContent.footer_text || "Expertise scientifique au service de la performance sportive et de la santé."}
                         </p>

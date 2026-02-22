@@ -24,10 +24,10 @@ export default function Navbar({ initialLogoUrl = '/logo.png' }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="fixed w-full z-50 bg-black/80 backdrop-blur-xl text-white py-4 px-6 border-b border-white/10">
+        <nav className="fixed w-full z-50 bg-black text-white py-4 px-6 border-b border-white/10">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <Link href="/" className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2 z-50 relative" style={{ mixBlendMode: 'lighten' }}>
-                    {logoUrl ? <Image src={logoUrl} alt="NA Coaching" width={40} height={40} className="object-contain rounded-sm" style={{ filter: 'contrast(1.2)' }} priority /> : <span className="text-xl font-bold">NA</span>}
+                <Link href="/" className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2 z-50 relative">
+                    {logoUrl ? <Image src={logoUrl} alt="NA Coaching" width={40} height={40} className="object-contain" priority /> : <span className="text-xl font-bold">NA</span>}
                     <span className="hidden sm:inline">NA <span className="text-[#FF6B00]">COACHING</span></span>
                 </Link>
 
