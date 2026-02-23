@@ -910,6 +910,8 @@ export default function AdminPage() {
                                 { key: 'about_subtitle', label: 'Sous-titre Section Labo' },
                                 { key: 'about_text', label: 'Texte Section Labo (Optionnel)' },
                                 { key: 'tools_subtitle', label: 'Sous-titre Section Outils Gratuits' },
+                                { key: 'outils_seo_title', label: 'Titre SEO (Bas de page Outils)' },
+                                { key: 'outils_seo_desc', label: 'Description SEO (Bas de page Outils)' },
                                 { key: 'shop_title', label: 'Titre Section Boutique' },
                                 { key: 'shop_subtitle', label: 'Sous-titre Section Boutique' }
                             ].map(field => {

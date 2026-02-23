@@ -18,5 +18,11 @@ export default async function OutilsPage() {
 
     const tools = dbTools || [];
 
-    return <OutilsView tools={tools} />;
+    const { data: content } = await supabase.from('site_content').select('*');
+    const siteContent = {};
+    if (content) {
+        content.forEach(item => { siteContent[item.key] = item.value; });
+    }
+
+    return <OutilsView tools={tools} siteContent={siteContent} />;
 }

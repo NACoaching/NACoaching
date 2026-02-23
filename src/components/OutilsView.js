@@ -32,7 +32,7 @@ const searchKeywords = {
     '/outils/vma-vo2': 'vma vo2 vo2max',
 };
 
-export default function OutilsView({ tools }) {
+export default function OutilsView({ tools, siteContent = {} }) {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -159,12 +159,12 @@ export default function OutilsView({ tools }) {
                 )}
 
                 {/* SEO Text for the Hub Page */}
-                <div className="mt-20 max-w-4xl mx-auto prose prose-zinc text-center">
-                    <h2 className="text-3xl font-black uppercase mb-6 text-zinc-900">Pourquoi utiliser mes outils de coaching ?</h2>
+                <div className="mt-20 max-w-4xl mx-auto prose prose-zinc text-center relative z-10 px-6">
+                    <h2 className="text-3xl font-black uppercase mb-6 text-zinc-900">
+                        {siteContent?.outils_seo_title || "Pourquoi utiliser mes outils de coaching ?"}
+                    </h2>
                     <p className="text-zinc-600">
-                        La progression sportive ne doit rien au hasard. Que vous soyez pratiquant de musculation, coureur à pied ou athlète hybride,
-                        la quantification de la charge et l'ajustement de l'intensité sont les clés de la réussite.
-                        Ces outils sont ceux que j'utilise quotidiennement avec mes athlètes pour planifier leurs saisons.
+                        {siteContent?.outils_seo_desc || "La progression sportive ne doit rien au hasard. Que vous soyez pratiquant de musculation, coureur à pied ou athlète hybride, la quantification de la charge et l'ajustement de l'intensité sont les clés de la réussite. Ces outils sont ceux que j'utilise quotidiennement avec mes athlètes pour planifier leurs saisons."}
                     </p>
                 </div>
             </div>
