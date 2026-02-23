@@ -1208,8 +1208,8 @@ export default function AdminPage() {
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200 space-y-12">
                         {/* SECTION 1: Home FAQs */}
                         <div>
-                            <h2 className="text-xl font-black mb-2 uppercase">FAQs Page d'Accueil</h2>
-                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur la page d'accueil juste avant le bouton "Me Contacter".</p>
+                            <h2 className="text-xl font-black mb-2 uppercase">FAQs (Accueil & Contact)</h2>
+                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur la page d'accueil et sur la page "Me Contacter".</p>
 
                             <div className="space-y-3 mb-6">
                                 {homeFaqs.map((faq, i) => (
@@ -1223,6 +1223,8 @@ export default function AdminPage() {
                                                 const updated = homeFaqs.filter((_, idx) => idx !== i);
                                                 setHomeFaqs(updated);
                                                 await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
+                                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
                                             }}
                                             className="text-red-500 hover:text-red-700 flex-shrink-0"
                                         >
@@ -1255,6 +1257,8 @@ export default function AdminPage() {
                                         const updated = [...homeFaqs, { question: newFaqQ, answer: newFaqA }];
                                         setHomeFaqs(updated);
                                         await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                        fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
+                                        fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
                                         setNewFaqQ('');
                                         setNewFaqA('');
                                         setFaqSaving(false);
