@@ -58,9 +58,11 @@ export default function OutilsView({ tools, siteContent = {} }) {
             <div className="max-w-7xl mx-auto px-6">
                 <AnimWrapper>
                     <div className="text-center mb-16">
-                        <h1 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">Les Outils du Coach</h1>
+                        <h1 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">
+                            {siteContent?.outils_header_title || "Les Outils du Coach"}
+                        </h1>
                         <p className="text-zinc-500 max-w-xl mx-auto text-lg">
-                            Des calculateurs précis et gratuits pour vous accompagner dans votre progression athlétique.
+                            {siteContent?.outils_header_desc || "Des calculateurs précis et gratuits pour vous accompagner dans votre progression athlétique."}
                         </p>
                     </div>
                 </AnimWrapper>
