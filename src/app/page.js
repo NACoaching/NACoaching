@@ -121,10 +121,10 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { icon: Award, title: siteContent.find(c => c.key === 'expertise_1')?.value || "Master EOPS", desc: "Expertise universitaire" },
-              { icon: Activity, title: siteContent.find(c => c.key === 'expertise_2')?.value || "Expert Sport-Santé", desc: "Suivi médicalisé" },
-              { icon: UserCheck, title: siteContent.find(c => c.key === 'expertise_3')?.value || "Brevet Football", desc: "Spécialiste tactique" },
-              { icon: HeartPulse, title: siteContent.find(c => c.key === 'expertise_4')?.value || "Licence STAPS", desc: "Base scientifique" }
+              { icon: Award, title: siteContent.find(c => c.key === 'expertise_1')?.value || "Master EOPS" },
+              { icon: Activity, title: siteContent.find(c => c.key === 'expertise_2')?.value || "Expert Sport-Santé" },
+              { icon: UserCheck, title: siteContent.find(c => c.key === 'expertise_3')?.value || "Brevet Football" },
+              { icon: HeartPulse, title: siteContent.find(c => c.key === 'expertise_4')?.value || "Licence STAPS" }
             ].map((exp, i) => (
               <AnimWrapper key={i} delay={i * 0.1}>
                 <div className="bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-zinc-100 flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full">
@@ -132,7 +132,6 @@ export default async function HomePage() {
                     <exp.icon className="text-[#FF6B00]" size={28} />
                   </div>
                   <h3 className="font-bold text-zinc-900 text-lg mb-1">{exp.title}</h3>
-                  <p className="text-zinc-500 text-sm">{exp.desc}</p>
                 </div>
               </AnimWrapper>
             ))}
