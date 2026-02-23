@@ -173,8 +173,11 @@ export default function AdminPage() {
             alert('Erreur : ' + error.message);
         } else {
             alert('Contenu sauvegardé !');
-            // Revalidate home page cache since most site_content is there
-            fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
+            // Revalidate caches for all main pages that might use site_content
+            const pathsToRevalidate = ['/', '/labo', '/outils', '/boutique', '/coach', '/contact'];
+            pathsToRevalidate.forEach(path => {
+                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path }) });
+            });
         }
     };
 
