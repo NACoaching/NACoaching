@@ -15,7 +15,8 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
         return { avg, count: productReviews.length };
     };
 
-    const categories = ["Tous", ...new Set(products.map(p => p.category || 'Programmes'))].sort();
+    const uniqueCategories = [...new Set(products.map(p => p.category || 'Programmes'))].sort();
+    const categories = ["Tous", ...uniqueCategories];
 
     const filteredProducts = selectedCategory === "Tous"
         ? products
@@ -42,7 +43,7 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition ${selectedCategory === category
                                     ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
-                                    : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-[#FF6B00] hover:text-[#FF6B00]'
+                                    : 'bg-zinc-900 text-zinc-400 border-zinc-700 hover:border-[#FF6B00] hover:text-[#FF6B00]'
                                     }`}
                             >
                                 {category}
