@@ -861,6 +861,43 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                             ))}
+                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Outils Mis En Avant (Accueil)</h3>
+                            {[1, 2, 3, 4].map(num => (
+                                <div key={`home_tool_${num}`} className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-zinc-50 p-4 rounded-lg border border-zinc-100 mb-4">
+                                    <div>
+                                        <label className="block text-[10px] font-black uppercase text-zinc-500 mb-2">Outil {num} - Titre</label>
+                                        <div className="flex gap-2 items-start">
+                                            <input
+                                                value={siteContent.find(c => c.key === `home_tool_${num}_title`)?.value || ''}
+                                                onChange={(e) => handleContentChange(`home_tool_${num}_title`, e.target.value)}
+                                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none bg-white"
+                                            />
+                                            <button
+                                                onClick={() => saveContent(`home_tool_${num}_title`, siteContent.find(c => c.key === `home_tool_${num}_title`)?.value || '', `Outil ${num} - Titre`)}
+                                                className="bg-black text-white px-3 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] transition h-fit py-3"
+                                            >
+                                                <Save size={16} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-black uppercase text-zinc-500 mb-2">Outil {num} - Description</label>
+                                        <div className="flex gap-2 items-start">
+                                            <textarea
+                                                value={siteContent.find(c => c.key === `home_tool_${num}_desc`)?.value || ''}
+                                                onChange={(e) => handleContentChange(`home_tool_${num}_desc`, e.target.value)}
+                                                className="w-full border p-3 rounded text-sm min-h-[50px] focus:border-[#FF6B00] outline-none bg-white"
+                                            />
+                                            <button
+                                                onClick={() => saveContent(`home_tool_${num}_desc`, siteContent.find(c => c.key === `home_tool_${num}_desc`)?.value || '', `Outil ${num} - Description`)}
+                                                className="bg-black text-white px-3 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] transition h-fit py-3"
+                                            >
+                                                <Save size={16} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
 
 
 

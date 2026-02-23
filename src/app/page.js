@@ -215,10 +215,10 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Calculateur 1RM", desc: "Estime ta force max théorique selon la méthode Brzycki ou Epley.", icon: "💪", href: "/outils" },
-              { title: "Besoins Caloriques", desc: "Défini ton métabolisme de base et tes dépenses journalières.", icon: "🔥", href: "/outils" },
-              { title: "VMA & VO2max", desc: "Évalue tes capacités aérobies pour mieux cibler tes efforts.", icon: "🏃‍♂️", href: "/outils" },
-              { title: "Zones Cardiaques", desc: "Cible tes 5 zones d'entraînement via la méthode Karvonen.", icon: "🫀", href: "/outils" }
+              { title: siteContent.find(c => c.key === 'home_tool_1_title')?.value || "Calculateur 1RM", desc: siteContent.find(c => c.key === 'home_tool_1_desc')?.value || "Estime ta force max théorique selon la méthode Brzycki ou Epley.", icon: "💪", href: "/outils" },
+              { title: siteContent.find(c => c.key === 'home_tool_2_title')?.value || "Besoins Caloriques", desc: siteContent.find(c => c.key === 'home_tool_2_desc')?.value || "Défini ton métabolisme de base et tes dépenses journalières.", icon: "🔥", href: "/outils" },
+              { title: siteContent.find(c => c.key === 'home_tool_3_title')?.value || "VMA & VO2max", desc: siteContent.find(c => c.key === 'home_tool_3_desc')?.value || "Évalue tes capacités aérobies pour mieux cibler tes efforts.", icon: "🏃‍♂️", href: "/outils" },
+              { title: siteContent.find(c => c.key === 'home_tool_4_title')?.value || "Zones Cardiaques", desc: siteContent.find(c => c.key === 'home_tool_4_desc')?.value || "Cible tes 5 zones d'entraînement via la méthode Karvonen.", icon: "🫀", href: "/outils" }
             ].map((tool, i) => (
               <AnimWrapper key={i} delay={i * 0.1}>
                 <Link href={tool.href} className="block group h-full">
