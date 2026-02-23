@@ -19,6 +19,19 @@ const iconMap = {
     '/outils/predictateur-performance': { icon: Trophy, color: "text-blue-500", bg: "bg-blue-50" },
 };
 
+// Hidden keywords to improve search matching
+const searchKeywords = {
+    '/outils/besoins-caloriques': 'calories kcal metabolisme',
+    '/outils/calculateur-1rm': 'rm repetition max',
+    '/outils/frequence-cardiaque': 'fc fcm bpm',
+    '/outils/macros-avancees': 'macronutriments proteines glucides lipides diete',
+    '/outils/rpe-1rm': 'rir fatigue',
+    '/outils/volume-effectif': 'series repetitions',
+    '/outils/score-recuperation': 'sommeil stress recup',
+    '/outils/test-demi-cooper': 'vma demi cooper',
+    '/outils/vma-vo2': 'vma vo2 vo2max',
+};
+
 export default function OutilsView({ tools }) {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
     const [searchQuery, setSearchQuery] = useState("");
@@ -31,7 +44,8 @@ export default function OutilsView({ tools }) {
             tool.title?.toLowerCase().includes(term) ||
             tool.excerpt?.toLowerCase().includes(term) ||
             tool.cta?.toLowerCase().includes(term) ||
-            tool.subcategory?.toLowerCase().includes(term)
+            tool.subcategory?.toLowerCase().includes(term) ||
+            (searchKeywords[tool.cta] && searchKeywords[tool.cta].includes(term))
         );
 
         return (tool.is_published !== false) && matchesCategory && matchesSearch;
