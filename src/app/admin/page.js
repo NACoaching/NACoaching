@@ -145,7 +145,7 @@ export default function AdminPage() {
         if (contentRes.data) {
             setSiteContent(contentRes.data);
             // Parse home FAQs
-            const faqItem = contentRes.data.find(c => c.key === 'site_faq');
+            const faqItem = contentRes.data.find(c => c.key === 'home_faq');
             if (faqItem && faqItem.value && faqItem.value !== '[]') {
                 try {
                     const parsed = JSON.parse(faqItem.value);
@@ -1258,7 +1258,7 @@ export default function AdminPage() {
                                             onClick={async () => {
                                                 const updated = homeFaqs.filter((_, idx) => idx !== i);
                                                 setHomeFaqs(updated);
-                                                await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                await supabase.from('site_content').upsert({ key: 'home_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
                                                 fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
                                             }}
                                             className="text-red-500 hover:text-red-700 flex-shrink-0"
@@ -1291,7 +1291,7 @@ export default function AdminPage() {
                                         setFaqSaving(true);
                                         const updated = [...homeFaqs, { question: newFaqQ, answer: newFaqA }];
                                         setHomeFaqs(updated);
-                                        await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                        await supabase.from('site_content').upsert({ key: 'home_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
                                         fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
                                         setNewFaqQ('');
                                         setNewFaqA('');

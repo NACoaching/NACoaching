@@ -42,13 +42,13 @@ export default async function HomePage() {
 
   // Parse global FAQs if they exist
   let globalFaqs = DEFAULT_HOME_FAQS;
-  const faqString = siteContent.find(c => c.key === 'site_faq')?.value;
+  const faqString = siteContent.find(c => c.key === 'home_faq')?.value;
   if (faqString && faqString !== '[]') {
     try {
       const parsed = JSON.parse(faqString);
       if (parsed.length > 0) globalFaqs = parsed;
     } catch (e) {
-      console.error("Could not parse site_faq", e);
+      console.error("Could not parse home_faq", e);
     }
   }
 
