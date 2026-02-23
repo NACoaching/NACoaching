@@ -1402,7 +1402,7 @@ export default function AdminPage() {
                                     </div>
                                 </div>
 
-                                {[['coach_description', 'Description hero (paragraphe)'], ['coach_cta_desc', 'Texte du CTA']].map(([key, label]) => (
+                                {[['coach_description', 'Description hero (paragraphe)'], ['coach_cta_title', 'Titre du CTA'], ['coach_cta_desc', 'Texte du CTA']].map(([key, label]) => (
                                     <div key={key} className="md:col-span-2">
                                         <label className="block text-xs font-black uppercase text-zinc-500 mb-1">{label}</label>
                                         <textarea rows={3} value={coachBasics[key] || ''} onChange={e => setCoachBasics(prev => ({ ...prev, [key]: e.target.value }))} className="w-full border border-zinc-200 rounded px-3 py-2 text-sm focus:border-[#FF6B00] outline-none" />
@@ -1416,6 +1416,7 @@ export default function AdminPage() {
                                 }
                                 setCoachSaving(false);
                                 alert('Infos coach sauvegardées !');
+                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/coach' }) });
                             }} className="mt-4 bg-[#FF6B00] text-black px-6 py-2 rounded font-black uppercase text-sm hover:bg-black hover:text-white transition">
                                 {coachSaving ? 'Sauvegarde...' : 'Sauvegarder'}
                             </button>
