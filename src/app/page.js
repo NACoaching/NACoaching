@@ -207,7 +207,9 @@ export default async function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
                 Mes Outils <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-300">Gratuits</span>
               </h2>
-              <p className="text-zinc-400 text-lg">Des calculateurs fiables basés sur la littérature scientifique pour optimiser ton entraînement.</p>
+              <p className="text-zinc-400 text-lg">
+                {siteContent.find(c => c.key === 'tools_subtitle')?.value || "Des calculateurs fiables basés sur la littérature scientifique pour optimiser ton entraînement."}
+              </p>
             </div>
           </AnimWrapper>
 

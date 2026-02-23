@@ -869,6 +869,7 @@ export default function AdminPage() {
                                 { key: 'about_title', label: 'Titre Section Labo' },
                                 { key: 'about_subtitle', label: 'Sous-titre Section Labo' },
                                 { key: 'about_text', label: 'Texte Section Labo (Optionnel)' },
+                                { key: 'tools_subtitle', label: 'Sous-titre Section Outils Gratuits' },
                                 { key: 'shop_title', label: 'Titre Section Boutique' },
                                 { key: 'shop_subtitle', label: 'Sous-titre Section Boutique' }
                             ].map(field => {
