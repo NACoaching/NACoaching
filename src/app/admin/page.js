@@ -1455,6 +1455,7 @@ export default function AdminPage() {
                                 await supabase.from('site_content').upsert({ key: 'coach_credentials', label: 'Coach Expertises', value: JSON.stringify(coachCredentials) }, { onConflict: 'key' });
                                 setCoachSaving(false);
                                 alert('Expertises sauvegardées !');
+                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/coach' }) });
                             }} className="bg-[#FF6B00] text-black px-6 py-2 rounded font-black uppercase text-sm hover:bg-black hover:text-white transition">
                                 Sauvegarder les expertises
                             </button>
@@ -1492,6 +1493,7 @@ export default function AdminPage() {
                                 await supabase.from('site_content').upsert({ key: 'coach_values', label: 'Coach Philosophie', value: JSON.stringify(coachValues) }, { onConflict: 'key' });
                                 setCoachSaving(false);
                                 alert('Philosophie sauvegardée !');
+                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/coach' }) });
                             }} className="bg-[#FF6B00] text-black px-6 py-2 rounded font-black uppercase text-sm hover:bg-black hover:text-white transition">
                                 Sauvegarder la philosophie
                             </button>
