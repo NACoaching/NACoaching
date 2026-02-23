@@ -25,8 +25,15 @@ export default function OutilsView({ tools }) {
 
     const filteredTools = tools.filter(tool => {
         const matchesCategory = selectedCategory === "Tous" ? true : tool.subcategory === selectedCategory;
-        const matchesSearch = (tool.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            tool.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()));
+        const searchTerms = searchQuery.toLowerCase().split(' ').filter(term => term.length > 0);
+
+        const matchesSearch = searchTerms.every(term =>
+            tool.title?.toLowerCase().includes(term) ||
+            tool.excerpt?.toLowerCase().includes(term) ||
+            tool.cta?.toLowerCase().includes(term) ||
+            tool.subcategory?.toLowerCase().includes(term)
+        );
+
         return (tool.is_published !== false) && matchesCategory && matchesSearch;
     });
 
