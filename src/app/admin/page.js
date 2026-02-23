@@ -1250,21 +1250,51 @@ export default function AdminPage() {
                             <div className="space-y-3 mb-6">
                                 {homeFaqs.map((faq, i) => (
                                     <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
-                                        <div className="flex-grow">
-                                            <div className="font-bold text-sm">{faq.question}</div>
-                                            <div className="text-zinc-500 text-xs mt-1">{faq.answer}</div>
+                                        <div className="flex-grow space-y-2">
+                                            <input
+                                                className="w-full border p-2 rounded text-sm font-bold bg-white focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                value={faq.question}
+                                                onChange={(e) => {
+                                                    const updated = [...homeFaqs];
+                                                    updated[i].question = e.target.value;
+                                                    setHomeFaqs(updated);
+                                                }}
+                                            />
+                                            <textarea
+                                                className="w-full border p-2 rounded text-xs bg-white h-20 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                value={faq.answer}
+                                                onChange={(e) => {
+                                                    const updated = [...homeFaqs];
+                                                    updated[i].answer = e.target.value;
+                                                    setHomeFaqs(updated);
+                                                }}
+                                            />
                                         </div>
-                                        <button
-                                            onClick={async () => {
-                                                const updated = homeFaqs.filter((_, idx) => idx !== i);
-                                                setHomeFaqs(updated);
-                                                await supabase.from('site_content').upsert({ key: 'home_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
-                                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
-                                            }}
-                                            className="text-red-500 hover:text-red-700 flex-shrink-0"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
+                                        <div className="flex flex-col gap-3 pt-2">
+                                            <button
+                                                onClick={async () => {
+                                                    await supabase.from('site_content').upsert({ key: 'home_faq', label: 'FAQ Page Accueil', value: JSON.stringify(homeFaqs) }, { onConflict: 'key' });
+                                                    fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
+                                                    alert('FAQ modifiée avec succès !');
+                                                }}
+                                                className="text-green-600 hover:text-green-800 flex-shrink-0"
+                                                title="Sauvegarder la modification"
+                                            >
+                                                <Save size={16} />
+                                            </button>
+                                            <button
+                                                onClick={async () => {
+                                                    const updated = homeFaqs.filter((_, idx) => idx !== i);
+                                                    setHomeFaqs(updated);
+                                                    await supabase.from('site_content').upsert({ key: 'home_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                    fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
+                                                }}
+                                                className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                                title="Supprimer la question"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
                                     </div>
                                 ))}
                                 {homeFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour le moment.</p>}
@@ -1312,21 +1342,51 @@ export default function AdminPage() {
                             <div className="space-y-3 mb-6">
                                 {contactFaqs.map((faq, i) => (
                                     <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
-                                        <div className="flex-grow">
-                                            <div className="font-bold text-sm">{faq.question}</div>
-                                            <div className="text-zinc-500 text-xs mt-1">{faq.answer}</div>
+                                        <div className="flex-grow space-y-2">
+                                            <input
+                                                className="w-full border p-2 rounded text-sm font-bold bg-white focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                value={faq.question}
+                                                onChange={(e) => {
+                                                    const updated = [...contactFaqs];
+                                                    updated[i].question = e.target.value;
+                                                    setContactFaqs(updated);
+                                                }}
+                                            />
+                                            <textarea
+                                                className="w-full border p-2 rounded text-xs bg-white h-20 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                value={faq.answer}
+                                                onChange={(e) => {
+                                                    const updated = [...contactFaqs];
+                                                    updated[i].answer = e.target.value;
+                                                    setContactFaqs(updated);
+                                                }}
+                                            />
                                         </div>
-                                        <button
-                                            onClick={async () => {
-                                                const updated = contactFaqs.filter((_, idx) => idx !== i);
-                                                setContactFaqs(updated);
-                                                await supabase.from('site_content').upsert({ key: 'contact_faq', label: 'FAQ Page Contact', value: JSON.stringify(updated) }, { onConflict: 'key' });
-                                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
-                                            }}
-                                            className="text-red-500 hover:text-red-700 flex-shrink-0"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
+                                        <div className="flex flex-col gap-3 pt-2">
+                                            <button
+                                                onClick={async () => {
+                                                    await supabase.from('site_content').upsert({ key: 'contact_faq', label: 'FAQ Page Contact', value: JSON.stringify(contactFaqs) }, { onConflict: 'key' });
+                                                    fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
+                                                    alert('FAQ modifiée avec succès !');
+                                                }}
+                                                className="text-green-600 hover:text-green-800 flex-shrink-0"
+                                                title="Sauvegarder la modification"
+                                            >
+                                                <Save size={16} />
+                                            </button>
+                                            <button
+                                                onClick={async () => {
+                                                    const updated = contactFaqs.filter((_, idx) => idx !== i);
+                                                    setContactFaqs(updated);
+                                                    await supabase.from('site_content').upsert({ key: 'contact_faq', label: 'FAQ Page Contact', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                    fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
+                                                }}
+                                                className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                                title="Supprimer la question"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
                                     </div>
                                 ))}
                                 {contactFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour le moment.</p>}
@@ -1396,20 +1456,50 @@ export default function AdminPage() {
                                 <div className="space-y-3 mb-6">
                                     {productFaqs.map((faq, i) => (
                                         <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
-                                            <div className="flex-grow">
-                                                <div className="font-bold text-sm">{faq.question}</div>
-                                                <div className="text-zinc-500 text-xs mt-1">{faq.answer}</div>
+                                            <div className="flex-grow space-y-2">
+                                                <input
+                                                    className="w-full border p-2 rounded text-sm font-bold bg-white focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                    value={faq.question}
+                                                    onChange={(e) => {
+                                                        const updated = [...productFaqs];
+                                                        updated[i].question = e.target.value;
+                                                        setProductFaqs(updated);
+                                                    }}
+                                                />
+                                                <textarea
+                                                    className="w-full border p-2 rounded text-xs bg-white h-20 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                    value={faq.answer}
+                                                    onChange={(e) => {
+                                                        const updated = [...productFaqs];
+                                                        updated[i].answer = e.target.value;
+                                                        setProductFaqs(updated);
+                                                    }}
+                                                />
                                             </div>
-                                            <button
-                                                onClick={async () => {
-                                                    const updated = productFaqs.filter((_, idx) => idx !== i);
-                                                    setProductFaqs(updated);
-                                                    await supabase.from('products').update({ faqs: updated }).eq('id', faqProduct.id);
-                                                }}
-                                                className="text-red-500 hover:text-red-700 flex-shrink-0"
-                                            >
-                                                <Trash2 size={16} />
-                                            </button>
+                                            <div className="flex flex-col gap-3 pt-2">
+                                                <button
+                                                    onClick={async () => {
+                                                        await supabase.from('products').update({ faqs: productFaqs }).eq('id', faqProduct.id);
+                                                        fetch(`/api/revalidate`, { method: 'POST', body: JSON.stringify({ path: `/boutique/${faqProduct.slug}` }) });
+                                                        alert('FAQ du produit modifiée avec succès !');
+                                                    }}
+                                                    className="text-green-600 hover:text-green-800 flex-shrink-0"
+                                                    title="Sauvegarder la modification"
+                                                >
+                                                    <Save size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={async () => {
+                                                        const updated = productFaqs.filter((_, idx) => idx !== i);
+                                                        setProductFaqs(updated);
+                                                        await supabase.from('products').update({ faqs: updated }).eq('id', faqProduct.id);
+                                                    }}
+                                                    className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                                    title="Supprimer la question"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </div>
                                         </div>
                                     ))}
                                     {productFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour ce produit.</p>}
