@@ -36,15 +36,15 @@ export default function AdminPage() {
     // Coach States
     const [coachSaving, setCoachSaving] = useState(false);
     const [coachCredentials, setCoachCredentials] = useState([
-        { icon: 'Award', title: 'Master EOPS', desc: "Master Entraînement et Optimisation de la Performance Sportive." },
-        { icon: 'HeartPulse', title: 'Expert Sport-Santé', desc: 'Spécialiste en réathlétisation.' },
-        { icon: 'Activity', title: 'Prépa Physique Hybride', desc: 'Maîtrise des disciplines hybrides.' },
-        { icon: 'BookOpen', title: 'Vulgarisation Scientifique', desc: 'Traduction des données scientifiques en protocoles concrets.' },
+        { icon: 'Award', title: 'Master EOPS', desc: "Master Entraînement et Optimisation de la Performance Sportive — formation d'élite en sciences du sport." },
+        { icon: 'HeartPulse', title: 'Expert Sport-Santé', desc: 'Spécialiste en réathlétisation et préparation physique pour les sportifs blessés ou en reprise.' },
+        { icon: 'Activity', title: 'Prépa Physique Hybride', desc: 'Maîtrise des disciplines hybrides : musculation, course à pied et performance aérobie-anaérobie.' },
+        { icon: 'BookOpen', title: 'Vulgarisation Scientifique', desc: 'Traduction des données scientifiques en protocoles concrets, accessibles à tous les niveaux.' },
     ]);
     const [coachValues, setCoachValues] = useState([
-        { number: '01', title: 'La Science avant tout', desc: 'Chaque conseil est ancré dans la littérature scientifique.' },
-        { number: '02', title: "L'Individualisation", desc: 'Chaque athlète mérite une approche sur-mesure.' },
-        { number: '03', title: 'La Durabilité', desc: 'Performer sur le long terme sans se blesser.' },
+        { number: '01', title: 'La Science avant tout', desc: "Chaque conseil est ancré dans la littérature scientifique. Pas de méthodes à la mode, que des protocoles validés." },
+        { number: '02', title: "L'Individualisation", desc: "Ton corps, tes objectifs, ta vie. Un programme générique ne fonctionne pas — chaque athlète mérite une approche sur-mesure." },
+        { number: '03', title: 'La Durabilité', desc: "Performer sur le long terme sans se blesser. L'objectif n'est pas la transformation rapide, c'est la progression durable." },
     ]);
     const [coachBasics, setCoachBasics] = useState({
         coach_name: 'Nolwen Albanesi',
