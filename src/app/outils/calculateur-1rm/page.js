@@ -68,8 +68,6 @@ export default async function Calculator1RMPage() {
                     {/* Related Articles */}
                     <RelatedArticles
                         articles={relatedArticles}
-                        title="La Science de la Force"
-                        subtitle="Optimise ton entraînement avec nos articles experts"
                     />
                 </AnimWrapper>
             </div>

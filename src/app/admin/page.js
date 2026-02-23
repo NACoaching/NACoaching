@@ -900,6 +900,33 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                             ))}
+                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Articles Recommandés (Outils)</h3>
+                            {[
+                                { key: 'tools_related_title', label: 'Titre de la section' },
+                                { key: 'tools_related_subtitle', label: 'Sous-titre de la section' }
+                            ].map(field => {
+                                const itemValue = siteContent.find(c => c.key === field.key)?.value || '';
+                                return (
+                                    <div key={field.key} className="mb-4">
+                                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">{field.label}</label>
+                                        <div className="flex gap-4 items-start">
+                                            <input
+                                                value={itemValue}
+                                                onChange={(e) => handleContentChange(field.key, e.target.value)}
+                                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                                placeholder={field.key === 'tools_related_title' ? 'Articles Recommandés' : 'En apprendre plus avec le Labo'}
+                                            />
+                                            <button
+                                                onClick={() => saveContent(field.key, itemValue, field.label)}
+                                                className="bg-black text-white px-4 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition h-fit py-3"
+                                            >
+                                                Sauvegarder
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
                             <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Outils Mis En Avant (Accueil)</h3>
                             {[1, 2, 3, 4].map(num => (
                                 <div key={`home_tool_${num}`} className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-zinc-50 p-4 rounded-lg border border-zinc-100 mb-4">

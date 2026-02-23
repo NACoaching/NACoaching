@@ -1,14 +1,25 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { supabase } from '@/lib/supabaseClient';
 
-export default function RelatedArticles({ articles, title = "Articles du Labo liés", subtitle = "En apprendre plus sur la science du sport" }) {
+export default async function RelatedArticles({ articles, title, subtitle }) {
     if (!articles || articles.length === 0) return null;
+
+    let displayTitle = title;
+    let displaySubtitle = subtitle;
+
+    if (!title || !subtitle) {
+        const { data: content } = await supabase.from('site_content').select('*').in('key', ['tools_related_title', 'tools_related_subtitle']);
+
+        if (!title) displayTitle = content?.find(c => c.key === 'tools_related_title')?.value || "Articles Recommandés";
+        if (!subtitle) displaySubtitle = content?.find(c => c.key === 'tools_related_subtitle')?.value || "En apprendre plus avec le Labo";
+    }
 
     return (
         <div className="mt-16 pt-16 border-t border-zinc-200">
             <div className="mb-10">
-                <h3 className="text-2xl font-black uppercase text-black">{title}</h3>
-                <p className="text-zinc-500 text-sm mt-1">{subtitle}</p>
+                <h3 className="text-2xl font-black uppercase text-black">{displayTitle}</h3>
+                <p className="text-zinc-500 text-sm mt-1">{displaySubtitle}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {articles.map((article) => (

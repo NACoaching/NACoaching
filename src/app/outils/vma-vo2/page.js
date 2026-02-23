@@ -67,8 +67,6 @@ export default async function VmaVo2ConverterPage() {
                     {/* Related Articles */}
                     <RelatedArticles
                         articles={relatedArticles}
-                        title="La Science de l'Endurance"
-                        subtitle="Optimise ton potentiel aérobie avec le Labo"
                     />
                 </AnimWrapper>
             </div>
