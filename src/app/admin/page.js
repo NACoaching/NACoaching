@@ -788,24 +788,32 @@ export default function AdminPage() {
                         <h2 className="text-xl font-black mb-6 uppercase">Personnalisation des textes</h2>
                         <div className="space-y-6">
                             <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00]">Héros (Accueil)</h3>
-                            {siteContent.filter(item => ['hero_title', 'hero_subtitle', 'hero_cta_primary', 'hero_cta_secondary'].includes(item.key)).map(item => (
-                                <div key={item.key}>
-                                    <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">{item.label}</label>
-                                    <div className="flex gap-4 items-start">
-                                        <textarea
-                                            value={item.value}
-                                            onChange={(e) => handleContentChange(item.key, e.target.value)}
-                                            className="w-full border p-3 rounded text-sm min-h-[50px]"
-                                        />
-                                        <button
-                                            onClick={() => saveContent(item.key, item.value)}
-                                            className="bg-black text-white px-4 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition h-fit py-3"
-                                        >
-                                            Sauvegarder
-                                        </button>
+                            {[
+                                { key: 'hero_title', label: 'Titre Principal' },
+                                { key: 'hero_subtitle', label: 'Sous-titre' },
+                                { key: 'hero_cta_primary_v2', label: 'Bouton 1 - Primaire (Labo)' },
+                                { key: 'hero_cta_secondary_v2', label: 'Bouton 2 - Secondaire (Outils)' }
+                            ].map(field => {
+                                const itemValue = siteContent.find(c => c.key === field.key)?.value || '';
+                                return (
+                                    <div key={field.key}>
+                                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">{field.label}</label>
+                                        <div className="flex gap-4 items-start">
+                                            <textarea
+                                                value={itemValue}
+                                                onChange={(e) => handleContentChange(field.key, e.target.value)}
+                                                className="w-full border p-3 rounded text-sm min-h-[50px] focus:border-[#FF6B00] outline-none"
+                                            />
+                                            <button
+                                                onClick={() => saveContent(field.key, itemValue, field.label)}
+                                                className="bg-black text-white px-4 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition h-fit py-3"
+                                            >
+                                                Sauvegarder
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
 
                             <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Barre d'Expertise</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -849,25 +857,7 @@ export default function AdminPage() {
                                 </div>
                             ))}
 
-                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Page d'Accueil (Hero)</h3>
-                            {siteContent.filter(item => ['hero_title', 'hero_subtitle', 'hero_cta_primary', 'hero_cta_secondary'].includes(item.key)).map(item => (
-                                <div key={item.key}>
-                                    <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">{item.label}</label>
-                                    <div className="flex gap-4 items-start">
-                                        <textarea
-                                            value={item.value}
-                                            onChange={(e) => handleContentChange(item.key, e.target.value)}
-                                            className="w-full border p-3 rounded text-sm min-h-[50px]"
-                                        />
-                                        <button
-                                            onClick={() => saveContent(item.key, item.value)}
-                                            className="bg-black text-white px-4 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition h-fit py-3"
-                                        >
-                                            Sauvegarder
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
+
 
                             <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Sections & Textes Divers</h3>
                             {siteContent.filter(item => ['about_title', 'about_text', 'shop_title', 'shop_subtitle'].includes(item.key)).map(item => (
