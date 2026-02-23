@@ -26,7 +26,16 @@ export default function AdminPage() {
     const [logoUrl, setLogoUrl] = useState("/logo.png");
     // FAQ States
     const [homeFaqs, setHomeFaqs] = useState([]);
-    const [contactFaqs, setContactFaqs] = useState([]);
+    const DEFAULT_CONTACT_FAQS = [
+        { question: "Comment fonctionne le coaching en ligne ?", answer: "Le coaching en ligne se fait à distance. Après un échange initial pour comprendre vos objectifs, je vous envoie un programme personnalisé adapté à votre niveau et à votre matériel. Un suivi régulier par message permet d'ajuster le plan en fonction de vos retours et de votre progression." },
+        { question: "Quel est le délai de livraison des programmes ?", answer: "Les programmes digitaux sont livrés instantanément par email après l'achat. Vous recevez un lien de téléchargement valide pendant 7 jours. Pour un coaching personnalisé, comptez 48 à 72h après notre premier échange pour recevoir votre programme sur-mesure." },
+        { question: "Les programmes sont-ils adaptés aux débutants ?", answer: "Oui, chaque programme est conçu pour s'adapter à votre niveau. Que vous soyez débutant ou athlète confirmé, les exercices, volumes et intensités sont ajustés. Les programmes incluent des descriptions détaillées des mouvements pour garantir une bonne exécution." },
+        { question: "Puis-je obtenir un remboursement ?", answer: "Les programmes digitaux étant des produits dématérialisés, ils ne sont pas remboursables une fois téléchargés. Si vous rencontrez un problème technique pour accéder à votre programme, contactez-moi et je trouverai une solution rapidement." },
+        { question: "Comment utiliser les outils gratuits du site ?", answer: "Tous les outils (calculateur 1RM, besoins caloriques, zones de fréquence cardiaque, VMA/VO2max, convertisseur de vitesse) sont accessibles gratuitement depuis la section Outils. Il suffit d'entrer vos données et les résultats s'affichent instantanément. Vous pouvez même partager vos résultats." },
+        { question: "Quel type de coaching proposez-vous ?", answer: "Je propose du coaching en musculation, en course à pied et en préparation physique hybride. Chaque accompagnement est basé sur des données scientifiques et une approche individualisée. L'objectif est de vous faire progresser durablement avec une méthode structurée." },
+        { question: "Comment vous contacter pour une question ?", answer: "Vous pouvez utiliser le formulaire de contact ci-dessus ou m'envoyer un message directement sur Instagram @na_coaching_. Je réponds généralement sous 24 à 48h." }
+    ];
+    const [contactFaqs, setContactFaqs] = useState(DEFAULT_CONTACT_FAQS);
     const [newContactFaqQ, setNewContactFaqQ] = useState('');
     const [newContactFaqA, setNewContactFaqA] = useState('');
     const [productFaqs, setProductFaqs] = useState([]);
@@ -136,7 +145,9 @@ export default function AdminPage() {
             // Parse contact FAQs
             const contactFaqItem = contentRes.data.find(c => c.key === 'contact_faq');
             if (contactFaqItem && contactFaqItem.value) {
-                try { setContactFaqs(JSON.parse(contactFaqItem.value)); } catch { setContactFaqs([]); }
+                try { setContactFaqs(JSON.parse(contactFaqItem.value)); } catch { setContactFaqs(DEFAULT_CONTACT_FAQS); }
+            } else {
+                setContactFaqs(DEFAULT_CONTACT_FAQS);
             }
             // Load Coach data
             const coachKeys = ['coach_name', 'coach_badge', 'coach_tagline', 'coach_description', 'coach_meta_desc', 'coach_philosophy_title', 'coach_cta_title', 'coach_cta_desc', 'coach_image'];
