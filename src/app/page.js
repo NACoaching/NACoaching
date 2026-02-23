@@ -151,7 +151,9 @@ export default async function HomePage() {
                 <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 tracking-tight mb-4">
                   {siteContent.find(c => c.key === 'about_title')?.value || 'Le Labo'}
                 </h2>
-                <p className="text-zinc-600 text-lg">Découvrez les dernières avancées scientifiques appliquées à l'entraînement, la nutrition et la récupération.</p>
+                <p className="text-zinc-600 text-lg">
+                  {siteContent.find(c => c.key === 'about_subtitle')?.value || "Découvrez les dernières avancées scientifiques appliquées à l'entraînement, la nutrition et la récupération."}
+                </p>
               </div>
               <Link href="/labo" className="inline-flex items-center text-[#FF6B00] font-semibold text-lg hover:text-[#e66000] border-b-2 border-transparent hover:border-[#FF6B00] pb-1 transition-all">
                 Explorer les articles <ArrowRight className="ml-2 w-5 h-5" />
