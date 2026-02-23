@@ -45,7 +45,8 @@ export default async function HomePage() {
   const faqString = siteContent.find(c => c.key === 'site_faq')?.value;
   if (faqString && faqString !== '[]') {
     try {
-      globalFaqs = JSON.parse(faqString);
+      const parsed = JSON.parse(faqString);
+      if (parsed.length > 0) globalFaqs = parsed;
     } catch (e) {
       console.error("Could not parse site_faq", e);
     }

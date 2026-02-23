@@ -146,15 +146,23 @@ export default function AdminPage() {
             setSiteContent(contentRes.data);
             // Parse home FAQs
             const faqItem = contentRes.data.find(c => c.key === 'site_faq');
-            if (faqItem && faqItem.value) {
-                try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs(DEFAULT_HOME_FAQS); }
+            if (faqItem && faqItem.value && faqItem.value !== '[]') {
+                try {
+                    const parsed = JSON.parse(faqItem.value);
+                    if (parsed.length > 0) setHomeFaqs(parsed);
+                    else setHomeFaqs(DEFAULT_HOME_FAQS);
+                } catch { setHomeFaqs(DEFAULT_HOME_FAQS); }
             } else {
                 setHomeFaqs(DEFAULT_HOME_FAQS);
             }
             // Parse contact FAQs
             const contactFaqItem = contentRes.data.find(c => c.key === 'contact_faq');
-            if (contactFaqItem && contactFaqItem.value) {
-                try { setContactFaqs(JSON.parse(contactFaqItem.value)); } catch { setContactFaqs(DEFAULT_CONTACT_FAQS); }
+            if (contactFaqItem && contactFaqItem.value && contactFaqItem.value !== '[]') {
+                try {
+                    const parsed = JSON.parse(contactFaqItem.value);
+                    if (parsed.length > 0) setContactFaqs(parsed);
+                    else setContactFaqs(DEFAULT_CONTACT_FAQS);
+                } catch { setContactFaqs(DEFAULT_CONTACT_FAQS); }
             } else {
                 setContactFaqs(DEFAULT_CONTACT_FAQS);
             }
