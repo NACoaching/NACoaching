@@ -169,8 +169,13 @@ export default function AdminPage() {
     // Save Content to Supabase (Upsert to handle new keys)
     const saveContent = async (key, value, label = '') => {
         const { error } = await supabase.from('site_content').upsert({ key, value, label }, { onConflict: 'key' });
-        if (error) alert('Erreur : ' + error.message);
-        else alert('Contenu sauvegardé !');
+        if (error) {
+            alert('Erreur : ' + error.message);
+        } else {
+            alert('Contenu sauvegardé !');
+            // Revalidate home page cache since most site_content is there
+            fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
+        }
     };
 
     // ... (rest of the code)
