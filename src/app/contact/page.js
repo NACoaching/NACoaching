@@ -9,23 +9,23 @@ export default async function ContactPage() {
     const { data: content } = await supabase.from('site_content').select('*');
     const siteContent = content || [];
 
-    // Parse global FAQs if they exist
-    let globalFaqs = [];
-    const faqString = siteContent.find(c => c.key === 'site_faq')?.value;
+    // Parse contact FAQs if they exist
+    let contactFaqs = [];
+    const faqString = siteContent.find(c => c.key === 'contact_faq')?.value;
     if (faqString) {
         try {
-            globalFaqs = JSON.parse(faqString);
+            contactFaqs = JSON.parse(faqString);
         } catch (e) {
-            console.error("Could not parse site_faq", e);
+            console.error("Could not parse contact_faq", e);
         }
     }
 
     let faqJsonLd = null;
-    if (globalFaqs.length > 0) {
+    if (contactFaqs.length > 0) {
         faqJsonLd = {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
-            mainEntity: globalFaqs.map(faq => ({
+            mainEntity: contactFaqs.map(faq => ({
                 '@type': 'Question',
                 name: faq.question,
                 acceptedAnswer: {
@@ -58,7 +58,7 @@ export default async function ContactPage() {
                 </div>
             </section>
 
-            <HomeFAQ faqData={globalFaqs} />
+            <HomeFAQ faqData={contactFaqs} />
         </>
     );
 }

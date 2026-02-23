@@ -26,6 +26,9 @@ export default function AdminPage() {
     const [logoUrl, setLogoUrl] = useState("/logo.png");
     // FAQ States
     const [homeFaqs, setHomeFaqs] = useState([]);
+    const [contactFaqs, setContactFaqs] = useState([]);
+    const [newContactFaqQ, setNewContactFaqQ] = useState('');
+    const [newContactFaqA, setNewContactFaqA] = useState('');
     const [productFaqs, setProductFaqs] = useState([]);
     const [faqProduct, setFaqProduct] = useState(null); // product being edited
     const [newFaqQ, setNewFaqQ] = useState('');
@@ -129,6 +132,11 @@ export default function AdminPage() {
             const faqItem = contentRes.data.find(c => c.key === 'site_faq');
             if (faqItem && faqItem.value) {
                 try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs([]); }
+            }
+            // Parse contact FAQs
+            const contactFaqItem = contentRes.data.find(c => c.key === 'contact_faq');
+            if (contactFaqItem && contactFaqItem.value) {
+                try { setContactFaqs(JSON.parse(contactFaqItem.value)); } catch { setContactFaqs([]); }
             }
             // Load Coach data
             const coachKeys = ['coach_name', 'coach_badge', 'coach_tagline', 'coach_description', 'coach_meta_desc', 'coach_philosophy_title', 'coach_cta_title', 'coach_cta_desc', 'coach_image'];
@@ -1208,8 +1216,8 @@ export default function AdminPage() {
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200 space-y-12">
                         {/* SECTION 1: Home FAQs */}
                         <div>
-                            <h2 className="text-xl font-black mb-2 uppercase">FAQs (Accueil & Contact)</h2>
-                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur la page d'accueil et sur la page "Me Contacter".</p>
+                            <h2 className="text-xl font-black mb-2 uppercase">FAQs Page d'Accueil</h2>
+                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur la page d'accueil juste avant le bouton "Me Contacter".</p>
 
                             <div className="space-y-3 mb-6">
                                 {homeFaqs.map((faq, i) => (
@@ -1224,7 +1232,6 @@ export default function AdminPage() {
                                                 setHomeFaqs(updated);
                                                 await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
                                                 fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
-                                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
                                             }}
                                             className="text-red-500 hover:text-red-700 flex-shrink-0"
                                         >
@@ -1258,7 +1265,6 @@ export default function AdminPage() {
                                         setHomeFaqs(updated);
                                         await supabase.from('site_content').upsert({ key: 'site_faq', label: 'FAQ Page Accueil', value: JSON.stringify(updated) }, { onConflict: 'key' });
                                         fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/' }) });
-                                        fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
                                         setNewFaqQ('');
                                         setNewFaqA('');
                                         setFaqSaving(false);
@@ -1270,7 +1276,69 @@ export default function AdminPage() {
                             </div>
                         </div>
 
-                        {/* SECTION 2: Product FAQs */}
+                        {/* SECTION: Contact FAQs */}
+                        <div>
+                            <h2 className="text-xl font-black mb-2 uppercase">FAQs Page Contact</h2>
+                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent tout en bas de la page "Me Contacter".</p>
+
+                            <div className="space-y-3 mb-6">
+                                {contactFaqs.map((faq, i) => (
+                                    <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
+                                        <div className="flex-grow">
+                                            <div className="font-bold text-sm">{faq.question}</div>
+                                            <div className="text-zinc-500 text-xs mt-1">{faq.answer}</div>
+                                        </div>
+                                        <button
+                                            onClick={async () => {
+                                                const updated = contactFaqs.filter((_, idx) => idx !== i);
+                                                setContactFaqs(updated);
+                                                await supabase.from('site_content').upsert({ key: 'contact_faq', label: 'FAQ Page Contact', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
+                                            }}
+                                            className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </div>
+                                ))}
+                                {contactFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour le moment.</p>}
+                            </div>
+
+                            <div className="bg-zinc-50 p-4 rounded border border-zinc-200 space-y-3">
+                                <h3 className="font-bold text-sm uppercase text-zinc-500">Ajouter une question</h3>
+                                <input
+                                    value={newContactFaqQ}
+                                    onChange={e => setNewContactFaqQ(e.target.value)}
+                                    placeholder="Question (ex: Proposez-vous du coaching personnalisé ?)"
+                                    className="w-full border p-2 rounded text-sm"
+                                />
+                                <textarea
+                                    value={newContactFaqA}
+                                    onChange={e => setNewContactFaqA(e.target.value)}
+                                    placeholder="Réponse..."
+                                    className="w-full border p-2 rounded text-sm h-20"
+                                />
+                                <button
+                                    disabled={!newContactFaqQ || !newContactFaqA || faqSaving}
+                                    onClick={async () => {
+                                        if (!newContactFaqQ || !newContactFaqA) return;
+                                        setFaqSaving(true);
+                                        const updated = [...contactFaqs, { question: newContactFaqQ, answer: newContactFaqA }];
+                                        setContactFaqs(updated);
+                                        await supabase.from('site_content').upsert({ key: 'contact_faq', label: 'FAQ Page Contact', value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                        fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path: '/contact' }) });
+                                        setNewContactFaqQ('');
+                                        setNewContactFaqA('');
+                                        setFaqSaving(false);
+                                    }}
+                                    className="bg-black text-white px-6 py-2 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition disabled:opacity-50"
+                                >
+                                    {faqSaving ? 'Sauvegarde...' : '+ Ajouter'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* SECTION 3: Product FAQs */}
                         <div>
                             <h2 className="text-xl font-black mb-2 uppercase">FAQs des Produits</h2>
                             <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur une page produit spécifique, avant la section Avis.</p>
