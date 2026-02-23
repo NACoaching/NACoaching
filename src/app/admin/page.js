@@ -25,7 +25,14 @@ export default function AdminPage() {
     const [editingItem, setEditingItem] = useState(null);
     const [logoUrl, setLogoUrl] = useState("/logo.png");
     // FAQ States
-    const [homeFaqs, setHomeFaqs] = useState([]);
+    const DEFAULT_HOME_FAQS = [
+        { question: "Le coaching est-il adapté à mon sport ?", answer: "Oui, en tant que Master EOPS, j'analyse les spécificités physiologiques et biomécaniques de votre discipline (course à pied, football, triathlon...) pour créer un programme qui optimise vos performances de manière ciblée." },
+        { question: "Proposez-vous des programmes de réathlétisation ?", answer: "C'est l'une de mes spécialités. Si vous sortez d'une blessure, nous établirons un protocole scientifique et progressif pour garantir un retour au sport optimal et sans risque de rechute." },
+        { question: "Quand vais-je voir les premiers résultats ?", answer: "La performance prend du temps, mais avec une surcharge progressive bien calibrée, les premiers gains de force ou d'endurance se font ressentir dès 4 à 6 semaines d'entraînement sérieux." },
+        { question: "Ai-je besoin de beaucoup de matériel ?", answer: "Pas obligatoirement. Que vous soyez inscrit(e) dans une salle suréquipée ou que vous vous entraîniez à la maison avec une paire d'haltères, j'adapte le programme pour respecter les principes physiologiques de progression avec ce que vous avez." },
+        { question: "Proposez-vous un suivi nutritionnel ?", answer: "Je ne donne pas de plan alimentaire figé, mais je vous apprends à gérer vos macronutriments (comme le montre mon outil 'Besoins Caloriques' gratuit) pour soutenir vos nouvelles performances sportives." }
+    ];
+    const [homeFaqs, setHomeFaqs] = useState(DEFAULT_HOME_FAQS);
     const DEFAULT_CONTACT_FAQS = [
         { question: "Comment fonctionne le coaching en ligne ?", answer: "Le coaching en ligne se fait à distance. Après un échange initial pour comprendre vos objectifs, je vous envoie un programme personnalisé adapté à votre niveau et à votre matériel. Un suivi régulier par message permet d'ajuster le plan en fonction de vos retours et de votre progression." },
         { question: "Quel est le délai de livraison des programmes ?", answer: "Les programmes digitaux sont livrés instantanément par email après l'achat. Vous recevez un lien de téléchargement valide pendant 7 jours. Pour un coaching personnalisé, comptez 48 à 72h après notre premier échange pour recevoir votre programme sur-mesure." },
@@ -140,7 +147,9 @@ export default function AdminPage() {
             // Parse home FAQs
             const faqItem = contentRes.data.find(c => c.key === 'site_faq');
             if (faqItem && faqItem.value) {
-                try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs([]); }
+                try { setHomeFaqs(JSON.parse(faqItem.value)); } catch { setHomeFaqs(DEFAULT_HOME_FAQS); }
+            } else {
+                setHomeFaqs(DEFAULT_HOME_FAQS);
             }
             // Parse contact FAQs
             const contactFaqItem = contentRes.data.find(c => c.key === 'contact_faq');

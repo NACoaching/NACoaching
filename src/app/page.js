@@ -32,10 +32,18 @@ export default async function HomePage() {
     ].filter(Boolean)
   };
 
+  const DEFAULT_HOME_FAQS = [
+    { question: "Le coaching est-il adapté à mon sport ?", answer: "Oui, en tant que Master EOPS, j'analyse les spécificités physiologiques et biomécaniques de votre discipline (course à pied, football, triathlon...) pour créer un programme qui optimise vos performances de manière ciblée." },
+    { question: "Proposez-vous des programmes de réathlétisation ?", answer: "C'est l'une de mes spécialités. Si vous sortez d'une blessure, nous établirons un protocole scientifique et progressif pour garantir un retour au sport optimal et sans risque de rechute." },
+    { question: "Quand vais-je voir les premiers résultats ?", answer: "La performance prend du temps, mais avec une surcharge progressive bien calibrée, les premiers gains de force ou d'endurance se font ressentir dès 4 à 6 semaines d'entraînement sérieux." },
+    { question: "Ai-je besoin de beaucoup de matériel ?", answer: "Pas obligatoirement. Que vous soyez inscrit(e) dans une salle suréquipée ou que vous vous entraîniez à la maison avec une paire d'haltères, j'adapte le programme pour respecter les principes physiologiques de progression avec ce que vous avez." },
+    { question: "Proposez-vous un suivi nutritionnel ?", answer: "Je ne donne pas de plan alimentaire figé, mais je vous apprends à gérer vos macronutriments (comme le montre mon outil 'Besoins Caloriques' gratuit) pour soutenir vos nouvelles performances sportives." }
+  ];
+
   // Parse global FAQs if they exist
-  let globalFaqs = [];
+  let globalFaqs = DEFAULT_HOME_FAQS;
   const faqString = siteContent.find(c => c.key === 'site_faq')?.value;
-  if (faqString) {
+  if (faqString && faqString !== '[]') {
     try {
       globalFaqs = JSON.parse(faqString);
     } catch (e) {
