@@ -2,8 +2,9 @@ import RecoveryScore from "@/components/tools/RecoveryScore";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getToolArticle } from "@/lib/getToolArticle";
+import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
+import RelatedArticles from "@/components/RelatedArticles";
 
 export const revalidate = 0;
 
@@ -31,6 +32,7 @@ const jsonLd = {
 
 export default async function RecoveryScorePage() {
     const article = await getToolArticle('/outils/score-recuperation');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -56,6 +58,13 @@ export default async function RecoveryScorePage() {
                     </div>
 
                     <ToolArticleContent content={article.content} />
+
+                    {/* Related Articles */}
+                    <RelatedArticles
+                        articles={relatedArticles}
+                        title={article.related_title}
+                        subtitle={article.related_subtitle}
+                    />
                 </AnimWrapper>
             </div>
         </section>

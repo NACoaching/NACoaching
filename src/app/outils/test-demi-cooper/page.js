@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import HalfCooperTest from '@/components/tools/HalfCooperTest';
-import { getToolArticle } from '@/lib/getToolArticle';
+import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -16,11 +16,8 @@ export async function generateMetadata() {
 }
 
 export default async function DemiCooperPage() {
-    const [article, { data: relatedArticlesData }] = await Promise.all([
-        getToolArticle('test-demi-cooper'),
-        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
-    ]);
-    const relatedArticles = relatedArticlesData || [];
+    const article = await getToolArticle('test-demi-cooper');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -62,8 +59,8 @@ export default async function DemiCooperPage() {
                 {/* Related Articles */}
                 <RelatedArticles
                     articles={relatedArticles}
-                    title="VMA & Performance"
-                    subtitle="Comprends la physiologie de l'effort avec le Labo"
+                    title={article.related_title}
+                    subtitle={article.related_subtitle}
                 />
             </div>
         </div>

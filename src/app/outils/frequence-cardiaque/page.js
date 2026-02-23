@@ -3,7 +3,7 @@ import CalculatorHeartRate from "@/components/tools/CalculatorHeartRate";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getToolArticle } from "@/lib/getToolArticle";
+import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import RelatedArticles from "@/components/RelatedArticles";
 import { supabase } from '@/lib/supabaseClient';
@@ -33,11 +33,8 @@ const jsonLd = {
 };
 
 export default async function CalculatorHeartRatePage() {
-    const [article, { data: relatedArticlesData }] = await Promise.all([
-        getToolArticle('/outils/frequence-cardiaque'),
-        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
-    ]);
-    const relatedArticles = relatedArticlesData || [];
+    const article = await getToolArticle('/outils/frequence-cardiaque');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -68,8 +65,8 @@ export default async function CalculatorHeartRatePage() {
                     {/* Related Articles */}
                     <RelatedArticles
                         articles={relatedArticles}
-                        title="Cardio & Physiologie"
-                        subtitle="Optimise ton endurance avec les conseils du Labo"
+                        title={article.related_title}
+                        subtitle={article.related_subtitle}
                     />
                 </AnimWrapper>
             </div>

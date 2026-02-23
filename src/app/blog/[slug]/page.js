@@ -63,28 +63,37 @@ export default async function ArticlePage({ params }) {
     // Fetch related articles
     let relatedArticles = [];
     if (article) {
-        const { data } = await supabase
-            .from('articles')
-            .select('id, slug, title, category')
-            .neq('id', article.id)
-            .eq('category', article.category)
-            .eq('is_published', true)
-            .limit(2);
-
-        relatedArticles = data || [];
-
-        // If not enough in same category, just get latest
-        if (relatedArticles.length < 2) {
-            const { data: fallbackData } = await supabase
+        if (article.related_articles && article.related_articles.length > 0) {
+            const { data } = await supabase
+                .from('articles')
+                .select('id, slug, title, category')
+                .in('id', article.related_articles)
+                .eq('is_published', true);
+            relatedArticles = data || [];
+        } else {
+            const { data } = await supabase
                 .from('articles')
                 .select('id, slug, title, category')
                 .neq('id', article.id)
+                .eq('category', article.category)
                 .eq('is_published', true)
-                .order('created_at', { ascending: false })
-                .limit(2 - relatedArticles.length);
+                .limit(2);
 
-            if (fallbackData) {
-                relatedArticles = [...relatedArticles, ...fallbackData];
+            relatedArticles = data || [];
+
+            // If not enough in same category, just get latest
+            if (relatedArticles.length < 2) {
+                const { data: fallbackData } = await supabase
+                    .from('articles')
+                    .select('id, slug, title, category')
+                    .neq('id', article.id)
+                    .eq('is_published', true)
+                    .order('created_at', { ascending: false })
+                    .limit(2 - relatedArticles.length);
+
+                if (fallbackData) {
+                    relatedArticles = [...relatedArticles, ...fallbackData];
+                }
             }
         }
     }
@@ -239,7 +248,7 @@ export default async function ArticlePage({ params }) {
 
                     {/* RELATED ARTICLES */}
                     <div className="mt-20 pt-12 border-t border-zinc-200">
-                        <h3 className="text-2xl font-black uppercase mb-8 text-black text-center">Pour aller plus loin</h3>
+                        <h3 className="text-2xl font-black uppercase mb-8 text-black text-center">{article.related_title || "Pour aller plus loin"}</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {relatedArticles.map((relatedArticle) => (
                                 <Link href={`/blog/${relatedArticle.slug || relatedArticle.id}`} key={relatedArticle.id} className="group block">

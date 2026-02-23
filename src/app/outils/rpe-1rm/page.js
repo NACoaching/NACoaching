@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import RPEConverter from '@/components/tools/RPEConverter';
-import { getToolArticle } from '@/lib/getToolArticle';
+import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -15,11 +16,8 @@ export async function generateMetadata() {
 }
 
 export default async function RPEPage() {
-    const [article, { data: relatedArticlesData }] = await Promise.all([
-        getToolArticle('rpe-1rm'),
-        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
-    ]);
-    const relatedArticles = relatedArticlesData || [];
+    const article = await getToolArticle('rpe-1rm');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -61,8 +59,8 @@ export default async function RPEPage() {
                 {/* Related Articles */}
                 <RelatedArticles
                     articles={relatedArticles}
-                    title="Force & Programmation"
-                    subtitle="Apprends à mieux t'entraîner avec le Labo"
+                    title={article.related_title}
+                    subtitle={article.related_subtitle}
                 />
             </div>
         </div>

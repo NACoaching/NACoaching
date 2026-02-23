@@ -4,7 +4,7 @@ import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from '@/lib/supabaseClient';
-import { getToolArticle } from "@/lib/getToolArticle";
+import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import RelatedArticles from "@/components/RelatedArticles";
 
@@ -33,11 +33,8 @@ const jsonLd = {
 };
 
 export default async function Calculator1RMPage() {
-    const [article, { data: relatedArticlesData }] = await Promise.all([
-        getToolArticle('/outils/calculateur-1rm'),
-        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
-    ]);
-    const relatedArticles = relatedArticlesData || [];
+    const article = await getToolArticle('/outils/calculateur-1rm');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -68,6 +65,8 @@ export default async function Calculator1RMPage() {
                     {/* Related Articles */}
                     <RelatedArticles
                         articles={relatedArticles}
+                        title={article.related_title}
+                        subtitle={article.related_subtitle}
                     />
                 </AnimWrapper>
             </div>

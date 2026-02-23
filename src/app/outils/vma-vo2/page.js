@@ -3,7 +3,7 @@ import VmaVo2Converter from "@/components/tools/VmaVo2Converter";
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getToolArticle } from "@/lib/getToolArticle";
+import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import RelatedArticles from "@/components/RelatedArticles";
 
@@ -32,11 +32,8 @@ const jsonLd = {
 };
 
 export default async function VmaVo2ConverterPage() {
-    const [article, { data: relatedArticlesData }] = await Promise.all([
-        getToolArticle('/outils/vma-vo2'),
-        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
-    ]);
-    const relatedArticles = relatedArticlesData || [];
+    const article = await getToolArticle('/outils/vma-vo2');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
@@ -67,6 +64,8 @@ export default async function VmaVo2ConverterPage() {
                     {/* Related Articles */}
                     <RelatedArticles
                         articles={relatedArticles}
+                        title={article.related_title}
+                        subtitle={article.related_subtitle}
                     />
                 </AnimWrapper>
             </div>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import EffectiveVolume from '@/components/tools/EffectiveVolume';
-import { getToolArticle } from '@/lib/getToolArticle';
+import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -16,11 +16,8 @@ export async function generateMetadata() {
 }
 
 export default async function VolumePage() {
-    const [article, { data: relatedArticlesData }] = await Promise.all([
-        getToolArticle('volume-effectif'),
-        supabase.from('articles').select('id, title, category').eq('is_published', true).neq('category', 'Outils').limit(3)
-    ]);
-    const relatedArticles = relatedArticlesData || [];
+    const article = await getToolArticle('volume-effectif');
+    const relatedArticles = await getToolRelatedArticles(article);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -62,8 +59,8 @@ export default async function VolumePage() {
                 {/* Related Articles */}
                 <RelatedArticles
                     articles={relatedArticles}
-                    title="Hypertrophie & Science"
-                    subtitle="Maximise tes gains avec les meilleurs conseils du Labo"
+                    title={article.related_title}
+                    subtitle={article.related_subtitle}
                 />
             </div>
         </div>
