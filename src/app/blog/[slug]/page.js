@@ -8,8 +8,6 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumb from '@/components/Breadcrumb';
-import AffiliateCard from '@/components/AffiliateCard';
-import RelatedArticles from '@/components/RelatedArticles';
 
 import { redirect } from 'next/navigation';
 
