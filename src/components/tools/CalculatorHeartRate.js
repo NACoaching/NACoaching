@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Heart, Activity } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 import ShareResults from "@/components/tools/ShareResults";
+import AffiliateCard from "@/components/AffiliateCard";
+import { Info } from 'lucide-react';
 
 export default function CalculatorHeartRate() {
     const [fcMax, setFcMax] = useState('');
@@ -88,6 +90,23 @@ export default function CalculatorHeartRate() {
                     </div>
                 )}
                 {zones && <ShareResults title="Mes Zones Cardiaques" zones={zones} />}
+            </div>
+
+            <div className="mt-8 border-t border-zinc-200 pt-8">
+                <div className="flex items-center gap-2 mb-6">
+                    <Info size={16} className="text-[#FF6B00]" />
+                    <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500">Expertise Matériel</h4>
+                </div>
+
+                <AffiliateCard
+                    title="Polar H10 - Ceinture Pectorale"
+                    price="~85€"
+                    description="Pour utiliser ces zones avec précision, une simple montre ne suffit pas. La Polar H10 est la référence mondiale pour la précision du rythme cardiaque."
+                    imageUrl="https://m.media-amazon.com/images/I/61K8PjF4KQL._AC_SL1500_.jpg"
+                    affiliateUrl="https://www.amazon.fr/Polar-Capteur-fr%C3%A9quence-cardiaque-Ant/dp/B07P7S6VB6?tag=na-ranking-21"
+                    ctaText="Mesurer avec précision"
+                    badge="Mon Choix Personnel"
+                />
             </div>
         </AnimWrapper>
     );

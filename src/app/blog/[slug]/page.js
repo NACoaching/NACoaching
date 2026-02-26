@@ -205,17 +205,17 @@ export default async function ArticlePage({ params }) {
                     </div>
 
                     {/* AFFILIATE CARD */}
-                    {article.affiliate_link && (
+                    {(article.affiliate_link || article.slug === 'recuperation-active-vs-passive-pourquoi-rester-dans-ton-canape-freine-tes-progres') && (
                         <div className="mt-12 p-8 rounded-xl border-2 border-dashed border-[#FF6B00]/30 bg-[#FF6B00]/5 flex flex-col md:flex-row items-center gap-8">
                             <div className="flex-1 text-center md:text-left">
                                 <span className="inline-block px-3 py-1 bg-[#FF6B00] text-black text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
                                     Recommandation de l'expert
                                 </span>
                                 <p className="text-zinc-800 font-medium text-lg leading-relaxed mb-6">
-                                    {article.affiliate_text || "Je vous recommande ce produit pour optimiser vos résultats et votre récupération."}
+                                    {article.affiliate_text || "Pour optimiser tes séances de récupération (active ou passive), l'auto-massage avec ce rouleau BLACKROLL est un indispensable pour détendre tes tissus."}
                                 </p>
                                 <a
-                                    href={article.affiliate_link}
+                                    href={article.affiliate_link || "https://www.amazon.fr/BLACKROLL-Standard-Rouleau-massage-muscles/dp/B0040G66W8?tag=na-ranking-21"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-block bg-black text-white font-black py-4 px-8 rounded-sm uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition shadow-lg"
