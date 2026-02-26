@@ -6,10 +6,11 @@ export function middleware(request) {
     // Only run this logic if we are running in production (Vercel)
     if (process.env.NODE_ENV === 'production') {
         // If the request comes from a *.vercel.app domain
-        if (host.endsWith('.vercel.app')) {
-            // Redirect to the main domain
+        // If the request comes from a www domain or vercel domain
+        if (host.startsWith('www.') || host.endsWith('.vercel.app')) {
+            // Redirect to the root domain
             const url = request.nextUrl.clone();
-            url.hostname = 'www.na-coaching.com';
+            url.hostname = 'na-coaching.com';
             url.port = ''; // Clear port just in case
             url.protocol = 'https';
 

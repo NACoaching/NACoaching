@@ -38,6 +38,10 @@ export async function generateMetadata({ params }) {
             description: article.excerpt,
             images: [article.image],
         },
+        alternates: {
+            canonical: `/blog/${article.slug || article.id}`,
+        },
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
     }
 }
 

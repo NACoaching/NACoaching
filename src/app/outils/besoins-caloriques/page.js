@@ -4,8 +4,10 @@ import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
+import { supabase } from '@/lib/supabaseClient';
 import ToolArticleContent from "@/components/ToolArticleContent";
 import RelatedArticles from "@/components/RelatedArticles";
+import HomeFAQ from "@/components/HomeFAQ";
 
 export const revalidate = 3600;
 
@@ -14,10 +16,20 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Calculateur de Besoins Caloriques'} | NA Coaching`,
         description: article.intro || 'Calculez vos besoins caloriques journaliers.',
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        openGraph: {
+            title: article.title || 'Calculateur de Besoins Caloriques',
+            description: article.intro || 'Calculez vos besoins caloriques journaliers.',
+            images: [article.image || '/logo.png'],
+            type: 'website',
+        },
+        alternates: {
+            canonical: '/outils/besoins-caloriques',
+        }
     }
 }
 
-const jsonLd = {
+const softwareJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     'name': 'Calculateur Besoins Caloriques NA Coaching',
@@ -31,15 +43,57 @@ const jsonLd = {
     'description': 'Outil gratuit pour calculer ses besoins caloriques journaliers (TDEE).'
 };
 
+const DEFAULT_FAQ_DATA = [
+    {
+        question: 'Comment calculer mes besoins caloriques ?',
+        answer: 'Vos besoins dépendent de votre métabolisme de base (âge, sexe, poids, taille) et de votre niveau d\'activité physique journalier.'
+    },
+    {
+        question: 'C\'est quoi le TDEE ?',
+        answer: 'Le TDEE (Total Daily Energy Expenditure) est le nombre total de calories que vous brûlez par jour. C\'est le chiffre de référence pour ajuster votre alimentation.'
+    },
+    {
+        question: 'Quel déficit calorique pour perdre du poids ?',
+        answer: 'Un déficit modéré de 300 à 500 calories par rapport à votre TDEE est généralement recommandé pour perdre du gras durablement sans sacrifier le muscle.'
+    }
+];
+
 export default async function CalculatorCaloriesPage() {
     const article = await getToolArticle('/outils/besoins-caloriques');
     const relatedArticles = await getToolRelatedArticles(article);
+
+    // Fetch Dynamic FAQ
+    let faqData = DEFAULT_FAQ_DATA;
+    const { data: faqItem } = await supabase.from('site_content').select('value').eq('key', 'tool_calories_faq').single();
+    if (faqItem && faqItem.value) {
+        try {
+            const parsed = JSON.parse(faqItem.value);
+            if (parsed && parsed.length > 0) faqData = parsed;
+        } catch (e) { console.error("Error parsing FAQ", e); }
+    }
+
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+            '@type': 'Question',
+            'name': item.question,
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': item.answer
+            }
+        }))
+    };
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
             <div className="max-w-4xl mx-auto px-6">
                 <AnimWrapper>
@@ -69,6 +123,7 @@ export default async function CalculatorCaloriesPage() {
                     />
                 </AnimWrapper>
             </div>
+            <HomeFAQ faqData={faqData} />
         </section>
     );
 }

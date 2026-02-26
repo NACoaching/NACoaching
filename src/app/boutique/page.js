@@ -10,6 +10,9 @@ export const metadata = {
         description: 'Programmes de coaching et ebooks basés sur la physiologie et la biomécanique.',
         url: 'https://na-coaching.com/boutique',
         type: 'website',
+    },
+    alternates: {
+        canonical: '/boutique',
     }
 };
 

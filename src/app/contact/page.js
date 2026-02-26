@@ -3,6 +3,14 @@ import ContactForm from '@/components/ContactForm';
 import HomeFAQ from '@/components/HomeFAQ';
 import { supabase } from '@/lib/supabaseClient';
 
+export const metadata = {
+    title: 'Contact - NA Coaching',
+    description: 'Une question ou une demande de coaching personnalisé ? Contactez-moi.',
+    alternates: {
+        canonical: '/contact',
+    },
+};
+
 export const revalidate = 3600;
 
 export default async function ContactPage() {

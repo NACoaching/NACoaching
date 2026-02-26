@@ -51,6 +51,10 @@ export default function AdminPage() {
     const [newFaqA, setNewFaqA] = useState('');
     const [newProductFaqQ, setNewProductFaqQ] = useState('');
     const [newProductFaqA, setNewProductFaqA] = useState('');
+    const [toolFaqs, setToolFaqs] = useState([]);
+    const [faqTool, setFaqTool] = useState(null); // tool being edited
+    const [newToolFaqQ, setNewToolFaqQ] = useState('');
+    const [newToolFaqA, setNewToolFaqA] = useState('');
     const [faqSaving, setFaqSaving] = useState(false);
     // Coach States
     const [coachSaving, setCoachSaving] = useState(false);
@@ -1547,19 +1551,126 @@ export default function AdminPage() {
                                         <textarea
                                             value={newProductFaqA}
                                             onChange={e => setNewProductFaqA(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* SECTION 4: Tool FAQs */}
+                        <div>
+                            <h2 className="text-xl font-black mb-2 uppercase">FAQs des Outils</h2>
+                            <p className="text-zinc-500 text-sm mb-6">Ces questions apparaissent sur les pages outils (1RM, Calories, etc.).</p>
+
+                            <div className="mb-4">
+                                <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Choisir un outil</label>
+                                <select
+                                    onChange={async (e) => {
+                                        const toolId = e.target.value;
+                                        setFaqTool(toolId);
+                                        const key = `tool_${toolId}_faq`;
+                                        const item = siteContent.find(c => c.key === key);
+                                        if (item && item.value) {
+                                            try {
+                                                setToolFaqs(JSON.parse(item.value));
+                                            } catch { setToolFaqs([]); }
+                                        } else {
+                                            setToolFaqs([]);
+                                        }
+                                    }}
+                                    className="border p-2 rounded text-sm w-full"
+                                >
+                                    <option value="">-- Sélectionner un outil --</option>
+                                    <option value="1rm">Calculateur 1RM</option>
+                                    <option value="calories">Calculateur Calories</option>
+                                    <option value="vma">VMA / VO2max</option>
+                                    <option value="hr">Fréquence Cardiaque</option>
+                                    <option value="speed">Vitesse / Allure</option>
+                                </select>
+                            </div>
+
+                            {faqTool && (
+                                <div className="space-y-3 mb-6">
+                                    {toolFaqs.map((faq, i) => (
+                                        <div key={i} className="flex gap-4 items-start bg-zinc-50 p-4 rounded border border-zinc-200">
+                                            <div className="flex-grow space-y-2">
+                                                <input
+                                                    className="w-full border p-2 rounded text-sm font-bold bg-white focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                    value={faq.question}
+                                                    onChange={(e) => {
+                                                        const updated = [...toolFaqs];
+                                                        updated[i].question = e.target.value;
+                                                        setToolFaqs(updated);
+                                                    }}
+                                                />
+                                                <textarea
+                                                    className="w-full border p-2 rounded text-xs bg-white h-20 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]"
+                                                    value={faq.answer}
+                                                    onChange={(e) => {
+                                                        const updated = [...toolFaqs];
+                                                        updated[i].answer = e.target.value;
+                                                        setToolFaqs(updated);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="flex flex-col gap-3 pt-2">
+                                                <button
+                                                    onClick={async () => {
+                                                        const key = `tool_${faqTool}_faq`;
+                                                        await supabase.from('site_content').upsert({ key, label: `FAQ Outil ${faqTool}`, value: JSON.stringify(toolFaqs) }, { onConflict: 'key' });
+                                                        // Update siteContent locally too to avoid sync issues
+                                                        fetchData();
+                                                        alert('FAQ de l\'outil modifiée avec succès !');
+                                                    }}
+                                                    className="text-green-600 hover:text-green-800 flex-shrink-0"
+                                                    title="Sauvegarder la modification"
+                                                >
+                                                    <Save size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={async () => {
+                                                        const updated = toolFaqs.filter((_, idx) => idx !== i);
+                                                        setToolFaqs(updated);
+                                                        const key = `tool_${faqTool}_faq`;
+                                                        await supabase.from('site_content').upsert({ key, label: `FAQ Outil ${faqTool}`, value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                        fetchData();
+                                                    }}
+                                                    className="text-red-500 hover:text-red-700 flex-shrink-0"
+                                                    title="Supprimer la question"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {toolFaqs.length === 0 && <p className="text-zinc-400 italic text-sm">Aucune question pour cet outil.</p>}
+
+                                    <div className="bg-zinc-50 p-4 rounded border border-zinc-200 space-y-3">
+                                        <h3 className="font-bold text-sm uppercase text-zinc-500">Ajouter une question à l'outil</h3>
+                                        <input
+                                            value={newToolFaqQ}
+                                            onChange={e => setNewToolFaqQ(e.target.value)}
+                                            placeholder="Question..."
+                                            className="w-full border p-2 rounded text-sm"
+                                        />
+                                        <textarea
+                                            value={newToolFaqA}
+                                            onChange={e => setNewToolFaqA(e.target.value)}
                                             placeholder="Réponse..."
                                             className="w-full border p-2 rounded text-sm h-20"
                                         />
                                         <button
-                                            disabled={!newProductFaqQ || !newProductFaqA || faqSaving}
+                                            disabled={!newToolFaqQ || !newToolFaqA || faqSaving}
                                             onClick={async () => {
-                                                if (!newProductFaqQ || !newProductFaqA) return;
+                                                if (!newToolFaqQ || !newToolFaqA) return;
                                                 setFaqSaving(true);
-                                                const updated = [...productFaqs, { question: newProductFaqQ, answer: newProductFaqA }];
-                                                setProductFaqs(updated);
-                                                await supabase.from('products').update({ faqs: updated }).eq('id', faqProduct.id);
-                                                setNewProductFaqQ('');
-                                                setNewProductFaqA('');
+                                                const updated = [...toolFaqs, { question: newToolFaqQ, answer: newToolFaqA }];
+                                                setToolFaqs(updated);
+                                                const key = `tool_${faqTool}_faq`;
+                                                await supabase.from('site_content').upsert({ key, label: `FAQ Outil ${faqTool}`, value: JSON.stringify(updated) }, { onConflict: 'key' });
+                                                fetchData();
+                                                setNewToolFaqQ('');
+                                                setNewToolFaqA('');
                                                 setFaqSaving(false);
                                             }}
                                             className="bg-black text-white px-6 py-2 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition disabled:opacity-50"
@@ -2112,8 +2223,9 @@ export default function AdminPage() {
                         </div>
 
                     </div>
-                )}
-            </div>
+                )
+                }
+            </div >
         </div >
     );
 }

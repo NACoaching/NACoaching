@@ -15,7 +15,7 @@ export async function getToolArticle(slug) {
 
     const { data } = await supabase
         .from('articles')
-        .select('title, excerpt, content, related_title, related_subtitle, related_articles')
+        .select('title, excerpt, content, image, related_title, related_subtitle, related_articles')
         .eq('cta', slug)
         .single();
 
@@ -25,7 +25,8 @@ export async function getToolArticle(slug) {
         content: data?.content || '',
         related_title: data?.related_title || '',
         related_subtitle: data?.related_subtitle || '',
-        related_articles: data?.related_articles || []
+        related_articles: data?.related_articles || [],
+        image: data?.image || ''
     };
 }
 

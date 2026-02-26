@@ -6,6 +6,9 @@ export const revalidate = 3600;
 export const metadata = {
     title: 'Outils & Calculateurs Sportifs Gratuits | NA Coaching',
     description: 'Accédez à nos outils gratuits pour optimiser votre entraînement : Calculateur 1RM, Besoins Caloriques, VMA, Zones Cardiaques et plus encore.',
+    alternates: {
+        canonical: '/outils',
+    },
 };
 
 export default async function OutilsPage() {

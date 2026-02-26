@@ -9,6 +9,9 @@ export const metadata = {
         description: 'Découvrez mes articles scientifiques sur la performance, la physiologie et la réathlétisation.',
         url: 'https://na-coaching.com/labo',
         type: 'website',
+    },
+    alternates: {
+        canonical: '/labo',
     }
 };
 

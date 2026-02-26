@@ -57,9 +57,8 @@ export async function generateMetadata() {
     icons: {
       icon: '/favicon.ico', // Ensure you have a favicon
     },
-    alternates: {
-      canonical: siteUrl,
-    },
+    authors: [{ name: 'NA Coaching', url: siteUrl }],
+    publisher: 'NA Coaching',
   };
 }
 
