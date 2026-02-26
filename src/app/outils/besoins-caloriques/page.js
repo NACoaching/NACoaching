@@ -109,7 +109,7 @@ export default async function CalculatorCaloriesPage() {
                     </p>
 
                     <div className="mb-16">
-                        <CalculatorCalories />
+                        <CalculatorCalories affiliateData={article} />
                     </div>
 
                     {/* SEO Content */}

@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from 'react';
-import { Dumbbell, RotateCcw } from 'lucide-react';
+import { Dumbbell, RotateCcw, Info } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 import ShareResults from "@/components/tools/ShareResults";
+import AffiliateCard from "@/components/AffiliateCard";
 
-export default function Calculator1RM() {
+export default function Calculator1RM({ affiliateData }) {
     const [weight, setWeight] = useState('');
     const [reps, setReps] = useState('');
     const [result, setResult] = useState(null);
@@ -91,6 +92,24 @@ export default function Calculator1RM() {
                     </div>
                 )}
             </div>
+
+            {affiliateData?.affiliate_link && (
+                <div className="mt-8 border-t border-zinc-200 pt-8">
+                    <div className="flex items-center gap-2 mb-6">
+                        <Info size={16} className="text-[#FF6B00]" />
+                        <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500">Expertise Matériel</h4>
+                    </div>
+
+                    <AffiliateCard
+                        title={affiliateData.title?.toLowerCase().includes('1rm') ? "Accessoires de musculation" : "Recommandation"}
+                        description={affiliateData.affiliate_text || "Pour tes séances de force, le bon matériel fait la différence."}
+                        imageUrl={affiliateData.affiliate_image}
+                        affiliateUrl={affiliateData.affiliate_link}
+                        ctaText="Voir la sélection"
+                        badge="Sélection Coach"
+                    />
+                </div>
+            )}
         </AnimWrapper>
     );
 }

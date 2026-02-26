@@ -107,7 +107,7 @@ export default function AdminPage() {
     // Forms Data
     const [articleForm, setArticleForm] = useState({
         title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
-        affiliate_link: '', affiliate_text: '',
+        affiliate_link: '', affiliate_text: '', affiliate_image: '',
         related_title: '', related_subtitle: '', related_articles: [],
         is_published: true,
         date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -284,6 +284,7 @@ export default function AdminPage() {
                 content: item.content, image: item.image, cta: item.cta, date: item.date,
                 affiliate_link: item.affiliate_link || '',
                 affiliate_text: item.affiliate_text || '',
+                affiliate_image: item.affiliate_image || '',
                 related_title: item.related_title || '',
                 related_subtitle: item.related_subtitle || '',
                 related_articles: item.related_articles || []
@@ -303,7 +304,7 @@ export default function AdminPage() {
         setEditingItem(null);
         setArticleForm({
             title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
-            affiliate_link: '', affiliate_text: '',
+            affiliate_link: '', affiliate_text: '', affiliate_image: '',
             related_title: '', related_subtitle: '', related_articles: [],
             date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
         });
@@ -1925,6 +1926,19 @@ export default function AdminPage() {
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Affiliation (Optionnel)</h3>
                                             <input name="affiliate_link" value={articleForm.affiliate_link} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Lien d'affiliation (URL)" />
                                             <textarea name="affiliate_text" value={articleForm.affiliate_text} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white h-20" placeholder="Texte promotionnel (ex: Profitez de 10% avec le code NA10)" />
+
+                                            <div className="pt-2 border-t border-zinc-200">
+                                                <label className="block text-[10px] font-bold uppercase text-zinc-400 mb-2">Image Recommandation (Optionnel)</label>
+                                                <div className="flex items-center gap-4">
+                                                    {articleForm.affiliate_image && <img src={articleForm.affiliate_image} className="w-12 h-12 object-cover rounded bg-white shadow-sm" />}
+                                                    <input
+                                                        type="file"
+                                                        accept="image/png, image/jpeg, image/webp"
+                                                        onChange={(e) => handleImageUpload(e, (val) => setArticleForm({ ...articleForm, affiliate_image: val.image }), articleForm)}
+                                                        className="text-[10px]"
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">

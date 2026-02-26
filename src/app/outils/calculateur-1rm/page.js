@@ -109,7 +109,7 @@ export default async function Calculator1RMPage() {
                     </p>
 
                     <div className="mb-16">
-                        <Calculator1RM />
+                        <Calculator1RM affiliateData={article} />
                     </div>
 
                     {/* SEO Content */}

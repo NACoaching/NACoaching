@@ -109,7 +109,7 @@ export default async function CalculatorHeartRatePage() {
                     </p>
 
                     <div className="mb-16">
-                        <CalculatorHeartRate />
+                        <CalculatorHeartRate affiliateData={article} />
                     </div>
 
                     {/* SEO Content */}
