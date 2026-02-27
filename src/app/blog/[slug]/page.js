@@ -211,6 +211,9 @@ export default async function ArticlePage({ params }) {
                                 <span className="inline-block px-3 py-1 bg-[#FF6B00] text-black text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
                                     Recommandation de l&apos;expert
                                 </span>
+                                {article.affiliate_title && (
+                                    <h4 className="text-xl font-black uppercase mb-2 text-black">{article.affiliate_title}</h4>
+                                )}
                                 <p className="text-zinc-800 font-medium text-lg leading-relaxed mb-6">
                                     {article.affiliate_text || "Profitez de cette recommandation pour optimiser vos résultats."}
                                 </p>
