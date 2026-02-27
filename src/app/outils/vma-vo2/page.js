@@ -128,7 +128,7 @@ export default async function VmaVo2ConverterPage() {
 
                             <div className="max-w-md w-full mx-auto">
                                 <AffiliateCard
-                                    title={article.title}
+                                    title={article.affiliate_title || article.title}
                                     description={article.affiliate_text || "Recommandation d'expert pour optimiser vos résultats."}
                                     imageUrl={article.affiliate_image}
                                     affiliateUrl={article.affiliate_link}
