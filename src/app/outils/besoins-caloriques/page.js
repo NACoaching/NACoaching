@@ -10,7 +10,7 @@ import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import HomeFAQ from "@/components/HomeFAQ";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/besoins-caloriques');
