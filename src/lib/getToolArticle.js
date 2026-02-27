@@ -17,10 +17,12 @@ export async function getToolArticle(slug) {
         .from('articles')
         .select('title, excerpt, content, image, related_title, related_subtitle, related_articles, affiliate_link, affiliate_text, affiliate_image, affiliate_title')
         .eq('cta', slug)
-        .order('id', { ascending: true }) // Consistance : on prend le premier créé ou spécifiquement celui voulu
-        .limit(1);
+        .order('id', { ascending: true });
 
-    const article = data && data.length > 0 ? data[0] : null;
+    // En cas de doublons (comme Article 10 et 17), on cherche en priorité celui qui a du contenu
+    const article = data && data.length > 0
+        ? (data.find(a => a.content && a.content.trim().length > 0) || data[0])
+        : null;
 
     return {
         title: article?.title || '',
