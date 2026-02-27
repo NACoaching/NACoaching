@@ -118,7 +118,7 @@ export default async function VmaVo2ConverterPage() {
 
                     {/* AFFILIATE SECTION (RESTORED STYLE) */}
                     {article.affiliate_link && (
-                        <div className="mt-12 border-t border-zinc-200 pt-12">
+                        <div className="mt-12 border-t border-zinc-200 pt-12 flex flex-col items-center">
                             <div className="flex items-center gap-2 mb-8">
                                 <span className="flex items-center gap-2">
                                     <Info size={16} className="text-[#FF6B00]" />
@@ -126,7 +126,7 @@ export default async function VmaVo2ConverterPage() {
                                 </span>
                             </div>
 
-                            <div className="max-w-md mx-auto md:mx-0">
+                            <div className="max-w-md w-full mx-auto">
                                 <AffiliateCard
                                     title={article.title}
                                     description={article.affiliate_text || "Recommandation d'expert pour optimiser vos résultats."}
