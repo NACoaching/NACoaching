@@ -1912,7 +1912,7 @@ export default function AdminPage() {
 
                                         {/* IMAGE UPLOAD ARTICLE */}
                                         <div className="border border-zinc-200 p-2 rounded bg-zinc-50">
-                                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Image de l'article</label>
+                                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Image de l&apos;article</label>
                                             <div className="flex items-center gap-4">
                                                 {articleForm.image && <img src={articleForm.image} className="w-16 h-16 object-cover rounded" />}
                                                 <input type="file" accept="image/png, image/jpeg, image/webp" onChange={(e) => handleImageUpload(e, setArticleForm, articleForm)} className="text-xs" />
@@ -1924,7 +1924,7 @@ export default function AdminPage() {
 
                                         <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Affiliation (Optionnel)</h3>
-                                            <input name="affiliate_link" value={articleForm.affiliate_link} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Lien d'affiliation (URL)" />
+                                            <input name="affiliate_link" value={articleForm.affiliate_link} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Lien d&apos;affiliation (URL)" />
                                             <textarea name="affiliate_text" value={articleForm.affiliate_text} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white h-20" placeholder="Texte promotionnel (ex: Profitez de 10% avec le code NA10)" />
 
                                             <div className="pt-2 border-t border-zinc-200">
@@ -1943,7 +1943,7 @@ export default function AdminPage() {
 
                                         <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Articles Recommandés Par Défaut (Optionnel)</h3>
-                                            <p className="text-[10px] text-zinc-500">Pour forcer l'affichage de certains articles/outils en bas de cette page au lieu de laisser l'aléatoire choisir.</p>
+                                            <p className="text-[10px] text-zinc-500">Pour forcer l&apos;affichage de certains articles/outils en bas de cette page au lieu de laisser l&apos;aléatoire choisir.</p>
                                             <input name="related_title" value={articleForm.related_title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Titre (ex: La Science de la Force)" />
                                             <input name="related_subtitle" value={articleForm.related_subtitle} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Sous-titre" />
 

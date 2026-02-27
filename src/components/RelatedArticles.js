@@ -30,7 +30,7 @@ export default async function RelatedArticles({ articles, title, subtitle }) {
                                 {article.title}
                             </h4>
                             <div className="mt-auto text-xs font-bold text-zinc-400 group-hover:text-black transition flex items-center gap-2">
-                                Lire l'article <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                                Lire l&apos;article <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                             </div>
                         </div>
                     </Link>

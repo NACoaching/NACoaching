@@ -43,7 +43,7 @@ export default function CalculatorHeartRate({ affiliateData }) {
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
-                    Calcule tes 5 zones d'entraînement selon la méthode de Karvonen (plus précise).
+                    Calcule tes 5 zones d&apos;entraînement selon la méthode de Karvonen (plus précise).
                 </p>
 
                 <form onSubmit={calculateZones} className="space-y-4 mb-6">

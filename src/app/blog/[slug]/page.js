@@ -209,7 +209,7 @@ export default async function ArticlePage({ params }) {
                         <div className="mt-12 p-8 rounded-xl border-2 border-dashed border-[#FF6B00]/30 bg-[#FF6B00]/5 flex flex-col md:flex-row items-center gap-8 group">
                             <div className="flex-1 text-center md:text-left">
                                 <span className="inline-block px-3 py-1 bg-[#FF6B00] text-black text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
-                                    Recommandation de l'expert
+                                    Recommandation de l&apos;expert
                                 </span>
                                 <p className="text-zinc-800 font-medium text-lg leading-relaxed mb-6">
                                     {article.affiliate_text || "Profitez de cette recommandation pour optimiser vos résultats."}
@@ -269,7 +269,7 @@ export default async function ArticlePage({ params }) {
                                         <h4 className="text-lg font-bold uppercase leading-snug mb-3 text-black group-hover:text-[#FF6B00] transition line-clamp-2">
                                             {relatedArticle.title}
                                         </h4>
-                                        <div className="mt-auto text-xs font-bold text-zinc-400 group-hover:text-black transition">Lire l'article →</div>
+                                        <div className="mt-auto text-xs font-bold text-zinc-400 group-hover:text-black transition">Lire l&apos;article →</div>
                                     </div>
                                 </Link>
                             ))}

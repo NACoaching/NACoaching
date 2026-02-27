@@ -33,7 +33,7 @@ export default function Calculator1RM({ affiliateData }) {
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
-                    Estime ta force maximale (1RM) à partir d'une charge et d'un nombre de répétitions.
+                    Estime ta force maximale (1RM) à partir d&apos;une charge et d&apos;un nombre de répétitions.
                 </p>
 
                 <form onSubmit={calculate1RM} className="space-y-4 mb-6">
