@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { Heart, Activity } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 import ShareResults from "@/components/tools/ShareResults";
-import AffiliateCard from "@/components/AffiliateCard";
 import { Info } from 'lucide-react';
 
-export default function CalculatorHeartRate({ affiliateData }) {
+export default function CalculatorHeartRate() {
     const [fcMax, setFcMax] = useState('');
     const [fcRest, setFcRest] = useState('');
     const [zones, setZones] = useState(null);
@@ -92,23 +91,6 @@ export default function CalculatorHeartRate({ affiliateData }) {
                 {zones && <ShareResults title="Mes Zones Cardiaques" zones={zones} />}
             </div>
 
-            {affiliateData?.affiliate_link && (
-                <div className="mt-8 border-t border-zinc-200 pt-8">
-                    <div className="flex items-center gap-2 mb-6">
-                        <Info size={16} className="text-[#FF6B00]" />
-                        <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500">Expertise Matériel</h4>
-                    </div>
-
-                    <AffiliateCard
-                        title={affiliateData.title?.toLowerCase().includes('cardiaque') ? "Polar H10 - Ceinture Pectorale" : "Recommandation"}
-                        description={affiliateData.affiliate_text || "Pour utiliser ces zones avec précision, une simple montre ne suffit pas."}
-                        imageUrl={affiliateData.affiliate_image || "https://m.media-amazon.com/images/I/61K8PjF4KQL._AC_SL1500_.jpg"}
-                        affiliateUrl={affiliateData.affiliate_link}
-                        ctaText="Mesurer avec précision"
-                        badge="Sélection Coach"
-                    />
-                </div>
-            )}
         </AnimWrapper>
     );
 }
