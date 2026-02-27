@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { ChevronLeft, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, ShoppingBag, Info } from 'lucide-react';
+import AffiliateCard from "@/components/AffiliateCard";
 import EffectiveVolume from '@/components/tools/EffectiveVolume';
 import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
@@ -56,35 +57,23 @@ export default async function VolumePage() {
                     </div>
                 </div>
 
-                {/* AFFILIATE BANNER (HORIZONTAL) */}
+                {/* AFFILIATE SECTION (RESTORED STYLE) */}
                 {article.affiliate_link && (
-                    <div className="mt-12 p-8 rounded-xl border-2 border-dashed border-[#FF6B00]/30 bg-[#FF6B00]/5 flex flex-col md:flex-row items-center gap-8 group">
-                        <div className="flex-1 text-center md:text-left">
-                            <span className="inline-block px-3 py-1 bg-[#FF6B00] text-black text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
-                                Recommandation de l&apos;expert
-                            </span>
-                            <p className="text-zinc-800 font-medium text-lg leading-relaxed mb-6">
-                                {article.affiliate_text || "Profitez de cette recommandation pour optimiser vos résultats."}
-                            </p>
-                            <a
-                                href={article.affiliate_link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block bg-black text-white font-black py-4 px-8 rounded-sm uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition shadow-lg"
-                            >
-                                Découvrir le produit
-                            </a>
+                    <div className="mt-12 border-t border-zinc-200 pt-12 text-left">
+                        <div className="flex items-center gap-2 mb-8">
+                            <Info size={16} className="text-[#FF6B00]" />
+                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
                         </div>
-                        <div className="w-32 h-32 flex items-center justify-center shrink-0">
-                            {article.affiliate_image ? (
-                                <img
-                                    src={article.affiliate_image}
-                                    alt="Recommandation"
-                                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                                />
-                            ) : (
-                                <ShoppingBag className="w-full h-full text-[#FF6B00] opacity-20" />
-                            )}
+
+                        <div className="max-w-md mx-auto md:mx-0">
+                            <AffiliateCard
+                                title={article.title}
+                                description={article.affiliate_text || "Recommandation d'expert pour optimiser vos résultats."}
+                                imageUrl={article.affiliate_image}
+                                affiliateUrl={article.affiliate_link}
+                                ctaText="Voir le produit"
+                                badge="Sélection Coach"
+                            />
                         </div>
                     </div>
                 )}
