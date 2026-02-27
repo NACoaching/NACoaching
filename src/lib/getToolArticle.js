@@ -13,24 +13,27 @@ export async function getToolArticle(slug) {
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     );
 
-    const { data } = await supabase
+    const { data, error } = await supabase
         .from('articles')
         .select('title, excerpt, content, image, related_title, related_subtitle, related_articles, affiliate_link, affiliate_text, affiliate_image, affiliate_title')
         .eq('cta', slug)
-        .single();
+        .order('id', { ascending: true }) // Consistance : on prend le premier créé ou spécifiquement celui voulu
+        .limit(1);
+
+    const article = data && data.length > 0 ? data[0] : null;
 
     return {
-        title: data?.title || '',
-        intro: data?.excerpt || '',
-        content: data?.content || '',
-        related_title: data?.related_title || '',
-        related_subtitle: data?.related_subtitle || '',
-        related_articles: data?.related_articles || [],
-        image: data?.image || '',
-        affiliate_link: data?.affiliate_link || '',
-        affiliate_text: data?.affiliate_text || '',
-        affiliate_image: data?.affiliate_image || '',
-        affiliate_title: data?.affiliate_title || ''
+        title: article?.title || '',
+        intro: article?.excerpt || '',
+        content: article?.content || '',
+        related_title: article?.related_title || '',
+        related_subtitle: article?.related_subtitle || '',
+        related_articles: article?.related_articles || [],
+        image: article?.image || '',
+        affiliate_link: article?.affiliate_link || '',
+        affiliate_text: article?.affiliate_text || '',
+        affiliate_image: article?.affiliate_image || '',
+        affiliate_title: article?.affiliate_title || ''
     };
 }
 
