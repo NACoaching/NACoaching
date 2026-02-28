@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 import AnimWrapper from '@/components/AnimWrapper';
-import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight } from 'lucide-react';
+import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight, Dumbbell, Flame, Wind, Heart } from 'lucide-react';
 import HomeFAQ from '@/components/HomeFAQ';
 
 export const revalidate = 3600;
@@ -229,15 +229,15 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: siteContent.find(c => c.key === 'home_tool_1_title')?.value || "Calculateur 1RM", desc: siteContent.find(c => c.key === 'home_tool_1_desc')?.value || "Estime ta force max théorique selon la méthode Brzycki ou Epley.", icon: "💪", href: "/outils/calculateur-1rm" },
-              { title: siteContent.find(c => c.key === 'home_tool_2_title')?.value || "Besoins Caloriques", desc: siteContent.find(c => c.key === 'home_tool_2_desc')?.value || "Défini ton métabolisme de base et tes dépenses journalières.", icon: "🔥", href: "/outils/besoins-caloriques" },
-              { title: siteContent.find(c => c.key === 'home_tool_3_title')?.value || "VMA & VO2max", desc: siteContent.find(c => c.key === 'home_tool_3_desc')?.value || "Évalue tes capacités aérobies pour mieux cibler tes efforts.", icon: "🏃‍♂️", href: "/outils/vma-vo2" },
-              { title: siteContent.find(c => c.key === 'home_tool_4_title')?.value || "Zones Cardiaques", desc: siteContent.find(c => c.key === 'home_tool_4_desc')?.value || "Cible tes 5 zones d'entraînement via la méthode Karvonen.", icon: "🫀", href: "/outils/frequence-cardiaque" }
+              { title: siteContent.find(c => c.key === 'home_tool_1_title')?.value || "Calculateur 1RM", desc: siteContent.find(c => c.key === 'home_tool_1_desc')?.value || "Estime ta force max théorique selon la méthode Brzycki ou Epley.", Icon: Dumbbell, href: "/outils/calculateur-1rm" },
+              { title: siteContent.find(c => c.key === 'home_tool_2_title')?.value || "Besoins Caloriques", desc: siteContent.find(c => c.key === 'home_tool_2_desc')?.value || "Défini ton métabolisme de base et tes dépenses journalières.", Icon: Flame, href: "/outils/besoins-caloriques" },
+              { title: siteContent.find(c => c.key === 'home_tool_3_title')?.value || "VMA & VO2max", desc: siteContent.find(c => c.key === 'home_tool_3_desc')?.value || "Évalue tes capacités aérobies pour mieux cibler tes efforts.", Icon: Wind, href: "/outils/vma-vo2" },
+              { title: siteContent.find(c => c.key === 'home_tool_4_title')?.value || "Zones Cardiaques", desc: siteContent.find(c => c.key === 'home_tool_4_desc')?.value || "Cible tes 5 zones d'entraînement via la méthode Karvonen.", Icon: Heart, href: "/outils/frequence-cardiaque" }
             ].map((tool, i) => (
               <AnimWrapper key={i} delay={i * 0.1}>
                 <Link href={tool.href} className="block group h-full">
                   <div className="bg-zinc-800/50 backdrop-blur-sm p-8 rounded-3xl border border-zinc-700/50 hover:border-[#FF6B00]/50 transition-all duration-300 h-full flex flex-col hover:bg-zinc-800 hover:-translate-y-2">
-                    <div className="text-4xl mb-6 bg-zinc-900 w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner">{tool.icon}</div>
+                    <div className="mb-6 bg-zinc-900 w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner"><tool.Icon size={28} className="text-[#FF6B00]" /></div>
                     <h3 className="text-xl font-bold mb-3 text-white group-hover:text-[#FF6B00] transition-colors">{tool.title}</h3>
                     <p className="text-zinc-400 text-sm mb-6 leading-relaxed flex-grow">{tool.desc}</p>
                     <div className="mt-auto text-sm font-semibold text-[#FF6B00] flex items-center gap-2">
