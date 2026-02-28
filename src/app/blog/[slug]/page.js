@@ -207,7 +207,7 @@ export default async function ArticlePage({ params }) {
                                     strong: ({ node, ...props }) => <strong className="font-black text-black" {...props} />,
                                 }}
                             >
-                                {autoLinkContent(article.content, autoLinks)}
+                                {autoLinkContent(article.content, autoLinks, "/blog/" + (article.slug || article.id))}
                             </ReactMarkdown>
                         </div>
 

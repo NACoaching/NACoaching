@@ -114,7 +114,7 @@ export default async function VmaVo2ConverterPage() {
                     </div>
 
                     {/* SEO Content */}
-                    <ToolArticleContent content={article.content} glossary={article.auto_links} />
+                    <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
 
                     {/* AFFILIATE SECTION (RESTORED STYLE) */}
                     {article.affiliate_link && (

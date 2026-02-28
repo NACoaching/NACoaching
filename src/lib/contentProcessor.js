@@ -4,9 +4,10 @@
  * 
  * @param {string} content - Markdown content to process
  * @param {Array} glossary - Array of { keywords: 'kw1, kw2', url: '/url' }
+ * @param {string} currentPath - Current page path to skip self-linking
  * @returns {string} - Processed content with auto-links
  */
-export function autoLinkContent(content, glossary = []) {
+export function autoLinkContent(content, glossary = [], currentPath = '') {
     if (!content || !glossary || glossary.length === 0) return content;
 
     let processedContent = content;
@@ -31,6 +32,9 @@ export function autoLinkContent(content, glossary = []) {
 
     // 3. Process each glossary item
     glossary.forEach(item => {
+        // Skip link if it points to the current page
+        if (currentPath && item.url === currentPath) return;
+
         // Keywords can be a string (comma separated) or an array
         const keywordsArray = typeof item.keywords === 'string'
             ? item.keywords.split(',').map(k => k.trim())

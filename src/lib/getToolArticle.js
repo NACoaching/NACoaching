@@ -39,6 +39,7 @@ export async function getToolArticle(slug) {
         affiliate_text: article?.affiliate_text || '',
         affiliate_image: article?.affiliate_image || '',
         affiliate_title: article?.affiliate_title || '',
+        current_path: slug,
         auto_links: autoLinks
     };
 }

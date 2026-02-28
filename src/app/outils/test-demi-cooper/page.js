@@ -53,7 +53,7 @@ export default async function DemiCooperPage() {
                                 {article.intro}
                             </p>
                             <div className="h-px bg-zinc-200 mb-8" />
-                            <ToolArticleContent content={article.content} glossary={article.auto_links} />
+                            <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
                         </div>
                     </div>
                 </div>

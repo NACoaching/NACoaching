@@ -7,10 +7,10 @@ import { autoLinkContent } from '@/lib/contentProcessor';
  * Renders tool article content using ReactMarkdown (supports both Markdown and HTML).
  * Styled consistently with the blog article pages.
  */
-export default function ToolArticleContent({ content, glossary = [] }) {
+export default function ToolArticleContent({ content, glossary = [], currentPath = '' }) {
     if (!content) return null;
 
-    const processedContent = autoLinkContent(content, glossary);
+    const processedContent = autoLinkContent(content, glossary, currentPath);
 
     return (
         <article className="prose prose-zinc max-w-none text-zinc-900">
