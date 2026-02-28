@@ -110,7 +110,7 @@ export default async function SpeedConverterPage() {
                     </p>
 
                     <div className="mb-16">
-                        <SpeedConverter />
+                        <SpeedConverter hints={article.tool_hints} />
                     </div>
 
                     {/* SEO Content */}

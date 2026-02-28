@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useMemo } from 'react';
 import { Trophy, Clock, Info, ArrowRight } from 'lucide-react';
+import Tooltip from "@/components/Tooltip";
 
 const DISTANCES = [
     { id: '5k', name: '5 km', meters: 5000 },
@@ -9,7 +10,7 @@ const DISTANCES = [
     { id: 'marathon', name: 'Marathon', meters: 42195 },
 ];
 
-export default function RacePredictor() {
+export default function RacePredictor({ hints = {} }) {
     const [refDist, setRefDist] = useState(5000);
     const [hours, setHours] = useState('');
     const [mins, setMins] = useState('');

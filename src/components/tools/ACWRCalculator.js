@@ -1,9 +1,10 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState } from 'react';
 import { Activity, Thermometer, AlertTriangle, CheckCircle2, Info } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 
-export default function ACWRCalculator() {
+export default function ACWRCalculator() { hints = {} } {
     const [acute, setAcute] = useState('');
     const [chronic, setChronic] = useState('');
     const [result, setResult] = useState(null);
@@ -65,34 +66,35 @@ export default function ACWRCalculator() {
                 </p>
 
                 <form onSubmit={calculateACWR} className="space-y-6">
-                    <div>
-                        <label className="block text-xs font-black uppercase tracking-widest mb-2 text-zinc-400">
-                            Charge Aiguë (7 derniers jours)
-                        </label>
-                        <input
-                            type="number"
-                            step="0.1"
-                            required
-                            value={acute}
-                            onChange={(e) => setAcute(e.target.value)}
-                            className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl text-lg font-bold focus:ring-2 focus:ring-[#FF6B00] outline-none transition"
-                            placeholder="Somme des charges de la semaine"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-xs font-black uppercase tracking-widest mb-2 text-zinc-400">
-                            Charge Chronique (Moyenne 4 dernières semaines)
-                        </label>
-                        <input
-                            type="number"
-                            step="0.1"
-                            required
-                            value={chronic}
-                            onChange={(e) => setChronic(e.target.value)}
-                            className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl text-lg font-bold focus:ring-2 focus:ring-[#FF6B00] outline-none transition"
-                            placeholder="Moyenne hebdo sur 1 mois"
-                        />
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Charge Aiguë (7j)
+                                <Tooltip text={hints.aigue || hints.acute} />
+                            </label>
+                            <input
+                                type="number"
+                                value={acute}
+                                onChange={(e) => setAcute(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 350"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Charge Chronique (28j)
+                                <Tooltip text={hints.chronique || hints.chronic} />
+                            </label>
+                            <input
+                                type="number"
+                                value={chronic}
+                                onChange={(e) => setChronic(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 300"
+                                required
+                            />
+                        </div>
                     </div>
 
                     <button type="submit" className="w-full bg-black text-white font-black py-5 rounded-xl uppercase tracking-widest hover:bg-[#FF6B00] hover:text-black transition-all shadow-lg hover:shadow-[#FF6B00]/40">

@@ -55,7 +55,7 @@ export default async function RecoveryScorePage() {
                     </p>
 
                     <div className="mb-16">
-                        <RecoveryScore />
+                        <RecoveryScore hints={article.tool_hints} />
                     </div>
 
                     <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />

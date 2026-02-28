@@ -15,7 +15,7 @@ export async function getToolArticle(slug) {
 
     const { data, error } = await supabase
         .from('articles')
-        .select('title, excerpt, content, image, related_title, related_subtitle, related_articles, affiliate_link, affiliate_text, affiliate_image, affiliate_title')
+        .select('title, excerpt, content, image, related_title, related_subtitle, related_articles, affiliate_link, affiliate_text, affiliate_image, affiliate_title, tool_hints')
         .eq('cta', slug)
         .order('id', { ascending: true });
 
@@ -40,6 +40,7 @@ export async function getToolArticle(slug) {
         affiliate_image: article?.affiliate_image || '',
         affiliate_title: article?.affiliate_title || '',
         current_path: slug,
+        tool_hints: article?.tool_hints || {},
         auto_links: autoLinks
     };
 }

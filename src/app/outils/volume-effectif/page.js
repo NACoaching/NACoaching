@@ -41,7 +41,7 @@ export default async function VolumePage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
                     <div className="lg:col-span-8">
-                        <EffectiveVolume />
+                        <EffectiveVolume hints={article.tool_hints} />
                     </div>
 
                     <div className="lg:col-span-4">

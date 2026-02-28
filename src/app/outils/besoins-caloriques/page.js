@@ -109,8 +109,8 @@ export default async function CalculatorCaloriesPage() {
                         {article.intro || "Estimez précisément votre dépense énergétique totale quotidienne."}
                     </p>
 
-                    <div className="mb-16">
-                        <CalculatorCalories />
+                    <div className="lg:col-span-7">
+                        <CalculatorCalories hints={article.tool_hints} />
                     </div>
 
                     {/* SEO Content */}

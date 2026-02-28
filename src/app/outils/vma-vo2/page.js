@@ -109,8 +109,8 @@ export default async function VmaVo2ConverterPage() {
                         {article.intro || "Analysez votre potentiel aérobie en reliant votre vitesse maximale à votre consommation d'oxygène."}
                     </p>
 
-                    <div className="mb-16">
-                        <VmaVo2Converter />
+                    <div className="lg:col-span-7">
+                        <VmaVo2Converter hints={article.tool_hints} />
                     </div>
 
                     {/* SEO Content */}

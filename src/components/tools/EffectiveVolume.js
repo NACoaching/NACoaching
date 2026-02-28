@@ -1,4 +1,5 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState } from 'react';
 import { Layers, Info, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
@@ -11,7 +12,7 @@ const muscles = [
     { id: 'bras', name: 'Bras (Biceps/Triceps)' }
 ];
 
-export default function EffectiveVolume() {
+export default function EffectiveVolume() { hints = {} } {
     const [volumes, setVolumes] = useState({
         pecs: 0, dos: 0, quads: 0, ischios: 0, épaules: 0, bras: 0
     });
@@ -47,7 +48,10 @@ export default function EffectiveVolume() {
                         <div key={m.id} className="group">
                             <div className="flex justify-between items-end mb-3">
                                 <div>
-                                    <label className="text-xs font-black uppercase text-zinc-500 block mb-1">{m.name}</label>
+                                    <label className="flex items-center text-xs font-black uppercase text-zinc-500 mb-1">
+                                        {m.name}
+                                        <Tooltip text={hints[m.id]} />
+                                    </label>
                                     <div className="flex items-center gap-2">
                                         <input
                                             type="number"

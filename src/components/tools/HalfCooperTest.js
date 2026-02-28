@@ -1,8 +1,9 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState, useMemo } from 'react';
 import { Timer, ChevronRight, Info, Zap } from 'lucide-react';
 
-export default function HalfCooperTest() {
+export default function HalfCooperTest() { hints = {} } {
     const [distance, setDistance] = useState('');
 
     const results = useMemo(() => {
@@ -55,13 +56,17 @@ export default function HalfCooperTest() {
             </div>
 
             <div className="mb-10">
-                <label className="block text-xs font-black uppercase text-zinc-500 mb-2 text-center">Distance parcourue en 6 minutes (mètres)</label>
+                <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                    Distance parcourue (m)
+                    <Tooltip text={hints.distance} />
+                </label>
                 <input
                     type="number"
-                    placeholder="Ex: 1500"
+                    placeholder="Ex: 1550"
                     value={distance}
                     onChange={(e) => setDistance(e.target.value)}
-                    className="w-full bg-zinc-50 border border-zinc-200 p-6 rounded-2xl font-black text-4xl text-center focus:outline-none focus:border-orange-500 transition shadow-inner"
+                    className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                    required
                 />
             </div>
 

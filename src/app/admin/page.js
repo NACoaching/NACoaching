@@ -18,6 +18,14 @@ export default function AdminPage() {
     const [subscribers, setSubscribers] = useState([]);
     const [autoLinks, setAutoLinks] = useState([]);
     const [newAutoLink, setNewAutoLink] = useState({ keywords: '', url: '', is_active: true });
+    const [articleForm, setArticleForm] = useState({
+        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
+        affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
+        related_title: '', related_subtitle: '', related_articles: [],
+        tool_hints: {},
+        is_published: true,
+        date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
+    });
     const [rawPageViews, setRawPageViews] = useState([]);
     const [analyticsFilter, setAnalyticsFilter] = useState('all');
     const [customDate, setCustomDate] = useState('');
@@ -107,13 +115,6 @@ export default function AdminPage() {
     }, []);
 
     // Forms Data
-    const [articleForm, setArticleForm] = useState({
-        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
-        affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
-        related_title: '', related_subtitle: '', related_articles: [],
-        is_published: true,
-        date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
-    });
 
     const [productForm, setProductForm] = useState({
         title: '', price: '', discount_price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: '',
@@ -309,7 +310,8 @@ export default function AdminPage() {
                 affiliate_title: item.affiliate_title || '',
                 related_title: item.related_title || '',
                 related_subtitle: item.related_subtitle || '',
-                related_articles: item.related_articles || []
+                related_articles: item.related_articles || [],
+                tool_hints: item.tool_hints || {}
             });
         } else {
             setProductForm({
@@ -328,6 +330,7 @@ export default function AdminPage() {
             title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
             affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
             related_title: '', related_subtitle: '', related_articles: [],
+            tool_hints: {},
             date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
         });
         setProductForm({
@@ -1979,6 +1982,63 @@ export default function AdminPage() {
                                         {articleForm.category === 'Outils' && (
                                             <input name="subcategory" value={articleForm.subcategory} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm shrink" placeholder="Sous-Catégorie (ex: Force, Endurance...)" />
                                         )}
+                                        {/* TOOL HINTS MANAGEMENT (MOVED UP FOR VISIBILITY) */}
+                                        {(articleForm.category?.toLowerCase() === 'outils' || articleForm.category?.toLowerCase() === 'outil') && (
+                                            <div className="border border-zinc-300 p-3 rounded bg-orange-50/30 space-y-3">
+                                                <div className="flex justify-between items-center">
+                                                    <h3 className="text-xs font-black uppercase text-[#FF6B00]">Aide de l'outil (Tooltips)</h3>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            const key = window.prompt("Nom du champ EXACT de l'outil (ex: poids, reps, vma...) :");
+                                                            if (key) {
+                                                                setArticleForm(prev => ({
+                                                                    ...prev,
+                                                                    tool_hints: { ...(prev.tool_hints || {}), [key.toLowerCase().trim()]: "" }
+                                                                }));
+                                                            }
+                                                        }}
+                                                        className="text-[10px] font-bold uppercase text-zinc-600 hover:text-[#FF6B00] bg-white px-2 py-1 rounded shadow-sm border"
+                                                    >
+                                                        + Ajouter un champ
+                                                    </button>
+                                                </div>
+                                                <p className="text-[9px] text-zinc-400">Ajoutez des bulles "?" à côté des champs. Utilisez les noms des champs en bas de casse.</p>
+                                                <div className="space-y-3">
+                                                    {Object.entries(articleForm.tool_hints || {}).map(([key, value]) => (
+                                                        <div key={key} className="flex gap-2 items-start bg-white p-2 rounded border border-zinc-100 shadow-sm">
+                                                            <div className="flex-1">
+                                                                <label className="block text-[10px] font-black uppercase text-[#FF6B00] mb-1">{key}</label>
+                                                                <textarea
+                                                                    value={value}
+                                                                    onChange={(e) => {
+                                                                        const updated = { ...articleForm.tool_hints, [key]: e.target.value };
+                                                                        setArticleForm({ ...articleForm, tool_hints: updated });
+                                                                    }}
+                                                                    className="w-full border p-2 rounded text-xs bg-zinc-50 min-h-[50px] focus:border-[#FF6B00] outline-none"
+                                                                    placeholder={`Explication pour ${key}...`}
+                                                                />
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    const updated = { ...articleForm.tool_hints };
+                                                                    delete updated[key];
+                                                                    setArticleForm({ ...articleForm, tool_hints: updated });
+                                                                }}
+                                                                className="text-zinc-300 hover:text-red-500 mt-6"
+                                                            >
+                                                                <Trash2 size={14} />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                    {Object.keys(articleForm.tool_hints || {}).length === 0 && (
+                                                        <p className="text-[10px] text-zinc-400 italic text-center py-2">Aucune aide configurée.</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+
                                         <textarea required name="excerpt" value={articleForm.excerpt} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Extrait" />
                                         <div className="relative">
                                             <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-40 font-mono text-xs" placeholder="Contenu (Markdown supporté)" />
@@ -2016,6 +2076,7 @@ export default function AdminPage() {
                                             {uploadStatus && <p className="text-xs text-green-600 font-bold mt-2">{uploadStatus}</p>}
                                             <input type="hidden" name="image" value={articleForm.image} />
                                         </div>
+
                                         <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="CTA (Produit lié - Optionnel)" />
 
                                         <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">

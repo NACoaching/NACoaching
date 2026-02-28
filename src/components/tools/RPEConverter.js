@@ -1,4 +1,5 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState, useMemo } from 'react';
 import { Target, Info } from 'lucide-react';
 
@@ -12,7 +13,7 @@ const rpeChart = {
     7: [89, 86, 84, 82, 80, 78, 76, 74, 72, 70, 68, 66],
 };
 
-export default function RPEConverter() {
+export default function RPEConverter() { hints = {} } {
     const [reps, setReps] = useState(1);
     const [rpe, setRpe] = useState(10);
     const [weight, setWeight] = useState('');
@@ -55,7 +56,10 @@ export default function RPEConverter() {
                 </div>
 
                 <div>
-                    <label className="block text-xs font-black uppercase text-zinc-500 mb-2">Intensité (RPE)</label>
+                    <label className="flex items-center text-xs font-black uppercase text-zinc-500 mb-2">
+                        Intensité (RPE)
+                        <Tooltip text={hints.rpe} />
+                    </label>
                     <select
                         value={rpe}
                         onChange={(e) => setRpe(parseFloat(e.target.value))}
@@ -68,7 +72,10 @@ export default function RPEConverter() {
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="block text-xs font-black uppercase text-zinc-500 mb-2">Charge utilisée (kg) - Optionnel</label>
+                    <label className="flex items-center text-xs font-black uppercase text-zinc-500 mb-2">
+                        Charge utilisée (kg) - Optionnel
+                        <Tooltip text={hints.weight} />
+                    </label>
                     <input
                         type="number"
                         placeholder="Ex: 100"
@@ -76,6 +83,48 @@ export default function RPEConverter() {
                         onChange={(e) => setWeight(e.target.value)}
                         className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner"
                     />
+                </div>
+
+                {/* New inputs from the provided snippet */}
+                <div className="grid grid-cols-2 gap-4 md:col-span-2">
+                    <div>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Ton 1RM (kg)
+                            <Tooltip text={hints.max || hints.unrm} />
+                        </label>
+                        <input
+                            type="number"
+                            value={max}
+                            onChange={(e) => setMax(e.target.value)}
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            placeholder="Ex: 100"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            RPE visé
+                            <Tooltip text={hints.rpe} />
+                        </label>
+                        <input
+                            type="number"
+                            step="0.5"
+                            value={rpe}
+                            onChange={(e) => setRpe(e.target.value)}
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            placeholder="Ex: 8"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div className="md:col-span-2">
+                    <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        Répétitions visées
+                        <Tooltip text={hints.reps || hints.repetitions} />
+                    </label>
+                    {/* Assuming an input or select would go here for "Répétitions visées" */}
+                    {/* For now, leaving it as just the label as per the snippet */}
                 </div>
             </div>
 

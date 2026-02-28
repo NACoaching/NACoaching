@@ -109,8 +109,8 @@ export default async function CalculatorHeartRatePage() {
                         {article.intro || "Optimisez votre entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
                     </p>
 
-                    <div className="mb-16">
-                        <CalculatorHeartRate />
+                    <div className="lg:col-span-7">
+                        <CalculatorHeartRate hints={article.tool_hints} />
                     </div>
 
                     {/* SEO Content */}

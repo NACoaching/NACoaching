@@ -1,15 +1,15 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState, useEffect } from 'react';
 import { Gauge, ArrowRightLeft } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 
-export default function SpeedConverter() {
+export default function SpeedConverter({ hints = {} }) {
     const [kmh, setKmh] = useState('');
     const [ms, setMs] = useState('');
-    const [minkm, setMinkm] = useState(''); // Stores "min:sec" string
+    const [minkm, setMinkm] = useState('');
 
-    const handleKmhChange = (e) => {
-        const val = e.target.value;
+    const handleSpeedChange = (val) => {
         setKmh(val);
         if (val && !isNaN(val)) {
             const k = parseFloat(val);
@@ -84,36 +84,42 @@ export default function SpeedConverter() {
                     Convertis instantanément ta vitesse entre km/h, m/s et allure (min/km).
                 </p>
 
-                <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Vitesse (km/h)</label>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Vitesse (km/h)
+                            <Tooltip text={hints.vitesse || hints.speed} />
+                        </label>
                         <input
                             type="number"
+                            step="0.1"
                             value={kmh}
                             onChange={handleKmhChange}
                             className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 12"
+                            placeholder="Ex: 12.5"
                         />
                     </div>
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Vitesse (m/s)</label>
-                        <input
-                            type="number"
-                            value={ms}
-                            onChange={handleMsChange}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 3.33"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Allure (min/km)</label>
-                        <input
-                            type="text"
-                            value={minkm}
-                            onChange={handleMinkmChange}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 5:00"
-                        />
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Allure (min/km)
+                            <Tooltip text={hints.allure || hints.pace} />
+                        </label>
+                        <div className="flex gap-1">
+                            <input
+                                type="number"
+                                value={minkm.split(':')[0] || ''} // Assuming minkm is "min:sec"
+                                onChange={(e) => handleMinkmChange(`${e.target.value}:${minkm.split(':')[1] || '00'}`)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Min"
+                            />
+                            <input
+                                type="number"
+                                value={minkm.split(':')[1] || ''} // Assuming minkm is "min:sec"
+                                onChange={(e) => handleMinkmChange(`${minkm.split(':')[0] || '0'}:${e.target.value}`)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Sec"
+                            />
+                        </div>
                         <span className="text-[10px] text-zinc-400">Format: minutes:secondes (ex: 4:30)</span>
                     </div>
                 </div>

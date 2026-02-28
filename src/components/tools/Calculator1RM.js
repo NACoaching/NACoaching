@@ -1,10 +1,8 @@
 "use client";
 import React, { useState } from 'react';
-import { Dumbbell, RotateCcw, Info } from 'lucide-react';
-import AnimWrapper from "@/components/AnimWrapper";
-import ShareResults from "@/components/tools/ShareResults";
+import Tooltip from "@/components/Tooltip";
 
-export default function Calculator1RM() {
+export default function Calculator1RM({ hints = {} }) {
     const [weight, setWeight] = useState('');
     const [reps, setReps] = useState('');
     const [result, setResult] = useState(null);
@@ -37,7 +35,10 @@ export default function Calculator1RM() {
 
                 <form onSubmit={calculate1RM} className="space-y-4 mb-6">
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Poids soulevé (kg)</label>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Poids soulevé (kg)
+                            <Tooltip text={hints.poids || hints.weight} />
+                        </label>
                         <input
                             type="number"
                             value={weight}
@@ -48,7 +49,10 @@ export default function Calculator1RM() {
                         />
                     </div>
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Répétitions</label>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Répétitions
+                            <Tooltip text={hints.reps || hints.repetitions} />
+                        </label>
                         <input
                             type="number"
                             value={reps}

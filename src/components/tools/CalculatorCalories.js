@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Flame, Activity, Info } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 import ShareResults from "@/components/tools/ShareResults";
+import Tooltip from "@/components/Tooltip";
 
-export default function CalculatorCalories() {
+export default function CalculatorCalories({ hints = {} }) {
     const [gender, setGender] = useState('male');
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
@@ -44,52 +45,71 @@ export default function CalculatorCalories() {
                 <form onSubmit={calculateCalories} className="space-y-4 mb-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Sexe</label>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Âge
+                                <Tooltip text={hints.age} />
+                            </label>
+                            <input
+                                type="number"
+                                value={age}
+                                onChange={(e) => setAge(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 30"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Sexe
+                                <Tooltip text={hints.sexe || hints.gender} />
+                            </label>
                             <select
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
-                                className="w-full border p-2 rounded bg-white text-sm"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none bg-white"
                             >
                                 <option value="male">Homme</option>
                                 <option value="female">Femme</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Âge (ans)</label>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Poids (kg)
+                                <Tooltip text={hints.poids || hints.weight} />
+                            </label>
                             <input
                                 type="number"
-                                value={age}
-                                onChange={(e) => setAge(e.target.value)}
-                                className="w-full border p-2 rounded text-sm"
+                                value={weight}
+                                onChange={(e) => setWeight(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 75"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Taille (cm)
+                                <Tooltip text={hints.taille || hints.height} />
+                            </label>
+                            <input
+                                type="number"
+                                value={height}
+                                onChange={(e) => setHeight(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 180"
                                 required
                             />
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Poids (kg)</label>
-                            <input
-                                type="number"
-                                value={weight}
-                                onChange={(e) => setWeight(e.target.value)}
-                                className="w-full border p-2 rounded text-sm"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Taille (cm)</label>
-                            <input
-                                type="number"
-                                value={height}
-                                onChange={(e) => setHeight(e.target.value)}
-                                className="w-full border p-2 rounded text-sm"
-                                required
-                            />
-                        </div>
-                    </div>
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Activité</label>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Niveau d'activité
+                            <Tooltip text={hints.activite || hints.activity} />
+                        </label>
                         <select
                             value={activity}
                             onChange={(e) => setActivity(e.target.value)}

@@ -1,4 +1,5 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState } from 'react';
 import { Sparkles, Moon, Battery, Brain, Heart, ChevronRight, RotateCcw } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
@@ -11,7 +12,7 @@ const QUESTIONS = [
     { key: 'mood', label: 'Humeur / Motivation', icon: Heart, desc: 'Envie d\'écraser la séance' }
 ];
 
-export default function RecoveryScore() {
+export default function RecoveryScore({ hints = {} }) {
     const [scores, setScores] = useState({ sleep: 3, fatigue: 3, muscles: 3, stress: 3, mood: 3 });
     const [result, setResult] = useState(null);
 
@@ -78,7 +79,10 @@ export default function RecoveryScore() {
                                         <q.icon size={20} />
                                     </div>
                                     <div>
-                                        <div className="font-black uppercase text-sm tracking-tight">{q.label}</div>
+                                        <div className="flex items-center gap-1 font-black uppercase text-sm tracking-tight">
+                                            {q.label}
+                                            <Tooltip text={hints[q.key]} />
+                                        </div>
                                         <div className="text-[10px] text-zinc-400 font-bold uppercase">{q.desc}</div>
                                     </div>
                                 </div>
@@ -90,8 +94,8 @@ export default function RecoveryScore() {
                                         key={val}
                                         onClick={() => handleScore(q.key, val)}
                                         className={`h-12 rounded-xl border-2 transition-all font-black text-lg ${scores[q.key] === val
-                                                ? 'bg-black text-white border-black scale-105'
-                                                : 'bg-zinc-50 border-zinc-100 text-zinc-300 hover:border-zinc-300'
+                                            ? 'bg-black text-white border-black scale-105'
+                                            : 'bg-zinc-50 border-zinc-100 text-zinc-300 hover:border-zinc-300'
                                             }`}
                                     >
                                         {val}

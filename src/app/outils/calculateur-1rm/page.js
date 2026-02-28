@@ -109,8 +109,8 @@ export default async function Calculator1RMPage() {
                         {article.intro || "Estimez votre charge maximale théorique pour calibrer vos entraînements de force et d'hypertrophie."}
                     </p>
 
-                    <div className="mb-16">
-                        <Calculator1RM />
+                    <div className="lg:col-span-7">
+                        <Calculator1RM hints={article.tool_hints} />
                     </div>
 
                     {/* SEO Content */}

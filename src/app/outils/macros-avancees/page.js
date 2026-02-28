@@ -55,7 +55,7 @@ export default async function MacrosAvanceesPage() {
                     </p>
 
                     <div className="mb-16">
-                        <AdvancedMacros />
+                        <AdvancedMacros hints={article.tool_hints} />
                     </div>
 
                     {/* SEO Content */}

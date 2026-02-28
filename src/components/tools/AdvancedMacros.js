@@ -1,9 +1,10 @@
 "use client";
+import Tooltip from "@/components/Tooltip";
 import React, { useState } from 'react';
 import { Pizza, ChevronRight, Apple, Info, InfoIcon } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 
-export default function AdvancedMacros() {
+export default function AdvancedMacros() { hints = {} } {
     const [weight, setWeight] = useState('');
     const [calories, setCalories] = useState('');
     const [proteinRatio, setProteinRatio] = useState(2.0);
@@ -42,28 +43,64 @@ export default function AdvancedMacros() {
 
                 <form onSubmit={calculate} className="space-y-8">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest pl-1">Poids de corps (kg)</label>
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Poids (kg)
+                                <Tooltip text={hints.poids || hints.weight} />
+                            </label>
                             <input
                                 type="number"
-                                required
                                 value={weight}
                                 onChange={(e) => setWeight(e.target.value)}
-                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-2xl text-xl font-bold focus:ring-2 focus:ring-[#FF6B00] outline-none transition"
-                                placeholder="75"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 75"
+                                required
                             />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest pl-1">Calories Cibles</label>
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                % MG (optionnel)
+                                <Tooltip text={hints.fat_percentage || hints.mg} />
+                            </label>
                             <input
                                 type="number"
-                                required
-                                value={calories}
-                                onChange={(e) => setCalories(e.target.value)}
-                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-2xl text-xl font-bold focus:ring-2 focus:ring-[#FF6B00] outline-none transition"
-                                placeholder="2500"
+                                value={bodyFat}
+                                onChange={(e) => setBodyFat(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 15"
                             />
                         </div>
+                    </div>
+
+                    <div>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Objectif
+                            <Tooltip text={hints.objectif || hints.goal} />
+                        </label>
+                        <select
+                            value={goal}
+                            onChange={(e) => setGoal(e.target.value)}
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                        >
+                            <option value="loss">Perte de poids</option>
+                            <option value="maintenance">Maintien</option>
+                            <option value="gain">Prise de masse</option>
+                        </select>
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Calories Cibles
+                            <Tooltip text="Votre apport calorique journalier souhaité." />
+                        </label>
+                        <input
+                            type="number"
+                            required
+                            value={calories}
+                            onChange={(e) => setCalories(e.target.value)}
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            placeholder="Ex: 2500"
+                        />
                     </div>
 
                     <div className="space-y-6">

@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Gauge, Wind } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 import ShareResults from "@/components/tools/ShareResults";
+import Tooltip from "@/components/Tooltip";
 
-export default function VmaVo2Converter() {
+export default function VmaVo2Converter({ hints = {} }) {
     const [vma, setVma] = useState('');
     const [weight, setWeight] = useState('');
     const [vo2Rel, setVo2Rel] = useState(null);
@@ -60,23 +61,31 @@ export default function VmaVo2Converter() {
 
                 <div className="space-y-4 mb-6">
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Ta VMA (km/h)</label>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Ta VMA (km/h)
+                            <Tooltip text={hints.vma} />
+                        </label>
                         <input
                             type="number"
+                            step="0.1"
                             value={vma}
-                            onChange={handleVmaChange}
+                            onChange={(e) => handleVmaChange(e.target.value)}
                             className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 18"
+                            placeholder="Ex: 15.5"
                         />
                     </div>
                     <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">Ton Poids (kg) <span className="text-zinc-400 font-normal lowercase">(optionnel)</span></label>
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            Ta VO2max (ml/kg/min)
+                            <Tooltip text={hints.vo2max} />
+                        </label>
                         <input
                             type="number"
-                            value={weight}
-                            onChange={handleWeightChange}
+                            step="0.1"
+                            value={vo2max}
+                            onChange={(e) => handleVo2maxChange(e.target.value)}
                             className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 75"
+                            placeholder="Ex: 50.2"
                         />
                     </div>
                 </div>

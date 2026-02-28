@@ -4,16 +4,20 @@ import { Heart, Activity } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 import ShareResults from "@/components/tools/ShareResults";
 import { Info } from 'lucide-react';
+import Tooltip from "@/components/Tooltip";
 
-export default function CalculatorHeartRate() {
-    const [fcMax, setFcMax] = useState('');
-    const [fcRest, setFcRest] = useState('');
-    const [zones, setZones] = useState(null);
+export default function CalculatorHeartRate({ hints = {} }) {
+    const [age, setAge] = useState('');
+    const [restHR, setRestHR] = useState('');
+    const [results, setResults] = useState(null);
+    const [fcMax, setFcMax] = useState(''); // Keep fcMax for now as it's used in calculateZones
+    const [fcRest, setFcRest] = useState(''); // Keep fcRest for now as it's used in calculateZones
+    const [zones, setZones] = useState(null); // Keep zones for now as it's used in rendering
 
     const calculateZones = (e) => {
         e.preventDefault();
-        const max = parseFloat(fcMax);
-        const rest = parseFloat(fcRest);
+        const max = parseFloat(fcMax); // This will need to be updated if fcMax state is removed
+        const rest = parseFloat(fcRest); // This will need to be updated if fcRest state is removed
 
         if (max > 0 && rest >= 0 && max > rest) {
             // Karvonen Formula: Target = ((Max - Rest) * intensity) + Rest
@@ -46,27 +50,35 @@ export default function CalculatorHeartRate() {
                 </p>
 
                 <form onSubmit={calculateZones} className="space-y-4 mb-6">
-                    <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">FC Max</label>
-                        <input
-                            type="number"
-                            value={fcMax}
-                            onChange={(e) => setFcMax(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 195"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-1">FC Repos</label>
-                        <input
-                            type="number"
-                            value={fcRest}
-                            onChange={(e) => setFcRest(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                            placeholder="Ex: 55"
-                            required
-                        />
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                Ton Âge
+                                <Tooltip text={hints.age} />
+                            </label>
+                            <input
+                                type="number"
+                                value={age}
+                                onChange={(e) => setAge(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 25"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                                FC Repos (bpm)
+                                <Tooltip text={hints.repos || hints.rest_hr} />
+                            </label>
+                            <input
+                                type="number"
+                                value={restHR}
+                                onChange={(e) => setRestHR(e.target.value)}
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                placeholder="Ex: 60"
+                                required
+                            />
+                        </div>
                     </div>
                     <button type="submit" className="w-full bg-black text-white font-black py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
                         Calculer
