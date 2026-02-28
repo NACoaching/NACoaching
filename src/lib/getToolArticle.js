@@ -15,7 +15,7 @@ export async function getToolArticle(slug) {
 
     const { data, error } = await supabase
         .from('articles')
-        .select('title, excerpt, content, image, related_title, related_subtitle, related_articles, affiliate_link, affiliate_text, affiliate_image, affiliate_title, tool_hints')
+        .select('*')
         .eq('cta', slug)
         .order('id', { ascending: true });
 
