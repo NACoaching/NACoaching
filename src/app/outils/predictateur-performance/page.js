@@ -14,6 +14,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Prédicteur de Performance'} | NA Coaching`,
         description: article.intro || "Prédisez vos temps sur 5km, 10km, Semi-Marathon et Marathon à partir d'un chrono de référence. Utilisez la formule de Riegel pour vos objectifs.",
+        alternates: { canonical: '/outils/predictateur-performance' },
     };
 }
 

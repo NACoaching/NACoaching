@@ -14,6 +14,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title} | NA Coaching`,
         description: article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
+        alternates: { canonical: '/outils/rpe-1rm' },
     };
 }
 

@@ -14,6 +14,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Calculateur ACWR'} | NA Coaching`,
         description: article.intro || 'Surveillez votre charge d\'entraînement pour prévenir les blessures.',
+        alternates: { canonical: '/outils/acwr' },
     }
 }
 

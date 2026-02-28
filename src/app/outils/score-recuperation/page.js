@@ -14,6 +14,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Score de Récupération'} | NA Coaching`,
         description: article.intro || 'Évaluez votre état de forme quotidien pour adapter votre entraînement.',
+        alternates: { canonical: '/outils/score-recuperation' },
     }
 }
 

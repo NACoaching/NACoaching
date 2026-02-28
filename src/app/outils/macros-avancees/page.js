@@ -14,6 +14,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Macros Avancées'} | NA Coaching`,
         description: article.intro || 'Calculez précisément vos besoins en protéines, lipides et glucides.',
+        alternates: { canonical: '/outils/macros-avancees' },
     }
 }
 

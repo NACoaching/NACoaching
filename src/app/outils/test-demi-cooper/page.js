@@ -14,6 +14,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title} | NA Coaching`,
         description: article.intro || "Évaluez votre VMA et votre VO2max avec le test du demi-cooper (6 minutes). Obtenez vos allures d'entraînement personnalisées pour le running.",
+        alternates: { canonical: '/outils/test-demi-cooper' },
     };
 }
 
