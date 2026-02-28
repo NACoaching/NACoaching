@@ -171,39 +171,44 @@ export default async function HomePage() {
           </AnimWrapper>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {articles && articles.map((article, index) => (
-              <AnimWrapper key={article.id} delay={index * 0.1}>
-                <Link href={`/blog/${article.slug || article.id}`} className="group block h-full">
-                  <div className="bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 h-full flex flex-col hover:-translate-y-2 border border-zinc-100/50">
-                    <div className="relative h-64 overflow-hidden w-full m-2 rounded-t-[1.75rem] rounded-b-xl">
-                      <Image
-                        src={article.image || "/api/placeholder/400/320"}
-                        alt={article.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-white/90 backdrop-blur-sm text-zinc-900 text-xs font-bold px-4 py-1.5 rounded-full tracking-wide shadow-sm">
-                          {article.category}
-                        </span>
+            {articles && articles.map((article, index) => {
+              const isTool = article.category === 'Outils';
+              const href = isTool && article.cta ? article.cta : `/blog/${article.slug || article.id}`;
+
+              return (
+                <AnimWrapper key={article.id} delay={index * 0.1}>
+                  <Link href={href} className="group block h-full">
+                    <div className="bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 h-full flex flex-col hover:-translate-y-2 border border-zinc-100/50">
+                      <div className="relative h-64 overflow-hidden w-full m-2 rounded-t-[1.75rem] rounded-b-xl">
+                        <Image
+                          src={article.image || "/api/placeholder/400/320"}
+                          alt={article.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-white/90 backdrop-blur-sm text-zinc-900 text-xs font-bold px-4 py-1.5 rounded-full tracking-wide shadow-sm">
+                            {article.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="px-8 pt-6 pb-8 flex flex-col flex-grow">
+                        <h3 className="text-2xl font-bold mb-3 leading-tight text-zinc-900 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
+                          {article.title}
+                        </h3>
+                        <p className="text-zinc-500 text-base mb-6 line-clamp-3 flex-grow leading-relaxed">
+                          {article.excerpt}
+                        </p>
+                        <div className="flex items-center text-[#FF6B00] text-sm font-semibold mt-auto">
+                          Lire l'article <ArrowRight size={16} className="ml-2 group-hover:translate-x-2 transition-transform" />
+                        </div>
                       </div>
                     </div>
-                    <div className="px-8 pt-6 pb-8 flex flex-col flex-grow">
-                      <h3 className="text-2xl font-bold mb-3 leading-tight text-zinc-900 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
-                        {article.title}
-                      </h3>
-                      <p className="text-zinc-500 text-base mb-6 line-clamp-3 flex-grow leading-relaxed">
-                        {article.excerpt}
-                      </p>
-                      <div className="flex items-center text-[#FF6B00] text-sm font-semibold mt-auto">
-                        Lire l'article <ArrowRight size={16} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </AnimWrapper>
-            ))}
+                  </Link>
+                </AnimWrapper>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -224,10 +229,10 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: siteContent.find(c => c.key === 'home_tool_1_title')?.value || "Calculateur 1RM", desc: siteContent.find(c => c.key === 'home_tool_1_desc')?.value || "Estime ta force max théorique selon la méthode Brzycki ou Epley.", icon: "💪", href: "/outils" },
-              { title: siteContent.find(c => c.key === 'home_tool_2_title')?.value || "Besoins Caloriques", desc: siteContent.find(c => c.key === 'home_tool_2_desc')?.value || "Défini ton métabolisme de base et tes dépenses journalières.", icon: "🔥", href: "/outils" },
-              { title: siteContent.find(c => c.key === 'home_tool_3_title')?.value || "VMA & VO2max", desc: siteContent.find(c => c.key === 'home_tool_3_desc')?.value || "Évalue tes capacités aérobies pour mieux cibler tes efforts.", icon: "🏃‍♂️", href: "/outils" },
-              { title: siteContent.find(c => c.key === 'home_tool_4_title')?.value || "Zones Cardiaques", desc: siteContent.find(c => c.key === 'home_tool_4_desc')?.value || "Cible tes 5 zones d'entraînement via la méthode Karvonen.", icon: "🫀", href: "/outils" }
+              { title: siteContent.find(c => c.key === 'home_tool_1_title')?.value || "Calculateur 1RM", desc: siteContent.find(c => c.key === 'home_tool_1_desc')?.value || "Estime ta force max théorique selon la méthode Brzycki ou Epley.", icon: "💪", href: "/outils/calculateur-1rm" },
+              { title: siteContent.find(c => c.key === 'home_tool_2_title')?.value || "Besoins Caloriques", desc: siteContent.find(c => c.key === 'home_tool_2_desc')?.value || "Défini ton métabolisme de base et tes dépenses journalières.", icon: "🔥", href: "/outils/besoins-caloriques" },
+              { title: siteContent.find(c => c.key === 'home_tool_3_title')?.value || "VMA & VO2max", desc: siteContent.find(c => c.key === 'home_tool_3_desc')?.value || "Évalue tes capacités aérobies pour mieux cibler tes efforts.", icon: "🏃‍♂️", href: "/outils/vma-vo2" },
+              { title: siteContent.find(c => c.key === 'home_tool_4_title')?.value || "Zones Cardiaques", desc: siteContent.find(c => c.key === 'home_tool_4_desc')?.value || "Cible tes 5 zones d'entraînement via la méthode Karvonen.", icon: "🫀", href: "/outils/frequence-cardiaque" }
             ].map((tool, i) => (
               <AnimWrapper key={i} delay={i * 0.1}>
                 <Link href={tool.href} className="block group h-full">

@@ -117,35 +117,40 @@ export default async function LaboCategoryPage({ params }) {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                            {articlesList.map((article, index) => (
-                                <AnimWrapper key={article.id} delay={index * 0.1}>
-                                    <Link href={`/blog/${article.slug || article.id}`} className="group cursor-pointer flex flex-col h-full">
-                                        <div className="aspect-[4/3] bg-zinc-200 mb-6 overflow-hidden relative rounded-lg">
-                                            {article.image ? (
-                                                <Image
-                                                    src={article.image}
-                                                    alt={article.title}
-                                                    fill
-                                                    className="object-cover group-hover:scale-105 transition duration-500"
-                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center bg-zinc-100">
-                                                    <span className="text-zinc-400 font-bold uppercase text-sm">NA Coaching</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex flex-col flex-grow">
-                                            <span className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{article.category}</span>
-                                            <h2 className="text-xl font-black uppercase leading-tight mb-3 text-black group-hover:text-[#FF6B00] transition">{article.title}</h2>
-                                            <p className="text-zinc-500 text-sm line-clamp-3 flex-grow">{article.excerpt}</p>
-                                            <div className="mt-4 text-xs font-black uppercase text-zinc-400 group-hover:text-[#FF6B00] transition">
-                                                Lire l'article →
+                            {articlesList.map((article, index) => {
+                                const isTool = article.category === 'Outils';
+                                const href = isTool && article.cta ? article.cta : `/blog/${article.slug || article.id}`;
+
+                                return (
+                                    <AnimWrapper key={article.id} delay={index * 0.1}>
+                                        <Link href={href} className="group cursor-pointer flex flex-col h-full">
+                                            <div className="aspect-[4/3] bg-zinc-200 mb-6 overflow-hidden relative rounded-lg">
+                                                {article.image ? (
+                                                    <Image
+                                                        src={article.image}
+                                                        alt={article.title}
+                                                        fill
+                                                        className="object-cover group-hover:scale-105 transition duration-500"
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center bg-zinc-100">
+                                                        <span className="text-zinc-400 font-bold uppercase text-sm">NA Coaching</span>
+                                                    </div>
+                                                )}
                                             </div>
-                                        </div>
-                                    </Link>
-                                </AnimWrapper>
-                            ))}
+                                            <div className="flex flex-col flex-grow">
+                                                <span className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{article.category}</span>
+                                                <h2 className="text-xl font-black uppercase leading-tight mb-3 text-black group-hover:text-[#FF6B00] transition">{article.title}</h2>
+                                                <p className="text-zinc-500 text-sm line-clamp-3 flex-grow">{article.excerpt}</p>
+                                                <div className="mt-4 text-xs font-black uppercase text-zinc-400 group-hover:text-[#FF6B00] transition">
+                                                    Lire l'article →
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </AnimWrapper>
+                                );
+                            })}
                         </div>
                     )}
 

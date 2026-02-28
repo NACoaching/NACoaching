@@ -113,6 +113,11 @@ export default async function ArticlePage({ params }) {
         redirect(`/blog/${article.slug}`);
     }
 
+    // Redirect tools to their interactive page if a CTA exists
+    if (article.category === 'Outils' && article.cta) {
+        redirect(article.cta);
+    }
+
     const currentUrl = `https://na-coaching.com/blog/${article.slug || article.id}`;
 
     const jsonLd = {
