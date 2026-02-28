@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumb from '@/components/Breadcrumb';
+import { autoLinkContent } from '@/lib/contentProcessor';
 
 import { redirect } from 'next/navigation';
 
@@ -171,6 +172,13 @@ export default async function ArticlePage({ params }) {
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
+                                    a: ({ node, ...props }) => {
+                                        const isInternal = props.href?.startsWith('/') || props.href?.includes('na-coaching.com');
+                                        if (isInternal) {
+                                            return <Link href={props.href} className="text-[#FF6B00] font-bold hover:underline" {...props} />;
+                                        }
+                                        return <a target="_blank" rel="noopener noreferrer" className="text-[#FF6B00] font-bold hover:underline" {...props} />;
+                                    },
                                     img: ({ node, ...props }) => (
                                         <figure className="my-8">
                                             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
@@ -197,7 +205,7 @@ export default async function ArticlePage({ params }) {
                                     strong: ({ node, ...props }) => <strong className="font-black text-black" {...props} />,
                                 }}
                             >
-                                {article.content}
+                                {autoLinkContent(article.content)}
                             </ReactMarkdown>
                         </div>
 

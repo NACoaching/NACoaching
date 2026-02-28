@@ -1,6 +1,7 @@
-"use client";
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { autoLinkContent } from '@/lib/contentProcessor';
 
 /**
  * Renders tool article content using ReactMarkdown (supports both Markdown and HTML).
@@ -9,12 +10,21 @@ import remarkGfm from 'remark-gfm';
 export default function ToolArticleContent({ content }) {
     if (!content) return null;
 
+    const processedContent = autoLinkContent(content);
+
     return (
         <article className="prose prose-zinc max-w-none text-zinc-900">
             <div className="text-zinc-800 leading-loose">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
+                        a: ({ node, ...props }) => {
+                            const isInternal = props.href?.startsWith('/') || props.href?.includes('na-coaching.com');
+                            if (isInternal) {
+                                return <Link href={props.href} className="text-[#FF6B00] font-bold hover:underline" {...props} />;
+                            }
+                            return <a target="_blank" rel="noopener noreferrer" className="text-[#FF6B00] font-bold hover:underline" {...props} />;
+                        },
                         h1: ({ node, ...props }) => <h1 className="text-3xl font-black uppercase mt-12 mb-6 text-[#FF6B00] border-l-8 border-[#FF6B00] pl-6 italic" {...props} />,
                         h2: ({ node, ...props }) => <h2 className="text-2xl font-black uppercase mt-12 mb-6 text-black border-b-2 border-zinc-100 pb-2" {...props} />,
                         h3: ({ node, ...props }) => <h3 className="text-xl font-black uppercase mt-8 mb-4 text-zinc-500 tracking-wider" {...props} />,
@@ -25,7 +35,7 @@ export default function ToolArticleContent({ content }) {
                         p: ({ node, ...props }) => <p className="mb-4" {...props} />,
                     }}
                 >
-                    {content}
+                    {processedContent}
                 </ReactMarkdown>
             </div>
         </article>
