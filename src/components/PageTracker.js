@@ -15,7 +15,8 @@ export default function PageTracker() {
             const isBot =
                 typeof window !== 'undefined' &&
                 (window.navigator.webdriver ||
-                    /bot|crawler|spider|googlebot|bingbot|yandexbot|duckduckbot|slurp|baiduspider|playwright/i.test(window.navigator.userAgent));
+                    /bot|crawler|spider|googlebot|bingbot|yandexbot|duckduckbot|slurp|baiduspider|playwright|headless/i.test(window.navigator.userAgent) ||
+                    (window.navigator.userAgent.includes('Chrome/') && parseInt(window.navigator.userAgent.match(/Chrome\/(\d+)/)?.[1] || 0) > 140));
 
             if (isBot) return;
 
