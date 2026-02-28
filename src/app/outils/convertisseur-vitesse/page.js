@@ -114,7 +114,7 @@ export default async function SpeedConverterPage() {
                     </div>
 
                     {/* SEO Content */}
-                    <ToolArticleContent content={article.content} />
+                    <ToolArticleContent content={article.content} glossary={article.auto_links} />
 
                     {/* AFFILIATE SECTION (RESTORED STYLE) */}
                     {article.affiliate_link && (

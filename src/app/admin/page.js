@@ -16,6 +16,8 @@ export default function AdminPage() {
     const [comments, setComments] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
+    const [autoLinks, setAutoLinks] = useState([]);
+    const [newAutoLink, setNewAutoLink] = useState({ keywords: '', url: '', is_active: true });
     const [rawPageViews, setRawPageViews] = useState([]);
     const [analyticsFilter, setAnalyticsFilter] = useState('all');
     const [customDate, setCustomDate] = useState('');
@@ -142,7 +144,8 @@ export default function AdminPage() {
             supabase.from('comments').select('*').order('created_at', { ascending: false }),
             supabase.from('subscribers').select('*').order('created_at', { ascending: false }),
             supabase.from('page_views').select('*'), // GetAll views to aggregate locally (simple for small scale)
-            supabase.from('reviews').select('*').order('created_at', { ascending: false })
+            supabase.from('reviews').select('*').order('created_at', { ascending: false }),
+            supabase.from('auto_links').select('*').order('created_at', { ascending: false })
         ]);
 
         if (articlesRes.data) setArticles(articlesRes.data);
@@ -189,6 +192,7 @@ export default function AdminPage() {
         if (subscribersRes.data) setSubscribers(subscribersRes.data);
         if (reviewsRes.data) setReviews(reviewsRes.data);
         if (analyticsRes.data) setRawPageViews(analyticsRes.data);
+        if (autoLinksRes && autoLinksRes.data) setAutoLinks(autoLinksRes.data);
         setLoading(false);
     };
 
@@ -220,6 +224,23 @@ export default function AdminPage() {
                 fetch('/api/revalidate', { method: 'POST', body: JSON.stringify({ path }) });
             });
         }
+    };
+
+    const saveAutoLink = async (e) => {
+        e.preventDefault();
+        const { error } = await supabase.from('auto_links').insert([newAutoLink]);
+        if (error) alert('Erreur : ' + error.message);
+        else {
+            setNewAutoLink({ keywords: '', url: '', is_active: true });
+            fetchData();
+        }
+    };
+
+    const deleteAutoLink = async (id) => {
+        if (!confirm('Supprimer ce lien ?')) return;
+        const { error } = await supabase.from('auto_links').delete().eq('id', id);
+        if (error) alert('Erreur : ' + error.message);
+        else fetchData();
     };
 
     // ... (rest of the code)
@@ -640,6 +661,12 @@ export default function AdminPage() {
                     >
                         <Activity size={20} /> Stats
                     </button>
+                    <button
+                        onClick={() => setActiveTab('links')}
+                        className={`flex items-center gap-2 px-6 py-3 rounded font-black uppercase tracking-widest transition ${activeTab === 'links' ? 'bg-[#FF6B00] text-black' : 'bg-white text-zinc-400'}`}
+                    >
+                        <Edit size={20} /> Liens Auto
+                    </button>
                 </div>
 
                 {activeTab === 'analytics' ? (
@@ -723,6 +750,74 @@ export default function AdminPage() {
                                             </div>
                                         );
                                     })}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ) : activeTab === 'links' ? (
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
+                        <h2 className="text-xl font-black mb-6 uppercase tracking-tight text-[#FF6B00]">Gestion des Liens Automatiques</h2>
+                        <p className="text-sm text-zinc-500 mb-8">
+                            Ajoute des mots-clés qui seront automatiquement transformés en liens sur tout le site (outils et blog).
+                            Sépare les synonymes par des virgules (ex: "VMA, VO2max").
+                        </p>
+
+                        <form onSubmit={saveAutoLink} className="bg-zinc-50 p-6 rounded border border-zinc-200 mb-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-xs font-black uppercase text-zinc-500 mb-2">Mots-clés (séparés par des virgules)</label>
+                                    <input
+                                        type="text"
+                                        placeholder="ex: VMA, VO2max, Vitesse Maximale"
+                                        required
+                                        value={newAutoLink.keywords}
+                                        onChange={(e) => setNewAutoLink({ ...newAutoLink, keywords: e.target.value })}
+                                        className="w-full p-3 border rounded text-sm focus:border-[#FF6B00] outline-none font-bold"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-black uppercase text-zinc-500 mb-2">URL de destination</label>
+                                    <input
+                                        type="text"
+                                        placeholder="ex: /outils/vma-vo2"
+                                        required
+                                        value={newAutoLink.url}
+                                        onChange={(e) => setNewAutoLink({ ...newAutoLink, url: e.target.value })}
+                                        className="w-full p-3 border rounded text-sm focus:border-[#FF6B00] outline-none font-bold"
+                                    />
+                                </div>
+                            </div>
+                            <div className="mt-4 flex justify-end">
+                                <button type="submit" className="bg-[#FF6B00] text-black px-8 py-3 rounded font-black uppercase tracking-widest text-sm hover:scale-105 transition-all">
+                                    Ajouter le Lien Auto
+                                </button>
+                            </div>
+                        </form>
+
+                        <div className="space-y-4">
+                            <h3 className="text-sm font-black uppercase text-zinc-400 mb-4">Liens Actifs ({autoLinks.length})</h3>
+                            {autoLinks.length === 0 ? (
+                                <p className="text-zinc-500 italic">Aucun lien automatique pour le moment.</p>
+                            ) : (
+                                <div className="grid grid-cols-1 gap-4">
+                                    {autoLinks.map((link) => (
+                                        <div key={link.id} className="flex justify-between items-center bg-white p-4 rounded border border-zinc-100 shadow-sm hover:border-[#FF6B00] transition-colors">
+                                            <div>
+                                                <div className="flex gap-2 mb-1">
+                                                    {link.keywords.split(',').map(kw => (
+                                                        <span key={kw} className="bg-[#FF6B00]/10 text-[#FF6B00] text-[10px] px-2 py-0.5 rounded font-black uppercase">{kw.trim()}</span>
+                                                    ))}
+                                                </div>
+                                                <div className="text-xs font-bold text-zinc-400">{link.url}</div>
+                                            </div>
+                                            <button
+                                                onClick={() => deleteAutoLink(link.id)}
+                                                className="text-red-500 p-2 hover:bg-red-50 rounded transition-colors"
+                                            >
+                                                <Trash2 size={18} />
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
                             )}
                         </div>

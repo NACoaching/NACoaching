@@ -24,6 +24,9 @@ export async function getToolArticle(slug) {
         ? (data.find(a => a.content && a.content.trim().length > 0) || data[0])
         : null;
 
+    // Récupérer les auto-links dynamiques
+    const autoLinks = await getAutoLinks();
+
     return {
         title: article?.title || '',
         intro: article?.excerpt || '',
@@ -35,7 +38,8 @@ export async function getToolArticle(slug) {
         affiliate_link: article?.affiliate_link || '',
         affiliate_text: article?.affiliate_text || '',
         affiliate_image: article?.affiliate_image || '',
-        affiliate_title: article?.affiliate_title || ''
+        affiliate_title: article?.affiliate_title || '',
+        auto_links: autoLinks
     };
 }
 
@@ -65,6 +69,24 @@ export async function getToolRelatedArticles(article) {
         .eq('is_published', true)
         .neq('category', 'Outils')
         .limit(3);
+
+    return data || [];
+}
+
+/**
+ * Fetches the active auto-links from the 'auto_links' table.
+ * @returns {Array} autoLinks
+ */
+export async function getAutoLinks() {
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+
+    const { data } = await supabase
+        .from('auto_links')
+        .select('keywords, url')
+        .eq('is_active', true);
 
     return data || [];
 }

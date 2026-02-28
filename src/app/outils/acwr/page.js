@@ -58,7 +58,7 @@ export default async function ACWRPage() {
                         <ACWRCalculator />
                     </div>
 
-                    <ToolArticleContent content={article.content} />
+                    <ToolArticleContent content={article.content} glossary={article.auto_links} />
 
                     {/* AFFILIATE SECTION (RESTORED STYLE) */}
                     {article.affiliate_link && (

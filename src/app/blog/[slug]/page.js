@@ -57,12 +57,14 @@ export default async function ArticlePage({ params }) {
         query = query.eq('slug', slug);
     }
 
-    const [articleRes, contentRes] = await Promise.all([
+    const [articleRes, contentRes, autoLinksRes] = await Promise.all([
         query.single(),
-        supabase.from('site_content').select('*')
+        supabase.from('site_content').select('*'),
+        supabase.from('auto_links').select('*').eq('is_active', true)
     ]);
 
     const article = articleRes.data;
+    const autoLinks = autoLinksRes.data || [];
     const siteContent = contentRes.data || [];
 
     // Fetch related articles
@@ -205,7 +207,7 @@ export default async function ArticlePage({ params }) {
                                     strong: ({ node, ...props }) => <strong className="font-black text-black" {...props} />,
                                 }}
                             >
-                                {autoLinkContent(article.content)}
+                                {autoLinkContent(article.content, autoLinks)}
                             </ReactMarkdown>
                         </div>
 

@@ -4,6 +4,7 @@ import AffiliateCard from "@/components/AffiliateCard";
 import RPEConverter from '@/components/tools/RPEConverter';
 import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
+import ToolArticleContent from '@/components/ToolArticleContent';
 import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
@@ -52,7 +53,7 @@ export default async function RPEPage() {
                                 {article.intro}
                             </p>
                             <div className="h-px bg-zinc-200 mb-8" />
-                            <div className="text-zinc-600 leading-relaxed space-y-4" dangerouslySetInnerHTML={{ __html: article.content }} />
+                            <ToolArticleContent content={article.content} glossary={article.auto_links} />
                         </div>
                     </div>
                 </div>
