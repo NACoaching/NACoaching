@@ -11,6 +11,14 @@ export default function PageTracker() {
             // Don't track admin pages
             if (pathname.startsWith('/admin')) return;
 
+            // Don't track automated browsers (like Playwright, bots, etc.)
+            const isBot =
+                typeof window !== 'undefined' &&
+                (window.navigator.webdriver ||
+                    /bot|crawler|spider|googlebot|bingbot|yandexbot|duckduckbot|slurp|baiduspider|playwright/i.test(window.navigator.userAgent));
+
+            if (isBot) return;
+
             // Don't track views from authenticated users (admin)
             const { data: { session } } = await supabase.auth.getSession();
             if (session) return;
