@@ -3,11 +3,11 @@ import { ShoppingBag, ChevronRight, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {
-    title: 'La Boutique - NA Coaching',
-    description: 'Programmes de coaching et ebooks basés sur la science.',
+    title: 'Boutique — Programmes Musculation & Ebooks Sport',
+    description: 'Programmes d\'entraînement et ebooks basés sur la science pour la musculation, le running et la préparation physique. Par un coach expert EOPS.',
     openGraph: {
-        title: 'La Boutique - NA Coaching',
-        description: 'Programmes de coaching et ebooks basés sur la physiologie et la biomécanique.',
+        title: 'Boutique — Programmes Musculation & Ebooks Sport',
+        description: 'Programmes de coaching et ebooks sport basés sur la physiologie et la biomécanique.',
         url: 'https://na-coaching.com/boutique',
         type: 'website',
     },

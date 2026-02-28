@@ -29,10 +29,10 @@ export async function generateMetadata() {
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: content.site_title || "NA COACHING",
-      template: `%s | ${content.site_title || "NA COACHING"}`
+      default: "Coach Sportif Expert EOPS — Musculation, Running & Réathlétisation | NA Coaching",
+      template: `%s | ${content.site_title || "NA Coaching"}`
     },
-    description: content.site_description || "Coaching sportif et réathlétisation par un expert Master EOPS",
+    description: content.site_description || "Coach sportif certifié Master EOPS. Outils gratuits, programmes et articles scientifiques pour la musculation, le running et la réathlétisation.",
     openGraph: {
       title: content.site_title || "NA COACHING",
       description: content.site_description || "Coaching sportif et réathlétisation par un expert Master EOPS",

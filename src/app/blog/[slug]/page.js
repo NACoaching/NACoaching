@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumb from '@/components/Breadcrumb';
+import AuthorBio from '@/components/AuthorBio';
 import { autoLinkContent } from '@/lib/contentProcessor';
 
 import { redirect } from 'next/navigation';
@@ -120,6 +121,10 @@ export default async function ArticlePage({ params }) {
 
     const currentUrl = `https://na-coaching.com/blog/${article.slug || article.id}`;
 
+    const coachName = getContent('coach_name') || 'Nolwen Albanesi';
+    const coachImage = getContent('coach_image') || '/logo.png';
+    const coachTagline = getContent('coach_tagline') || 'Coach Sportif · Master EOPS · Spécialiste Performance & Réathlétisation';
+
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -127,11 +132,22 @@ export default async function ArticlePage({ params }) {
         image: article.image ? [article.image] : [],
         datePublished: article.created_at,
         dateModified: article.created_at,
-        author: [{
+        author: {
             '@type': 'Person',
+            name: coachName,
+            url: 'https://na-coaching.com/coach',
+            jobTitle: 'Coach Sportif - Master EOPS',
+            sameAs: ['https://na-coaching.com/coach']
+        },
+        publisher: {
+            '@type': 'Organization',
             name: 'NA Coaching',
-            url: 'https://na-coaching.com'
-        }]
+            url: 'https://na-coaching.com',
+            logo: {
+                '@type': 'ImageObject',
+                url: 'https://na-coaching.com/logo.png'
+            }
+        }
     };
 
     return (
@@ -217,6 +233,8 @@ export default async function ArticlePage({ params }) {
                         </div>
 
                         <ShareButtons url={currentUrl} title={article.title} />
+
+                        <AuthorBio name={coachName} tagline={coachTagline} imageUrl={coachImage} />
                     </div>
 
                     {/* AFFILIATE BANNER (HORIZONTAL) */}

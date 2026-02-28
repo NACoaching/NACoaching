@@ -2,11 +2,11 @@ import { supabase } from '@/lib/supabaseClient';
 import LaboView from '@/components/LaboView';
 
 export const metadata = {
-    title: 'Le Labo - NA Coaching',
-    description: 'Articles scientifiques sur la performance et la réathlétisation.',
+    title: 'Le Labo — Articles Musculation, Running & Performance Sportive',
+    description: 'Découvrez nos articles scientifiques sur la musculation, le running, la nutrition sportive et la réathlétisation. Conseils d\'expert Master EOPS.',
     openGraph: {
-        title: 'Le Labo - NA Coaching',
-        description: 'Découvrez mes articles scientifiques sur la performance, la physiologie et la réathlétisation.',
+        title: 'Le Labo — Articles Musculation, Running & Performance Sportive',
+        description: 'Articles scientifiques sur la performance, la physiologie et la réathlétisation par un coach expert EOPS.',
         url: 'https://na-coaching.com/labo',
         type: 'website',
     },
