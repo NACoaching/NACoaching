@@ -32,6 +32,14 @@ export default function NotFound() {
                     >
                         <ArrowLeft size={18} /> Voir le Labo
                     </Link>
+                    <div className="grid grid-cols-2 gap-3 mt-2">
+                        <Link href="/outils" className="bg-zinc-50 border border-zinc-200 text-zinc-700 py-3 rounded font-bold uppercase text-xs tracking-widest hover:border-[#FF6B00] hover:text-[#FF6B00] transition text-center">
+                            Outils gratuits
+                        </Link>
+                        <Link href="/boutique" className="bg-zinc-50 border border-zinc-200 text-zinc-700 py-3 rounded font-bold uppercase text-xs tracking-widest hover:border-[#FF6B00] hover:text-[#FF6B00] transition text-center">
+                            Boutique
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,13 @@
 import { supabase } from '@/lib/supabaseClient';
 import AnimWrapper from "@/components/AnimWrapper";
 
+export const metadata = {
+    title: 'Mentions Légales',
+    description: 'Mentions légales du site NA Coaching : éditeur, hébergeur, propriété intellectuelle et conditions d\'utilisation.',
+    alternates: { canonical: '/mentions-legales' },
+    robots: { index: false, follow: true },
+};
+
 export const revalidate = 0;
 
 export default async function MentionsLegales() {

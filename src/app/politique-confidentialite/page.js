@@ -1,6 +1,13 @@
 import { supabase } from '@/lib/supabaseClient';
 import AnimWrapper from "@/components/AnimWrapper";
 
+export const metadata = {
+    title: 'Politique de Confidentialité',
+    description: 'Politique de confidentialité de NA Coaching : collecte de données, cookies, droits RGPD et protection de la vie privée.',
+    alternates: { canonical: '/politique-confidentialite' },
+    robots: { index: false, follow: true },
+};
+
 export const revalidate = 0;
 
 export default async function PolitiqueConfidentialite() {
