@@ -9,7 +9,8 @@ export default function SpeedConverter({ hints = {} }) {
     const [ms, setMs] = useState('');
     const [minkm, setMinkm] = useState('');
 
-    const handleSpeedChange = (val) => {
+    const handleKmhChange = (e) => {
+        const val = e.target.value;
         setKmh(val);
         if (val && !isNaN(val)) {
             const k = parseFloat(val);
@@ -107,15 +108,21 @@ export default function SpeedConverter({ hints = {} }) {
                         <div className="flex gap-1">
                             <input
                                 type="number"
-                                value={minkm.split(':')[0] || ''} // Assuming minkm is "min:sec"
-                                onChange={(e) => handleMinkmChange(`${e.target.value}:${minkm.split(':')[1] || '00'}`)}
+                                value={minkm.split(':')[0] || ''}
+                                onChange={(e) => {
+                                    const s = minkm.split(':')[1] || '00';
+                                    handleMinkmChange({ target: { value: `${e.target.value}:${s}` } });
+                                }}
                                 className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
                                 placeholder="Min"
                             />
                             <input
                                 type="number"
-                                value={minkm.split(':')[1] || ''} // Assuming minkm is "min:sec"
-                                onChange={(e) => handleMinkmChange(`${minkm.split(':')[0] || '0'}:${e.target.value}`)}
+                                value={minkm.split(':')[1] || ''}
+                                onChange={(e) => {
+                                    const m = minkm.split(':')[0] || '0';
+                                    handleMinkmChange({ target: { value: `${m}:${e.target.value}` } });
+                                }}
                                 className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
                                 placeholder="Sec"
                             />

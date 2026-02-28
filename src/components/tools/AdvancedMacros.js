@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { Pizza, ChevronRight, Apple, Info, InfoIcon } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 
-export default function AdvancedMacros() { hints = {} } {
+export default function AdvancedMacros({ hints = {} }) {
     const [weight, setWeight] = useState('');
+    const [bodyFat, setBodyFat] = useState('');
+    const [goal, setGoal] = useState('maintenance');
     const [calories, setCalories] = useState('');
     const [proteinRatio, setProteinRatio] = useState(2.0);
     const [fatRatio, setFatRatio] = useState(0.8);

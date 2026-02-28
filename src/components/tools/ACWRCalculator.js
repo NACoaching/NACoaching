@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Activity, Thermometer, AlertTriangle, CheckCircle2, Info } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 
-export default function ACWRCalculator() { hints = {} } {
+export default function ACWRCalculator({ hints = {} }) {
     const [acute, setAcute] = useState('');
     const [chronic, setChronic] = useState('');
     const [result, setResult] = useState(null);

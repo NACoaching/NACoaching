@@ -9,18 +9,16 @@ import Tooltip from "@/components/Tooltip";
 export default function CalculatorHeartRate({ hints = {} }) {
     const [age, setAge] = useState('');
     const [restHR, setRestHR] = useState('');
-    const [results, setResults] = useState(null);
-    const [fcMax, setFcMax] = useState(''); // Keep fcMax for now as it's used in calculateZones
-    const [fcRest, setFcRest] = useState(''); // Keep fcRest for now as it's used in calculateZones
-    const [zones, setZones] = useState(null); // Keep zones for now as it's used in rendering
+    const [zones, setZones] = useState(null);
 
     const calculateZones = (e) => {
         e.preventDefault();
-        const max = parseFloat(fcMax); // This will need to be updated if fcMax state is removed
-        const rest = parseFloat(fcRest); // This will need to be updated if fcRest state is removed
+        const a = parseFloat(age);
+        const rest = parseFloat(restHR);
 
-        if (max > 0 && rest >= 0 && max > rest) {
-            // Karvonen Formula: Target = ((Max - Rest) * intensity) + Rest
+        if (a > 0 && rest >= 0) {
+            // formula: 220 - age
+            const max = 220 - a;
             const reserve = max - rest;
 
             const calculateZone = (percentage) => Math.round((reserve * percentage) + rest);

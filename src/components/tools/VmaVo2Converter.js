@@ -7,6 +7,7 @@ import Tooltip from "@/components/Tooltip";
 
 export default function VmaVo2Converter({ hints = {} }) {
     const [vma, setVma] = useState('');
+    const [vo2max, setVo2max] = useState('');
     const [weight, setWeight] = useState('');
     const [vo2Rel, setVo2Rel] = useState(null);
     const [vo2Abs, setVo2Abs] = useState(null);
@@ -36,7 +37,21 @@ export default function VmaVo2Converter({ hints = {} }) {
     const handleVmaChange = (e) => {
         const val = e.target.value;
         setVma(val);
+        // Sync vo2max
+        if (val && !isNaN(val)) {
+            setVo2max((parseFloat(val) * 3.5).toFixed(1));
+        }
         calculate(val, weight);
+    };
+
+    const handleVo2maxChange = (e) => {
+        const val = e.target.value;
+        setVo2max(val);
+        // Sync VMA
+        if (val && !isNaN(val)) {
+            setVma((parseFloat(val) / 3.5).toFixed(1));
+        }
+        calculate(parseFloat(val) / 3.5, weight);
     };
 
     const handleWeightChange = (e) => {
@@ -69,7 +84,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                             type="number"
                             step="0.1"
                             value={vma}
-                            onChange={(e) => handleVmaChange(e.target.value)}
+                            onChange={handleVmaChange}
                             className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 15.5"
                         />
@@ -83,7 +98,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                             type="number"
                             step="0.1"
                             value={vo2max}
-                            onChange={(e) => handleVo2maxChange(e.target.value)}
+                            onChange={handleVo2maxChange}
                             className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 50.2"
                         />

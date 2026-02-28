@@ -3,7 +3,7 @@ import Tooltip from "@/components/Tooltip";
 import React, { useState, useMemo } from 'react';
 import { Timer, ChevronRight, Info, Zap } from 'lucide-react';
 
-export default function HalfCooperTest() { hints = {} } {
+export default function HalfCooperTest({ hints = {} }) {
     const [distance, setDistance] = useState('');
 
     const results = useMemo(() => {

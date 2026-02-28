@@ -12,7 +12,7 @@ const muscles = [
     { id: 'bras', name: 'Bras (Biceps/Triceps)' }
 ];
 
-export default function EffectiveVolume() { hints = {} } {
+export default function EffectiveVolume({ hints = {} }) {
     const [volumes, setVolumes] = useState({
         pecs: 0, dos: 0, quads: 0, ischios: 0, épaules: 0, bras: 0
     });

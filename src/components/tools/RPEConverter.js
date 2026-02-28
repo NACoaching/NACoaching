@@ -13,10 +13,12 @@ const rpeChart = {
     7: [89, 86, 84, 82, 80, 78, 76, 74, 72, 70, 68, 66],
 };
 
-export default function RPEConverter() { hints = {} } {
+export default function RPEConverter({ hints = {} }) {
     const [reps, setReps] = useState(1);
     const [rpe, setRpe] = useState(10);
     const [weight, setWeight] = useState('');
+    const [max, setMax] = useState('');
+    const [targetRpe, setTargetRpe] = useState('');
 
     const percentage = useMemo(() => {
         const row = rpeChart[rpe];
@@ -109,8 +111,8 @@ export default function RPEConverter() { hints = {} } {
                         <input
                             type="number"
                             step="0.5"
-                            value={rpe}
-                            onChange={(e) => setRpe(e.target.value)}
+                            value={targetRpe}
+                            onChange={(e) => setTargetRpe(e.target.value)}
                             className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 8"
                             required
@@ -123,6 +125,14 @@ export default function RPEConverter() { hints = {} } {
                         Répétitions visées
                         <Tooltip text={hints.reps || hints.repetitions} />
                     </label>
+                    <input
+                        type="number"
+                        value={reps}
+                        onChange={(e) => setReps(e.target.value)}
+                        className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                        placeholder="Ex: 5"
+                        required
+                    />
                     {/* Assuming an input or select would go here for "Répétitions visées" */}
                     {/* For now, leaving it as just the label as per the snippet */}
                 </div>

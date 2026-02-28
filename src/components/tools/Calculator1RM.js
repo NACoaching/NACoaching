@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import { Dumbbell } from 'lucide-react';
+import AnimWrapper from "@/components/AnimWrapper";
+import ShareResults from "@/components/tools/ShareResults";
 import Tooltip from "@/components/Tooltip";
 
 export default function Calculator1RM({ hints = {} }) {
