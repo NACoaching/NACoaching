@@ -4,6 +4,7 @@ import AffiliateCard from "@/components/AffiliateCard";
 import HalfCooperTest from '@/components/tools/HalfCooperTest';
 import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
+import RelatedTools from '@/components/RelatedTools';
 import ToolArticleContent from '@/components/ToolArticleContent';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -86,6 +87,8 @@ export default async function DemiCooperPage() {
                         </div>
                     </div>
                 )}
+
+                <RelatedTools currentTool="test-demi-cooper" />
 
                 {/* Related Articles */}
                 <RelatedArticles

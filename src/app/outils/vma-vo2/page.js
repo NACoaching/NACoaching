@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabaseClient';
 import ToolArticleContent from "@/components/ToolArticleContent";
 import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
+import RelatedTools from "@/components/RelatedTools";
 import HomeFAQ from "@/components/HomeFAQ";
 
 export const revalidate = 0;
@@ -138,6 +139,8 @@ export default async function VmaVo2ConverterPage() {
                             </div>
                         </div>
                     )}
+
+                    <RelatedTools currentTool="vma-vo2" />
 
                     {/* Related Articles */}
                     <RelatedArticles

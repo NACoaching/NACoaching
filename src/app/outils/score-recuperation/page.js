@@ -6,6 +6,7 @@ import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
+import RelatedTools from "@/components/RelatedTools";
 
 export const revalidate = 0;
 
@@ -88,6 +89,8 @@ export default async function RecoveryScorePage() {
                             </div>
                         </div>
                     )}
+
+                    <RelatedTools currentTool="score-recuperation" />
 
                     {/* Related Articles */}
                     <RelatedArticles

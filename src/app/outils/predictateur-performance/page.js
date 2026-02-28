@@ -4,6 +4,7 @@ import AffiliateCard from "@/components/AffiliateCard";
 import RacePredictor from '@/components/tools/RacePredictor';
 import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
+import RelatedTools from '@/components/RelatedTools';
 import ToolArticleContent from '@/components/ToolArticleContent';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -86,6 +87,8 @@ export default async function RacePredictorPage() {
                         </div>
                     </div>
                 )}
+
+                <RelatedTools currentTool="predictateur-performance" />
 
                 {/* Related Articles */}
                 <RelatedArticles

@@ -8,6 +8,7 @@ import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
+import RelatedTools from "@/components/RelatedTools";
 import HomeFAQ from "@/components/HomeFAQ";
 
 export const revalidate = 0;
@@ -136,6 +137,8 @@ export default async function Calculator1RMPage() {
                             </div>
                         </div>
                     )}
+
+                    <RelatedTools currentTool="calculateur-1rm" />
 
                     {/* Related Articles */}
                     <RelatedArticles

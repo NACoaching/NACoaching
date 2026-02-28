@@ -4,6 +4,7 @@ import AffiliateCard from "@/components/AffiliateCard";
 import EffectiveVolume from '@/components/tools/EffectiveVolume';
 import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
+import RelatedTools from '@/components/RelatedTools';
 import ToolArticleContent from '@/components/ToolArticleContent';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -86,6 +87,8 @@ export default async function VolumePage() {
                         </div>
                     </div>
                 )}
+
+                <RelatedTools currentTool="volume-effectif" />
 
                 {/* Related Articles */}
                 <RelatedArticles

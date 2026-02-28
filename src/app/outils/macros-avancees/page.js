@@ -6,6 +6,7 @@ import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
+import RelatedTools from "@/components/RelatedTools";
 
 export const revalidate = 0;
 
@@ -89,6 +90,8 @@ export default async function MacrosAvanceesPage() {
                             </div>
                         </div>
                     )}
+
+                    <RelatedTools currentTool="macros-avancees" />
 
                     {/* Related Articles */}
                     <RelatedArticles
