@@ -126,8 +126,8 @@ export default function RecoveryScore({ hints = {} }) {
                 {result !== null && (
                     <AnimWrapper delay={0.2}>
                         <div className={`mt-12 p-8 rounded-3xl border-4 ${getRecommendation(result).bg} ${getRecommendation(result).color.replace('text', 'border')} flex flex-col items-center text-center`}>
-                            <div className="text-6xl font-black italic mb-2 tracking-tighter">
-                                {result.toFixed(1)}<span className="text-2xl opacity-40">/10</span>
+                            <div className={`text-7xl font-black italic mb-2 tracking-tighter ${getRecommendation(result).color}`}>
+                                {result.toFixed(1)}<span className="text-2xl opacity-60">/10</span>
                             </div>
                             <h3 className={`text-2xl font-black uppercase mb-4 ${getRecommendation(result).color}`}>
                                 {getRecommendation(result).title}
