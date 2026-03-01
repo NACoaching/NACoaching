@@ -56,7 +56,8 @@ export async function generateMetadata() {
     },
     icons: {
       icon: [
-        { url: '/favicon.png', type: 'image/png' },
+        { url: '/favicon.ico', sizes: '32x32' },
+        { url: '/favicon.png', type: 'image/png', sizes: '500x500' },
       ],
       apple: '/favicon.png',
     },
