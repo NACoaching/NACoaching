@@ -4,6 +4,7 @@ import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, Info } from "lucide-react";
 import { getToolArticle, getToolRelatedArticles } from "@/lib/getToolArticle";
+import { supabase } from "@/lib/supabaseClient";
 import ToolArticleContent from "@/components/ToolArticleContent";
 import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
