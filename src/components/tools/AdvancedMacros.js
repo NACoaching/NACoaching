@@ -39,14 +39,14 @@ export default function AdvancedMacros({ hints = {} }) {
     return (
         <div className="max-w-xl mx-auto">
             <div className="bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-2xl">
-                <h2 className="text-3xl font-black uppercase mb-8 flex items-center gap-3 italic">
+                <h2 className="text-3xl font-black uppercase mb-8 flex items-center gap-3 italic text-black">
                     <Apple className="text-[#FF6B00]" /> Macros Avancées
                 </h2>
 
                 <form onSubmit={calculate} className="space-y-8">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
                                 Poids (kg)
                                 <Tooltip text={hints.poids || hints.weight} />
                             </label>
@@ -60,7 +60,7 @@ export default function AdvancedMacros({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
                                 % MG (optionnel)
                                 <Tooltip text={hints.fat_percentage || hints.mg} />
                             </label>
@@ -75,7 +75,7 @@ export default function AdvancedMacros({ hints = {} }) {
                     </div>
 
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
                             Objectif
                             <Tooltip text={hints.objectif || hints.goal} />
                         </label>
@@ -91,7 +91,7 @@ export default function AdvancedMacros({ hints = {} }) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
                             Calories Cibles
                             <Tooltip text="Votre apport calorique journalier souhaité." />
                         </label>
@@ -120,7 +120,7 @@ export default function AdvancedMacros({ hints = {} }) {
                                 onChange={(e) => setProteinRatio(e.target.value)}
                                 className="w-full accent-[#FF6B00] h-2 bg-zinc-100 rounded-lg appearance-none cursor-pointer"
                             />
-                            <div className="flex justify-between text-[8px] font-bold text-zinc-700 uppercase italic">
+                            <div className="flex justify-between text-[8px] font-black text-black uppercase italic">
                                 <span>Minimum (Santé)</span>
                                 <span>Intense (Muscle)</span>
                             </div>
@@ -128,7 +128,7 @@ export default function AdvancedMacros({ hints = {} }) {
 
                         <div className="space-y-2">
                             <div className="flex justify-between items-end px-1">
-                                <label className="text-[10px] font-black uppercase text-zinc-600 tracking-widest">Ratio Lipides</label>
+                                <label className="text-[10px] font-black uppercase text-black tracking-widest pl-1">Ratio Lipides</label>
                                 <span className="text-sm font-black text-[#FF6B00]">{fatRatio} g/kg</span>
                             </div>
                             <input
@@ -140,7 +140,7 @@ export default function AdvancedMacros({ hints = {} }) {
                                 onChange={(e) => setFatRatio(e.target.value)}
                                 className="w-full accent-[#FF6B00] h-2 bg-zinc-100 rounded-lg appearance-none cursor-pointer"
                             />
-                            <div className="flex justify-between text-[8px] font-bold text-zinc-700 uppercase italic">
+                            <div className="flex justify-between text-[8px] font-black text-black uppercase italic">
                                 <span>Hormonal Min</span>
                                 <span>High Fat</span>
                             </div>
@@ -182,9 +182,9 @@ export default function AdvancedMacros({ hints = {} }) {
                 )}
             </div>
 
-            <div className="mt-8 bg-zinc-900 text-zinc-600 p-6 rounded-2xl flex items-start gap-4">
-                <InfoIcon size={20} className="shrink-0 mt-1" />
-                <p className="text-[10px] font-bold leading-relaxed uppercase">
+            <div className="mt-8 bg-zinc-900 text-zinc-200 p-6 rounded-2xl flex items-start gap-4">
+                <InfoIcon size={20} className="shrink-0 mt-1 text-[#FF6B00]" />
+                <p className="text-[10px] font-black leading-relaxed uppercase tracking-tight">
                     Le ratio glucidique est ajusté automatiquement après avoir fixé vos besoins en protéines (essentiels pour la structure) et lipides (essentiels pour le système hormonal).
                 </p>
             </div>
@@ -195,7 +195,7 @@ export default function AdvancedMacros({ hints = {} }) {
 function MacroCard({ label, grams, pct, color }) {
     return (
         <div className="flex flex-col items-center p-4 rounded-2xl border border-zinc-100">
-            <span className="text-[9px] font-black uppercase text-zinc-600 mb-1">{label}</span>
+            <span className="text-[9px] font-black uppercase text-zinc-900 mb-1">{label}</span>
             <span className="text-3xl font-black italic text-zinc-900">{grams}<span className="text-sm not-italic opacity-60 ml-1 text-zinc-700">g</span></span>
             <div className={`mt-2 px-2 py-0.5 rounded text-[8px] font-black text-white ${color}`}>{pct}%</div>
         </div>

@@ -145,6 +145,13 @@ export default async function ACWRPage() {
 
                     <RelatedTools currentTool="acwr" />
 
+                    {/* FAQ SECTION */}
+                    {faqData && faqData.length > 0 && (
+                        <div className="mt-16">
+                            <HomeFAQ faqData={faqData} title="Questions Fréquentes sur l'ACWR & Prévention" id="faq-acwr" />
+                        </div>
+                    )}
+
                     {/* Related Articles */}
                     <RelatedArticles
                         articles={relatedArticles}

@@ -97,16 +97,22 @@ export default async function MacrosAvanceesPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
+            {faqData && faqData.length > 0 && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+                />
+            )}
             <div className="max-w-4xl mx-auto px-6">
                 <AnimWrapper>
-                    <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mb-8 font-bold uppercase text-sm">
+                    <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-700 hover:text-[#FF6B00] transition mb-8 font-bold uppercase text-sm">
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
                     <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
                         {article.title || 'Calculateur de Macros Avancé'}
                     </h1>
-                    <p className="text-xl text-zinc-600 mb-12">
+                    <p className="text-xl text-zinc-800 mb-12 font-medium">
                         {article.intro || "Allez plus loin qu'un simple calcul de calories. Définissez vos ratios de protéines et lipides selon votre poids de corps."}
                     </p>
 
@@ -122,7 +128,7 @@ export default async function MacrosAvanceesPage() {
                         <div className="mt-12 border-t border-zinc-200 pt-12 flex flex-col items-center">
                             <div className="flex items-center gap-2 mb-8">
                                 <Info size={16} className="text-[#FF6B00]" />
-                                <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
+                                <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                             </div>
 
                             <div className="max-w-md w-full mx-auto">
@@ -139,6 +145,13 @@ export default async function MacrosAvanceesPage() {
                     )}
 
                     <RelatedTools currentTool="macros-avancees" />
+
+                    {/* FAQ SECTION */}
+                    {faqData && faqData.length > 0 && (
+                        <div className="mt-16">
+                            <HomeFAQ faqData={faqData} title="Questions Fréquentes sur les Macronutriments" id="faq-macros" />
+                        </div>
+                    )}
 
                     {/* Related Articles */}
                     <RelatedArticles
