@@ -316,13 +316,13 @@ export default async function ArticlePage({ params }) {
                     <div className="mt-16 pt-12 border-t border-zinc-100 bg-zinc-50/50 p-8 rounded-xl">
                         <h3 className="text-xl font-black uppercase mb-6 text-black">Outils Scientifiques Gratuits</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <Link href="/outils/calculateur-1rm" className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
+                            <Link href="/outils/rpe-1rm" className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
                                 <div className="text-2xl mb-2">💪</div>
-                                <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">1RM Max</div>
+                                <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">RPE / 1RM</div>
                             </Link>
-                            <Link href="/outils/vma-vo2" className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
+                            <Link href="/outils/test-demi-cooper" className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
                                 <div className="text-2xl mb-2">🏃‍♂️</div>
-                                <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">VMA / VO2</div>
+                                <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">Test Demi-Cooper</div>
                             </Link>
                         </div>
                     </div>
