@@ -196,7 +196,7 @@ function MacroCard({ label, grams, pct, color }) {
     return (
         <div className="flex flex-col items-center p-4 rounded-2xl border border-zinc-100">
             <span className="text-[9px] font-black uppercase text-zinc-600 mb-1">{label}</span>
-            <span className="text-3xl font-black italic">{grams}<span className="text-sm not-italic opacity-40 ml-1">g</span></span>
+            <span className="text-3xl font-black italic text-zinc-900">{grams}<span className="text-sm not-italic opacity-60 ml-1 text-zinc-700">g</span></span>
             <div className={`mt-2 px-2 py-0.5 rounded text-[8px] font-black text-white ${color}`}>{pct}%</div>
         </div>
     );
