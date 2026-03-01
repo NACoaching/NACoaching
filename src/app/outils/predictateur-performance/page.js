@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
 export const revalidate = 0;
 
 export async function generateMetadata() {
-    const article = await getToolArticle('race-predictor');
+    const article = await getToolArticle('/outils/predictateur-performance');
     return {
         title: `${article.title || 'Prédicteur de Performance Running — 5km, 10km, Semi & Marathon'} | NA Coaching`,
         description: article.intro || "Prédisez vos temps sur 5km, 10km, Semi-Marathon et Marathon à partir d'un chrono de référence. Formule de Riegel pour vos objectifs course à pied.",
@@ -51,7 +51,7 @@ const DEFAULT_FAQ_DATA = [
 ];
 
 export default async function RacePredictorPage() {
-    const article = await getToolArticle('race-predictor');
+    const article = await getToolArticle('/outils/predictateur-performance');
     const relatedArticles = await getToolRelatedArticles(article);
 
     let faqData = DEFAULT_FAQ_DATA;
@@ -91,7 +91,7 @@ export default async function RacePredictorPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
-                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-400 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
+                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
@@ -105,7 +105,7 @@ export default async function RacePredictorPage() {
                             <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
                                 {article.title || "Prédicteur de Performance"}
                             </h1>
-                            <p className="text-zinc-500 text-lg mb-8 leading-relaxed">
+                            <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
                                 {article.intro}
                             </p>
                             <div className="h-px bg-zinc-200 mb-8" />
@@ -119,7 +119,7 @@ export default async function RacePredictorPage() {
                     <div className="mt-12 border-t border-zinc-200 pt-12 text-left flex flex-col items-center">
                         <div className="flex items-center gap-2 mb-8">
                             <Info size={16} className="text-[#FF6B00]" />
-                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
+                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                         </div>
 
                         <div className="max-w-md w-full mx-auto">
@@ -144,7 +144,11 @@ export default async function RacePredictorPage() {
                     subtitle={article.related_subtitle}
                 />
             </div>
-            <div className="bg-white"><HomeFAQ faqData={faqData} /></div>
+            <div className="bg-white">
+                {faqData && faqData.length > 0 && (
+                    <HomeFAQ faqData={faqData} title="Questions Fréquentes sur les Prédictions Running" id="faq-predictor" />
+                )}
+            </div>
         </div>
     );
 }
