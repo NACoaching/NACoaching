@@ -32,13 +32,13 @@ export default function EffectiveVolume({ hints = {} }) {
                     <Layers size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-zinc-900">Calculateur de Volume Effectif</h2>
-                    <p className="text-xs font-bold text-zinc-600 uppercase tracking-widest">Optimisation de l'hypertrophie</p>
+                    <h2 className="text-2xl font-black uppercase text-black">Calculateur de Volume Effectif</h2>
+                    <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Optimisation de l'hypertrophie</p>
                 </div>
             </div>
 
             <div className="space-y-6 mb-10">
-                <p className="text-sm text-zinc-700 italic mb-6">Indiquez le nombre de **séries effectives** (amenées à proximité de l'échec) par semaine pour chaque groupe musculaire.</p>
+                <p className="text-sm text-zinc-800 font-medium italic mb-6">Indiquez le nombre de **séries effectives** (amenées à proximité de l'échec) par semaine pour chaque groupe musculaire.</p>
 
                 {muscles.map((m) => {
                     const status = getStatus(volumes[m.id]);
@@ -48,7 +48,7 @@ export default function EffectiveVolume({ hints = {} }) {
                         <div key={m.id} className="group">
                             <div className="flex justify-between items-end mb-3">
                                 <div>
-                                    <label className="flex items-center text-xs font-black uppercase text-zinc-700 mb-1">
+                                    <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
                                         {m.name}
                                         <Tooltip text={hints[m.id]} />
                                     </label>
@@ -79,16 +79,16 @@ export default function EffectiveVolume({ hints = {} }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100">
-                    <h4 className="text-[10px] font-black uppercase text-zinc-600 mb-2">Guide de lecture</h4>
+                    <h4 className="text-[10px] font-black uppercase text-zinc-900 mb-2">Guide de lecture</h4>
                     <ul className="space-y-2">
-                        <li className="text-[11px] text-zinc-600 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" /> **6-10 séries** : Minimum pour progresser.</li>
-                        <li className="text-[11px] text-zinc-600 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500" /> **12-20 séries** : Zone de gain maximal.</li>
-                        <li className="text-[11px] text-zinc-600 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-500" /> **20+ séries** : Haut volume (avancés uniquement).</li>
+                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" /> **6-10 séries** : Minimum pour progresser.</li>
+                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500" /> **12-20 séries** : Zone de gain maximal.</li>
+                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-500" /> **20+ séries** : Haut volume (avancés uniquement).</li>
                     </ul>
                 </div>
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex gap-3 items-start">
-                    <Info size={16} className="text-zinc-600 shrink-0 mt-0.5" />
-                    <p className="text-[10px] text-zinc-700 leading-relaxed italic">
+                    <Info size={16} className="text-[#FF6B00] shrink-0 mt-0.5" />
+                    <p className="text-[10px] text-zinc-900 leading-relaxed font-medium italic">
                         Ces données sont basées sur les travaux de **Dr. Mike Israetel** et **James Krieger**. Notez que la récupération dépend aussi de votre sommeil et de votre nutrition.
                     </p>
                 </div>
