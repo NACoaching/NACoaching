@@ -38,7 +38,7 @@ export default function Calculator1RM({ hints = {} }) {
 
                 <form onSubmit={calculate1RM} className="space-y-4 mb-6">
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                             Poids soulevé (kg)
                             <Tooltip text={hints.poids || hints.weight} />
                         </label>
@@ -52,7 +52,7 @@ export default function Calculator1RM({ hints = {} }) {
                         />
                     </div>
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                             Répétitions
                             <Tooltip text={hints.reps || hints.repetitions} />
                         </label>
@@ -73,25 +73,25 @@ export default function Calculator1RM({ hints = {} }) {
                 {result && (
                     <div className="mt-auto bg-white border border-zinc-200 p-4 rounded-lg">
                         <div className="text-center mb-4">
-                            <span className="block text-xs font-bold uppercase text-zinc-400">Ton 1RM estimé</span>
+                            <span className="block text-xs font-bold uppercase text-zinc-600">Ton 1RM estimé</span>
                             <span className="text-4xl font-black text-[#FF6B00]">{result} kg</span>
                         </div>
                         <div className="grid grid-cols-4 gap-2 text-center text-xs">
                             <div className="bg-zinc-50 p-2 rounded">
                                 <span className="block font-bold">90%</span>
-                                <span className="text-zinc-500">{Math.round(result * 0.9)}kg</span>
+                                <span className="text-zinc-700">{Math.round(result * 0.9)}kg</span>
                             </div>
                             <div className="bg-zinc-50 p-2 rounded">
                                 <span className="block font-bold">80%</span>
-                                <span className="text-zinc-500">{Math.round(result * 0.8)}kg</span>
+                                <span className="text-zinc-700">{Math.round(result * 0.8)}kg</span>
                             </div>
                             <div className="bg-zinc-50 p-2 rounded">
                                 <span className="block font-bold">70%</span>
-                                <span className="text-zinc-500">{Math.round(result * 0.7)}kg</span>
+                                <span className="text-zinc-700">{Math.round(result * 0.7)}kg</span>
                             </div>
                             <div className="bg-zinc-50 p-2 rounded">
                                 <span className="block font-bold">50%</span>
-                                <span className="text-zinc-500">{Math.round(result * 0.5)}kg</span>
+                                <span className="text-zinc-700">{Math.round(result * 0.5)}kg</span>
                             </div>
                         </div>
                         <ShareResults title="Mon 1RM Estimé" value={result + "kg"} subtitle={`${weight}kg x ${reps} reps`} />

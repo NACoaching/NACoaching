@@ -61,14 +61,14 @@ export default function ACWRCalculator({ hints = {} }) {
                     <Activity className="text-[#FF6B00]" /> ACWR Calculator
                 </h2>
 
-                <p className="text-sm text-zinc-500 mb-8 leading-relaxed">
+                <p className="text-sm text-zinc-700 mb-8 leading-relaxed">
                     L'<strong>Acute:Chronic Workload Ratio</strong> est l'outil n°1 des préparateurs physiques pour prévenir les blessures. Il compare votre fatigue récente (7 jours) à votre habitude (28 jours).
                 </p>
 
                 <form onSubmit={calculateACWR} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                                 Charge Aiguë (7j)
                                 <Tooltip text={hints.aigue || hints.acute} />
                             </label>
@@ -82,7 +82,7 @@ export default function ACWRCalculator({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                                 Charge Chronique (28j)
                                 <Tooltip text={hints.chronique || hints.chronic} />
                             </label>
@@ -129,8 +129,8 @@ export default function ACWRCalculator({ hints = {} }) {
             </div>
 
             <div className="mt-8 bg-zinc-100 p-6 rounded-2xl flex gap-4">
-                <Info className="text-zinc-400 shrink-0" />
-                <p className="text-[10px] text-zinc-500 uppercase font-bold leading-tight">
+                <Info className="text-zinc-600 shrink-0" />
+                <p className="text-[10px] text-zinc-700 uppercase font-bold leading-tight">
                     Note : La "charge" peut être calculée en multipliant la durée (min) par l'intensité perçue (RPE 0-10). Exemple : 60 min à intensité 7 = 420 unités de charge.
                 </p>
             </div>

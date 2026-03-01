@@ -28,7 +28,7 @@ const AffiliateCard = ({
                         className="h-full object-contain group-hover:scale-110 transition-transform duration-500"
                     />
                 ) : (
-                    <div className="bg-zinc-200 w-full h-full rounded-lg flex items-center justify-center text-zinc-400">
+                    <div className="bg-zinc-200 w-full h-full rounded-lg flex items-center justify-center text-zinc-600">
                         <ShoppingCart size={48} />
                     </div>
                 )}
@@ -63,7 +63,7 @@ const AffiliateCard = ({
                     <ExternalLink size={14} />
                 </a>
 
-                <div className="mt-4 flex items-center gap-1.5 justify-center text-[10px] text-zinc-400 font-medium">
+                <div className="mt-4 flex items-center gap-1.5 justify-center text-[10px] text-zinc-600 font-medium">
                     <Info size={10} />
                     <span>Lien affilié — Soutenez le blog sans surcoût</span>
                 </div>

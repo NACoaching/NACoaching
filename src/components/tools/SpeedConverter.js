@@ -87,7 +87,7 @@ export default function SpeedConverter({ hints = {} }) {
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                             Vitesse (km/h)
                             <Tooltip text={hints.vitesse || hints.speed} />
                         </label>
@@ -101,7 +101,7 @@ export default function SpeedConverter({ hints = {} }) {
                         />
                     </div>
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                             Allure (min/km)
                             <Tooltip text={hints.allure || hints.pace} />
                         </label>
@@ -127,7 +127,7 @@ export default function SpeedConverter({ hints = {} }) {
                                 placeholder="Sec"
                             />
                         </div>
-                        <span className="text-[10px] text-zinc-400">Format: minutes:secondes (ex: 4:30)</span>
+                        <span className="text-[10px] text-zinc-600">Format: minutes:secondes (ex: 4:30)</span>
                     </div>
                 </div>
             </div>

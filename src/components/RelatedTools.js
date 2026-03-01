@@ -107,7 +107,7 @@ export default function RelatedTools({ currentTool, max = 4 }) {
             <h3 className="text-xl font-black uppercase mb-2 text-black">
                 Outils complémentaires
             </h3>
-            <p className="text-sm text-zinc-500 mb-6">
+            <p className="text-sm text-zinc-700 mb-6">
                 Combine ces outils pour une approche complète de ta progression.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -122,7 +122,7 @@ export default function RelatedTools({ currentTool, max = 4 }) {
                         >
                             <div className="flex items-center gap-2 mb-2">
                                 <Icon size={18} className="text-[#FF6B00]" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{clusterLabel}</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">{clusterLabel}</span>
                             </div>
                             <div className="text-sm font-bold text-black group-hover:text-[#FF6B00] transition">
                                 {tool.name}

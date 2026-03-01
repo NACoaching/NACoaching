@@ -15,11 +15,11 @@ function FAQItem({ item, isOpen, onToggle }) {
                 </span>
                 <ChevronDown
                     size={20}
-                    className={`text-zinc-400 group-hover:text-[#FF6B00] transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}
+                    className={`text-zinc-600 group-hover:text-[#FF6B00] transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}
                 />
             </button>
             <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}>
-                <p className="text-zinc-500 text-sm leading-relaxed px-1">
+                <p className="text-zinc-700 text-sm leading-relaxed px-1">
                     {item.answer}
                 </p>
             </div>
@@ -50,7 +50,7 @@ export default function HomeFAQ({ faqData }) {
                 <AnimWrapper>
                     <div className="text-center mb-10">
                         <h2 className="text-3xl font-black uppercase mb-3 text-black">Questions <span className="text-[#FF6B00]">Fréquentes</span></h2>
-                        <p className="text-zinc-500 text-sm">Les réponses aux questions les plus posées</p>
+                        <p className="text-zinc-700 text-sm">Les réponses aux questions les plus posées</p>
                     </div>
                     <div className="bg-zinc-50 rounded-lg border border-zinc-200 px-6">
                         {faqs.map((faq, index) => (

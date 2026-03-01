@@ -9,7 +9,7 @@ export default function ProductGallery({ images, title }) {
 
     if (!images || images.length === 0) {
         return (
-            <div className="relative aspect-square bg-zinc-200 rounded-lg overflow-hidden mb-8 shadow-sm border border-zinc-200 flex items-center justify-center text-zinc-300">
+            <div className="relative aspect-square bg-zinc-200 rounded-lg overflow-hidden mb-8 shadow-sm border border-zinc-200 flex items-center justify-center text-zinc-700">
                 <ShoppingBag size={64} />
             </div>
         );

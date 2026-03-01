@@ -27,16 +27,16 @@ export default function Breadcrumb({ items = [] }) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <nav aria-label="Fil d'ariane" className="flex items-center gap-1.5 text-xs font-bold text-zinc-400 flex-wrap">
+            <nav aria-label="Fil d'ariane" className="flex items-center gap-1.5 text-xs font-bold text-zinc-600 flex-wrap">
                 {items.map((item, index) => (
                     <span key={index} className="flex items-center gap-1.5">
-                        {index > 0 && <ChevronRight size={12} className="text-zinc-300 flex-shrink-0" />}
+                        {index > 0 && <ChevronRight size={12} className="text-zinc-700 flex-shrink-0" />}
                         {item.href && index < items.length - 1 ? (
                             <Link href={item.href} className="hover:text-[#FF6B00] transition uppercase tracking-wider">
                                 {item.label}
                             </Link>
                         ) : (
-                            <span className="text-zinc-500 uppercase tracking-wider line-clamp-1">{item.label}</span>
+                            <span className="text-zinc-700 uppercase tracking-wider line-clamp-1">{item.label}</span>
                         )}
                     </span>
                 ))}

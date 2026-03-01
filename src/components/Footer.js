@@ -46,13 +46,13 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
                     <div>
                         {siteContent.logo_url ? <Image src={siteContent.logo_url} alt="NA Coaching" width={48} height={48} className="mb-6 object-contain" /> : <div className="mb-6 font-bold text-xl">NA COACHING</div>}
-                        <p className="text-zinc-500 text-sm leading-relaxed">
+                        <p className="text-zinc-400 text-sm leading-relaxed">
                             {siteContent.footer_text || "Expertise scientifique au service de la performance sportive et de la santé."}
                         </p>
                     </div>
                     <div>
                         <h4 className="font-black uppercase tracking-widest mb-6 text-[#FF6B00]">{siteContent.footer_newsletter_title || 'Newsletter'}</h4>
-                        <p className="text-xs text-zinc-500 mb-4 italic">{siteContent.footer_newsletter_text || 'Recevez mes analyses scientifiques hebdomadaires (Gratuit).'}</p>
+                        <p className="text-xs text-zinc-400 mb-4 italic">{siteContent.footer_newsletter_text || 'Recevez mes analyses scientifiques hebdomadaires (Gratuit).'}</p>
                         <form onSubmit={handleSubscribe} className="flex gap-2">
                             <input
                                 required
@@ -73,7 +73,7 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className="pt-8 border-t border-zinc-900 text-[10px] text-zinc-600 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="pt-8 border-t border-zinc-900 text-[10px] text-zinc-500 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center gap-4">
                     <span>{siteContent.footer_copyright || '© 2024 NA Coaching - Master EOPS / Licence STAPS'} - {siteContent.footer_sub_copyright || 'Design Scientifique & Terrain'}</span>
                     <div className="flex gap-4">
                         <Link href="/mentions-legales" className="hover:text-[#FF6B00]">Mentions Légales</Link>

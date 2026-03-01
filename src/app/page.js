@@ -34,34 +34,34 @@ export default async function HomePage() {
 
   const DEFAULT_HOME_FAQS = [
     {
-        question: "Le coaching sportif personnalisé est-il adapté aux débutants ?",
-        answer: "Absolument. En tant que coach diplômé Master EOPS, j'adapte chaque programme à votre niveau initial, vos antécédents médicaux et vos objectifs personnels. Que vous n'ayez jamais fait de sport ou que vous repreniez après une longue pause, la progression est calibrée pour être efficace et sans risque."
+      question: "Le coaching sportif personnalisé est-il adapté aux débutants ?",
+      answer: "Absolument. En tant que coach diplômé Master EOPS, j'adapte chaque programme à votre niveau initial, vos antécédents médicaux et vos objectifs personnels. Que vous n'ayez jamais fait de sport ou que vous repreniez après une longue pause, la progression est calibrée pour être efficace et sans risque."
     },
     {
-        question: "Proposez-vous des programmes de réathlétisation après blessure ?",
-        answer: "C'est l'une de mes spécialités principales. Après une blessure (rupture des ligaments croisés, entorse, déchirure musculaire, tendinopathie), j'établis un protocole de réathlétisation progressif et scientifique. L'objectif est un retour au sport optimal, sans rechute, en respectant les délais de cicatrisation tissulaire."
+      question: "Proposez-vous des programmes de réathlétisation après blessure ?",
+      answer: "C'est l'une de mes spécialités principales. Après une blessure (rupture des ligaments croisés, entorse, déchirure musculaire, tendinopathie), j'établis un protocole de réathlétisation progressif et scientifique. L'objectif est un retour au sport optimal, sans rechute, en respectant les délais de cicatrisation tissulaire."
     },
     {
-        question: "En combien de temps peut-on voir les premiers résultats en musculation ?",
-        answer: "Avec un entraînement structuré et une surcharge progressive bien calibrée, les premiers gains de force se ressentent dès 3 à 4 semaines. Les changements physiques visibles (hypertrophie, composition corporelle) apparaissent généralement entre 6 et 12 semaines d'entraînement régulier."
+      question: "En combien de temps peut-on voir les premiers résultats en musculation ?",
+      answer: "Avec un entraînement structuré et une surcharge progressive bien calibrée, les premiers gains de force se ressentent dès 3 à 4 semaines. Les changements physiques visibles (hypertrophie, composition corporelle) apparaissent généralement entre 6 et 12 semaines d'entraînement régulier."
     },
     {
-        question: "Ai-je besoin de matériel ou d'une salle de sport pour suivre un programme ?",
-        answer: "Pas obligatoirement. Je m'adapte à votre environnement : salle de musculation complète, home gym avec haltères et banc, ou même entraînement au poids du corps. Le programme respecte les principes physiologiques de progression quel que soit le matériel disponible."
+      question: "Ai-je besoin de matériel ou d'une salle de sport pour suivre un programme ?",
+      answer: "Pas obligatoirement. Je m'adapte à votre environnement : salle de musculation complète, home gym avec haltères et banc, ou même entraînement au poids du corps. Le programme respecte les principes physiologiques de progression quel que soit le matériel disponible."
     },
     {
-        question: "Proposez-vous un suivi nutritionnel en complément de l'entraînement ?",
-        answer: "Je ne prescris pas de régime alimentaire, mais je vous apprends à gérer vos macronutriments (protéines, glucides, lipides) pour soutenir vos performances sportives. Mon outil gratuit 'Calculateur de besoins caloriques' vous aide à déterminer votre apport optimal au quotidien."
+      question: "Proposez-vous un suivi nutritionnel en complément de l'entraînement ?",
+      answer: "Je ne prescris pas de régime alimentaire, mais je vous apprends à gérer vos macronutriments (protéines, glucides, lipides) pour soutenir vos performances sportives. Mon outil gratuit 'Calculateur de besoins caloriques' vous aide à déterminer votre apport optimal au quotidien."
     },
     {
-        question: "Quelle est la différence entre un coach sportif classique et un Master EOPS ?",
-        answer: "Le Master EOPS (Entraînement et Optimisation de la Performance Sportive) est le plus haut niveau de formation universitaire en préparation physique en France (Bac+5). Il combine des compétences en physiologie de l'exercice, biomécanique, planification de l'entraînement et réathlétisation — bien au-delà d'un simple diplôme de coaching."
+      question: "Quelle est la différence entre un coach sportif classique et un Master EOPS ?",
+      answer: "Le Master EOPS (Entraînement et Optimisation de la Performance Sportive) est le plus haut niveau de formation universitaire en préparation physique en France (Bac+5). Il combine des compétences en physiologie de l'exercice, biomécanique, planification de l'entraînement et réathlétisation — bien au-delà d'un simple diplôme de coaching."
     },
     {
-        question: "Comment fonctionne le coaching en ligne à distance ?",
-        answer: "Après un bilan initial détaillé, vous recevez votre programme personnalisé via une application dédiée avec vidéos des exercices. Un suivi hebdomadaire permet d'ajuster les charges, le volume et l'intensité en fonction de votre progression et de vos sensations."
+      question: "Comment fonctionne le coaching en ligne à distance ?",
+      answer: "Après un bilan initial détaillé, vous recevez votre programme personnalisé via une application dédiée avec vidéos des exercices. Un suivi hebdomadaire permet d'ajuster les charges, le volume et l'intensité en fonction de votre progression et de vos sensations."
     }
-];
+  ];
 
   // Parse global FAQs if they exist
   let globalFaqs = DEFAULT_HOME_FAQS;
@@ -183,7 +183,7 @@ export default async function HomePage() {
                 <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 tracking-tight mb-4">
                   {siteContent.find(c => c.key === 'about_title')?.value || 'Le Labo'}
                 </h2>
-                <p className="text-zinc-600 text-lg">
+                <p className="text-zinc-700 text-lg leading-relaxed font-medium">
                   {siteContent.find(c => c.key === 'about_subtitle')?.value || "Découvrez les dernières avancées scientifiques appliquées à l'entraînement, la nutrition et la récupération."}
                 </p>
               </div>
@@ -220,7 +220,7 @@ export default async function HomePage() {
                         <h3 className="text-2xl font-bold mb-3 leading-tight text-zinc-900 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
                           {article.title}
                         </h3>
-                        <p className="text-zinc-500 text-base mb-6 line-clamp-3 flex-grow leading-relaxed">
+                        <p className="text-zinc-700 text-base mb-6 line-clamp-3 flex-grow leading-relaxed">
                           {article.excerpt}
                         </p>
                         <div className="flex items-center text-[#FF6B00] text-sm font-semibold mt-auto">
@@ -299,7 +299,7 @@ export default async function HomePage() {
             <h2 className="text-4xl md:text-6xl font-bold mb-8 text-zinc-900 tracking-tight leading-tight">
               {siteContent.find(c => c.key === 'contact_cta_title')?.value || "Passe Master de ton propre entraînement."}
             </h2>
-            <p className="text-zinc-600 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-zinc-700 mb-10 text-xl max-w-2xl mx-auto leading-relaxed font-medium">
               {siteContent.find(c => c.key === 'contact_cta_text')?.value || "Besoin d'un accompagnement personnalisé ou d'une question sur un programme ? N'hésitez pas à me contacter."}
             </p>
             <Link

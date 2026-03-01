@@ -124,7 +124,7 @@ export default function ReviewForm({ productId, onReviewSubmitted }) {
                         placeholder="L'email utilisé pour l'achat"
                         required
                     />
-                    <p className="text-xs text-zinc-400 mt-1 italic">Votre email ne sera pas publié.</p>
+                    <p className="text-xs text-zinc-600 mt-1 italic">Votre email ne sera pas publié.</p>
                 </div>
 
                 {/* Comment Input */}

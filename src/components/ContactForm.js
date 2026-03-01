@@ -40,24 +40,24 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6 bg-zinc-50 p-8 rounded-lg border border-zinc-200">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Nom</label>
+                    <label className="block text-xs font-bold uppercase text-zinc-700 mb-2">Nom</label>
                     <input required name="name" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="Votre nom" />
                 </div>
                 <div>
-                    <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Email</label>
+                    <label className="block text-xs font-bold uppercase text-zinc-700 mb-2">Email</label>
                     <input required type="email" name="email" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="votre@email.com" />
                 </div>
             </div>
             <div>
-                <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Téléphone (Optionnel)</label>
+                <label className="block text-xs font-bold uppercase text-zinc-700 mb-2">Téléphone (Optionnel)</label>
                 <input name="phone" type="tel" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="06 12 34 56 78" />
             </div>
             <div>
-                <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Sujet</label>
+                <label className="block text-xs font-bold uppercase text-zinc-700 mb-2">Sujet</label>
                 <input required name="subject" className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black" placeholder="Renseignement coaching,..." />
             </div>
             <div>
-                <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Message</label>
+                <label className="block text-xs font-bold uppercase text-zinc-700 mb-2">Message</label>
                 <textarea required name="message" className="w-full border p-3 rounded text-sm h-40 focus:border-[#FF6B00] outline-none text-black" placeholder="Comment puis-je vous aider ?" />
             </div>
 

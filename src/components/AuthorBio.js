@@ -21,18 +21,18 @@ export default function AuthorBio({ name, tagline, imageUrl }) {
                 </div>
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Rédigé par</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-600">Rédigé par</span>
                     </div>
                     <Link href="/coach" className="text-lg font-black uppercase text-black hover:text-[#FF6B00] transition">
                         {authorName}
                     </Link>
-                    <p className="text-sm text-zinc-500 mt-1 leading-relaxed">{authorTagline}</p>
+                    <p className="text-sm text-zinc-700 mt-1 leading-relaxed">{authorTagline}</p>
                     <div className="flex items-center gap-4 mt-3">
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-400">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-600">
                             <Award size={14} className="text-[#FF6B00]" />
                             Master EOPS
                         </span>
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-400">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-600">
                             <BookOpen size={14} className="text-[#FF6B00]" />
                             Vulgarisation scientifique
                         </span>

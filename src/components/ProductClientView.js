@@ -75,7 +75,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                             <ProductGallery images={productImages} title={product.title} />
 
                             <div className="bg-white p-8 rounded-lg border border-zinc-200 shadow-sm">
-                                <h3 className="text-sm font-black uppercase text-zinc-400 mb-4 tracking-widest">{getContent('product_page_features_title', 'Ce que tu vas obtenir')}</h3>
+                                <h3 className="text-sm font-black uppercase text-zinc-600 mb-4 tracking-widest">{getContent('product_page_features_title', 'Ce que tu vas obtenir')}</h3>
                                 <ul className="space-y-4">
                                     {product.features?.map((f, i) => (
                                         <li key={i} className="flex items-start gap-3 text-sm font-bold">
@@ -110,7 +110,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                         />
                                     ))}
                                 </div>
-                                <span className="text-sm font-bold text-zinc-500">
+                                <span className="text-sm font-bold text-zinc-700">
                                     {averageRating ? `${averageRating}/5` : 'Nouveau'} ({reviews.length} avis)
                                 </span>
                             </div>
@@ -122,7 +122,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                     <div className="flex flex-col">
                                         <div className="flex items-center gap-4">
                                             <div className="text-4xl font-black italic text-[#FF6B00]">{product.discount_price}</div>
-                                            <div className="text-xl font-bold text-zinc-400 line-through opacity-70">{product.price}</div>
+                                            <div className="text-xl font-bold text-zinc-600 line-through opacity-70">{product.price}</div>
                                         </div>
                                         <span className="text-[10px] font-black uppercase text-[#FF6B00] tracking-widest mt-1">Offre Spéciale</span>
                                     </div>
@@ -148,25 +148,25 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                     <div className="text-[#FF6B00]">
                                         <Lock size={20} strokeWidth={2.5} />
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Paiement 100% Sécurisé</span>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-700">Paiement 100% Sécurisé</span>
                                 </div>
                                 <div className="flex flex-col items-center text-center gap-2">
                                     <div className="text-[#FF6B00]">
                                         <Zap size={20} strokeWidth={2.5} />
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Accès Immédiat après achat</span>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-700">Accès Immédiat après achat</span>
                                 </div>
                                 <div className="flex flex-col items-center text-center gap-2">
                                     <div className="text-[#FF6B00]">
                                         <Award size={20} strokeWidth={2.5} />
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Master EOPS & Expertise</span>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-700">Master EOPS & Expertise</span>
                                 </div>
                                 <div className="flex flex-col items-center text-center gap-2">
                                     <div className="text-[#FF6B00]">
                                         <ShieldCheck size={20} strokeWidth={2.5} />
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Garantie & Support Réactif</span>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-700">Garantie & Support Réactif</span>
                                 </div>
                             </div>
 
@@ -196,7 +196,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                         {product.content}
                                     </ReactMarkdown>
                                 ) : (
-                                    <p className="italic text-zinc-500">Pas de description détaillée disponible pour le moment.</p>
+                                    <p className="italic text-zinc-700">Pas de description détaillée disponible pour le moment.</p>
                                 )}
                             </div>
 
@@ -219,7 +219,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                         <AnimWrapper>
                             <div className="text-center mb-10">
                                 <h2 className="text-3xl font-black uppercase mb-3 text-black">Foire Aux <span className="text-[#FF6B00]">Questions</span></h2>
-                                <p className="text-zinc-500 text-sm">Les réponses aux questions fréquentes sur ce programme</p>
+                                <p className="text-zinc-700 text-sm">Les réponses aux questions fréquentes sur ce programme</p>
                             </div>
                             <div className="bg-zinc-50 rounded-lg border border-zinc-200 px-6">
                                 {product.faqs.map((faq, index) => (
@@ -233,11 +233,11 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                             </span>
                                             <ChevronDown
                                                 size={20}
-                                                className={`text-zinc-400 group-hover:text-[#FF6B00] transition-transform duration-300 flex-shrink-0 ${openFaqIndex === index ? 'rotate-180' : ''}`}
+                                                className={`text-zinc-600 group-hover:text-[#FF6B00] transition-transform duration-300 flex-shrink-0 ${openFaqIndex === index ? 'rotate-180' : ''}`}
                                             />
                                         </button>
                                         <div className={`overflow-hidden transition-all duration-300 ${openFaqIndex === index ? 'max-h-96 pb-5' : 'max-h-0'}`}>
-                                            <p className="text-zinc-500 text-sm leading-relaxed px-1">
+                                            <p className="text-zinc-700 text-sm leading-relaxed px-1">
                                                 {faq.answer}
                                             </p>
                                         </div>
@@ -261,7 +261,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                             <h4 className="text-lg font-bold uppercase leading-snug mb-3 text-black group-hover:text-[#FF6B00] transition line-clamp-2">
                                                 {article.title}
                                             </h4>
-                                            <div className="mt-auto text-xs font-bold text-zinc-400 group-hover:text-black transition">Lire l'article dans le Labo →</div>
+                                            <div className="mt-auto text-xs font-bold text-zinc-600 group-hover:text-black transition">Lire l'article dans le Labo →</div>
                                         </div>
                                     </Link>
                                 ))}

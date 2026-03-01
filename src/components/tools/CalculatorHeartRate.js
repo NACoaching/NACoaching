@@ -50,7 +50,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                 <form onSubmit={calculateZones} className="space-y-4 mb-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                                 Ton Âge
                                 <Tooltip text={hints.age} />
                             </label>
@@ -64,7 +64,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                                 FC Repos (bpm)
                                 <Tooltip text={hints.repos || hints.rest_hr} />
                             </label>

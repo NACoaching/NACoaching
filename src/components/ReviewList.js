@@ -6,7 +6,7 @@ import { Star, User } from 'lucide-react';
 export default function ReviewList({ reviews }) {
     if (!reviews || reviews.length === 0) {
         return (
-            <div className="text-zinc-500 italic text-center py-8 bg-zinc-50 rounded-lg border border-zinc-100">
+            <div className="text-zinc-700 italic text-center py-8 bg-zinc-50 rounded-lg border border-zinc-100">
                 Soyez le premier à donner votre avis !
             </div>
         );
@@ -18,12 +18,12 @@ export default function ReviewList({ reviews }) {
                 <div key={review.id} className="bg-white p-6 rounded-lg border border-zinc-200 shadow-sm transition hover:shadow-md">
                     <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400">
+                            <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600">
                                 <User size={16} />
                             </div>
                             <div>
                                 <h4 className="font-bold text-sm">{review.author_name}</h4>
-                                <span className="text-xs text-zinc-400 block">
+                                <span className="text-xs text-zinc-600 block">
                                     {new Date(review.created_at).toLocaleDateString('fr-FR', {
                                         day: 'numeric',
                                         month: 'long',

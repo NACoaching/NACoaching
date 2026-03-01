@@ -38,7 +38,7 @@ export default function CookieBanner() {
                     </div>
                     <div>
                         <h3 className="font-black uppercase text-[#FF6B00] mb-1">Un cookie pour la perf ?</h3>
-                        <p className="text-sm text-zinc-400 leading-relaxed">
+                        <p className="text-sm text-zinc-600 leading-relaxed">
                             On utilise des cookies pour analyser le trafic et améliorer ton expérience sur le site.
                             Promis, c'est moins calorique qu'un vrai cookie. 🍪
                         </p>
@@ -48,7 +48,7 @@ export default function CookieBanner() {
                 <div className="flex gap-3 w-full md:w-auto shrink-0">
                     <button
                         onClick={handleRefuse}
-                        className="flex-1 md:flex-none border border-zinc-700 text-zinc-400 px-4 py-3 rounded font-bold uppercase text-xs hover:border-white hover:text-white transition whitespace-nowrap"
+                        className="flex-1 md:flex-none border border-zinc-700 text-zinc-600 px-4 py-3 rounded font-bold uppercase text-xs hover:border-white hover:text-white transition whitespace-nowrap"
                     >
                         Continuer sans
                     </button>

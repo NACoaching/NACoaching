@@ -19,7 +19,7 @@ export default async function RelatedArticles({ articles, title, subtitle }) {
         <div className="mt-16 pt-16 border-t border-zinc-200">
             <div className="mb-10">
                 <h3 className="text-2xl font-black uppercase text-black">{displayTitle}</h3>
-                <p className="text-zinc-500 text-sm mt-1">{displaySubtitle}</p>
+                <p className="text-zinc-700 text-sm mt-1">{displaySubtitle}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {articles.map((article) => {
@@ -33,7 +33,7 @@ export default async function RelatedArticles({ articles, title, subtitle }) {
                                 <h4 className="text-lg font-bold uppercase leading-snug mb-3 text-black group-hover:text-[#FF6B00] transition line-clamp-2">
                                     {article.title}
                                 </h4>
-                                <div className="mt-auto text-xs font-bold text-zinc-400 group-hover:text-black transition flex items-center gap-2">
+                                <div className="mt-auto text-xs font-bold text-zinc-600 group-hover:text-black transition flex items-center gap-2">
                                     Lire l&apos;article <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </div>

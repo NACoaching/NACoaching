@@ -17,7 +17,7 @@ export default function Tooltip({ text }) {
                 type="button"
                 onMouseEnter={() => setIsVisible(true)}
                 onMouseLeave={() => setIsVisible(false)}
-                className="text-zinc-400 hover:text-[#FF6B00] transition-colors focus:outline-none"
+                className="text-zinc-600 hover:text-[#FF6B00] transition-colors focus:outline-none"
                 aria-label="Aide"
             >
                 <HelpCircle size={14} />

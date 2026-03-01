@@ -46,7 +46,7 @@ export default function AdvancedMacros({ hints = {} }) {
                 <form onSubmit={calculate} className="space-y-8">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                                 Poids (kg)
                                 <Tooltip text={hints.poids || hints.weight} />
                             </label>
@@ -60,7 +60,7 @@ export default function AdvancedMacros({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                                 % MG (optionnel)
                                 <Tooltip text={hints.fat_percentage || hints.mg} />
                             </label>
@@ -75,7 +75,7 @@ export default function AdvancedMacros({ hints = {} }) {
                     </div>
 
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                             Objectif
                             <Tooltip text={hints.objectif || hints.goal} />
                         </label>
@@ -91,7 +91,7 @@ export default function AdvancedMacros({ hints = {} }) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-500 mb-1">
+                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
                             Calories Cibles
                             <Tooltip text="Votre apport calorique journalier souhaité." />
                         </label>
@@ -108,7 +108,7 @@ export default function AdvancedMacros({ hints = {} }) {
                     <div className="space-y-6">
                         <div className="space-y-2">
                             <div className="flex justify-between items-end px-1">
-                                <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Ratio Protéines</label>
+                                <label className="text-[10px] font-black uppercase text-zinc-600 tracking-widest">Ratio Protéines</label>
                                 <span className="text-sm font-black text-[#FF6B00]">{proteinRatio} g/kg</span>
                             </div>
                             <input
@@ -120,7 +120,7 @@ export default function AdvancedMacros({ hints = {} }) {
                                 onChange={(e) => setProteinRatio(e.target.value)}
                                 className="w-full accent-[#FF6B00] h-2 bg-zinc-100 rounded-lg appearance-none cursor-pointer"
                             />
-                            <div className="flex justify-between text-[8px] font-bold text-zinc-300 uppercase italic">
+                            <div className="flex justify-between text-[8px] font-bold text-zinc-700 uppercase italic">
                                 <span>Minimum (Santé)</span>
                                 <span>Intense (Muscle)</span>
                             </div>
@@ -128,7 +128,7 @@ export default function AdvancedMacros({ hints = {} }) {
 
                         <div className="space-y-2">
                             <div className="flex justify-between items-end px-1">
-                                <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Ratio Lipides</label>
+                                <label className="text-[10px] font-black uppercase text-zinc-600 tracking-widest">Ratio Lipides</label>
                                 <span className="text-sm font-black text-[#FF6B00]">{fatRatio} g/kg</span>
                             </div>
                             <input
@@ -140,7 +140,7 @@ export default function AdvancedMacros({ hints = {} }) {
                                 onChange={(e) => setFatRatio(e.target.value)}
                                 className="w-full accent-[#FF6B00] h-2 bg-zinc-100 rounded-lg appearance-none cursor-pointer"
                             />
-                            <div className="flex justify-between text-[8px] font-bold text-zinc-300 uppercase italic">
+                            <div className="flex justify-between text-[8px] font-bold text-zinc-700 uppercase italic">
                                 <span>Hormonal Min</span>
                                 <span>High Fat</span>
                             </div>
@@ -162,7 +162,7 @@ export default function AdvancedMacros({ hints = {} }) {
                             </div>
 
                             <div className="bg-zinc-50 p-6 rounded-2xl space-y-3">
-                                <div className="flex justify-between text-[10px] font-black uppercase text-zinc-400">
+                                <div className="flex justify-between text-[10px] font-black uppercase text-zinc-600">
                                     <span>Répartition Calorique</span>
                                     <span>{result.total} kcal</span>
                                 </div>
@@ -182,7 +182,7 @@ export default function AdvancedMacros({ hints = {} }) {
                 )}
             </div>
 
-            <div className="mt-8 bg-zinc-900 text-zinc-400 p-6 rounded-2xl flex items-start gap-4">
+            <div className="mt-8 bg-zinc-900 text-zinc-600 p-6 rounded-2xl flex items-start gap-4">
                 <InfoIcon size={20} className="shrink-0 mt-1" />
                 <p className="text-[10px] font-bold leading-relaxed uppercase">
                     Le ratio glucidique est ajusté automatiquement après avoir fixé vos besoins en protéines (essentiels pour la structure) et lipides (essentiels pour le système hormonal).
@@ -195,7 +195,7 @@ export default function AdvancedMacros({ hints = {} }) {
 function MacroCard({ label, grams, pct, color }) {
     return (
         <div className="flex flex-col items-center p-4 rounded-2xl border border-zinc-100">
-            <span className="text-[9px] font-black uppercase text-zinc-400 mb-1">{label}</span>
+            <span className="text-[9px] font-black uppercase text-zinc-600 mb-1">{label}</span>
             <span className="text-3xl font-black italic">{grams}<span className="text-sm not-italic opacity-40 ml-1">g</span></span>
             <div className={`mt-2 px-2 py-0.5 rounded text-[8px] font-black text-white ${color}`}>{pct}%</div>
         </div>

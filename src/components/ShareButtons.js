@@ -35,7 +35,7 @@ export default function ShareButtons({ url, title }) {
 
     return (
         <div className="flex items-center gap-4 mt-8 border-t border-zinc-100 pt-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Partager :</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-zinc-600">Partager :</span>
             <div className="flex gap-3">
                 {shareLinks.map((link) => (
                     <a

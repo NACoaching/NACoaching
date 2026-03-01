@@ -14,7 +14,7 @@ export default function NotFound() {
 
                 <h1 className="text-8xl font-black text-[#FF6B00] mb-4">404</h1>
                 <h2 className="text-2xl font-black uppercase mb-4">Oups, ce muscle n'existe pas !</h2>
-                <p className="text-zinc-500 mb-8 leading-relaxed">
+                <p className="text-zinc-700 mb-8 leading-relaxed">
                     Il semblerait que tu aies cherché à travailler une zone inconnue.
                     Reviens aux fondamentaux avant de te blesser.
                 </p>

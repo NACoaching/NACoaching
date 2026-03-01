@@ -61,7 +61,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
                         <h1 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">
                             {siteContent?.outils_header_title || "Les Outils du Coach"}
                         </h1>
-                        <p className="text-zinc-500 max-w-xl mx-auto text-lg">
+                        <p className="text-zinc-700 max-w-xl mx-auto text-lg leading-relaxed">
                             {siteContent?.outils_header_desc || "Des calculateurs précis et gratuits pour vous accompagner dans votre progression athlétique."}
                         </p>
                     </div>
@@ -79,13 +79,13 @@ export default function OutilsView({ tools, siteContent = {} }) {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="w-full bg-white border border-zinc-200 rounded-xl px-6 py-4 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:border-transparent transition-all shadow-sm pl-14"
                             />
-                            <div className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400">
+                            <div className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             </div>
                             {searchQuery && (
                                 <button
                                     onClick={() => setSearchQuery("")}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black transition"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600 hover:text-black transition"
                                 >
                                     Effacer
                                 </button>
@@ -98,7 +98,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
                                 onClick={() => setSelectedCategory("Tous")}
                                 className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${selectedCategory === "Tous"
                                     ? 'bg-[#FF6B00] text-black border-[#FF6B00] shadow-[0_4px_12px_rgba(255,107,0,0.2)]'
-                                    : 'bg-white text-zinc-500 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
+                                    : 'bg-white text-zinc-600 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
                                     }`}
                             >
                                 Tous
@@ -109,7 +109,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
                                     onClick={() => setSelectedCategory(category)}
                                     className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest border transition-all ${selectedCategory === category
                                         ? 'bg-[#FF6B00] text-black border-[#FF6B00] shadow-[0_4px_12px_rgba(255,107,0,0.2)]'
-                                        : 'bg-white text-zinc-500 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
+                                        : 'bg-white text-zinc-700 border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] shadow-sm'
                                         }`}
                                 >
                                     {category}
@@ -121,7 +121,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredTools.map((tool, index) => {
-                        const config = iconMap[tool.cta] || { icon: HelpCircle, color: "text-zinc-400", bg: "bg-zinc-100" };
+                        const config = iconMap[tool.cta] || { icon: HelpCircle, color: "text-zinc-600", bg: "bg-zinc-100" };
                         const Icon = config.icon;
 
                         return (
@@ -140,7 +140,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
                                             <div className="text-[#FF6B00] text-xs font-black uppercase mb-4 tracking-widest">{tool.subcategory}</div>
                                         )}
 
-                                        <p className="text-zinc-500 mb-6 flex-grow leading-relaxed line-clamp-3">
+                                        <p className="text-zinc-600 mb-6 flex-grow leading-relaxed line-clamp-3">
                                             {tool.excerpt}
                                         </p>
 
@@ -156,7 +156,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
 
                 {filteredTools.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-zinc-500 text-lg">Aucun outil trouvé pour cette recherche.</p>
+                        <p className="text-zinc-700 text-lg">Aucun outil trouvé pour cette recherche.</p>
                     </div>
                 )}
 
@@ -165,7 +165,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
                     <h2 className="text-3xl font-black uppercase mb-6 text-zinc-900">
                         {siteContent?.outils_seo_title || "Pourquoi utiliser mes outils de coaching ?"}
                     </h2>
-                    <p className="text-zinc-600">
+                    <p className="text-zinc-700 leading-relaxed font-medium">
                         {siteContent?.outils_seo_desc || "La progression sportive ne doit rien au hasard. Que vous soyez pratiquant de musculation, coureur à pied ou athlète hybride, la quantification de la charge et l'ajustement de l'intensité sont les clés de la réussite. Ces outils sont ceux que j'utilise quotidiennement avec mes athlètes pour planifier leurs saisons."}
                     </p>
                 </div>

@@ -65,7 +65,7 @@ export default function RecoveryScore({ hints = {} }) {
                     <h2 className="text-4xl font-black uppercase mb-4 italic text-black">
                         Recovery <span className="text-[#FF6B00]">Score</span>
                     </h2>
-                    <p className="text-zinc-500 max-w-md mx-auto">
+                    <p className="text-zinc-700 max-w-md mx-auto">
                         Auto-évaluation scientifique de ta readiness pour adapter ta séance en moins de 60 secondes.
                     </p>
                 </div>
@@ -79,11 +79,11 @@ export default function RecoveryScore({ hints = {} }) {
                                         <q.icon size={20} />
                                     </div>
                                     <div>
-                                        <div className="flex items-center gap-1 font-black uppercase text-sm tracking-tight">
+                                        <div className="flex items-center gap-1 font-black uppercase text-sm tracking-tight text-zinc-900">
                                             {q.label}
                                             <Tooltip text={hints[q.key]} />
                                         </div>
-                                        <div className="text-[10px] text-zinc-400 font-bold uppercase">{q.desc}</div>
+                                        <div className="text-[10px] text-zinc-700 font-bold uppercase">{q.desc}</div>
                                     </div>
                                 </div>
                                 <span className="text-2xl font-black italic text-[#FF6B00]">{scores[q.key]}/5</span>
@@ -95,7 +95,7 @@ export default function RecoveryScore({ hints = {} }) {
                                         onClick={() => handleScore(q.key, val)}
                                         className={`h-12 rounded-xl border-2 transition-all font-black text-lg ${scores[q.key] === val
                                             ? 'bg-black text-white border-black scale-105'
-                                            : 'bg-zinc-50 border-zinc-100 text-zinc-300 hover:border-zinc-300'
+                                            : 'bg-zinc-50 border-zinc-100 text-zinc-600 hover:border-zinc-300'
                                             }`}
                                     >
                                         {val}
@@ -118,7 +118,7 @@ export default function RecoveryScore({ hints = {} }) {
                             onClick={() => { setResult(null); setScores({ sleep: 3, fatigue: 3, muscles: 3, stress: 3, mood: 3 }); }}
                             className="bg-zinc-100 p-5 rounded-2xl hover:bg-zinc-200 transition-colors"
                         >
-                            <RotateCcw size={24} className="text-zinc-400" />
+                            <RotateCcw size={24} className="text-zinc-600" />
                         </button>
                     )}
                 </div>
@@ -140,7 +140,7 @@ export default function RecoveryScore({ hints = {} }) {
                 )}
             </div>
 
-            <p className="mt-8 text-center text-zinc-400 text-xs font-bold uppercase tracking-widest">
+            <p className="mt-8 text-center text-zinc-600 text-xs font-bold uppercase tracking-widest">
                 Based on Hooper-Mackinnon Scale for Athlete Monitoring
             </p>
         </div>

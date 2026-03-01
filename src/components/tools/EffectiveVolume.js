@@ -18,7 +18,7 @@ export default function EffectiveVolume({ hints = {} }) {
     });
 
     const getStatus = (sets) => {
-        if (sets === 0) return { label: 'Inactif', color: 'bg-zinc-100 text-zinc-400', width: '5%', icon: Info };
+        if (sets === 0) return { label: 'Inactif', color: 'bg-zinc-100 text-zinc-600', width: '5%', icon: Info };
         if (sets < 6) return { label: 'Maintien', color: 'bg-blue-100 text-blue-600', width: '30%', icon: CheckCircle2 };
         if (sets <= 15) return { label: 'Volume Optimal', color: 'bg-green-100 text-green-600', width: '70%', icon: CheckCircle2 };
         if (sets <= 22) return { label: 'Over-reaching', color: 'bg-orange-100 text-orange-600', width: '90%', icon: AlertTriangle };
@@ -33,12 +33,12 @@ export default function EffectiveVolume({ hints = {} }) {
                 </div>
                 <div>
                     <h2 className="text-2xl font-black uppercase text-zinc-900">Calculateur de Volume Effectif</h2>
-                    <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Optimisation de l'hypertrophie</p>
+                    <p className="text-xs font-bold text-zinc-600 uppercase tracking-widest">Optimisation de l'hypertrophie</p>
                 </div>
             </div>
 
             <div className="space-y-6 mb-10">
-                <p className="text-sm text-zinc-500 italic mb-6">Indiquez le nombre de **séries effectives** (amenées à proximité de l'échec) par semaine pour chaque groupe musculaire.</p>
+                <p className="text-sm text-zinc-700 italic mb-6">Indiquez le nombre de **séries effectives** (amenées à proximité de l'échec) par semaine pour chaque groupe musculaire.</p>
 
                 {muscles.map((m) => {
                     const status = getStatus(volumes[m.id]);
@@ -48,7 +48,7 @@ export default function EffectiveVolume({ hints = {} }) {
                         <div key={m.id} className="group">
                             <div className="flex justify-between items-end mb-3">
                                 <div>
-                                    <label className="flex items-center text-xs font-black uppercase text-zinc-500 mb-1">
+                                    <label className="flex items-center text-xs font-black uppercase text-zinc-700 mb-1">
                                         {m.name}
                                         <Tooltip text={hints[m.id]} />
                                     </label>
@@ -59,7 +59,7 @@ export default function EffectiveVolume({ hints = {} }) {
                                             onChange={(e) => setVolumes({ ...volumes, [m.id]: Math.max(0, parseInt(e.target.value) || 0) })}
                                             className="w-20 bg-zinc-50 border border-zinc-200 p-2 rounded-lg font-bold text-center focus:outline-none focus:border-emerald-500 transition"
                                         />
-                                        <span className="text-xs font-bold text-zinc-400 uppercase">séries / sem</span>
+                                        <span className="text-xs font-bold text-zinc-600 uppercase">séries / sem</span>
                                     </div>
                                 </div>
                                 <div className={`px-3 py-1 rounded-full text-[10px] font-black uppercase flex items-center gap-1.5 ${status.color}`}>
@@ -79,7 +79,7 @@ export default function EffectiveVolume({ hints = {} }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100">
-                    <h4 className="text-[10px] font-black uppercase text-zinc-400 mb-2">Guide de lecture</h4>
+                    <h4 className="text-[10px] font-black uppercase text-zinc-600 mb-2">Guide de lecture</h4>
                     <ul className="space-y-2">
                         <li className="text-[11px] text-zinc-600 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" /> **6-10 séries** : Minimum pour progresser.</li>
                         <li className="text-[11px] text-zinc-600 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500" /> **12-20 séries** : Zone de gain maximal.</li>
@@ -87,8 +87,8 @@ export default function EffectiveVolume({ hints = {} }) {
                     </ul>
                 </div>
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex gap-3 items-start">
-                    <Info size={16} className="text-zinc-400 shrink-0 mt-0.5" />
-                    <p className="text-[10px] text-zinc-500 leading-relaxed italic">
+                    <Info size={16} className="text-zinc-600 shrink-0 mt-0.5" />
+                    <p className="text-[10px] text-zinc-700 leading-relaxed italic">
                         Ces données sont basées sur les travaux de **Dr. Mike Israetel** et **James Krieger**. Notez que la récupération dépend aussi de votre sommeil et de votre nutrition.
                     </p>
                 </div>

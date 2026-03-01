@@ -28,7 +28,7 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                 <AnimWrapper>
                     <div className="text-center mb-12">
                         <h2 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">{siteContent.shop_title || 'La Boutique'}</h2>
-                        <p className="text-zinc-400 max-w-xl mx-auto italic">
+                        <p className="text-zinc-600 max-w-xl mx-auto italic">
                             {siteContent.shop_subtitle || 'Programmes basés sur la science.'}
                         </p>
                     </div>
@@ -43,7 +43,7 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition ${selectedCategory === category
                                     ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
-                                    : 'bg-zinc-900 text-zinc-400 border-zinc-700 hover:border-[#FF6B00] hover:text-[#FF6B00]'
+                                    : 'bg-zinc-900 text-zinc-600 border-zinc-700 hover:border-[#FF6B00] hover:text-[#FF6B00]'
                                     }`}
                             >
                                 {category}
@@ -69,7 +69,7 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                                             {product.discount_price ? (
                                                 <>
                                                     <span className="text-3xl font-black italic text-[#FF6B00]">{product.discount_price}</span>
-                                                    <span className="text-sm font-bold text-zinc-500 line-through opacity-70">{product.price}</span>
+                                                    <span className="text-sm font-bold text-zinc-700 line-through opacity-70">{product.price}</span>
                                                 </>
                                             ) : (
                                                 <span className="text-3xl font-black italic">{product.price}</span>
@@ -94,11 +94,11 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                                                     />
                                                 ))}
                                             </div>
-                                            <span className="text-sm text-zinc-400 font-bold">{avg}/5 ({count} avis)</span>
+                                            <span className="text-sm text-zinc-600 font-bold">{avg}/5 ({count} avis)</span>
                                         </div>
                                     )}
 
-                                    <p className="text-zinc-400 mb-8 flex-grow">{product.description}</p>
+                                    <p className="text-zinc-600 mb-8 flex-grow">{product.description}</p>
                                     <ul className="space-y-3 mb-10">
                                         {product.features?.map((f, i) => (
                                             <li key={i} className="flex items-center gap-3 text-sm font-bold">
