@@ -107,9 +107,9 @@ export default async function VolumePage({ params }) {
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
                             components={{
-                                h1: ({ node, ...props }) => <h2 className="text-2xl md:text-3xl font-black uppercase text-white mb-6 mt-10" {...props} />,
-                                h2: ({ node, ...props }) => <h3 className="text-xl md:text-2xl font-black uppercase text-white mb-4 mt-8" {...props} />,
-                                h3: ({ node, ...props }) => <h4 className="text-lg md:text-xl font-black uppercase text-white mb-3 mt-6" {...props} />,
+                                h1: ({ node, ...props }) => <h2 className="text-xl md:text-2xl font-black uppercase text-white mb-4 mt-8" {...props} />,
+                                h2: ({ node, ...props }) => <h3 className="text-lg md:text-xl font-black uppercase text-white mb-3 mt-6" {...props} />,
+                                h3: ({ node, ...props }) => <h4 className="text-base md:text-lg font-black uppercase text-white mb-2 mt-4" {...props} />,
                                 p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
                                 strong: ({ node, ...props }) => <strong className="text-white font-black" {...props} />,
                                 ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-4 space-y-2" {...props} />,
