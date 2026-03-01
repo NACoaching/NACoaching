@@ -571,7 +571,8 @@ export default function AdminPage() {
         if (type === 'article') {
             setArticleForm({
                 title: item.title, category: item.category, subcategory: item.subcategory || '', excerpt: item.excerpt,
-                content: item.content, image: item.image, cta: item.cta, date: item.date,
+                content: item.content, image: item.image, cta: item.cta || '', date: item.date,
+                is_published: item.is_published || false,
                 affiliate_link: item.affiliate_link || '',
                 affiliate_text: item.affiliate_text || '',
                 affiliate_image: item.affiliate_image || '',
@@ -596,6 +597,7 @@ export default function AdminPage() {
         setEditingItem(null);
         setArticleForm({
             title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
+            is_published: false,
             affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
             related_title: '', related_subtitle: '', related_articles: [],
             tool_hints: {},
@@ -1838,6 +1840,7 @@ export default function AdminPage() {
                             <div className="mb-4">
                                 <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">Choisir un produit</label>
                                 <select
+                                    value={faqTool || ""}
                                     onChange={async (e) => {
                                         const p = products.find(p => p.id === parseInt(e.target.value));
                                         setFaqProduct(p);
