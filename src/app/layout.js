@@ -55,10 +55,7 @@ export async function generateMetadata() {
       images: [content.logo_url || '/logo.png'],
     },
     icons: {
-      icon: [
-        { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
-        { url: '/favicon.png', type: 'image/png', sizes: '64x64' },
-      ],
+      icon: '/favicon.ico',
       apple: '/apple-icon.png',
     },
     authors: [{ name: 'NA Coaching', url: siteUrl }],
