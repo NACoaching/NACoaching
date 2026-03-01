@@ -57,18 +57,15 @@ export default async function VolumePage({ params }) {
     const articles = await getVolumeData(slug);
 
     // Fetch custom SEO content for this specific volume
-    // The DB key is like 'volume_seo_volume-1-la-science-de-la-force'
     const { data: volumeContentData } = await supabase
         .from('site_content')
         .select('value')
-        .eq('key', `volume_seo_volume-${slug}`)
+        .eq('key', `volume_seo_${slug}`)
         .single();
 
     const volumeSeoText = volumeContentData?.value || "Retrouvez ici toute l'expertise NA Coaching compilée. Que vous cherchiez à optimiser vos gains, comprendre la physiologie humaine ou adopter les meilleures routines.";
 
-    // Format the slug '1-la-science-de-la-force' into 'Volume 1 : La Science De La Force'
-    const formattedSlug = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-    const fancyTitle = `Volume ${formattedSlug.replace(' ', ' : ')}`;
+    const fancyTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).replace('Volume', 'Volume');
 
     // Group articles by subcategory to create beautiful "Chapters"
     const chapters = {};
