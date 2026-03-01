@@ -103,8 +103,19 @@ export default async function VolumePage({ params }) {
                         {fancyTitle}
                     </h1>
 
-                    <div className="prose prose-invert prose-lg max-w-2xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    <div className="max-w-2xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed">
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                                h1: ({ node, ...props }) => <h2 className="text-2xl md:text-3xl font-black uppercase text-white mb-6 mt-10" {...props} />,
+                                h2: ({ node, ...props }) => <h3 className="text-xl md:text-2xl font-black uppercase text-white mb-4 mt-8" {...props} />,
+                                h3: ({ node, ...props }) => <h4 className="text-lg md:text-xl font-black uppercase text-white mb-3 mt-6" {...props} />,
+                                p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
+                                strong: ({ node, ...props }) => <strong className="text-white font-black" {...props} />,
+                                ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-4 space-y-2" {...props} />,
+                                li: ({ node, ...props }) => <li className="text-sm md:text-base" {...props} />,
+                            }}
+                        >
                             {volumeSeoText}
                         </ReactMarkdown>
                     </div>
