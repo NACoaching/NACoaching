@@ -74,7 +74,7 @@ export default function Calculator1RM({ hints = {} }) {
                     <div className="mt-auto bg-white border border-zinc-200 p-4 rounded-lg">
                         <div className="text-center mb-4">
                             <span className="block text-xs font-bold uppercase text-zinc-600">Ton 1RM estimé</span>
-                            <span className="text-4xl font-black text-[#FF6B00]">{result} kg</span>
+                            <span className="text-6xl font-black text-[#FF6B00]">{result} kg</span>
                         </div>
                         <div className="grid grid-cols-4 gap-2 text-center text-xs">
                             <div className="bg-zinc-50 p-2 rounded">

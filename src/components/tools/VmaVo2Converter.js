@@ -109,7 +109,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                     <div className="mt-auto bg-white border border-zinc-200 p-4 rounded-lg space-y-3">
                         <div className="text-center">
                             <span className="block text-xs font-bold uppercase text-zinc-600">VO2max Relatif</span>
-                            <span className="text-4xl font-black text-[#FF6B00]">{vo2Rel}</span>
+                            <span className="text-6xl font-black text-[#FF6B00]">{vo2Rel}</span>
                             <span className="block text-[10px] text-zinc-600">ml/kg/min</span>
                         </div>
                         {vo2Abs && (

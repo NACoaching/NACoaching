@@ -141,7 +141,7 @@ export default function RPEConverter({ hints = {} }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-zinc-900 text-white p-6 rounded-2xl flex flex-col items-center justify-center text-center">
                     <span className="text-xs font-black uppercase tracking-widest text-zinc-700 mb-2">Intensité Relative</span>
-                    <div className="text-4xl font-black text-blue-400">{percentage}%</div>
+                    <div className="text-5xl font-black text-blue-500">{percentage}%</div>
                     <span className="text-[10px] text-zinc-600 mt-1 uppercase font-bold">de ton 1RM</span>
                 </div>
 
