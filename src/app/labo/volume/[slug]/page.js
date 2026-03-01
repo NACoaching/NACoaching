@@ -23,8 +23,17 @@ async function getVolumeData(slug) {
 
         const volumeArticles = (articles || []).filter(a => {
             if (!a.category) return false;
-            const cat = a.category.toUpperCase().replace(/[^A-Z0-9]/g, '');
-            const tgt = targetCategory.replace(/[^A-Z0-9]/g, '');
+
+            // Normalize strings (remove accents and special chars) for robust matching
+            const normalize = (str) => str
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toUpperCase()
+                .replace(/[^A-Z0-9]/g, '');
+
+            const cat = normalize(a.category);
+            const tgt = normalize(targetCategory);
+
             return cat.includes(tgt) || tgt.includes(cat);
         });
 
