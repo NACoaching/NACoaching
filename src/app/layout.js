@@ -56,10 +56,10 @@ export async function generateMetadata() {
     },
     icons: {
       icon: [
-        { url: '/favicon.ico', sizes: '32x32' },
-        { url: '/favicon.png', type: 'image/png', sizes: '500x500' },
+        { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+        { url: '/favicon.png', type: 'image/png', sizes: '64x64' },
       ],
-      apple: '/favicon.png',
+      apple: '/apple-icon.png',
     },
     authors: [{ name: 'NA Coaching', url: siteUrl }],
     publisher: 'NA Coaching',
