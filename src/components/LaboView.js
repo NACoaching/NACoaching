@@ -28,10 +28,18 @@ export default function LaboView({ articles, siteContent }) {
     const [searchQuery, setSearchQuery] = useState("");
 
     const filteredArticles = articles.filter(article => {
-        const matchesCategory = selectedCategory === "Tous" ? true : article.category === selectedCategory;
+        if (article.is_published === false) return false;
+
         const matchesSearch = (article.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             article.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()));
-        return (article.is_published !== false) && matchesCategory && matchesSearch;
+
+        if (!matchesSearch) return false;
+
+        if (selectedCategory === "Tous") return true;
+        if (selectedCategory === "Outils") return article.category === "Outils";
+
+        // Otherwise, match by subcategory (Chapter)
+        return article.subcategory === selectedCategory;
     });
 
     return (
@@ -151,10 +159,15 @@ export default function LaboView({ articles, siteContent }) {
                                 >
                                     Tous
                                 </button>
-                                {[...new Set(articles
-                                    .filter(a => a.is_published !== false && a.category && !a.category.startsWith('Volume'))
-                                    .map(a => a.category)
-                                )].sort().map(category => (
+                                {/* Categorized Filters */}
+                                {["Outils", ...new Set(articles
+                                    .filter(a => a.is_published !== false && a.subcategory && !a.category.startsWith('Volume'))
+                                    .map(a => a.subcategory)
+                                )].sort((a, b) => {
+                                    if (a === "Outils") return -1;
+                                    if (b === "Outils") return 1;
+                                    return a.localeCompare(b);
+                                }).map(category => (
                                     <button
                                         key={category}
                                         onClick={() => setSelectedCategory(category)}
