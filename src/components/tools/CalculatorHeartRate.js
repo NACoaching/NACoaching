@@ -50,7 +50,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                 <form onSubmit={calculateZones} className="space-y-4 mb-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
                                 Ton Âge
                                 <Tooltip text={hints.age} />
                             </label>
@@ -64,7 +64,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
                                 FC Repos (bpm)
                                 <Tooltip text={hints.repos || hints.rest_hr} />
                             </label>
@@ -88,11 +88,11 @@ export default function CalculatorHeartRate({ hints = {} }) {
                         {zones.map((zone, index) => (
                             <div key={index} className={`flex justify-between items-center p-3 border-b border-zinc-100 last:border-0 text-xs ${zone.color}`}>
                                 <div>
-                                    <span className="font-black block uppercase">{zone.name}</span>
-                                    <span className="opacity-75">{zone.range}</span>
+                                    <span className="font-black block uppercase text-zinc-900">{zone.name}</span>
+                                    <span className="opacity-90 font-bold">{zone.range}</span>
                                 </div>
-                                <div className="text-right font-bold text-lg">
-                                    {zone.min}-{zone.max} <span className="text-[10px] font-normal">bpm</span>
+                                <div className="text-right font-black text-lg text-black">
+                                    {zone.min}-{zone.max} <span className="text-[10px] font-bold text-zinc-700 uppercase">bpm</span>
                                 </div>
                             </div>
                         ))}

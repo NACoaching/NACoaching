@@ -114,7 +114,7 @@ export default async function CalculatorHeartRatePage() {
                     <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
                         {article.title || 'Zones de Fréquence Cardiaque'}
                     </h1>
-                    <p className="text-xl text-zinc-600 mb-12">
+                    <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
                         {article.intro || "Optimisez votre entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
                     </p>
 
@@ -130,7 +130,7 @@ export default async function CalculatorHeartRatePage() {
                         <div className="mt-12 border-t border-zinc-200 pt-12 flex flex-col items-center">
                             <div className="flex items-center gap-2 mb-8">
                                 <Info size={16} className="text-[#FF6B00]" />
-                                <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
+                                <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                             </div>
 
                             <div className="max-w-md w-full mx-auto">
@@ -156,7 +156,11 @@ export default async function CalculatorHeartRatePage() {
                     />
                 </AnimWrapper>
             </div>
-            <HomeFAQ faqData={faqData} />
+            <div className="bg-white">
+                {faqData && faqData.length > 0 && (
+                    <HomeFAQ faqData={faqData} title="Questions Fréquentes sur la FC" id="faq-fc" />
+                )}
+            </div>
         </section>
     );
 }
