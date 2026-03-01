@@ -33,12 +33,35 @@ export default async function HomePage() {
   };
 
   const DEFAULT_HOME_FAQS = [
-    { question: "Le coaching est-il adapté à mon sport ?", answer: "Oui, en tant que Master EOPS, j'analyse les spécificités physiologiques et biomécaniques de votre discipline (course à pied, football, triathlon...) pour créer un programme qui optimise vos performances de manière ciblée." },
-    { question: "Proposez-vous des programmes de réathlétisation ?", answer: "C'est l'une de mes spécialités. Si vous sortez d'une blessure, nous établirons un protocole scientifique et progressif pour garantir un retour au sport optimal et sans risque de rechute." },
-    { question: "Quand vais-je voir les premiers résultats ?", answer: "La performance prend du temps, mais avec une surcharge progressive bien calibrée, les premiers gains de force ou d'endurance se font ressentir dès 4 à 6 semaines d'entraînement sérieux." },
-    { question: "Ai-je besoin de beaucoup de matériel ?", answer: "Pas obligatoirement. Que vous soyez inscrit(e) dans une salle suréquipée ou que vous vous entraîniez à la maison avec une paire d'haltères, j'adapte le programme pour respecter les principes physiologiques de progression avec ce que vous avez." },
-    { question: "Proposez-vous un suivi nutritionnel ?", answer: "Je ne donne pas de plan alimentaire figé, mais je vous apprends à gérer vos macronutriments (comme le montre mon outil 'Besoins Caloriques' gratuit) pour soutenir vos nouvelles performances sportives." }
-  ];
+    {
+        question: "Le coaching sportif personnalisé est-il adapté aux débutants ?",
+        answer: "Absolument. En tant que coach diplômé Master EOPS, j'adapte chaque programme à votre niveau initial, vos antécédents médicaux et vos objectifs personnels. Que vous n'ayez jamais fait de sport ou que vous repreniez après une longue pause, la progression est calibrée pour être efficace et sans risque."
+    },
+    {
+        question: "Proposez-vous des programmes de réathlétisation après blessure ?",
+        answer: "C'est l'une de mes spécialités principales. Après une blessure (rupture des ligaments croisés, entorse, déchirure musculaire, tendinopathie), j'établis un protocole de réathlétisation progressif et scientifique. L'objectif est un retour au sport optimal, sans rechute, en respectant les délais de cicatrisation tissulaire."
+    },
+    {
+        question: "En combien de temps peut-on voir les premiers résultats en musculation ?",
+        answer: "Avec un entraînement structuré et une surcharge progressive bien calibrée, les premiers gains de force se ressentent dès 3 à 4 semaines. Les changements physiques visibles (hypertrophie, composition corporelle) apparaissent généralement entre 6 et 12 semaines d'entraînement régulier."
+    },
+    {
+        question: "Ai-je besoin de matériel ou d'une salle de sport pour suivre un programme ?",
+        answer: "Pas obligatoirement. Je m'adapte à votre environnement : salle de musculation complète, home gym avec haltères et banc, ou même entraînement au poids du corps. Le programme respecte les principes physiologiques de progression quel que soit le matériel disponible."
+    },
+    {
+        question: "Proposez-vous un suivi nutritionnel en complément de l'entraînement ?",
+        answer: "Je ne prescris pas de régime alimentaire, mais je vous apprends à gérer vos macronutriments (protéines, glucides, lipides) pour soutenir vos performances sportives. Mon outil gratuit 'Calculateur de besoins caloriques' vous aide à déterminer votre apport optimal au quotidien."
+    },
+    {
+        question: "Quelle est la différence entre un coach sportif classique et un Master EOPS ?",
+        answer: "Le Master EOPS (Entraînement et Optimisation de la Performance Sportive) est le plus haut niveau de formation universitaire en préparation physique en France (Bac+5). Il combine des compétences en physiologie de l'exercice, biomécanique, planification de l'entraînement et réathlétisation — bien au-delà d'un simple diplôme de coaching."
+    },
+    {
+        question: "Comment fonctionne le coaching en ligne à distance ?",
+        answer: "Après un bilan initial détaillé, vous recevez votre programme personnalisé via une application dédiée avec vidéos des exercices. Un suivi hebdomadaire permet d'ajuster les charges, le volume et l'intensité en fonction de votre progression et de vos sensations."
+    }
+];
 
   // Parse global FAQs if they exist
   let globalFaqs = DEFAULT_HOME_FAQS;

@@ -47,16 +47,24 @@ const softwareJsonLd = {
 
 const DEFAULT_FAQ_DATA = [
     {
-        question: 'Comment calculer mes zones de fréquence cardiaque ?',
-        answer: 'La méthode la plus précise est celle de Karvonen, qui prend en compte votre fréquence cardiaque de repos et votre fréquence cardiaque maximale.'
+        question: "Comment calculer ses zones de fréquence cardiaque d'entraînement ?",
+        answer: "La méthode la plus précise est celle de Karvonen, qui utilise votre fréquence cardiaque de réserve (FC max − FC repos). Elle donne 5 zones d'intensité personnalisées : récupération, endurance fondamentale, tempo, seuil et effort maximal. Notre calculateur les détermine automatiquement."
     },
     {
-        question: 'C\'est quoi la zone d\'endurance fondamentale ?',
-        answer: 'L\'endurance fondamentale correspond généralement aux zones 1 et 2 (entre 60% et 75% de votre FC Max). C\'est l\'allure à laquelle vous pouvez parler sans être essoufflé.'
+        question: "C'est quoi la zone d'endurance fondamentale et à quoi sert-elle ?",
+        answer: "L'endurance fondamentale correspond aux zones 1 et 2, soit environ 60-75% de votre FC de réserve. C'est l'allure où vous pouvez tenir une conversation sans essoufflement. Elle développe le réseau capillaire, améliore l'utilisation des graisses et constitue la base de tout programme de course à pied."
     },
     {
-        question: 'Pourquoi utiliser la méthode de Karvonen ?',
-        answer: 'Contrairement à la formule classique (220-âge), Karvonen utilise la fréquence cardiaque de réserve, ce qui rend les zones d\'intensité beaucoup plus personnalisées et précises.'
+        question: "Pourquoi la méthode de Karvonen est-elle plus précise que 220 moins l'âge ?",
+        answer: "La formule classique (220 − âge) estime seulement la FC max théorique et ne tient pas compte de votre fréquence cardiaque de repos. Karvonen utilise la FCR (fréquence cardiaque de réserve = FC max − FC repos), ce qui rend les zones beaucoup plus personnalisées, surtout pour les sportifs entraînés."
+    },
+    {
+        question: "Comment mesurer sa fréquence cardiaque de repos ?",
+        answer: "Mesurez votre FC de repos le matin au réveil, allongé et détendu, avant de vous lever. Comptez vos pulsations pendant 60 secondes ou utilisez une montre connectée. Faites la mesure sur 3 à 5 jours consécutifs et prenez la moyenne pour un résultat fiable."
+    },
+    {
+        question: "Dans quelle zone cardiaque courir pour perdre du poids ?",
+        answer: "La zone d'endurance fondamentale (zone 2, environ 60-70% de FC max) est idéale pour la perte de poids car elle maximise l'oxydation des graisses. Cependant, les séances à haute intensité (zone 4-5) brûlent plus de calories totales et créent un effet afterburn. L'idéal est de combiner les deux."
     }
 ];
 

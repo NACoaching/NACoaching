@@ -1,4 +1,5 @@
 import ACWRCalculator from "@/components/tools/ACWRCalculator";
+import HomeFAQ from '@/components/HomeFAQ';
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, Info } from "lucide-react";
@@ -40,9 +41,54 @@ const jsonLd = {
     'description': 'Outil gratuit pour calculer son Acute:Chronic Workload Ratio (ACWR) et prévenir le surentraînement.'
 };
 
+const DEFAULT_FAQ_DATA = [
+    {
+        question: "C'est quoi le ratio ACWR en préparation physique ?",
+        answer: "Le ratio ACWR (Acute:Chronic Workload Ratio) compare votre charge d'entraînement récente (semaine en cours) à votre charge chronique (moyenne des 4 dernières semaines). Un ratio entre 0.8 et 1.3 est considéré comme la 'zone optimale' de progression avec un risque de blessure minimisé."
+    },
+    {
+        question: "Comment calculer l'ACWR pour éviter les blessures ?",
+        answer: "Divisez la charge de la semaine en cours par la moyenne des 4 semaines précédentes. La charge peut être mesurée en volume (km, tonnes soulevées) ou en charge interne (RPE × durée). Un ratio supérieur à 1.5 indique un pic de charge dangereux et augmente significativement le risque de blessure."
+    },
+    {
+        question: "Quelle est la zone optimale du ratio ACWR ?",
+        answer: "La zone optimale se situe entre 0.8 et 1.3. En dessous de 0.8, vous êtes en sous-entraînement et perdez des adaptations. Au-dessus de 1.5, le risque de blessure augmente de 200 à 400% selon les études. Entre 1.3 et 1.5, c'est une zone de vigilance qui nécessite une attention particulière."
+    },
+    {
+        question: "L'ACWR est-il utile pour les sportifs amateurs ?",
+        answer: "Absolument. L'ACWR est encore plus important pour les amateurs car ils sont plus vulnérables aux pics de charge (reprise après vacances, augmentation brutale du volume). Notre outil simplifie le calcul : entrez vos charges hebdomadaires et le ratio est calculé automatiquement avec un code couleur visuel."
+    },
+    {
+        question: "Comment augmenter progressivement sa charge d'entraînement ?",
+        answer: "La règle générale est de ne pas augmenter la charge de plus de 10% par semaine. Cela maintient l'ACWR dans la zone optimale. Par exemple, si vous courez 30 km cette semaine, ne dépassez pas 33 km la semaine suivante. Cette progression graduelle permet au corps de s'adapter et réduit le risque de blessure."
+    }
+];
+
 export default async function ACWRPage() {
     const article = await getToolArticle('/outils/acwr');
     const relatedArticles = await getToolRelatedArticles(article);
+
+    let faqData = DEFAULT_FAQ_DATA;
+    const { data: faqItem } = await supabase.from('site_content').select('value').eq('key', 'tool_acwr_faq').single();
+    if (faqItem && faqItem.value) {
+        try {
+            const parsed = JSON.parse(faqItem.value);
+            if (parsed && parsed.length > 0) faqData = parsed;
+        } catch (e) { console.error("Error parsing FAQ", e); }
+    }
+
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+            '@type': 'Question',
+            'name': item.question,
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': item.answer
+            }
+        }))
+    };
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">

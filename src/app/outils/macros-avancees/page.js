@@ -1,4 +1,5 @@
 import AdvancedMacros from "@/components/tools/AdvancedMacros";
+import HomeFAQ from '@/components/HomeFAQ';
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, Info } from "lucide-react";
@@ -40,9 +41,54 @@ const jsonLd = {
     'description': 'Calculateur nutritionnel précis pour athlètes et pratiquants de musculation.'
 };
 
+const DEFAULT_FAQ_DATA = [
+    {
+        question: "Comment calculer la répartition idéale de ses macronutriments ?",
+        answer: "La répartition optimale dépend de votre objectif : en prise de masse, visez environ 2g de protéines/kg, 4-6g de glucides/kg et 0.8-1.2g de lipides/kg. En sèche, augmentez les protéines (2-2.5g/kg), réduisez les glucides et maintenez les lipides. Notre outil calcule ces valeurs automatiquement."
+    },
+    {
+        question: "Combien de protéines par jour pour la musculation ?",
+        answer: "La recherche scientifique recommande 1.6 à 2.2g de protéines par kg de poids corporel pour optimiser la synthèse protéique musculaire. Au-delà de 2.2g/kg, les bénéfices supplémentaires sont minimes. Répartissez l'apport sur 3 à 5 repas pour maximiser l'absorption."
+    },
+    {
+        question: "Faut-il compter les macros ou les calories pour progresser ?",
+        answer: "Les deux sont complémentaires. Les calories déterminent si vous gagnez ou perdez du poids, tandis que la répartition des macronutriments influence la composition corporelle (muscle vs graisse). Compter ses macros est la méthode la plus efficace pour transformer son physique de manière ciblée."
+    },
+    {
+        question: "Quelle est la différence entre macros et calories ?",
+        answer: "Les macronutriments (protéines, glucides, lipides) fournissent des calories : 1g de protéine = 4 kcal, 1g de glucide = 4 kcal, 1g de lipide = 9 kcal. Les calories sont l'énergie totale, les macros sont la composition qualitative de cette énergie. Les deux comptent pour la performance et la composition corporelle."
+    },
+    {
+        question: "Comment adapter ses macros selon les jours d'entraînement ?",
+        answer: "Le cycling des glucides est une stratégie efficace : augmentez les glucides les jours d'entraînement intense (+50-100g) pour soutenir la performance, et réduisez-les légèrement les jours de repos. Les protéines restent constantes chaque jour. Notre outil vous aide à ajuster cette répartition automatiquement."
+    }
+];
+
 export default async function MacrosAvanceesPage() {
     const article = await getToolArticle('/outils/macros-avancees');
     const relatedArticles = await getToolRelatedArticles(article);
+
+    let faqData = DEFAULT_FAQ_DATA;
+    const { data: faqItem } = await supabase.from('site_content').select('value').eq('key', 'tool_macros_faq').single();
+    if (faqItem && faqItem.value) {
+        try {
+            const parsed = JSON.parse(faqItem.value);
+            if (parsed && parsed.length > 0) faqData = parsed;
+        } catch (e) { console.error("Error parsing FAQ", e); }
+    }
+
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+            '@type': 'Question',
+            'name': item.question,
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': item.answer
+            }
+        }))
+    };
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">

@@ -47,16 +47,24 @@ const softwareJsonLd = {
 
 const DEFAULT_FAQ_DATA = [
     {
-        question: 'Comment calculer mes besoins caloriques ?',
-        answer: 'Vos besoins dépendent de votre métabolisme de base (âge, sexe, poids, taille) et de votre niveau d\'activité physique journalier.'
+        question: "Comment calculer ses besoins caloriques journaliers ?",
+        answer: "Vos besoins caloriques dépendent de deux facteurs : votre métabolisme de base (BMR – calories brûlées au repos, calculé selon votre âge, sexe, poids et taille) et votre niveau d'activité physique quotidien. Le TDEE (Total Daily Energy Expenditure) est le résultat de ces deux facteurs combinés."
     },
     {
-        question: 'C\'est quoi le TDEE ?',
-        answer: 'Le TDEE (Total Daily Energy Expenditure) est le nombre total de calories que vous brûlez par jour. C\'est le chiffre de référence pour ajuster votre alimentation.'
+        question: "C'est quoi le TDEE et pourquoi est-ce important ?",
+        answer: "Le TDEE (Total Daily Energy Expenditure) est le nombre total de calories que votre corps brûle chaque jour. C'est votre point d'équilibre : manger au-dessus permet la prise de masse, manger en dessous déclenche la perte de poids. Connaître son TDEE est la base de toute stratégie nutritionnelle efficace."
     },
     {
-        question: 'Quel déficit calorique pour perdre du poids ?',
-        answer: 'Un déficit modéré de 300 à 500 calories par rapport à votre TDEE est généralement recommandé pour perdre du gras durablement sans sacrifier le muscle.'
+        question: "Quel déficit calorique pour perdre du gras sans perdre de muscle ?",
+        answer: "Un déficit modéré de 300 à 500 calories par jour par rapport à votre TDEE est optimal pour perdre du gras tout en préservant la masse musculaire. Combiné à un apport suffisant en protéines (1.6 à 2.2g/kg) et un entraînement de musculation, ce déficit permet une perte durable d'environ 0.5 kg par semaine."
+    },
+    {
+        question: "Combien de calories en surplus pour prendre du muscle ?",
+        answer: "Pour une prise de masse musculaire propre, visez un surplus calorique de 200 à 400 calories au-dessus de votre TDEE. Au-delà, vous risquez d'accumuler trop de tissu adipeux. Ce surplus doit s'accompagner d'un entraînement progressif en musculation et d'un apport protéique suffisant."
+    },
+    {
+        question: "Quelle formule est utilisée pour calculer le métabolisme de base ?",
+        answer: "Notre calculateur utilise la formule de Mifflin-St Jeor, considérée comme la plus précise par la recherche scientifique actuelle. Elle tient compte de votre poids, taille, âge et sexe. Le résultat est ensuite multiplié par un coefficient d'activité pour obtenir votre TDEE."
     }
 ];
 

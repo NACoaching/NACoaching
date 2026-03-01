@@ -47,16 +47,24 @@ const softwareJsonLd = {
 
 const DEFAULT_FAQ_DATA = [
     {
-        question: 'Comment convertir km/h en min/km ?',
-        answer: 'La formule est 60 divisé par la vitesse en km/h. Par exemple, pour 12 km/h : 60 / 12 = 5 min/km.'
+        question: "Comment convertir les km/h en min/km (allure de course) ?",
+        answer: "La formule est simple : allure (min/km) = 60 ÷ vitesse (km/h). Par exemple, 12 km/h = 60 ÷ 12 = 5:00 min/km. Notre convertisseur fait le calcul instantanément dans les deux sens et affiche aussi les temps de passage aux distances clés."
     },
     {
-        question: 'Quelle est l\'allure pour courir un marathon en 4h ?',
-        answer: 'Pour terminer un marathon en 4 heures, vous devez maintenir une allure moyenne de 5:41 min/km (soit environ 10.55 km/h).'
+        question: "Quelle allure pour courir un marathon en moins de 4 heures ?",
+        answer: "Pour terminer un marathon (42.195 km) en moins de 4 heures, vous devez maintenir une allure moyenne de 5:41 min/km, soit environ 10.55 km/h. Prévoyez de courir les premiers kilomètres légèrement plus vite (5:35 min/km) pour avoir une marge de sécurité."
     },
     {
-        question: 'Pourquoi mesurer l\'allure en min/km plutôt qu\'en km/h ?',
-        answer: 'L\'allure en min/km est plus pratique pour le coureur car elle permet de calculer facilement ses temps de passage au kilomètre et de gérer son effort pendant la course.'
+        question: "Pourquoi les coureurs utilisent l'allure en min/km plutôt que la vitesse en km/h ?",
+        answer: "L'allure en min/km est plus pratique en course à pied car elle permet de calculer facilement ses temps de passage au kilomètre et de gérer son effort pendant la course. C'est aussi le format universel affiché sur les montres GPS de running comme Garmin, Polar ou COROS."
+    },
+    {
+        question: "Comment calculer son temps de course prévu sur une distance ?",
+        answer: "Multipliez votre allure (en min/km) par la distance (en km). Par exemple, à 5:30 min/km sur un semi-marathon (21.1 km) : 5.5 × 21.1 = 116 min soit 1h56. Notre outil affiche automatiquement les temps estimés pour le 5 km, 10 km, semi et marathon."
+    },
+    {
+        question: "Quelle est l'allure moyenne d'un coureur débutant ?",
+        answer: "Un coureur débutant court généralement entre 7:00 et 8:00 min/km (soit 7.5 à 8.5 km/h). Avec un entraînement régulier de 3 séances par semaine, cette allure peut descendre à 5:30-6:30 min/km en quelques mois. L'important est de progresser graduellement sans vouloir aller trop vite."
     }
 ];
 

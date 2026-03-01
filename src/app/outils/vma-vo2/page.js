@@ -47,16 +47,24 @@ const softwareJsonLd = {
 
 const DEFAULT_FAQ_DATA = [
     {
-        question: 'C\'est quoi la VMA ?',
-        answer: 'La VMA (Vitesse Maximale Aérobie) est la vitesse à laquelle votre consommation d\'oxygène est maximale. C\'est un indicateur clé pour calibrer vos allures d\'entraînement.'
+        question: "C'est quoi la VMA et pourquoi la calculer ?",
+        answer: "La VMA (Vitesse Maximale Aérobie) est la vitesse de course à laquelle votre consommation d'oxygène atteint son maximum (VO2max). C'est l'indicateur clé en course à pied pour calibrer vos allures d'entraînement : endurance fondamentale, seuil, VMA, et fractionné."
     },
     {
-        question: 'Comment calculer sa VMA ?',
-        answer: 'La VMA peut être estimée via des tests terrain comme le Test de Cooper (distance parcourue en 12 min) ou le Demi-Cooper (distance en 6 min).'
+        question: "Comment calculer sa VMA avec un test terrain ?",
+        answer: "Les tests les plus courants sont le Test de Cooper (distance maximale en 12 minutes) et le Demi-Cooper (distance maximale en 6 minutes). Notre outil convertit directement votre résultat en VMA et VO2max. D'autres tests existent comme le VAMEVAL ou le Léger-Boucher."
     },
     {
-        question: 'Quelle est la différence entre VMA et VO2max ?',
-        answer: 'La VO2max est une mesure physiologique (volume d\'oxygène), tandis que la VMA est la traduction de cette capacité en vitesse de course concrète.'
+        question: "Quelle est la différence entre VMA et VO2max ?",
+        answer: "La VO2max est une mesure physiologique exprimée en ml/kg/min : c'est le volume maximal d'oxygène que vos muscles peuvent utiliser. La VMA est la traduction de cette capacité en vitesse de course (km/h). La relation est : VMA ≈ VO2max / 3.5. Connaître les deux permet de planifier un entraînement optimal."
+    },
+    {
+        question: "Quelle est une bonne VMA selon le niveau ?",
+        answer: "En course à pied, une VMA de 12-14 km/h correspond à un débutant, 14-17 km/h à un coureur régulier, 17-20 km/h à un bon compétiteur et au-delà de 20 km/h à un athlète de haut niveau. La VMA progresse avec un entraînement spécifique en fractionné court."
+    },
+    {
+        question: "Comment améliorer sa VMA et sa VO2max ?",
+        answer: "Le meilleur moyen est le travail en fractionné court : des intervalles de 30 secondes à 3 minutes courus entre 95% et 105% de votre VMA, entrecoupés de récupérations actives. Deux séances par semaine pendant 6 à 8 semaines permettent généralement un gain de 1 à 2 km/h de VMA."
     }
 ];
 

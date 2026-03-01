@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HomeFAQ from '@/components/HomeFAQ';
 import { ChevronLeft, ShoppingBag, Info } from 'lucide-react';
 import AffiliateCard from "@/components/AffiliateCard";
 import HalfCooperTest from '@/components/tools/HalfCooperTest';
@@ -26,9 +27,54 @@ export async function generateMetadata() {
     };
 }
 
+const DEFAULT_FAQ_DATA = [
+    {
+        question: "C'est quoi le test Demi-Cooper et comment le faire ?",
+        answer: "Le test Demi-Cooper consiste à courir la plus grande distance possible en 6 minutes. Échauffez-vous 10 minutes, puis courez à allure maximale régulière pendant 6 minutes sur terrain plat. La distance parcourue permet d'estimer votre VMA avec la formule : VMA = distance (m) / 6 × 60 / 1000."
+    },
+    {
+        question: "Quelle est la différence entre le test de Cooper et le Demi-Cooper ?",
+        answer: "Le test de Cooper dure 12 minutes, le Demi-Cooper dure 6 minutes. Le Demi-Cooper est plus adapté aux sportifs non-spécialistes de course à pied car il est moins éprouvant mentalement et physiquement. Les deux tests donnent une estimation de la VMA et de la VO2max."
+    },
+    {
+        question: "Quelle distance est bonne au Demi-Cooper selon le niveau ?",
+        answer: "Au test Demi-Cooper (6 minutes) : moins de 1200m correspond à un débutant, 1200-1500m à un niveau intermédiaire, 1500-1800m à un bon sportif et plus de 1800m à un athlète entraîné. Ces distances correspondent à des VMA de 12 à 18+ km/h."
+    },
+    {
+        question: "Faut-il s'échauffer avant le test Demi-Cooper ?",
+        answer: "Un échauffement de 10 à 15 minutes est indispensable : footing léger, gammes de course, puis 2-3 accélérations progressives. Un bon échauffement améliore le résultat du test de 3 à 5% et réduit considérablement le risque de blessure musculaire."
+    },
+    {
+        question: "À quelle fréquence refaire le test Demi-Cooper ?",
+        answer: "Répétez le test toutes les 6 à 8 semaines pour suivre votre progression. Faites-le toujours dans les mêmes conditions (même terrain, même moment de la journée, après un échauffement similaire) pour que les résultats soient comparables. C'est un excellent indicateur de votre forme aérobie."
+    }
+];
+
 export default async function DemiCooperPage() {
     const article = await getToolArticle('test-demi-cooper');
     const relatedArticles = await getToolRelatedArticles(article);
+
+    let faqData = DEFAULT_FAQ_DATA;
+    const { data: faqItem } = await supabase.from('site_content').select('value').eq('key', 'tool_cooper_faq').single();
+    if (faqItem && faqItem.value) {
+        try {
+            const parsed = JSON.parse(faqItem.value);
+            if (parsed && parsed.length > 0) faqData = parsed;
+        } catch (e) { console.error("Error parsing FAQ", e); }
+    }
+
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+            '@type': 'Question',
+            'name': item.question,
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': item.answer
+            }
+        }))
+    };
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -42,6 +88,7 @@ export default async function DemiCooperPage() {
     return (
         <div className="min-h-screen bg-zinc-50 pt-32 pb-20">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
                 <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-400 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
@@ -97,6 +144,7 @@ export default async function DemiCooperPage() {
                     subtitle={article.related_subtitle}
                 />
             </div>
+            <div className="bg-white"><HomeFAQ faqData={faqData} /></div>
         </div>
     );
 }

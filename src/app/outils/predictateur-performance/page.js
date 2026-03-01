@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HomeFAQ from '@/components/HomeFAQ';
 import { ChevronLeft, Info, ShoppingBag } from 'lucide-react';
 import AffiliateCard from "@/components/AffiliateCard";
 import RacePredictor from '@/components/tools/RacePredictor';
@@ -26,9 +27,54 @@ export async function generateMetadata() {
     };
 }
 
+const DEFAULT_FAQ_DATA = [
+    {
+        question: "Comment prédire son temps de course sur une autre distance ?",
+        answer: "Le prédicteur de performance utilise votre temps sur une distance connue (ex : 10 km en 50 min) pour estimer vos temps sur d'autres distances (5 km, semi-marathon, marathon). Les modèles tiennent compte du facteur de fatigue et de la baisse de vitesse inhérente aux distances plus longues."
+    },
+    {
+        question: "Les prédicteurs de temps de course sont-ils fiables ?",
+        answer: "Les prédictions sont fiables à ±2-5% si vous avez un entraînement adapté à la distance cible. Les écarts sont plus grands pour le marathon si votre référence est un 5 km, car le marathon requiert une endurance spécifique que la performance sur courte distance ne reflète pas entièrement."
+    },
+    {
+        question: "Quel temps au 10 km pour courir un marathon en 3h30 ?",
+        answer: "Pour un marathon en 3h30, il faut typiquement courir le 10 km autour de 45-47 minutes. Cela correspond à une VMA d'environ 16 km/h. L'entraînement spécifique marathon (sorties longues, travail au seuil) est ensuite indispensable pour transformer ce potentiel en performance le jour J."
+    },
+    {
+        question: "Comment utiliser le prédicteur pour planifier une compétition ?",
+        answer: "Entrez votre meilleur temps récent (moins de 6 semaines) sur n'importe quelle distance. Le prédicteur affiche vos temps estimés sur les distances courantes. Utilisez le temps de la distance cible pour déterminer votre allure de course, puis entraînez-vous spécifiquement à cette allure."
+    },
+    {
+        question: "Pourquoi mon temps réel diffère-t-il de la prédiction ?",
+        answer: "Plusieurs facteurs influencent le résultat le jour J : condition météo (chaleur, vent), dénivelé du parcours, gestion de l'alimentation, hydratation, qualité du sommeil la veille, et surtout votre stratégie de course (partir trop vite est l'erreur n°1). Le prédicteur donne un potentiel théorique, l'exécution dépend de vous."
+    }
+];
+
 export default async function RacePredictorPage() {
     const article = await getToolArticle('race-predictor');
     const relatedArticles = await getToolRelatedArticles(article);
+
+    let faqData = DEFAULT_FAQ_DATA;
+    const { data: faqItem } = await supabase.from('site_content').select('value').eq('key', 'tool_predictor_faq').single();
+    if (faqItem && faqItem.value) {
+        try {
+            const parsed = JSON.parse(faqItem.value);
+            if (parsed && parsed.length > 0) faqData = parsed;
+        } catch (e) { console.error("Error parsing FAQ", e); }
+    }
+
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+            '@type': 'Question',
+            'name': item.question,
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': item.answer
+            }
+        }))
+    };
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -42,6 +88,7 @@ export default async function RacePredictorPage() {
     return (
         <div className="min-h-screen bg-zinc-50 pt-32 pb-20">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
                 <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-400 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
@@ -97,6 +144,7 @@ export default async function RacePredictorPage() {
                     subtitle={article.related_subtitle}
                 />
             </div>
+            <div className="bg-white"><HomeFAQ faqData={faqData} /></div>
         </div>
     );
 }

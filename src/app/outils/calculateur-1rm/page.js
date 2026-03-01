@@ -47,16 +47,24 @@ const softwareJsonLd = {
 
 const DEFAULT_FAQ_DATA = [
     {
-        question: 'C\'est quoi le 1RM en musculation ?',
-        answer: 'Le 1RM (One Repetition Maximum) est la charge maximale que vous pouvez soulever sur une seule répétition avec une technique parfaite.'
+        question: "C'est quoi le 1RM en musculation et à quoi ça sert ?",
+        answer: "Le 1RM (One Repetition Maximum) est la charge maximale que vous pouvez soulever sur une seule répétition avec une technique parfaite. C'est la référence pour programmer vos entraînements : les pourcentages de charge (ex : 75% du 1RM pour l'hypertrophie) permettent de cibler précisément vos objectifs."
     },
     {
-        question: 'Pourquoi calculer son 1RM ?',
-        answer: 'Calculer son 1RM est essentiel pour calibrer les intensités d\'entraînement (en % de charge) afin de viser précisément la force, l\'hypertrophie ou l\'endurance musculaire.'
+        question: "Comment calculer son 1RM sans tester sa charge maximale ?",
+        answer: "Plutôt que de risquer une blessure en testant votre max réel, utilisez les formules d'estimation (Brzycki, Epley). Entrez simplement le poids soulevé et le nombre de répétitions effectuées (entre 2 et 10 reps) et le calculateur estime votre 1RM théorique avec une marge d'erreur de 5 à 10%."
     },
     {
-        question: 'Comment utiliser le calculateur 1RM ?',
-        answer: 'Entrez le poids soulevé et le nombre de répétitions effectuées. Le calculateur utilise les formules de Brzycki et Epley pour estimer votre max théorique.'
+        question: "Quelle est la différence entre les formules Brzycki et Epley ?",
+        answer: "La formule de Brzycki (1RM = poids × 36 / (37 − reps)) est plus précise pour les séries courtes (2-6 reps). Celle d'Epley (1RM = poids × (1 + reps/30)) fonctionne mieux pour les séries plus longues (6-10 reps). Notre calculateur utilise les deux pour vous donner l'estimation la plus fiable."
+    },
+    {
+        question: "À quelle fréquence faut-il recalculer son 1RM ?",
+        answer: "Il est recommandé de réévaluer votre 1RM toutes les 4 à 6 semaines, ou à chaque début de nouveau cycle d'entraînement. Cela permet d'ajuster vos charges de travail à votre progression réelle et d'éviter de stagner."
+    },
+    {
+        question: "Quel pourcentage du 1RM utiliser pour la prise de masse musculaire ?",
+        answer: "Pour l'hypertrophie musculaire, travaillez entre 65% et 80% de votre 1RM avec 8 à 12 répétitions par série. Pour la force maximale, visez 85-95% du 1RM avec 1 à 5 reps. Pour l'endurance musculaire, restez entre 50-65% avec 15 à 20 reps."
     }
 ];
 

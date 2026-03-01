@@ -1,4 +1,5 @@
 import RecoveryScore from "@/components/tools/RecoveryScore";
+import HomeFAQ from '@/components/HomeFAQ';
 import AnimWrapper from "@/components/AnimWrapper";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, Info } from "lucide-react";
@@ -40,9 +41,54 @@ const jsonLd = {
     'description': 'Auto-évaluation de la readiness et de la récupération pour les sportifs.'
 };
 
+const DEFAULT_FAQ_DATA = [
+    {
+        question: "Comment savoir si j'ai bien récupéré entre deux séances de sport ?",
+        answer: "Le score de récupération évalue plusieurs indicateurs : qualité du sommeil, douleurs musculaires résiduelles (DOMS), niveau de fatigue perçue, humeur et motivation. Un score élevé indique que vous êtes prêt pour un entraînement intense, un score bas suggère une séance légère ou un jour de repos."
+    },
+    {
+        question: "C'est quoi le surentraînement et comment l'éviter ?",
+        answer: "Le surentraînement est un état de fatigue chronique causé par un déséquilibre entre charge d'entraînement et récupération. Symptômes : baisse de performance, fatigue persistante, troubles du sommeil, irritabilité. Pour l'éviter, respectez les jours de repos, surveillez votre score de récupération et augmentez les charges progressivement."
+    },
+    {
+        question: "Combien de temps de repos entre deux séances de musculation ?",
+        answer: "Pour le même groupe musculaire, 48 à 72 heures de repos sont recommandées. Cela laisse le temps à la synthèse protéique musculaire (qui dure 24-48h post-entraînement) de s'achever. Vous pouvez cependant entraîner des groupes musculaires différents sur des jours consécutifs."
+    },
+    {
+        question: "Le sommeil affecte-t-il vraiment la récupération musculaire ?",
+        answer: "Le sommeil est le facteur n°1 de récupération. Pendant les phases de sommeil profond, le corps libère l'hormone de croissance (GH), essentielle à la réparation musculaire. Moins de 7 heures de sommeil réduit la synthèse protéique de 18% et augmente le cortisol (hormone catabolique). Visez 7 à 9 heures par nuit."
+    },
+    {
+        question: "Quelles sont les meilleures stratégies de récupération après un entraînement ?",
+        answer: "Par ordre d'importance : 1) Sommeil de qualité (7-9h), 2) Nutrition post-entraînement (protéines + glucides dans les 2h), 3) Hydratation suffisante, 4) Gestion du stress, 5) Mobilité et étirements légers. Les bains froids et la compression sont des bonus, mais les fondamentaux ci-dessus sont prioritaires."
+    }
+];
+
 export default async function RecoveryScorePage() {
     const article = await getToolArticle('/outils/score-recuperation');
     const relatedArticles = await getToolRelatedArticles(article);
+
+    let faqData = DEFAULT_FAQ_DATA;
+    const { data: faqItem } = await supabase.from('site_content').select('value').eq('key', 'tool_recovery_faq').single();
+    if (faqItem && faqItem.value) {
+        try {
+            const parsed = JSON.parse(faqItem.value);
+            if (parsed && parsed.length > 0) faqData = parsed;
+        } catch (e) { console.error("Error parsing FAQ", e); }
+    }
+
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqData.map(item => ({
+            '@type': 'Question',
+            'name': item.question,
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': item.answer
+            }
+        }))
+    };
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-zinc-50">
