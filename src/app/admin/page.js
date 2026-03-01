@@ -2284,10 +2284,11 @@ export default function AdminPage() {
                                 {activeTab === 'articles' ? (
                                     <form onSubmit={handleArticleSubmit} className="space-y-4">
                                         <input required name="title" value={articleForm.title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Titre" />
-                                        <input required name="category" value={articleForm.category} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Catégorie" />
-                                        {articleForm.category === 'Outils' && (
-                                            <input name="subcategory" value={articleForm.subcategory} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm shrink" placeholder="Sous-Catégorie (ex: Force, Endurance...)" />
-                                        )}
+                                        <input required name="category" value={articleForm.category} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Catégorie (ex: Volume 3...)" />
+                                        <div className="space-y-1">
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400">Chapitre / Sous-catégorie</label>
+                                            <input name="subcategory" value={articleForm.subcategory} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm shrink" placeholder="Ex: Anatomie, Nutrition, Chapitre 1..." title="Sert de titre de chapitre dans l'encyclopédie" />
+                                        </div>
                                         {/* TOOL HINTS MANAGEMENT (MOVED UP FOR VISIBILITY) */}
                                         {(articleForm.category?.toLowerCase() === 'outils' || articleForm.category?.toLowerCase() === 'outil') && (
                                             <div className="border border-zinc-300 p-3 rounded bg-orange-50/30 space-y-3">
