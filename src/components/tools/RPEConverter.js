@@ -38,14 +38,14 @@ export default function RPEConverter({ hints = {} }) {
                     <Target size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-zinc-900">Convertisseur RPE / % 1RM</h2>
-                    <p className="text-xs font-bold text-zinc-600 uppercase tracking-widest">Optimisation de l'intensité</p>
+                    <h2 className="text-2xl font-black uppercase text-black">Convertisseur RPE / % 1RM</h2>
+                    <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Optimisation de l'intensité</p>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
-                    <label className="block text-xs font-black uppercase text-zinc-700 mb-2">Nombre de Répétitions</label>
+                    <label className="block text-xs font-black uppercase text-zinc-900 mb-2">Nombre de Répétitions</label>
                     <select
                         value={reps}
                         onChange={(e) => setReps(parseInt(e.target.value))}
@@ -58,7 +58,7 @@ export default function RPEConverter({ hints = {} }) {
                 </div>
 
                 <div>
-                    <label className="flex items-center text-xs font-black uppercase text-zinc-700 mb-2">
+                    <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-2">
                         Intensité (RPE)
                         <Tooltip text={hints.rpe} />
                     </label>
@@ -74,7 +74,7 @@ export default function RPEConverter({ hints = {} }) {
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="flex items-center text-xs font-black uppercase text-zinc-700 mb-2">
+                    <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-2">
                         Charge utilisée (kg) - Optionnel
                         <Tooltip text={hints.weight} />
                     </label>
@@ -90,7 +90,7 @@ export default function RPEConverter({ hints = {} }) {
                 {/* New inputs from the provided snippet */}
                 <div className="grid grid-cols-2 gap-4 md:col-span-2">
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
                             Ton 1RM (kg)
                             <Tooltip text={hints.max || hints.unrm} />
                         </label>
@@ -104,7 +104,7 @@ export default function RPEConverter({ hints = {} }) {
                         />
                     </div>
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
                             RPE visé
                             <Tooltip text={hints.rpe} />
                         </label>
@@ -121,7 +121,7 @@ export default function RPEConverter({ hints = {} }) {
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                    <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
                         Répétitions visées
                         <Tooltip text={hints.reps || hints.repetitions} />
                     </label>
@@ -140,7 +140,7 @@ export default function RPEConverter({ hints = {} }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-zinc-900 text-white p-6 rounded-2xl flex flex-col items-center justify-center text-center">
-                    <span className="text-xs font-black uppercase tracking-widest text-zinc-700 mb-2">Intensité Relative</span>
+                    <span className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-2">Intensité Relative</span>
                     <div className="text-5xl font-black text-blue-500">{percentage}%</div>
                     <span className="text-[10px] text-zinc-600 mt-1 uppercase font-bold">de ton 1RM</span>
                 </div>
@@ -153,8 +153,8 @@ export default function RPEConverter({ hints = {} }) {
             </div>
 
             <div className="mt-8 p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex gap-4 items-start">
-                <Info size={18} className="text-zinc-600 shrink-0 mt-0.5" />
-                <p className="text-xs text-zinc-700 leading-relaxed italic">
+                <Info size={18} className="text-[#FF6B00] shrink-0 mt-0.5" />
+                <p className="text-xs text-zinc-900 leading-relaxed font-medium italic">
                     Basé sur l'échelle de **Mike Tuchscherer (RTS)**. Un RPE 10 signifie aucune répétition supplémentaire possible, un RPE 9 signifie qu'il restait 1 répétition en réserve (RIR 1).
                 </p>
             </div>

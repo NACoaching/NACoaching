@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
 export const revalidate = 0;
 
 export async function generateMetadata() {
-    const article = await getToolArticle('rpe-1rm');
+    const article = await getToolArticle('/outils/rpe-1rm');
     return {
         title: `${article.title || 'Convertisseur RPE / % 1RM — Intensité & Force'} | NA Coaching`,
         description: article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
@@ -51,7 +51,7 @@ const DEFAULT_FAQ_DATA = [
 ];
 
 export default async function RPEPage() {
-    const article = await getToolArticle('rpe-1rm');
+    const article = await getToolArticle('/outils/rpe-1rm');
     const relatedArticles = await getToolRelatedArticles(article);
 
     let faqData = DEFAULT_FAQ_DATA;
@@ -91,7 +91,7 @@ export default async function RPEPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
-                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-400 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
+                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
@@ -105,7 +105,7 @@ export default async function RPEPage() {
                             <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
                                 {article.title || "Convertisseur RPE / % 1RM"}
                             </h1>
-                            <p className="text-zinc-500 text-lg mb-8 leading-relaxed">
+                            <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
                                 {article.intro}
                             </p>
                             <div className="h-px bg-zinc-200 mb-8" />
@@ -119,7 +119,7 @@ export default async function RPEPage() {
                     <div className="mt-12 border-t border-zinc-200 pt-12 text-left flex flex-col items-center">
                         <div className="flex items-center gap-2 mb-8">
                             <Info size={16} className="text-[#FF6B00]" />
-                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
+                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                         </div>
 
                         <div className="max-w-md w-full mx-auto">
@@ -144,7 +144,11 @@ export default async function RPEPage() {
                     subtitle={article.related_subtitle}
                 />
             </div>
-            <div className="bg-white"><HomeFAQ faqData={faqData} /></div>
+            <div className="bg-white">
+                {faqData && faqData.length > 0 && (
+                    <HomeFAQ faqData={faqData} title="Questions Fréquentes sur le RPE" id="faq-rpe" />
+                )}
+            </div>
         </div>
     );
 }
