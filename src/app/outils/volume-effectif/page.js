@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
 export const revalidate = 0;
 
 export async function generateMetadata() {
-    const article = await getToolArticle('volume-effectif');
+    const article = await getToolArticle('/outils/volume-effectif');
     return {
         title: `${article.title || 'Calculateur Volume Effectif — Séries par Muscle'} | NA Coaching`,
         description: article.intro || "Calculez votre volume d'entraînement hebdomadaire par groupe musculaire. Identifiez vos zones de maintenance, de progression et de sur-reaching.",
@@ -51,7 +51,7 @@ const DEFAULT_FAQ_DATA = [
 ];
 
 export default async function VolumePage() {
-    const article = await getToolArticle('volume-effectif');
+    const article = await getToolArticle('/outils/volume-effectif');
     const relatedArticles = await getToolRelatedArticles(article);
 
     let faqData = DEFAULT_FAQ_DATA;
