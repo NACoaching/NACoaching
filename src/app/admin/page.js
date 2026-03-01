@@ -1279,6 +1279,34 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                             ))}
+                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Encyclopédie — Textes SEO Volumes</h3>
+                            <p className="text-xs text-zinc-500 mb-4">Ces textes apparaissent sur les pages piliers de chaque volume de l&apos;Encyclopédie (sous le titre). Modifiez-les pour améliorer votre référencement.</p>
+                            {[
+                                { key: 'volume_seo_volume-1-la-science-de-la-force', label: 'Volume 1 — La Science de la Force' },
+                                { key: 'volume_seo_volume-2-la-science-de-lendurance', label: 'Volume 2 — La Science de l\'Endurance' },
+                                { key: 'volume_seo_volume-3-la-science-de-la-sante', label: 'Volume 3 — La Science de la Santé' },
+                            ].map(field => {
+                                const itemValue = siteContent.find(c => c.key === field.key)?.value || '';
+                                return (
+                                    <div key={field.key} className="mb-6">
+                                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">{field.label}</label>
+                                        <div className="flex gap-4 items-start">
+                                            <textarea
+                                                value={itemValue}
+                                                onChange={(e) => handleContentChange(field.key, e.target.value)}
+                                                className="w-full border p-3 rounded text-sm min-h-[150px] focus:border-[#FF6B00] outline-none font-mono"
+                                                placeholder="Rédigez le texte d'introduction SEO pour ce volume..."
+                                            />
+                                            <button
+                                                onClick={() => saveContent(field.key, itemValue, field.label)}
+                                                className="bg-black text-white px-4 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition h-fit py-3 whitespace-nowrap"
+                                            >
+                                                Sauvegarder
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                             <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Articles Recommandés (Outils)</h3>
                             {[
                                 { key: 'tools_related_title', label: 'Titre de la section' },

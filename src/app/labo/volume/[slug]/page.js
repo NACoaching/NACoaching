@@ -91,10 +91,6 @@ export default async function VolumePage({ params }) {
                         Retour au Labo
                     </Link>
 
-                    <div className="inline-block px-3 py-1 mb-4 text-[10px] font-black uppercase tracking-widest bg-zinc-800 text-zinc-300 rounded border border-zinc-700">
-                        L&apos;Encyclopédie — Page Pilier
-                    </div>
-
                     <h1 className="text-4xl md:text-6xl font-black uppercase leading-tight mb-8">
                         {fancyTitle}
                     </h1>
