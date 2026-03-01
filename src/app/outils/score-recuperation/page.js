@@ -97,6 +97,12 @@ export default async function RecoveryScorePage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
+            {faqData && faqData.length > 0 && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+                />
+            )}
             <div className="max-w-4xl mx-auto px-6">
                 <AnimWrapper>
                     <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mb-8 font-bold uppercase text-sm">
@@ -138,6 +144,13 @@ export default async function RecoveryScorePage() {
                     )}
 
                     <RelatedTools currentTool="score-recuperation" />
+
+                    {/* FAQ SECTION */}
+                    {faqData && faqData.length > 0 && (
+                        <div className="mt-16">
+                            <HomeFAQ faqData={faqData} title="Questions Fréquentes sur la Récupération" id="faq-recovery" />
+                        </div>
+                    )}
 
                     {/* Related Articles */}
                     <RelatedArticles
