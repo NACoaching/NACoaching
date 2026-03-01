@@ -405,7 +405,7 @@ export default function AdminPage() {
 
     const fetchData = async () => {
         setLoading(true);
-        const [articlesRes, productsRes, contentRes, messagesRes, commentsRes, subscribersRes, analyticsRes, reviewsRes] = await Promise.all([
+        const [articlesRes, productsRes, contentRes, messagesRes, commentsRes, subscribersRes, analyticsRes, reviewsRes, autoLinksRes] = await Promise.all([
             supabase.from('articles').select('*').order('created_at', { ascending: false }),
             supabase.from('products').select('*').order('created_at', { ascending: false }),
             supabase.from('site_content').select('*').order('key'),

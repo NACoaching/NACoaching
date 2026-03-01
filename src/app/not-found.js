@@ -2,6 +2,14 @@
 import Link from 'next/link';
 import { ArrowLeft, Home } from 'lucide-react';
 
+export const metadata = {
+    title: '404 - Page Introuvable | NA Coaching',
+    robots: {
+        index: false,
+        follow: false,
+    },
+};
+
 export default function NotFound() {
     return (
         <div className="min-h-screen bg-zinc-50 flex items-center justify-center text-center px-6">
