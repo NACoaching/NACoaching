@@ -55,7 +55,7 @@ export async function generateMetadata() {
       images: [content.logo_url || '/logo.png'],
     },
     icons: {
-      icon: '/favicon.ico', // Ensure you have a favicon
+      icon: '/icon.svg',
     },
     authors: [{ name: 'NA Coaching', url: siteUrl }],
     publisher: 'NA Coaching',
