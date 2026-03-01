@@ -4,6 +4,8 @@ import { ArrowLeft, BookOpen, Clock } from 'lucide-react';
 export const revalidate = 3600; // Cache pendant 1 heure pour la vitesse (ISR)
 
 import { supabase } from '@/lib/supabaseClient';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 async function getVolumeData(slug) {
     try {
@@ -101,8 +103,10 @@ export default async function VolumePage({ params }) {
                         {fancyTitle}
                     </h1>
 
-                    <div className="prose prose-invert prose-lg max-w-2xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed whitespace-pre-wrap">
-                        {volumeSeoText}
+                    <div className="prose prose-invert prose-lg max-w-2xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {volumeSeoText}
+                        </ReactMarkdown>
                     </div>
                 </div>
 
