@@ -55,8 +55,15 @@ export async function generateMetadata() {
       images: [content.logo_url || '/logo.png'],
     },
     icons: {
-      icon: '/favicon.ico',
+      icon: [
+        { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+        { url: '/favicon.png', sizes: '64x64', type: 'image/png' },
+      ],
+      shortcut: '/favicon.ico',
       apple: '/apple-icon.png',
+      other: [
+        { rel: 'mask-icon', url: '/favicon.png', color: '#FF6B00' },
+      ],
     },
     authors: [{ name: 'NA Coaching', url: siteUrl }],
     publisher: 'NA Coaching',
