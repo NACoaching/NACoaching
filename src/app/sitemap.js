@@ -26,12 +26,27 @@ export default async function sitemap() {
 
     // Get unique categories for Labo category pages
     const categories = [...new Set((articles || []).map(a => a.category).filter(Boolean))];
-    const categoryUrls = categories.map(category => ({
-        url: `${baseUrl}/labo/${encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.75,
-    }));
+    const categoryUrls = categories
+        .filter(cat => !cat.toLowerCase().includes('volume'))
+        .map(category => ({
+            url: `${baseUrl}/labo/${encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.75,
+        }));
+
+    // Add explicit URLs for the 3 Encyclopedia Volumes
+    const volumeCategories = categories.filter(cat => cat.toLowerCase().includes('volume'));
+    const volumeUrls = volumeCategories.map(vol => {
+        // Basic slugification for volumes (e.g. "Volume 1 : La Science de la Force" -> "1-la-science-de-la-force")
+        const cleanSlug = vol.toLowerCase().replace('volume ', '').replace(' :', '').replace(/ /g, '-').replace(/'/g, '');
+        return {
+            url: `${baseUrl}/labo/volume/${cleanSlug}`,
+            lastModified: new Date(),
+            changeFrequency: 'daily', // High priority for pillar pages
+            priority: 0.95,
+        };
+    });
 
     // Get all products
     const { data: products } = await supabase.from('products').select('id, created_at');
@@ -96,5 +111,6 @@ export default async function sitemap() {
         ...toolUrls,
         ...productUrls,
         ...categoryUrls,
+        ...volumeUrls,
     ];
 }

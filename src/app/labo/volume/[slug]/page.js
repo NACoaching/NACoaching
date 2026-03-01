@@ -36,7 +36,7 @@ async function getVolumeData(slug) {
 }
 
 export async function generateMetadata({ params }) {
-    const { slug } = params;
+    const { slug } = await params;
 
     // Very basic title generation from slug for now. Real titles can be mapped or fetched.
     const titleFromSlug = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -53,8 +53,17 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function VolumePage({ params }) {
-    const { slug } = params;
+    const { slug } = await params;
     const articles = await getVolumeData(slug);
+
+    // Fetch custom SEO content for this specific volume
+    const { data: volumeContentData } = await supabase
+        .from('site_content')
+        .select('value')
+        .eq('key', `volume_seo_${slug}`)
+        .single();
+
+    const volumeSeoText = volumeContentData?.value || "Retrouvez ici toute l'expertise NA Coaching compilée. Que vous cherchiez à optimiser vos gains, comprendre la physiologie humaine ou adopter les meilleures routines.";
 
     const fancyTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).replace('Volume', 'Volume');
 
@@ -80,16 +89,16 @@ export default async function VolumePage({ params }) {
                     </Link>
 
                     <div className="inline-block px-3 py-1 mb-4 text-[10px] font-black uppercase tracking-widest bg-zinc-800 text-zinc-300 rounded border border-zinc-700">
-                        L'Encyclopédie — Page Pilier
+                        L&apos;Encyclopédie — Page Pilier
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-black uppercase leading-tight mb-6">
+                    <h1 className="text-4xl md:text-6xl font-black uppercase leading-tight mb-8">
                         {fancyTitle}
                     </h1>
 
-                    <p className="text-zinc-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl border-l-4 border-[#FF6B00] pl-6">
-                        Retrouvez ici toute l'expertise NA Coaching compilée. Que vous cherchiez à optimiser vos gains, comprendre la physiologie humaine ou adopter les meilleures routines.
-                    </p>
+                    <div className="prose prose-invert prose-lg max-w-2xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed whitespace-pre-wrap">
+                        {volumeSeoText}
+                    </div>
                 </div>
 
                 {/* Content Statistics */}
@@ -153,7 +162,7 @@ export default async function VolumePage({ params }) {
 
                                             {article.is_published ? (
                                                 <Link href={`/blog/${article.slug || article.id}`} className="mt-auto text-xs font-black uppercase text-white hover:text-[#FF6B00] flex items-center gap-2 group/link w-fit">
-                                                    Lire l'article <ArrowLeft className="w-4 h-4 rotate-180 group-hover/link:translate-x-1 transition-transform" />
+                                                    Lire l&apos;article <ArrowLeft className="w-4 h-4 rotate-180 group-hover/link:translate-x-1 transition-transform" />
                                                 </Link>
                                             ) : (
                                                 <div className="mt-auto text-xs font-bold uppercase text-zinc-600 flex items-center gap-2 cursor-not-allowed">

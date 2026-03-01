@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import AnimWrapper from '@/components/AnimWrapper';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
@@ -19,6 +20,11 @@ export async function generateMetadata({ params }) {
     // Next.js always gives us the decoded value in params
     const category = decodeURIComponent((await params).category);
 
+    // Prevent this route from handling Encyclopedia Volume pages
+    if (category.toLowerCase().startsWith('volume-')) {
+        notFound();
+    }
+
     return {
         title: `${category} - Le Labo NA Coaching`,
         description: `Tous les articles scientifiques de NA Coaching sur la thématique "${category}". Découvrez les conseils d'expert d'un Master EOPS.`,
@@ -33,6 +39,11 @@ export async function generateMetadata({ params }) {
 export default async function LaboCategoryPage({ params }) {
     // Next.js gives us the decoded category name in params
     const category = decodeURIComponent((await params).category);
+
+    // Prevent this route from handling Encyclopedia Volume pages
+    if (category.toLowerCase().startsWith('volume-')) {
+        notFound();
+    }
 
     // Fetch articles + all categories for the navigation bar in parallel
     const [articlesRes, allCatsRes] = await Promise.all([
@@ -85,7 +96,7 @@ export default async function LaboCategoryPage({ params }) {
                         </div>
                         <h1 className="text-5xl font-black uppercase text-black mb-4">{category}</h1>
                         <p className="text-zinc-500 mb-8 max-w-xl">
-                            {articlesList.length} article{articlesList.length > 1 ? 's' : ''} sur cette thématique — basés sur la science et l'expertise d'un Master EOPS.
+                            {articlesList.length} article{articlesList.length > 1 ? 's' : ''} sur cette thématique — basés sur la science et l&apos;expertise d'un Master EOPS.
                         </p>
                     </AnimWrapper>
 
@@ -144,7 +155,7 @@ export default async function LaboCategoryPage({ params }) {
                                                 <h2 className="text-xl font-black uppercase leading-tight mb-3 text-black group-hover:text-[#FF6B00] transition">{article.title}</h2>
                                                 <p className="text-zinc-500 text-sm line-clamp-3 flex-grow">{article.excerpt}</p>
                                                 <div className="mt-4 text-xs font-black uppercase text-zinc-400 group-hover:text-[#FF6B00] transition">
-                                                    Lire l'article →
+                                                    Lire l&apos;article →
                                                 </div>
                                             </div>
                                         </Link>

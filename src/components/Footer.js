@@ -70,7 +70,7 @@ export default function Footer() {
                             <Link href="/outils/rpe-1rm" className="hover:text-white transition">Calculateur RPE / 1RM</Link>
                             <Link href="/outils/test-demi-cooper" className="hover:text-white transition">Test Demi-Cooper (VMA)</Link>
                             <Link href="/outils/besoins-caloriques" className="hover:text-white transition">Besoins Caloriques</Link>
-                            <Link href="/labo" className="hover:text-white transition">L'Encyclopédie</Link>
+                            <Link href="/labo" className="hover:text-white transition">L&apos;Encyclopédie</Link>
                         </div>
                     </div>
                     <div className="flex flex-col md:items-end">

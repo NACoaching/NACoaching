@@ -54,7 +54,7 @@ export default function LaboView({ articles, siteContent }) {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                             {/* Volume 1 */}
-                            <Link href="/labo/volume-1-la-science-de-la-force" className="group relative overflow-hidden rounded-2xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00] transition-all flex flex-col justify-between min-h-[250px]">
+                            <Link href="/labo/volume/1-la-science-de-la-force" className="group relative overflow-hidden rounded-2xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00] transition-all flex flex-col justify-between min-h-[250px]">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-[#FF6B00]/10 transition-colors"></div>
                                 <div className="relative z-10">
                                     <div className="text-[#FF6B00] font-black uppercase tracking-widest text-xs mb-4">Volume 1</div>
@@ -71,7 +71,7 @@ export default function LaboView({ articles, siteContent }) {
                             </Link>
 
                             {/* Volume 2 */}
-                            <Link href="/labo/volume-2-la-science-de-lendurance" className="group relative overflow-hidden rounded-2xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00] transition-all flex flex-col justify-between min-h-[250px]">
+                            <Link href="/labo/volume/2-la-science-de-lendurance" className="group relative overflow-hidden rounded-2xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00] transition-all flex flex-col justify-between min-h-[250px]">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-[#FF6B00]/10 transition-colors"></div>
                                 <div className="relative z-10">
                                     <div className="text-[#FF6B00] font-black uppercase tracking-widest text-xs mb-4">Volume 2</div>
@@ -88,7 +88,7 @@ export default function LaboView({ articles, siteContent }) {
                             </Link>
 
                             {/* Volume 3 */}
-                            <Link href="/labo/volume-3-la-science-de-la-sante" className="group relative overflow-hidden rounded-2xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00] transition-all flex flex-col justify-between min-h-[250px]">
+                            <Link href="/labo/volume/3-la-science-de-la-sante" className="group relative overflow-hidden rounded-2xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00] transition-all flex flex-col justify-between min-h-[250px]">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-[#FF6B00]/10 transition-colors"></div>
                                 <div className="relative z-10">
                                     <div className="text-[#FF6B00] font-black uppercase tracking-widest text-xs mb-4">Volume 3</div>
