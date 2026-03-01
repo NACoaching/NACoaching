@@ -60,7 +60,7 @@ export default async function VolumePage({ params }) {
     const { data: volumeContentData } = await supabase
         .from('site_content')
         .select('value')
-        .eq('key', `volume_seo_${slug}`)
+        .eq('key', `volume_seo_volume-${slug}`)
         .single();
 
     const volumeSeoText = volumeContentData?.value || "Retrouvez ici toute l'expertise NA Coaching compilée. Que vous cherchiez à optimiser vos gains, comprendre la physiologie humaine ou adopter les meilleures routines.";
