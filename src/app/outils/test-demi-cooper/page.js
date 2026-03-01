@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
 export const revalidate = 0;
 
 export async function generateMetadata() {
-    const article = await getToolArticle('test-demi-cooper');
+    const article = await getToolArticle('/outils/test-demi-cooper');
     return {
         title: `${article.title || 'Test Demi-Cooper (6 min) — Estimez VMA & VO2max'} | NA Coaching`,
         description: article.intro || "Évaluez votre VMA et votre VO2max avec le test du demi-Cooper (6 minutes). Obtenez vos allures d'entraînement personnalisées pour le running.",
@@ -51,7 +51,7 @@ const DEFAULT_FAQ_DATA = [
 ];
 
 export default async function DemiCooperPage() {
-    const article = await getToolArticle('test-demi-cooper');
+    const article = await getToolArticle('/outils/test-demi-cooper');
     const relatedArticles = await getToolRelatedArticles(article);
 
     let faqData = DEFAULT_FAQ_DATA;
