@@ -287,7 +287,7 @@ export default function AdminPage() {
     const [autoLinks, setAutoLinks] = useState([]);
     const [newAutoLink, setNewAutoLink] = useState({ keywords: '', url: '', is_active: true });
     const [articleForm, setArticleForm] = useState({
-        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
+        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '',
         affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
         related_title: '', related_subtitle: '', related_articles: [],
         tool_hints: {},
@@ -571,7 +571,7 @@ export default function AdminPage() {
         if (type === 'article') {
             setArticleForm({
                 title: item.title, category: item.category, subcategory: item.subcategory || '', excerpt: item.excerpt,
-                content: item.content, image: item.image, cta: item.cta || '', date: item.date,
+                content: item.content, image: item.image, cta: item.cta || '', cta_image: item.cta_image || '', date: item.date,
                 is_published: item.is_published || false,
                 affiliate_link: item.affiliate_link || '',
                 affiliate_text: item.affiliate_text || '',
@@ -596,7 +596,7 @@ export default function AdminPage() {
     const cancelEdit = () => {
         setEditingItem(null);
         setArticleForm({
-            title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '',
+            title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '',
             is_published: false,
             affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
             related_title: '', related_subtitle: '', related_articles: [],
@@ -2385,7 +2385,43 @@ export default function AdminPage() {
                                             <input type="hidden" name="image" value={articleForm.image} />
                                         </div>
 
-                                        <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="CTA (Produit lié - Optionnel)" />
+                                        <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">
+                                            <h3 className="text-xs font-black uppercase text-[#FF6B00]">Appel à l&apos;action (Programme)</h3>
+                                            <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Slug du programme (ex: programme-musculation-ppl)" />
+
+                                            <label className="block text-xs font-black uppercase text-zinc-500 mt-2 mb-1">Image du Programme (Optionnel)</label>
+                                            <div className="flex gap-4 items-center">
+                                                {articleForm.cta_image && (
+                                                    <img src={articleForm.cta_image} alt="CTA Preview" className="w-16 h-16 object-contain rounded bg-white shadow-sm border p-1" />
+                                                )}
+                                                <div className="flex-1">
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={async (e) => {
+                                                            const file = e.target.files[0];
+                                                            if (!file) return;
+                                                            setUploadStatus('Uploading CTA image...');
+                                                            try {
+                                                                const fileExt = file.name.split('.').pop();
+                                                                const fileName = `cta-${Date.now()}.${fileExt}`;
+                                                                const { error } = await supabase.storage.from('images').upload(fileName, file);
+                                                                if (error) throw error;
+                                                                const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(fileName);
+                                                                setArticleForm(prev => ({ ...prev, cta_image: publicUrl }));
+                                                                setUploadStatus('Upload réussi !');
+                                                                setTimeout(() => setUploadStatus(null), 3000);
+                                                            } catch (err) {
+                                                                alert('Erreur upload: ' + err.message);
+                                                                setUploadStatus(null);
+                                                            }
+                                                        }}
+                                                        className="w-full text-sm text-zinc-500 file:mr-4 file:py-1 file:px-3 file:rounded-sm file:border-0 file:text-[10px] file:font-black file:uppercase file:bg-zinc-200 file:text-black hover:file:bg-zinc-300 transition-colors"
+                                                        disabled={uploadStatus?.includes('Uploading')}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Affiliation (Optionnel)</h3>

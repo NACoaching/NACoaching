@@ -253,7 +253,15 @@ export default async function ArticlePage({ params }) {
                                     </Link>
                                 </div>
                                 <div className="w-32 h-32 flex items-center justify-center shrink-0">
-                                    <ShoppingBag className="w-full h-full text-[#FF6B00] opacity-80 group-hover:scale-110 group-hover:text-white transition-all duration-500" strokeWidth={1} />
+                                    {article.cta_image ? (
+                                        <img
+                                            src={article.cta_image}
+                                            alt="Aperçu du Programme"
+                                            className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 rounded"
+                                        />
+                                    ) : (
+                                        <ShoppingBag className="w-full h-full text-[#FF6B00] opacity-80 group-hover:scale-110 group-hover:text-white transition-all duration-500" strokeWidth={1} />
+                                    )}
                                 </div>
                             </div>
                         )}
