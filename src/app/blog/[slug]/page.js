@@ -232,6 +232,32 @@ export default async function ArticlePage({ params }) {
                             </ReactMarkdown>
                         </div>
 
+                        {/* EXPERT BOX (CTA PROGRAMME) - FIN D'ARTICLE */}
+                        {article.cta && (
+                            <div className="my-12 p-8 rounded-xl bg-black border border-zinc-800 flex flex-col md:flex-row items-center gap-8 group shadow-2xl">
+                                <div className="flex-1 text-center md:text-left">
+                                    <span className="inline-block px-3 py-1 bg-[#FF6B00] text-black text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
+                                        Programme Recommandé
+                                    </span>
+                                    <h4 className="text-2xl font-black uppercase mb-2 text-white">
+                                        {getContent('expert_box_title') || "Passez à l'action"}
+                                    </h4>
+                                    <p className="text-zinc-400 font-medium text-base leading-relaxed mb-6">
+                                        {getContent('expert_box_text') || "La lecture ne suffit pas pour progresser. Découvrez le programme complet incluant les méthodes, protocoles et entraînements abordés sur ce site."}
+                                    </p>
+                                    <Link
+                                        href={article.cta.startsWith('http') ? article.cta : `/boutique/${article.cta}`}
+                                        className="inline-block bg-[#FF6B00] text-black font-black py-4 px-8 rounded-sm uppercase text-xs hover:bg-white hover:text-black transition shadow-lg"
+                                    >
+                                        Découvrir le programme
+                                    </Link>
+                                </div>
+                                <div className="w-32 h-32 flex items-center justify-center shrink-0">
+                                    <ShoppingBag className="w-full h-full text-[#FF6B00] opacity-80 group-hover:scale-110 group-hover:text-white transition-all duration-500" strokeWidth={1} />
+                                </div>
+                            </div>
+                        )}
+
                         <ShareButtons url={currentUrl} title={article.title} />
 
                         <AuthorBio name={coachName} tagline={coachTagline} imageUrl={coachImage} />
@@ -273,26 +299,7 @@ export default async function ArticlePage({ params }) {
                         </div>
                     )}
 
-                    {/* EXPERT BOX */}
-                    {article.cta && (
-                        <div className="mt-16 bg-black text-white p-8 rounded-sm relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <Activity size={80} className="text-[#FF6B00]" />
-                            </div>
-                            <h4 className="text-[#FF6B00] font-black uppercase tracking-tighter text-lg mb-2">
-                                {getContent('expert_box_title') || "L'avis du Master EOPS"}
-                            </h4>
-                            <p className="text-zinc-300 text-sm mb-6 leading-relaxed">
-                                {getContent('expert_box_text') || "En tant que professionnel, je vous conseille de ne jamais ignorer une douleur asymétrique. La science prouve que le repos n'est pas toujours la solution, c'est le mouvement contrôlé qui soigne."}
-                            </p>
-                            <Link
-                                href={article.cta.startsWith('http') ? article.cta : `/boutique/${article.cta}`}
-                                className="bg-[#FF6B00] text-black font-black py-3 px-6 rounded-sm uppercase text-xs hover:bg-white transition inline-block"
-                            >
-                                Découvrir le programme
-                            </Link>
-                        </div>
-                    )}
+
 
                     {/* RELATED ARTICLES */}
                     <div className="mt-20 pt-12 border-t border-zinc-200">
