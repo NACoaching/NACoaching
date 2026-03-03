@@ -240,10 +240,10 @@ export default async function ArticlePage({ params }) {
                                         Programme Recommandé
                                     </span>
                                     <h4 className="text-2xl font-black uppercase mb-2 text-white">
-                                        {getContent('expert_box_title') || "Passez à l'action"}
+                                        {article.cta_title || getContent('expert_box_title') || "Passez à l'action"}
                                     </h4>
                                     <p className="text-zinc-400 font-medium text-base leading-relaxed mb-6">
-                                        {getContent('expert_box_text') || "La lecture ne suffit pas pour progresser. Découvrez le programme complet incluant les méthodes, protocoles et entraînements abordés sur ce site."}
+                                        {article.cta_text || getContent('expert_box_text') || "La lecture ne suffit pas pour progresser. Découvrez le programme complet incluant les méthodes, protocoles et entraînements abordés sur ce site."}
                                     </p>
                                     <Link
                                         href={article.cta.startsWith('http') ? article.cta : `/boutique/${article.cta}`}

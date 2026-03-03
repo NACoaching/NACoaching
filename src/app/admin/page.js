@@ -287,7 +287,7 @@ export default function AdminPage() {
     const [autoLinks, setAutoLinks] = useState([]);
     const [newAutoLink, setNewAutoLink] = useState({ keywords: '', url: '', is_active: true });
     const [articleForm, setArticleForm] = useState({
-        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '',
+        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '', cta_title: '', cta_text: '',
         affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
         related_title: '', related_subtitle: '', related_articles: [],
         tool_hints: {},
@@ -571,7 +571,7 @@ export default function AdminPage() {
         if (type === 'article') {
             setArticleForm({
                 title: item.title, category: item.category, subcategory: item.subcategory || '', excerpt: item.excerpt,
-                content: item.content, image: item.image, cta: item.cta || '', cta_image: item.cta_image || '', date: item.date,
+                content: item.content, image: item.image, cta: item.cta || '', cta_image: item.cta_image || '', cta_title: item.cta_title || '', cta_text: item.cta_text || '', date: item.date,
                 is_published: item.is_published || false,
                 affiliate_link: item.affiliate_link || '',
                 affiliate_text: item.affiliate_text || '',
@@ -596,7 +596,7 @@ export default function AdminPage() {
     const cancelEdit = () => {
         setEditingItem(null);
         setArticleForm({
-            title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '',
+            title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '', cta_title: '', cta_text: '',
             is_published: false,
             affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
             related_title: '', related_subtitle: '', related_articles: [],
@@ -2387,7 +2387,30 @@ export default function AdminPage() {
 
                                         <div className="border border-zinc-200 p-3 rounded bg-zinc-50 space-y-3">
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Appel à l&apos;action (Programme)</h3>
-                                            <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Slug du programme (ex: programme-musculation-ppl)" />
+                                            <input name="cta" value={articleForm.cta} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white font-mono" placeholder="Slug du programme (ex: programme-musculation-ppl)" />
+
+                                            {articleForm.cta && (
+                                                <div className="mt-4 space-y-3 p-3 bg-white rounded border border-zinc-100 shadow-sm">
+                                                    <h4 className="text-[10px] font-black uppercase tracking-wider text-zinc-500">Textes personnalisés (Optionnel)</h4>
+                                                    <p className="text-[10px] text-zinc-400">Si laissés vides, les textes globaux de la Boîte Expert seront utilisés.</p>
+
+                                                    <input
+                                                        name="cta_title"
+                                                        value={articleForm.cta_title}
+                                                        onChange={handleArticleChange}
+                                                        className="w-full border p-2 rounded text-sm bg-zinc-50"
+                                                        placeholder="Titre (ex: Passez à l'action)"
+                                                    />
+
+                                                    <textarea
+                                                        name="cta_text"
+                                                        value={articleForm.cta_text}
+                                                        onChange={handleArticleChange}
+                                                        className="w-full border p-2 rounded text-sm bg-zinc-50 min-h-[60px]"
+                                                        placeholder="Description persuasive pour ce programme (ex: La lecture ne suffit pas...)"
+                                                    />
+                                                </div>
+                                            )}
 
                                             <label className="block text-xs font-black uppercase text-zinc-500 mt-2 mb-1">Image du Programme (Optionnel)</label>
                                             <div className="flex gap-4 items-center">
