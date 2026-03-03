@@ -54,17 +54,6 @@ export async function generateMetadata() {
       description: content.site_description || "Coaching sportif et réathlétisation par un expert Master EOPS",
       images: [content.logo_url || '/logo.png'],
     },
-    icons: {
-      icon: [
-        { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
-        { url: '/favicon.png', sizes: '64x64', type: 'image/png' },
-      ],
-      shortcut: '/favicon.png',
-      apple: '/apple-icon.png',
-      other: [
-        { rel: 'mask-icon', url: '/favicon.png', color: '#FF6B00' },
-      ],
-    },
     authors: [{ name: 'NA Coaching', url: siteUrl }],
     publisher: 'NA Coaching',
     alternates: {
