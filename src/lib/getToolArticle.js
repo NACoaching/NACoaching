@@ -57,12 +57,20 @@ export async function getToolRelatedArticles(article) {
     );
 
     if (article && article.related_articles && article.related_articles.length > 0) {
-        const { data } = await supabase
+        // Try fetching articles first
+        const { data: articlesData } = await supabase
             .from('articles')
-            .select('id, title, category, slug')
-            .in('id', article.related_articles)
+            .select('id, title, category, slug, image')
+            .in('slug', article.related_articles)
             .eq('is_published', true);
-        return data || [];
+
+        // Also check if any of the related_articles matches a product slug
+        const { data: productsData } = await supabase
+            .from('products')
+            .select('id, title, category, slug, image, price, discount_price, description')
+            .in('slug', article.related_articles);
+
+        return [...(articlesData || []), ...(productsData || [])];
     }
 
     const { data } = await supabase

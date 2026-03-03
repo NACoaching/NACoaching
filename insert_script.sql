@@ -1,4 +1,4 @@
-const sql = `
+
 INSERT INTO articles (
     title,
     slug,
@@ -80,8 +80,3 @@ L''**hypertrophie musculaire** n''est pas un mythe ni une loterie génétique. C
     'Passez à la pratique avec nos programmes optimisés',
     '["programme-ppl"]'::jsonb
 );
-`;
-
-const fs = require('fs');
-fs.writeFileSync('insert_script.sql', sql);
-console.log('SQL file written to insert_script.sql');

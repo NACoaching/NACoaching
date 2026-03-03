@@ -55,7 +55,7 @@ export async function POST(request) {
             mode: 'payment',
             customer_creation: 'always', // Forces Stripe to create a customer (requires email)
             success_url: `${request.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${request.headers.get('origin')}/boutique/${product.id}`,
+            cancel_url: `${request.headers.get('origin')}/boutique/${product.slug || product.id}`,
             metadata: {
                 productId: product.id,
                 productTitle: product.title,

@@ -107,7 +107,7 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
                                         ))}
                                     </ul>
                                     <Link
-                                        href={`/boutique/${product.id}`}
+                                        href={`/boutique/${product.slug}`}
                                         className="bg-[#FF6B00] text-black font-black py-4 rounded-sm uppercase text-center tracking-widest hover:bg-white transition mt-auto block"
                                     >
                                         En savoir plus

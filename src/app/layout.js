@@ -56,10 +56,10 @@ export async function generateMetadata() {
     },
     icons: {
       icon: [
-        { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+        { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
         { url: '/favicon.png', sizes: '64x64', type: 'image/png' },
       ],
-      shortcut: '/favicon.ico',
+      shortcut: '/favicon.png',
       apple: '/apple-icon.png',
       other: [
         { rel: 'mask-icon', url: '/favicon.png', color: '#FF6B00' },

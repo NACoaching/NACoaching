@@ -7,8 +7,8 @@ export const revalidate = 3600;
 
 // Generate dynamic metadata for the product
 export async function generateMetadata({ params }) {
-    const { id } = await params;
-    const { data: product } = await supabase.from('products').select('*').eq('id', id).single();
+    const { slug } = await params;
+    const { data: product } = await supabase.from('products').select('*').eq('slug', slug).single();
 
     if (!product) {
         return {
@@ -30,20 +30,22 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProductPage({ params }) {
-    const { id } = await params;
+    const { slug } = await params;
 
-    // Fetch all data necessary on the server
-    const [prodRes, contentRes, reviewsRes] = await Promise.all([
-        supabase.from('products').select('*').eq('id', id).single(),
-        supabase.from('site_content').select('*'),
-        supabase.from('reviews').select('*').eq('product_id', id).order('created_at', { ascending: false })
-    ]);
+    // Fetch the product first to get its ID for reviews
+    const { data: productDetails } = await supabase.from('products').select('*').eq('slug', slug).single();
 
-    if (!prodRes.data) {
+    if (!productDetails) {
         notFound();
     }
 
-    const product = prodRes.data;
+    // Fetch all data necessary on the server
+    const [contentRes, reviewsRes] = await Promise.all([
+        supabase.from('site_content').select('*'),
+        supabase.from('reviews').select('*').eq('product_id', productDetails.id).order('created_at', { ascending: false })
+    ]);
+
+    const product = productDetails;
     const siteContentMap = {};
     if (contentRes.data) {
         contentRes.data.forEach(item => { siteContentMap[item.key] = item.value; });

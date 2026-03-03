@@ -286,10 +286,10 @@ export default async function ArticlePage({ params }) {
                                 {getContent('expert_box_text') || "En tant que professionnel, je vous conseille de ne jamais ignorer une douleur asymétrique. La science prouve que le repos n'est pas toujours la solution, c'est le mouvement contrôlé qui soigne."}
                             </p>
                             <Link
-                                href="/boutique"
+                                href={`/boutique/${article.cta}`}
                                 className="bg-[#FF6B00] text-black font-black py-3 px-6 rounded-sm uppercase text-xs hover:bg-white transition inline-block"
                             >
-                                Découvrir le programme {article.cta}
+                                Découvrir le programme
                             </Link>
                         </div>
                     )}

@@ -657,7 +657,8 @@ export default function AdminPage() {
             ...productForm,
             features: featuresArray,
             // Ensure we save the first image of the array as the main image for backward compatibility
-            image: productForm.images && productForm.images.length > 0 ? productForm.images[0] : productForm.image
+            image: productForm.images && productForm.images.length > 0 ? productForm.images[0] : productForm.image,
+            slug: generateSlug(productForm.title)
         };
 
         let error;

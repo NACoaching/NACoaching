@@ -49,10 +49,10 @@ export default async function sitemap() {
     });
 
     // Get all products
-    const { data: products } = await supabase.from('products').select('id, created_at');
+    const { data: products } = await supabase.from('products').select('id, slug, created_at');
 
     const productUrls = products?.map((product) => ({
-        url: `${baseUrl}/boutique/${product.id}`,
+        url: `${baseUrl}/boutique/${product.slug || product.id}`,
         lastModified: new Date(product.created_at),
         changeFrequency: 'monthly',
         priority: 0.7,
