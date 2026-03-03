@@ -90,7 +90,7 @@ export default async function VolumePage({ params }) {
 
     return (
         <div className="min-h-screen bg-black text-white font-sans">
-            <div className="max-w-4xl mx-auto px-6 py-24">
+            <div className="max-w-5xl mx-auto px-6 py-24">
 
                 {/* Header Section */}
                 <div className="mb-16">
@@ -103,7 +103,7 @@ export default async function VolumePage({ params }) {
                         {fancyTitle}
                     </h1>
 
-                    <div className="max-w-2xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed">
+                    <div className="max-w-4xl border-l-4 border-[#FF6B00] pl-6 text-zinc-400 font-medium leading-relaxed">
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
                             components={{
