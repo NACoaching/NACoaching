@@ -184,7 +184,7 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                                                     />
                                                 </span>
                                             ),
-                                            h1: ({ node, ...props }) => <h1 className="text-3xl font-black uppercase mt-8 mb-4 text-[#FF6B00]" {...props} />,
+                                            h1: ({ node, ...props }) => <h2 className="text-3xl font-black uppercase mt-8 mb-4 text-[#FF6B00]" {...props} />,
                                             h2: ({ node, ...props }) => <h2 className="text-2xl font-black uppercase mt-6 mb-3 text-[#FF6B00]" {...props} />,
                                             h3: ({ node, ...props }) => <h3 className="text-xl font-bold mt-5 mb-2 text-black" {...props} />,
                                             h4: ({ node, ...props }) => <h4 className="text-lg font-bold mt-4 mb-2 text-black" {...props} />,
