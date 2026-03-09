@@ -2475,9 +2475,10 @@ export default function AdminPage() {
                                             <label className="block text-xs font-bold uppercase text-zinc-500 mb-2 mt-4">Sélectionner les recommandations (Publiées uniquement)</label>
                                             <div className="max-h-60 overflow-y-auto border p-2 bg-white rounded space-y-2">
                                                 {articles.filter(a => a.is_published && (editingItem ? a.id !== editingItem.id : true)).map(a => (
-                                                    <label key={a.id} className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-50 p-1 rounded">
+                                                    <label key={a.id} className="flex items-start gap-3 text-xs cursor-pointer hover:bg-zinc-50 p-2 rounded">
                                                         <input
                                                             type="checkbox"
+                                                            className="mt-0.5"
                                                             checked={articleForm.related_articles?.includes(a.id)}
                                                             onChange={(e) => {
                                                                 const current = new Set(articleForm.related_articles || []);
@@ -2486,8 +2487,10 @@ export default function AdminPage() {
                                                                 setArticleForm({ ...articleForm, related_articles: Array.from(current) });
                                                             }}
                                                         />
-                                                        <span className="truncate flex-1">{a.title}</span>
-                                                        <span className="text-zinc-400 text-[10px] uppercase font-bold tracking-wider shrink-0">{a.category}</span>
+                                                        <div className="flex flex-col">
+                                                            <span className="font-semibold text-zinc-900 leading-tight">{a.title}</span>
+                                                            <span className="text-zinc-400 text-[9px] uppercase font-bold tracking-wider mt-0.5">{a.category}</span>
+                                                        </div>
                                                     </label>
                                                 ))}
                                             </div>
