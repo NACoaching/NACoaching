@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import AnimWrapper from '@/components/AnimWrapper';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 3600;
+export const revalidate = 10;
 
 // Use the exact category name from the DB as the static param
 export async function generateStaticParams() {

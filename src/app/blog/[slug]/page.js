@@ -13,6 +13,8 @@ import { autoLinkContent } from '@/lib/contentProcessor';
 
 import { redirect } from 'next/navigation';
 
+export const revalidate = 10;
+
 export async function generateMetadata({ params }) {
     const { slug } = await params;
     const isId = /^\d+$/.test(slug);
