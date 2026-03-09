@@ -66,18 +66,35 @@ export default async function ArticlePage({ params }) {
 
     const article = articleRes.data;
     const autoLinks = autoLinksRes.data || [];
-    const siteContent = contentRes.data || [];
+    // Mapping of tools available on the website
+    const toolsMap = {
+        'rpe-1rm': { title: 'RPE / 1RM', icon: '💪', url: '/outils/rpe-1rm' },
+        'convertisseur-vitesse': { title: 'Convertisseur Vitesse', icon: '⚡️', url: '/outils/convertisseur-vitesse' },
+        'test-demi-cooper': { title: 'Test Demi-Cooper', icon: '🏃‍♂️', url: '/outils/test-demi-cooper' },
+        'frequence-cardiaque': { title: 'Zones Cardiaques', icon: '❤️', url: '/outils/frequence-cardiaque' },
+        'predictateur-performance': { title: 'Prédicateur', icon: '⏱️', url: '/outils/predictateur-performance' },
+        'besoins-caloriques': { title: 'Besoins Caloriques', icon: '🔥', url: '/outils/besoins-caloriques' },
+        'macros-avancees': { title: 'Macros Avancées', icon: '🥑', url: '/outils/macros-avancees' },
+        'volume-effectif': { title: 'Volume Effectif', icon: '📊', url: '/outils/volume-effectif' },
+        'ratio-acwr': { title: 'Ratio ACWR', icon: '📈', url: '/outils/ratio-acwr' },
+        'score-recuperation': { title: 'Score de Récup.', icon: '🔋', url: '/outils/score-recuperation' },
+    };
 
-    // Fetch related articles
+    const articleTools = article && article.related_articles ? article.related_articles.filter(slug => toolsMap[slug]) : [];
+
+    // Fetch related articles (excluding tools)
     let relatedArticles = [];
     if (article) {
         if (article.related_articles && article.related_articles.length > 0) {
-            const { data } = await supabase
-                .from('articles')
-                .select('id, slug, title, category')
-                .in('id', article.related_articles)
-                .eq('is_published', true);
-            relatedArticles = data || [];
+            const articleSlugsToFetch = article.related_articles.filter(slug => !toolsMap[slug]);
+            if (articleSlugsToFetch.length > 0) {
+                const { data } = await supabase
+                    .from('articles')
+                    .select('id, slug, title, category')
+                    .in('slug', articleSlugsToFetch)
+                    .eq('is_published', true);
+                relatedArticles = data || [];
+            }
         } else {
             const { data } = await supabase
                 .from('articles')
@@ -327,20 +344,24 @@ export default async function ArticlePage({ params }) {
                         </div>
                     </div>
 
-                    {/* RELATED TOOLS - MAILLAGE INTERNE */}
-                    <div className="mt-16 pt-12 border-t border-zinc-100 bg-zinc-50/50 p-8 rounded-xl">
-                        <h3 className="text-xl font-black uppercase mb-6 text-black">Outils Scientifiques Gratuits</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <Link href="/outils/rpe-1rm" className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
-                                <div className="text-2xl mb-2">💪</div>
-                                <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">RPE / 1RM</div>
-                            </Link>
-                            <Link href="/outils/test-demi-cooper" className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
-                                <div className="text-2xl mb-2">🏃‍♂️</div>
-                                <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">Test Demi-Cooper</div>
-                            </Link>
+                    {/* RELATED TOOLS - MAILLAGE INTERNE DYNAMIQUE */}
+                    {articleTools.length > 0 && (
+                        <div className="mt-16 pt-12 border-t border-zinc-100 bg-zinc-50/50 p-8 rounded-xl">
+                            <h3 className="text-xl font-black uppercase mb-6 text-black">Outils Scientifiques Gratuits</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {articleTools.map((slug) => {
+                                    const tool = toolsMap[slug];
+                                    if (!tool) return null;
+                                    return (
+                                        <Link key={slug} href={tool.url} className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
+                                            <div className="text-2xl mb-2">{tool.icon}</div>
+                                            <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">{tool.title}</div>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <CommentsSection articleId={article.id} />
                 </div>
