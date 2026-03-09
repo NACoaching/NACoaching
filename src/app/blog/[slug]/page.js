@@ -83,21 +83,22 @@ export default async function ArticlePage({ params }) {
     let relatedArticles = [];
     let articleTools = [];
 
-    if (article) {
-        if (article.related_articles && article.related_articles.length > 0) {
-            const { data } = await supabase
+    // Safe fetching of related articles and tools
+    try {
+        if (article && Array.isArray(article.related_articles) && article.related_articles.length > 0) {
+            const { data, error } = await supabase
                 .from('articles')
                 .select('id, slug, title, category, cta')
                 .in('id', article.related_articles)
                 .eq('is_published', true);
 
-            if (data) {
+            if (data && !error) {
                 // Separate tools from regular articles
                 articleTools = data.filter(a => a.category === 'Outils');
                 relatedArticles = data.filter(a => a.category !== 'Outils');
             }
-        } else {
-            const { data } = await supabase
+        } else if (article) {
+            const { data, error } = await supabase
                 .from('articles')
                 .select('id, slug, title, category')
                 .neq('id', article.id)
@@ -105,11 +106,13 @@ export default async function ArticlePage({ params }) {
                 .eq('is_published', true)
                 .limit(2);
 
-            relatedArticles = data || [];
+            if (data && !error) {
+                relatedArticles = data || [];
+            }
 
             // If not enough in same category, just get latest
             if (relatedArticles.length < 2) {
-                const { data: fallbackData } = await supabase
+                const { data: fallbackData, error: fallbackError } = await supabase
                     .from('articles')
                     .select('id, slug, title, category')
                     .neq('id', article.id)
@@ -117,11 +120,13 @@ export default async function ArticlePage({ params }) {
                     .order('created_at', { ascending: false })
                     .limit(2 - relatedArticles.length);
 
-                if (fallbackData) {
+                if (fallbackData && !fallbackError) {
                     relatedArticles = [...relatedArticles, ...fallbackData];
                 }
             }
         }
+    } catch (e) {
+        console.error("Safely caught render error in related articles parsing:", e);
     }
 
     const getContent = (key) => siteContent.find(c => c.key === key)?.value;
