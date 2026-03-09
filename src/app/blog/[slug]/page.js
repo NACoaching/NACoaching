@@ -129,6 +129,7 @@ export default async function ArticlePage({ params }) {
         console.error("Safely caught render error in related articles parsing:", e);
     }
 
+    const siteContent = contentRes.data || [];
     const getContent = (key) => siteContent.find(c => c.key === key)?.value;
 
     if (!article) return <div className="p-20 text-center">Article introuvable.</div>;
