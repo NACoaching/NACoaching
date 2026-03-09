@@ -50,7 +50,8 @@ export async function generateMetadata({ params }) {
     const { slug } = await params;
 
     // Very basic title generation from slug for now. Real titles can be mapped or fetched.
-    const titleFromSlug = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    let titleFromSlug = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    titleFromSlug = titleFromSlug.replace(/Lendurance/gi, "L'Endurance").replace(/L Endurance/gi, "L'Endurance");
 
     return {
         title: `${titleFromSlug} | Encyclopédie NA Coaching`,
@@ -76,7 +77,8 @@ export default async function VolumePage({ params }) {
 
     const volumeSeoText = volumeContentData?.value || "Retrouvez ici toute l'expertise NA Coaching compilée. Que vous cherchiez à optimiser vos gains, comprendre la physiologie humaine ou adopter les meilleures routines.";
 
-    const fancyTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).replace('Volume', 'Volume');
+    let fancyTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).replace('Volume', 'Volume');
+    fancyTitle = fancyTitle.replace(/Lendurance/gi, "L'Endurance").replace(/L Endurance/gi, "L'Endurance");
 
     // Group articles by subcategory to create beautiful "Chapters"
     const chapters = {};
