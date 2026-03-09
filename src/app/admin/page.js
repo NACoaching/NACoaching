@@ -2472,9 +2472,9 @@ export default function AdminPage() {
                                             <input name="related_title" value={articleForm.related_title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Titre (ex: La Science de la Force)" />
                                             <input name="related_subtitle" value={articleForm.related_subtitle} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm bg-white" placeholder="Sous-titre" />
 
-                                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2 mt-4">Sélectionner jusqu'à 3 recommandations</label>
-                                            <div className="max-h-40 overflow-y-auto border p-2 bg-white rounded space-y-2">
-                                                {articles.filter(a => editingItem ? a.id !== editingItem.id : true).map(a => (
+                                            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2 mt-4">Sélectionner les recommandations (Publiées uniquement)</label>
+                                            <div className="max-h-60 overflow-y-auto border p-2 bg-white rounded space-y-2">
+                                                {articles.filter(a => a.is_published && (editingItem ? a.id !== editingItem.id : true)).map(a => (
                                                     <label key={a.id} className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-50 p-1 rounded">
                                                         <input
                                                             type="checkbox"
