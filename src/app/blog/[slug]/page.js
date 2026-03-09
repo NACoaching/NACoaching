@@ -66,34 +66,35 @@ export default async function ArticlePage({ params }) {
 
     const article = articleRes.data;
     const autoLinks = autoLinksRes.data || [];
-    // Mapping of tools available on the website
-    const toolsMap = {
-        'rpe-1rm': { title: 'RPE / 1RM', icon: '💪', url: '/outils/rpe-1rm' },
-        'convertisseur-vitesse': { title: 'Convertisseur Vitesse', icon: '⚡️', url: '/outils/convertisseur-vitesse' },
-        'test-demi-cooper': { title: 'Test Demi-Cooper', icon: '🏃‍♂️', url: '/outils/test-demi-cooper' },
-        'frequence-cardiaque': { title: 'Zones Cardiaques', icon: '❤️', url: '/outils/frequence-cardiaque' },
-        'predictateur-performance': { title: 'Prédicateur', icon: '⏱️', url: '/outils/predictateur-performance' },
-        'besoins-caloriques': { title: 'Besoins Caloriques', icon: '🔥', url: '/outils/besoins-caloriques' },
-        'macros-avancees': { title: 'Macros Avancées', icon: '🥑', url: '/outils/macros-avancees' },
-        'volume-effectif': { title: 'Volume Effectif', icon: '📊', url: '/outils/volume-effectif' },
-        'ratio-acwr': { title: 'Ratio ACWR', icon: '📈', url: '/outils/ratio-acwr' },
-        'score-recuperation': { title: 'Score de Récup.', icon: '🔋', url: '/outils/score-recuperation' },
+    // Emoji mapping for tools based on their URL
+    const toolEmojis = {
+        '/outils/rpe-1rm': '💪',
+        '/outils/convertisseur-vitesse': '⚡️',
+        '/outils/test-demi-cooper': '🏃‍♂️',
+        '/outils/frequence-cardiaque': '❤️',
+        '/outils/predictateur-performance': '⏱️',
+        '/outils/besoins-caloriques': '🔥',
+        '/outils/macros-avancees': '🥑',
+        '/outils/volume-effectif': '📊',
+        '/outils/ratio-acwr': '📈',
+        '/outils/score-recuperation': '🔋',
     };
 
-    const articleTools = article && article.related_articles ? article.related_articles.filter(slug => toolsMap[slug]) : [];
-
-    // Fetch related articles (excluding tools)
     let relatedArticles = [];
+    let articleTools = [];
+
     if (article) {
         if (article.related_articles && article.related_articles.length > 0) {
-            const articleSlugsToFetch = article.related_articles.filter(slug => !toolsMap[slug]);
-            if (articleSlugsToFetch.length > 0) {
-                const { data } = await supabase
-                    .from('articles')
-                    .select('id, slug, title, category')
-                    .in('slug', articleSlugsToFetch)
-                    .eq('is_published', true);
-                relatedArticles = data || [];
+            const { data } = await supabase
+                .from('articles')
+                .select('id, slug, title, category, cta')
+                .in('id', article.related_articles)
+                .eq('is_published', true);
+
+            if (data) {
+                // Separate tools from regular articles
+                articleTools = data.filter(a => a.category === 'Outils');
+                relatedArticles = data.filter(a => a.category !== 'Outils');
             }
         } else {
             const { data } = await supabase
@@ -349,13 +350,15 @@ export default async function ArticlePage({ params }) {
                         <div className="mt-16 pt-12 border-t border-zinc-100 bg-zinc-50/50 p-8 rounded-xl">
                             <h3 className="text-xl font-black uppercase mb-6 text-black">Outils Scientifiques Gratuits</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {articleTools.map((slug) => {
-                                    const tool = toolsMap[slug];
-                                    if (!tool) return null;
+                                {articleTools.map((tool) => {
+                                    const icon = toolEmojis[tool.cta] || '🔧';
+                                    const title = tool.title;
+                                    const url = tool.cta || `/blog/${tool.slug}`;
+
                                     return (
-                                        <Link key={slug} href={tool.url} className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
-                                            <div className="text-2xl mb-2">{tool.icon}</div>
-                                            <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">{tool.title}</div>
+                                        <Link key={tool.id} href={url} className="bg-white p-4 rounded border border-zinc-200 hover:border-[#FF6B00] transition group">
+                                            <div className="text-2xl mb-2">{icon}</div>
+                                            <div className="text-xs font-black uppercase text-black group-hover:text-[#FF6B00]">{title}</div>
                                         </Link>
                                     );
                                 })}
