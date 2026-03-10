@@ -19,14 +19,14 @@ const geistMono = Geist_Mono({
 
 import { supabase } from '@/lib/supabaseClient';
 
+const siteUrl = 'https://na-coaching.com';
+
 export async function generateMetadata() {
   const { data } = await supabase.from('site_content').select('*');
   const content = {};
   if (data) {
     data.forEach(item => { content[item.key] = item.value });
   }
-
-  const siteUrl = 'https://na-coaching.com'; // Replace with actual domain
 
   return {
     metadataBase: new URL(siteUrl),
