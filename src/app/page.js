@@ -14,22 +14,27 @@ export default async function HomePage() {
 
   const siteContent = content || [];
 
-  const jsonLd = {
+  const websiteJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'WebSite',
     name: siteContent.find(c => c.key === 'site_title')?.value || 'NA Coaching',
-    image: 'https://na-coaching.com/logo.png', // Fallback, update if needed
-    description: siteContent.find(c => c.key === 'site_description')?.value || 'Coaching sportif et réathlétisation par un expert Master EOPS',
     url: 'https://na-coaching.com',
-    telephone: siteContent.find(c => c.key === 'contact_phone')?.value || '',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'FR'
-    },
-    sameAs: [
-      siteContent.find(c => c.key === 'social_instagram')?.value,
-      siteContent.find(c => c.key === 'social_tiktok')?.value
-    ].filter(Boolean)
+    description: siteContent.find(c => c.key === 'site_description')?.value || 'Coaching sportif et réathlétisation par un expert Master EOPS',
+  };
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Derniers articles du Labo",
+    "numberOfItems": articles?.length || 0,
+    "itemListElement": articles?.map((article, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": article.title,
+      "url": article.category === 'Outils' && article.cta
+        ? `https://na-coaching.com${article.cta.startsWith('/') ? article.cta : `/outils/${article.cta}`}`
+        : `https://na-coaching.com/blog/${article.slug || article.id}`
+    })) || []
   };
 
   const DEFAULT_HOME_FAQS = [
@@ -95,7 +100,11 @@ export default async function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
       {faqJsonLd && (
         <script

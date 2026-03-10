@@ -113,29 +113,15 @@ export default async function ProductPage({ params }) {
     const breadcrumbItems = [
         { label: 'Accueil', href: '/' },
         { label: 'Boutique', href: '/boutique' },
-        { label: product.title },
+        { label: product.title, href: `/boutique/${product.slug || product.id}` },
     ];
 
-    const breadcrumbJsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: breadcrumbItems.map((item, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: item.label,
-            item: item.href ? `https://na-coaching.com${item.href}` : undefined,
-        }))
-    };
 
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             {faqJsonLd && (
                 <script

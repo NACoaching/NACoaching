@@ -78,7 +78,7 @@ export default async function LaboCategoryPage({ params }) {
     const breadcrumbItems = [
         { label: 'Accueil', href: '/' },
         { label: 'Le Labo', href: '/labo' },
-        { label: category },
+        { label: category, href: `/labo/${encodeURIComponent(category)}` },
     ];
 
     return (

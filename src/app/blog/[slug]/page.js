@@ -189,7 +189,7 @@ export default async function ArticlePage({ params }) {
                         { label: 'Accueil', href: '/' },
                         { label: 'Le Labo', href: '/labo' },
                         { label: article.category, href: `/labo?category=${encodeURIComponent(article.category)}` },
-                        { label: article.title },
+                        { label: article.title, href: `/blog/${article.slug || article.id}` },
                     ]} />
 
                     <div className="text-[#FF6B00] text-sm font-black uppercase tracking-widest mb-4 mt-6">{article.category}</div>
