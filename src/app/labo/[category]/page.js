@@ -66,11 +66,11 @@ export default async function LaboCategoryPage({ params }) {
         '@type': 'CollectionPage',
         name: `${category} - Le Labo NA Coaching`,
         description: `Articles scientifiques sur la thématique ${category} par NA Coaching.`,
-        url: `https://na-coaching.com/labo/${encodeURIComponent(category)}`,
+        url: `https://www.na-coaching.com/labo/${encodeURIComponent(category)}`,
         hasPart: articlesList.map(article => ({
             '@type': 'Article',
             headline: article.title,
-            url: `https://na-coaching.com/blog/${article.slug || article.id}`,
+            url: `https://www.na-coaching.com/blog/${article.slug || article.id}`,
             image: article.image,
         })),
     };

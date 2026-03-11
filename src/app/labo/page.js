@@ -7,7 +7,7 @@ export const metadata = {
     openGraph: {
         title: 'Le Labo — Articles Musculation, Running & Performance Sportive',
         description: 'Articles scientifiques sur la performance, la physiologie et la réathlétisation par un coach expert EOPS.',
-        url: 'https://na-coaching.com/labo',
+        url: 'https://www.na-coaching.com/labo',
         type: 'website',
     },
     alternates: {

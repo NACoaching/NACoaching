@@ -16,7 +16,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Prédicteur de Performance Running — 5km, 10km, Semi & Marathon'} | NA Coaching`,
         description: article.intro || "Prédisez vos temps sur 5km, 10km, Semi-Marathon et Marathon à partir d'un chrono de référence. Formule de Riegel pour vos objectifs course à pied.",
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Prédicteur de Performance Running',
             description: article.intro || "Prédisez vos temps de course sur toutes les distances.",

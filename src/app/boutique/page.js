@@ -8,7 +8,7 @@ export const metadata = {
     openGraph: {
         title: 'Boutique — Programmes Musculation & Ebooks Sport',
         description: 'Programmes de coaching et ebooks sport basés sur la physiologie et la biomécanique.',
-        url: 'https://na-coaching.com/boutique',
+        url: 'https://www.na-coaching.com/boutique',
         type: 'website',
     },
     alternates: {

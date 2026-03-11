@@ -18,7 +18,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Convertisseur Vitesse'} | NA Coaching`,
         description: article.intro || 'Convertissez instantanément votre vitesse.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Convertisseur Vitesse',
             description: article.intro || 'Convertissez instantanément votre vitesse.',

@@ -18,7 +18,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Calculateur de Besoins Caloriques'} | NA Coaching`,
         description: article.intro || 'Calculez vos besoins caloriques journaliers.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Calculateur de Besoins Caloriques',
             description: article.intro || 'Calculez vos besoins caloriques journaliers.',

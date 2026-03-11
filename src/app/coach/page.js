@@ -15,10 +15,10 @@ export async function generateMetadata() {
         openGraph: {
             title: `${get('coach_name', 'Nolwen Albanesi')} - Coach Sportif | NA Coaching`,
             description: get('coach_meta_desc', 'Coach sportif Expert Master EOPS.'),
-            url: 'https://na-coaching.com/coach',
+            url: 'https://www.na-coaching.com/coach',
             type: 'profile',
         },
-        alternates: { canonical: 'https://na-coaching.com/coach' },
+        alternates: { canonical: 'https://www.na-coaching.com/coach' },
     };
 }
 
@@ -68,12 +68,12 @@ export default async function CoachPage() {
         name,
         jobTitle: 'Coach Sportif Expert',
         description: get('coach_meta_desc', 'Coach sportif certifié Master EOPS.'),
-        url: 'https://na-coaching.com/coach',
-        image: coachImage || 'https://na-coaching.com/logo.png',
+        url: 'https://www.na-coaching.com/coach',
+        image: coachImage || 'https://www.na-coaching.com/logo.png',
         sameAs: ['https://www.instagram.com/na_coaching_'],
         knowsAbout: ['Musculation', 'Course à pied', 'Préparation physique hybride', 'Réathlétisation', 'Physiologie du sport', 'Biomécanique'],
         alumniOf: { '@type': 'EducationalOrganization', name: 'Master EOPS — Entraînement et Optimisation de la Performance Sportive' },
-        worksFor: { '@type': 'LocalBusiness', name: 'NA Coaching', url: 'https://na-coaching.com' },
+        worksFor: { '@type': 'LocalBusiness', name: 'NA Coaching', url: 'https://www.na-coaching.com' },
     };
 
     return (

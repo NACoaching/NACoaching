@@ -16,7 +16,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Calculateur Volume Effectif — Séries par Muscle'} | NA Coaching`,
         description: article.intro || "Calculez votre volume d'entraînement hebdomadaire par groupe musculaire. Identifiez vos zones de maintenance, de progression et de sur-reaching.",
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Calculateur Volume Effectif',
             description: article.intro || "Optimisez vos séries par muscle pour l'hypertrophie.",

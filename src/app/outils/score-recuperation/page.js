@@ -17,7 +17,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Score de Récupération — Évaluez Votre Readiness'} | NA Coaching`,
         description: article.intro || 'Évaluez votre état de forme quotidien (sommeil, stress, fatigue) pour savoir si vous devez pousser ou récupérer. Outil gratuit.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Score de Récupération',
             description: article.intro || 'Calculez votre readiness pour optimiser vos entraînements.',

@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
         alternates: {
             canonical: `/blog/${article.slug || article.id}`,
         },
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
     }
 }
 
@@ -145,7 +145,7 @@ export default async function ArticlePage({ params }) {
         redirect(article.cta);
     }
 
-    const currentUrl = `https://na-coaching.com/blog/${article.slug || article.id}`;
+    const currentUrl = `https://www.na-coaching.com/blog/${article.slug || article.id}`;
 
     const coachName = getContent('coach_name') || 'Nolwen Albanesi';
     const coachImage = getContent('coach_image') || '/logo.png';
@@ -161,17 +161,17 @@ export default async function ArticlePage({ params }) {
         author: {
             '@type': 'Person',
             name: coachName,
-            url: 'https://na-coaching.com/coach',
+            url: 'https://www.na-coaching.com/coach',
             jobTitle: 'Coach Sportif - Master EOPS',
-            sameAs: ['https://na-coaching.com/coach']
+            sameAs: ['https://www.na-coaching.com/coach']
         },
         publisher: {
             '@type': 'Organization',
             name: 'NA Coaching',
-            url: 'https://na-coaching.com',
+            url: 'https://www.na-coaching.com',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://na-coaching.com/logo.png'
+                url: 'https://www.na-coaching.com/logo.png'
             }
         }
     };

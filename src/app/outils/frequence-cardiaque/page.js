@@ -18,7 +18,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Zones de Fréquence Cardiaque'} | NA Coaching`,
         description: article.intro || 'Calculez vos zones d\'intensité.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Zones de Fréquence Cardiaque',
             description: article.intro || 'Calculez vos zones d\'intensité.',

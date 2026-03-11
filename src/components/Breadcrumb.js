@@ -17,7 +17,7 @@ export default function Breadcrumb({ items = [] }) {
             '@type': 'ListItem',
             position: index + 1,
             name: item.label,
-            item: item.href ? `https://na-coaching.com${item.href}` : undefined,
+            item: item.href ? `https://www.na-coaching.com${item.href}` : undefined,
         })),
     };
 

@@ -17,7 +17,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Calculateur ACWR — Ratio Charge Aiguë/Chronique'} | NA Coaching`,
         description: article.intro || 'Surveillez votre ratio de charge aiguë/chronique (ACWR) pour prévenir les blessures et le surentraînement. Outil gratuit pour sportifs.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Calculateur ACWR',
             description: article.intro || 'Prévenez les blessures en surveillant votre charge d\'entraînement.',

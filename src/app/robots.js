@@ -4,9 +4,9 @@ export default function robots() {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/admin/', '/api/', '/_next/'],
+                disallow: ['/admin/', '/api/'],
             }
         ],
-        sitemap: 'https://na-coaching.com/sitemap.xml',
+        sitemap: 'https://www.na-coaching.com/sitemap.xml',
     }
 }

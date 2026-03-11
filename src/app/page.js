@@ -18,7 +18,7 @@ export default async function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: siteContent.find(c => c.key === 'site_title')?.value || 'NA Coaching',
-    url: 'https://na-coaching.com',
+    url: 'https://www.na-coaching.com',
     description: siteContent.find(c => c.key === 'site_description')?.value || 'Coaching sportif et réathlétisation par un expert Master EOPS',
   };
 
@@ -32,8 +32,8 @@ export default async function HomePage() {
       "position": index + 1,
       "name": article.title,
       "url": article.category === 'Outils' && article.cta
-        ? `https://na-coaching.com${article.cta.startsWith('/') ? article.cta : `/outils/${article.cta}`}`
-        : `https://na-coaching.com/blog/${article.slug || article.id}`
+        ? `https://www.na-coaching.com${article.cta.startsWith('/') ? article.cta : `/outils/${article.cta}`}`
+        : `https://www.na-coaching.com/blog/${article.slug || article.id}`
     })) || []
   };
 
@@ -117,7 +117,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
-            alt="Background"
+            alt=""
             fill
             className="object-cover opacity-40 mix-blend-luminosity"
             priority

@@ -16,7 +16,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Convertisseur RPE / % 1RM — Intensité & Force'} | NA Coaching`,
         description: article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Convertisseur RPE / % 1RM',
             description: article.intro || "Calculez votre intensité relative pour la force athlétique.",

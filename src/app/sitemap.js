@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabaseClient';
 
 export default async function sitemap() {
-    const baseUrl = 'https://na-coaching.com';
+    const baseUrl = 'https://www.na-coaching.com';
 
     // Get all articles (only published for sitemap)
     const { data: articles } = await supabase.from('articles').select('id, slug, category, created_at, cta').eq('is_published', true);

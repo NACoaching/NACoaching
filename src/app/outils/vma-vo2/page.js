@@ -18,7 +18,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Convertisseur VMA / VO2max'} | NA Coaching`,
         description: article.intro || 'Estimez votre VMA et VO2max.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Convertisseur VMA / VO2max',
             description: article.intro || 'Estimez votre VMA et VO2max.',

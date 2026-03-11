@@ -18,7 +18,7 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Calculateur 1RM'} | NA Coaching`,
         description: article.intro || 'Estimez votre 1RM en musculation.',
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Calculateur 1RM',
             description: article.intro || 'Estimez votre 1RM en musculation.',
