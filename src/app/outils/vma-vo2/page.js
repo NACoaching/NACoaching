@@ -26,7 +26,7 @@ export async function generateMetadata() {
             type: 'website',
         },
         alternates: {
-            canonical: '/outils/vma-vo2',
+            canonical: 'https://www.na-coaching.com/outils/vma-vo2',
         }
     }
 }

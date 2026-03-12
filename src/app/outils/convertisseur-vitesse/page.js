@@ -26,7 +26,7 @@ export async function generateMetadata() {
             type: 'website',
         },
         alternates: {
-            canonical: '/outils/convertisseur-vitesse',
+            canonical: 'https://www.na-coaching.com/outils/convertisseur-vitesse',
         }
     }
 }

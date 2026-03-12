@@ -60,6 +60,9 @@ export async function generateMetadata({ params }) {
             title: `${titleFromSlug} | NA Coaching`,
             description: `Le guide complet pour maîtriser ce domaine.`,
             type: 'website'
+        },
+        alternates: {
+            canonical: `https://www.na-coaching.com/labo/volume/${slug}`,
         }
     };
 }

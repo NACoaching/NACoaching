@@ -26,7 +26,7 @@ export async function generateMetadata() {
             type: 'website',
         },
         alternates: {
-            canonical: '/outils/besoins-caloriques',
+            canonical: 'https://www.na-coaching.com/outils/besoins-caloriques',
         }
     }
 }

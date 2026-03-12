@@ -58,9 +58,6 @@ export async function generateMetadata() {
     },
     authors: [{ name: 'NA Coaching', url: siteUrl }],
     publisher: 'NA Coaching',
-    alternates: {
-      canonical: siteUrl,
-    },
   };
 }
 

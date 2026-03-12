@@ -8,6 +8,12 @@ import HomeFAQ from '@/components/HomeFAQ';
 
 export const revalidate = 3600;
 
+export const metadata = {
+  alternates: {
+    canonical: 'https://www.na-coaching.com',
+  },
+};
+
 export default async function HomePage() {
   const { data: articles } = await supabase.from('articles').select('*').eq('is_published', true).order('created_at', { ascending: false }).limit(3);
   const { data: content } = await supabase.from('site_content').select('*');

@@ -24,7 +24,7 @@ export async function generateMetadata() {
             images: [article.image || '/logo.png'],
             type: 'website',
         },
-        alternates: { canonical: '/outils/acwr' },
+        alternates: { canonical: 'https://www.na-coaching.com/outils/acwr' },
     }
 }
 

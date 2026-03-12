@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
             images: [article.image],
         },
         alternates: {
-            canonical: `/blog/${article.slug || article.id}`,
+            canonical: `https://www.na-coaching.com/blog/${article.slug || article.id}`,
         },
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
     }

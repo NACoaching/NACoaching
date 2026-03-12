@@ -23,7 +23,7 @@ export async function generateMetadata() {
             images: [article.image || '/logo.png'],
             type: 'website',
         },
-        alternates: { canonical: '/outils/predictateur-performance' },
+        alternates: { canonical: 'https://www.na-coaching.com/outils/predictateur-performance' },
     };
 }
 

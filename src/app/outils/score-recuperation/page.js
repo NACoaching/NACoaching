@@ -24,7 +24,7 @@ export async function generateMetadata() {
             images: [article.image || '/logo.png'],
             type: 'website',
         },
-        alternates: { canonical: '/outils/score-recuperation' },
+        alternates: { canonical: 'https://www.na-coaching.com/outils/score-recuperation' },
     }
 }
 

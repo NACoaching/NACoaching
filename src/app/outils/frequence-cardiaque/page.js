@@ -26,7 +26,7 @@ export async function generateMetadata() {
             type: 'website',
         },
         alternates: {
-            canonical: '/outils/frequence-cardiaque',
+            canonical: 'https://www.na-coaching.com/outils/frequence-cardiaque',
         }
     }
 }

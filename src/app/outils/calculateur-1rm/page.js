@@ -26,7 +26,7 @@ export async function generateMetadata() {
             type: 'website',
         },
         alternates: {
-            canonical: '/outils/calculateur-1rm',
+            canonical: 'https://www.na-coaching.com/outils/calculateur-1rm',
         }
     }
 }
