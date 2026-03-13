@@ -27,19 +27,35 @@ export async function generateMetadata({ params }) {
     }
 
     const { data: article } = await query.single();
-
     if (!article) {
         return {
             title: 'Article introuvable - NA Coaching',
         }
     }
 
+    // Fetch SEO Overrides
+    const { data: seoData } = await supabase
+        .from('site_content')
+        .select('*')
+        .in('key', [`article_${article.id}_seo_title`, `article_${article.id}_seo_desc`]);
+
+    const overrides = {};
+    if (seoData) {
+        seoData.forEach(item => {
+            if (item.key.includes('title')) overrides.title = item.value;
+            if (item.key.includes('desc')) overrides.description = item.value;
+        });
+    }
+
+    const finalTitle = overrides.title || `${article.title} - NA Coaching`;
+    const finalDesc = overrides.description || article.excerpt;
+
     return {
-        title: `${article.title} - NA Coaching`,
-        description: article.excerpt,
+        title: finalTitle,
+        description: finalDesc,
         openGraph: {
-            title: article.title,
-            description: article.excerpt,
+            title: finalTitle,
+            description: finalDesc,
             images: [article.image],
         },
         alternates: {

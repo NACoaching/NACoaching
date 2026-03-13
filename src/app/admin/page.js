@@ -565,6 +565,76 @@ export default function AdminPage() {
                 { key: 'tool_hr_intro', label: 'Intro Outil FC (Visible sur la page)', type: 'text' },
                 { key: 'tool_hr_content', label: 'Contenu SEO Outil FC', type: 'html' }
             ]
+        },
+        {
+            id: 'acwr',
+            name: 'Ratio ACWR',
+            fields: [
+                { key: 'tool_acwr_title', label: 'Titre Outil ACWR (Balise Title)', type: 'text' },
+                { key: 'tool_acwr_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_acwr_intro', label: 'Intro Outil ACWR (Visible sur la page)', type: 'text' },
+                { key: 'tool_acwr_content', label: 'Contenu SEO Outil ACWR', type: 'html' }
+            ]
+        },
+        {
+            id: 'macros',
+            name: 'Macros Avancées',
+            fields: [
+                { key: 'tool_macros_title', label: 'Titre Outil Macros (Balise Title)', type: 'text' },
+                { key: 'tool_macros_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_macros_intro', label: 'Intro Outil Macros (Visible sur la page)', type: 'text' },
+                { key: 'tool_macros_content', label: 'Contenu SEO Outil Macros', type: 'html' }
+            ]
+        },
+        {
+            id: 'predict',
+            name: 'Prédicteur Performance',
+            fields: [
+                { key: 'tool_predict_title', label: 'Titre Outil Prédicteur (Balise Title)', type: 'text' },
+                { key: 'tool_predict_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_predict_intro', label: 'Intro Outil Prédicteur (Visible sur la page)', type: 'text' },
+                { key: 'tool_predict_content', label: 'Contenu SEO Outil Prédicteur', type: 'html' }
+            ]
+        },
+        {
+            id: 'rpe',
+            name: 'Convertisseur RPE',
+            fields: [
+                { key: 'tool_rpe_title', label: 'Titre Outil RPE (Balise Title)', type: 'text' },
+                { key: 'tool_rpe_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_rpe_intro', label: 'Intro Outil RPE (Visible sur la page)', type: 'text' },
+                { key: 'tool_rpe_content', label: 'Contenu SEO Outil RPE', type: 'html' }
+            ]
+        },
+        {
+            id: 'recovery',
+            name: 'Score Récupération',
+            fields: [
+                { key: 'tool_recovery_title', label: 'Titre Outil Récup (Balise Title)', type: 'text' },
+                { key: 'tool_recovery_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_recovery_intro', label: 'Intro Outil Récup (Visible sur la page)', type: 'text' },
+                { key: 'tool_recovery_content', label: 'Contenu SEO Outil Récup', type: 'html' }
+            ]
+        },
+        {
+            id: 'demi',
+            name: 'Test Demi-Cooper',
+            fields: [
+                { key: 'tool_demi_title', label: 'Titre Outil Demi-Cooper (Balise Title)', type: 'text' },
+                { key: 'tool_demi_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_demi_intro', label: 'Intro Outil Demi-Cooper (Visible sur la page)', type: 'text' },
+                { key: 'tool_demi_content', label: 'Contenu SEO Outil Demi-Cooper', type: 'html' }
+            ]
+        },
+        {
+            id: 'volume',
+            name: 'Volume Effectif',
+            fields: [
+                { key: 'tool_volume_title', label: 'Titre Outil Volume (Balise Title)', type: 'text' },
+                { key: 'tool_volume_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_volume_intro', label: 'Intro Outil Volume (Visible sur la page)', type: 'text' },
+                { key: 'tool_volume_content', label: 'Contenu SEO Outil Volume', type: 'html' }
+            ]
         }
     ];
 
@@ -585,15 +655,20 @@ export default function AdminPage() {
                 related_title: item.related_title || '',
                 related_subtitle: item.related_subtitle || '',
                 related_articles: item.related_articles || [],
-                tool_hints: item.tool_hints || {}
+                tool_hints: item.tool_hints || {},
+                seo_title: siteContent.find(c => c.key === `article_${item.id}_seo_title`)?.value || '',
+                seo_description: siteContent.find(c => c.key === `article_${item.id}_seo_desc`)?.value || ''
             });
         } else {
             setProductForm({
+                id: item.id,
                 title: item.title, price: item.price, discount_price: item.discount_price || '', description: item.description,
                 features: item.features ? item.features.join(', ') : '', stripeurl: item.stripeurl, image: item.image,
                 images: item.images || (item.image ? [item.image] : []),
                 content: item.content || '',
-                file_path: item.file_path || ''
+                file_path: item.file_path || '',
+                seo_title: siteContent.find(c => c.key === `product_${item.id}_seo_title`)?.value || '',
+                seo_description: siteContent.find(c => c.key === `product_${item.id}_seo_desc`)?.value || ''
             });
         }
     };
@@ -628,17 +703,27 @@ export default function AdminPage() {
 
         const dataToSave = { ...articleForm, slug: generateSlug(articleForm.title) };
 
+        let articleId = editingItem?.id;
         let error;
         if (editingItem && editingItem.type === 'article') {
             const { error: err } = await supabase.from('articles').update(dataToSave).eq('id', editingItem.id);
             error = err;
         } else {
-            const { error: err } = await supabase.from('articles').insert([dataToSave]);
+            const { data: inserted, error: err } = await supabase.from('articles').insert([dataToSave]).select();
             error = err;
+            if (inserted && inserted.length > 0) articleId = inserted[0].id;
         }
 
         if (error) alert('Erreur : ' + error.message);
         else {
+            // Save SEO Overrides to site_content
+            if (articleId) {
+                await Promise.all([
+                    supabase.from('site_content').upsert({ key: `article_${articleId}_seo_title`, value: articleForm.seo_title || '', label: `SEO Title: ${articleForm.title}` }, { onConflict: 'key' }),
+                    supabase.from('site_content').upsert({ key: `article_${articleId}_seo_desc`, value: articleForm.seo_description || '', label: `SEO Desc: ${articleForm.title}` }, { onConflict: 'key' })
+                ]);
+            }
+
             alert(editingItem ? 'Article modifié !' : 'Article ajouté !');
             cancelEdit();
             fetchData();
@@ -666,17 +751,27 @@ export default function AdminPage() {
             slug: generateSlug(productForm.title)
         };
 
+        let productId = editingItem?.id;
         let error;
         if (editingItem && editingItem.type === 'product') {
             const { error: err } = await supabase.from('products').update(productData).eq('id', editingItem.id);
             error = err;
         } else {
-            const { error: err } = await supabase.from('products').insert([productData]);
+            const { data: inserted, error: err } = await supabase.from('products').insert([productData]).select();
             error = err;
+            if (inserted && inserted.length > 0) productId = inserted[0].id;
         }
 
         if (error) alert('Erreur : ' + error.message);
         else {
+            // Save SEO Overrides to site_content
+            if (productId) {
+                await Promise.all([
+                    supabase.from('site_content').upsert({ key: `product_${productId}_seo_title`, value: productForm.seo_title || '', label: `SEO Title: ${productForm.title}` }, { onConflict: 'key' }),
+                    supabase.from('site_content').upsert({ key: `product_${productId}_seo_desc`, value: productForm.seo_description || '', label: `SEO Desc: ${productForm.title}` }, { onConflict: 'key' })
+                ]);
+            }
+
             alert(editingItem ? 'Produit modifié !' : 'Produit ajouté !');
             cancelEdit();
             fetchData();
@@ -2517,6 +2612,30 @@ export default function AdminPage() {
                                                 className="w-4 h-4 accent-[#FF6B00]"
                                             />
                                             <label htmlFor="is_published" className="text-xs font-bold uppercase text-zinc-600 cursor-pointer">Publier l'article</label>
+                                        </div>
+
+                                        <div className="border border-zinc-200 p-3 rounded bg-[#FF6B00]/5 space-y-3">
+                                            <h3 className="text-xs font-black uppercase text-[#FF6B00]">Optimisation SEO (Google)</h3>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Titre SEO spécifique (Optionnel)</label>
+                                                <input
+                                                    name="seo_title"
+                                                    value={articleForm.seo_title || ''}
+                                                    onChange={handleArticleChange}
+                                                    className="w-full border p-2 rounded text-sm bg-white"
+                                                    placeholder="Titre qui apparaîtra sur Google"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Meta Description SEO (Optionnel)</label>
+                                                <textarea
+                                                    name="seo_description"
+                                                    value={articleForm.seo_description || ''}
+                                                    onChange={handleArticleChange}
+                                                    className="w-full border p-2 rounded text-sm bg-white h-20"
+                                                    placeholder="Description qui apparaîtra sur Google"
+                                                />
+                                            </div>
                                         </div>
 
                                         <div className="flex gap-2">

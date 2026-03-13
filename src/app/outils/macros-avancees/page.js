@@ -16,7 +16,7 @@ export async function generateMetadata() {
     const article = await getToolArticle('/outils/macros-avancees');
     return {
         title: `${article.title || 'Calculateur de Macros Avancé — Protéines, Lipides & Glucides'} | NA Coaching`,
-        description: article.intro || 'Calculez précisément vos besoins en protéines, lipides et glucides selon votre poids de corps et vos objectifs. Outil gratuit pour sportifs.',
+        description: article.meta_desc || article.intro || 'Calculez précisément vos besoins en protéines, lipides et glucides selon votre poids de corps et vos objectifs. Outil gratuit pour sportifs.',
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
             title: article.title || 'Calculateur de Macros Avancé',

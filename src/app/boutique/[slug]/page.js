@@ -18,12 +18,29 @@ export async function generateMetadata({ params }) {
 
     const firstImage = (product.images && product.images.length > 0) ? product.images[0] : product.image;
 
+    // Fetch SEO Overrides
+    const { data: seoData } = await supabase
+        .from('site_content')
+        .select('*')
+        .in('key', [`product_${product.id}_seo_title`, `product_${product.id}_seo_desc`]);
+
+    const overrides = {};
+    if (seoData) {
+        seoData.forEach(item => {
+            if (item.key.includes('title')) overrides.title = item.value;
+            if (item.key.includes('desc')) overrides.description = item.value;
+        });
+    }
+
+    const finalTitle = overrides.title || `${product.title} - NA Coaching`;
+    const finalDesc = overrides.description || product.description;
+
     return {
-        title: `${product.title} - NA Coaching`,
-        description: product.description,
+        title: finalTitle,
+        description: finalDesc,
         openGraph: {
-            title: product.title,
-            description: product.description,
+            title: finalTitle,
+            description: finalDesc,
             images: firstImage ? [firstImage] : [],
         },
         alternates: {

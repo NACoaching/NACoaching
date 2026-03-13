@@ -31,7 +31,14 @@ export async function getToolArticle(slug) {
         '/outils/besoins-caloriques': 'calories',
         '/outils/convertisseur-vitesse': 'speed',
         '/outils/vma-vo2': 'vma',
-        '/outils/frequence-cardiaque': 'hr'
+        '/outils/frequence-cardiaque': 'hr',
+        '/outils/acwr': 'acwr',
+        '/outils/macros-avancees': 'macros',
+        '/outils/predicteur-vitesse': 'pred',
+        '/outils/rpe': 'rpe',
+        '/outils/score-recuperation': 'recovery',
+        '/outils/test-demi-cooper': 'demi',
+        '/outils/volume-effectif': 'volume'
     };
     const toolId = slugToToolId[slug];
     
