@@ -1316,7 +1316,33 @@ export default function AdminPage() {
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-zinc-200">
                         <h2 className="text-xl font-black mb-6 uppercase">Personnalisation des textes</h2>
                         <div className="space-y-6">
-                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00]">Héros (Accueil)</h3>
+                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00]">SEO Global (Accueil)</h3>
+                            {[
+                                { key: 'site_title', label: 'Titre du Site (Onglet)' },
+                                { key: 'site_description', label: 'Description Google (Meta)' }
+                            ].map(field => {
+                                const itemValue = siteContent.find(c => c.key === field.key)?.value || '';
+                                return (
+                                    <div key={field.key}>
+                                        <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">{field.label}</label>
+                                        <div className="flex gap-4 items-start">
+                                            <textarea
+                                                value={itemValue}
+                                                onChange={(e) => handleContentChange(field.key, e.target.value)}
+                                                className="w-full border p-3 rounded text-sm min-h-[50px] focus:border-[#FF6B00] outline-none"
+                                            />
+                                            <button
+                                                onClick={() => saveContent(field.key, itemValue, field.label)}
+                                                className="bg-black text-white px-4 rounded font-bold uppercase text-xs hover:bg-[#FF6B00] hover:text-black transition h-fit py-3"
+                                            >
+                                                Sauvegarder
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
+                            <h3 className="text-lg font-bold uppercase border-b pb-2 text-[#FF6B00] pt-6">Héros (Accueil)</h3>
                             {[
                                 { key: 'hero_title', label: 'Titre Principal' },
                                 { key: 'hero_subtitle', label: 'Sous-titre' },
