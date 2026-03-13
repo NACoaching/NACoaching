@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { autoLinkContent } from '@/lib/contentProcessor';
 
 /**
@@ -17,6 +18,7 @@ export default function ToolArticleContent({ content, glossary = [], currentPath
             <div className="text-zinc-800 leading-loose">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
                     components={{
                         a: ({ node, ...props }) => {
                             const isInternal = props.href?.startsWith('/') || props.href?.includes('na-coaching.com');
