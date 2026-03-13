@@ -704,7 +704,8 @@ export default function AdminPage() {
     const handleArticleSubmit = async (e) => {
         e.preventDefault();
 
-        const dataToSave = { ...articleForm, slug: generateSlug(articleForm.title) };
+        const { seo_title, seo_description, ...mainArticleData } = articleForm;
+        const dataToSave = { ...mainArticleData, slug: generateSlug(articleForm.title) };
 
         let articleId = editingItem?.id;
         let error;
@@ -746,8 +747,9 @@ export default function AdminPage() {
         const featuresArray = productForm.features.split(',').map(f => f.trim());
 
         // Create payload
+        const { seo_title, seo_description, ...mainProductData } = productForm;
         const productData = {
-            ...productForm,
+            ...mainProductData,
             features: featuresArray,
             // Ensure we save the first image of the array as the main image for backward compatibility
             image: productForm.images && productForm.images.length > 0 ? productForm.images[0] : productForm.image,
