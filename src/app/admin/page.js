@@ -386,7 +386,9 @@ export default function AdminPage() {
 
     const [productForm, setProductForm] = useState({
         title: '', price: '', discount_price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: '',
-        category: 'Programmes'
+        category: 'Programmes',
+        seo_title: '',
+        seo_description: ''
     });
 
     const handleLogin = async (e) => {
@@ -684,7 +686,8 @@ export default function AdminPage() {
             date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
         });
         setProductForm({
-            title: '', price: '', discount_price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: ''
+            title: '', price: '', discount_price: '', description: '', features: '', stripeurl: '', image: '', images: [], content: '', file_path: '',
+            seo_title: '', seo_description: ''
         });
     };
 
@@ -2760,6 +2763,30 @@ export default function AdminPage() {
                                                 </label>
                                             </div>
                                             <p className="text-[10px] text-zinc-400 mt-2">Ce fichier sera stocké de manière sécurisée et envoyé uniquement après paiement.</p>
+                                        </div>
+
+                                        <div className="border border-zinc-200 p-3 rounded bg-[#FF6B00]/5 space-y-3">
+                                            <h3 className="text-xs font-black uppercase text-[#FF6B00]">Optimisation SEO (Google)</h3>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Titre SEO spécifique (Optionnel)</label>
+                                                <input
+                                                    name="seo_title"
+                                                    value={productForm.seo_title || ''}
+                                                    onChange={handleProductChange}
+                                                    className="w-full border p-2 rounded text-sm bg-white"
+                                                    placeholder="Titre qui apparaîtra sur Google"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Meta Description SEO (Optionnel)</label>
+                                                <textarea
+                                                    name="seo_description"
+                                                    value={productForm.seo_description || ''}
+                                                    onChange={handleProductChange}
+                                                    className="w-full border p-2 rounded text-sm bg-white h-20"
+                                                    placeholder="Description qui apparaîtra sur Google"
+                                                />
+                                            </div>
                                         </div>
 
                                         <div className="flex gap-2">
