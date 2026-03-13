@@ -13,24 +13,51 @@ export async function getToolArticle(slug) {
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     );
 
-    const { data, error } = await supabase
+    // 1. Récupérer l'article de base
+    const { data: articlesData } = await supabase
         .from('articles')
         .select('*')
         .eq('cta', slug)
         .order('id', { ascending: true });
 
-    // En cas de doublons (comme Article 10 et 17), on cherche en priorité celui qui a du contenu
-    const article = data && data.length > 0
-        ? (data.find(a => a.content && a.content.trim().length > 0) || data[0])
+    const article = articlesData && articlesData.length > 0
+        ? (articlesData.find(a => a.content && a.content.trim().length > 0) || articlesData[0])
         : null;
+
+    // 2. Chercher des overrides SEO dans site_content
+    // On déduit l'ID de l'outil à partir du slug
+    const slugToToolId = {
+        '/outils/calculateur-1rm': '1rm',
+        '/outils/besoins-caloriques': 'calories',
+        '/outils/convertisseur-vitesse': 'speed',
+        '/outils/vma-vo2': 'vma',
+        '/outils/frequence-cardiaque': 'hr'
+    };
+    const toolId = slugToToolId[slug];
+    
+    let seoOverrides = {};
+    if (toolId) {
+        const { data: contentData } = await supabase
+            .from('site_content')
+            .select('key, value')
+            .like('key', `tool_${toolId}_%`);
+        
+        if (contentData) {
+            contentData.forEach(item => {
+                const suffix = item.key.replace(`tool_${toolId}_`, '');
+                seoOverrides[suffix] = item.value;
+            });
+        }
+    }
 
     // Récupérer les auto-links dynamiques
     const autoLinks = await getAutoLinks();
 
     return {
-        title: article?.title || '',
-        intro: article?.excerpt || '',
-        content: article?.content || '',
+        title: seoOverrides.title || article?.title || '',
+        meta_desc: seoOverrides.meta_desc || '', // Nouvelle propriété
+        intro: seoOverrides.intro || article?.excerpt || '',
+        content: seoOverrides.content || article?.content || '',
         related_title: article?.related_title || '',
         related_subtitle: article?.related_subtitle || '',
         related_articles: article?.related_articles || [],

@@ -15,13 +15,16 @@ export const revalidate = 0;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/convertisseur-vitesse');
+    const title = article.title || 'Convertisseur Vitesse';
+    const description = article.meta_desc || article.intro || 'Convertissez instantanément votre vitesse.';
+
     return {
-        title: `${article.title || 'Convertisseur Vitesse'} | NA Coaching`,
-        description: article.intro || 'Convertissez instantanément votre vitesse.',
+        title: `${title} | NA Coaching`,
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
-            title: article.title || 'Convertisseur Vitesse',
-            description: article.intro || 'Convertissez instantanément votre vitesse.',
+            title: title,
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },

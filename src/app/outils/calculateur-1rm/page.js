@@ -15,13 +15,16 @@ export const revalidate = 0;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/calculateur-1rm');
+    const title = article.title || 'Calculateur 1RM';
+    const description = article.meta_desc || article.intro || 'Estimez votre 1RM en musculation.';
+    
     return {
-        title: `${article.title || 'Calculateur 1RM'} | NA Coaching`,
-        description: article.intro || 'Estimez votre 1RM en musculation.',
+        title: `${title} | NA Coaching`,
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
-            title: article.title || 'Calculateur 1RM',
-            description: article.intro || 'Estimez votre 1RM en musculation.',
+            title: title,
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },

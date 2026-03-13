@@ -15,13 +15,16 @@ export const revalidate = 0;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/vma-vo2');
+    const title = article.title || 'Convertisseur VMA / VO2max';
+    const description = article.meta_desc || article.intro || 'Estimez votre VMA et VO2max.';
+
     return {
-        title: `${article.title || 'Convertisseur VMA / VO2max'} | NA Coaching`,
-        description: article.intro || 'Estimez votre VMA et VO2max.',
+        title: `${title} | NA Coaching`,
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
-            title: article.title || 'Convertisseur VMA / VO2max',
-            description: article.intro || 'Estimez votre VMA et VO2max.',
+            title: title,
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },

@@ -520,8 +520,9 @@ export default function AdminPage() {
             id: '1rm',
             name: 'Calculateur 1RM',
             fields: [
-                { key: 'tool_1rm_title', label: 'Titre Outil 1RM', type: 'text' },
-                { key: 'tool_1rm_intro', label: 'Intro Outil 1RM', type: 'text' },
+                { key: 'tool_1rm_title', label: 'Titre Outil 1RM (Balise Title)', type: 'text' },
+                { key: 'tool_1rm_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_1rm_intro', label: 'Intro Outil 1RM (Visible sur la page)', type: 'text' },
                 { key: 'tool_1rm_content', label: 'Contenu SEO Outil 1RM', type: 'html' }
             ]
         },
@@ -529,8 +530,9 @@ export default function AdminPage() {
             id: 'calories',
             name: 'Calculateur Calories',
             fields: [
-                { key: 'tool_calories_title', label: 'Titre Outil Calories', type: 'text' },
-                { key: 'tool_calories_intro', label: 'Intro Outil Calories', type: 'text' },
+                { key: 'tool_calories_title', label: 'Titre Outil Calories (Balise Title)', type: 'text' },
+                { key: 'tool_calories_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_calories_intro', label: 'Intro Outil Calories (Visible sur la page)', type: 'text' },
                 { key: 'tool_calories_content', label: 'Contenu SEO Outil Calories', type: 'html' }
             ]
         },
@@ -538,8 +540,9 @@ export default function AdminPage() {
             id: 'speed',
             name: 'Convertisseur Vitesse',
             fields: [
-                { key: 'tool_speed_title', label: 'Titre Outil Vitesse', type: 'text' },
-                { key: 'tool_speed_intro', label: 'Intro Outil Vitesse', type: 'text' },
+                { key: 'tool_speed_title', label: 'Titre Outil Vitesse (Balise Title)', type: 'text' },
+                { key: 'tool_speed_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_speed_intro', label: 'Intro Outil Vitesse (Visible sur la page)', type: 'text' },
                 { key: 'tool_speed_content', label: 'Contenu SEO Outil Vitesse', type: 'html' }
             ]
         },
@@ -547,8 +550,9 @@ export default function AdminPage() {
             id: 'vma',
             name: 'VMA / VO2max',
             fields: [
-                { key: 'tool_vma_title', label: 'Titre Outil VMA/VO2', type: 'text' },
-                { key: 'tool_vma_intro', label: 'Intro Outil VMA/VO2', type: 'text' },
+                { key: 'tool_vma_title', label: 'Titre Outil VMA/VO2 (Balise Title)', type: 'text' },
+                { key: 'tool_vma_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_vma_intro', label: 'Intro Outil VMA/VO2 (Visible sur la page)', type: 'text' },
                 { key: 'tool_vma_content', label: 'Contenu SEO Outil VMA/VO2', type: 'html' }
             ]
         },
@@ -556,8 +560,9 @@ export default function AdminPage() {
             id: 'hr',
             name: 'Zones Cardiaques',
             fields: [
-                { key: 'tool_hr_title', label: 'Titre Outil FC', type: 'text' },
-                { key: 'tool_hr_intro', label: 'Intro Outil FC', type: 'text' },
+                { key: 'tool_hr_title', label: 'Titre Outil FC (Balise Title)', type: 'text' },
+                { key: 'tool_hr_meta_desc', label: 'Meta Description SEO (Vu sur Google)', type: 'text' },
+                { key: 'tool_hr_intro', label: 'Intro Outil FC (Visible sur la page)', type: 'text' },
                 { key: 'tool_hr_content', label: 'Contenu SEO Outil FC', type: 'html' }
             ]
         }
@@ -1547,6 +1552,7 @@ export default function AdminPage() {
                                         const defaultContent = [
                                             // 1RM
                                             { key: 'tool_1rm_title', label: 'Titre Outil 1RM', value: `Calculateur 1RM - Calculez votre charge maximale en musculation` },
+                                            { key: 'tool_1rm_meta_desc', label: 'Meta Description SEO Outil 1RM', value: `Calculez précisément votre 1RM (Répétition Maximale) avec notre outil gratuit. Formules de Brzycki et Epley pour adapter vos charges d'entraînement.` },
                                             { key: 'tool_1rm_intro', label: 'Intro Outil 1RM', value: `Estimez votre 1RM (Répétition Maximale) pour mieux calibrer vos entraînements de force et d'hypertrophie. Basé sur les formules de Brzycki et Epley.` },
                                             {
                                                 key: 'tool_1rm_content', label: 'Contenu SEO Outil 1RM', value: `
@@ -1564,6 +1570,7 @@ export default function AdminPage() {
 
                                             // Calories
                                             { key: 'tool_calories_title', label: 'Titre Outil Calories', value: `Calculateur de Besoins Caloriques Journaliers (TDEE)` },
+                                            { key: 'tool_calories_meta_desc', label: 'Meta Description SEO Outil Calories', value: `Estimez vos besoins caloriques journaliers (TDEE) et votre métabolisme de base (BMR). Planifiez votre nutrition pour la sèche, le maintien ou la prise de masse.` },
                                             { key: 'tool_calories_intro', label: 'Intro Outil Calories', value: `Déterminez vos besoins énergétiques quotidiens (Maintien, Sèche, Prise de masse) selon votre métabolisme de base et votre niveau d'activité.` },
                                             {
                                                 key: 'tool_calories_content', label: 'Contenu SEO Outil Calories', value: `
@@ -1581,6 +1588,7 @@ export default function AdminPage() {
 
                                             // Speed
                                             { key: 'tool_speed_title', label: 'Titre Outil Vitesse', value: `Convertisseur Vitesse : km/h, min/km et m/s` },
+                                            { key: 'tool_speed_meta_desc', label: 'Meta Description SEO Outil Vitesse', value: `Convertissez facilement vos vitesses de course de km/h en min/km. Calculez vos temps de passage pour le 5km, 10km, semi et marathon.` },
                                             { key: 'tool_speed_intro', label: 'Intro Outil Vitesse', value: `Passez facilement des km/h aux allures de course (min/km) pour planifier vos entraînements de running et trail.` },
                                             {
                                                 key: 'tool_speed_content', label: 'Contenu SEO Outil Vitesse', value: `
@@ -1596,6 +1604,7 @@ export default function AdminPage() {
 
                                             // VMA
                                             { key: 'tool_vma_title', label: 'Titre Outil VMA/VO2', value: `Estimation VMA & VO2max - Test de Cooper` },
+                                            { key: 'tool_vma_meta_desc', label: 'Meta Description SEO Outil VMA', value: `Calculez votre VMA (Vitesse Maximale Aérobie) et votre VO2max. Test de Cooper et Demi-Cooper pour planifier vos allures d'entraînement en course à pied.` },
                                             { key: 'tool_vma_intro', label: 'Intro Outil VMA/VO2', value: `Évaluez votre Vitesse Maximale Aérobie (VMA) et votre VO2max à partir de vos performances sur le terrain (Test de Cooper, Demi-Cooper).` },
                                             {
                                                 key: 'tool_vma_content', label: 'Contenu SEO Outil VMA/VO2', value: `
@@ -1611,6 +1620,7 @@ export default function AdminPage() {
 
                                             // HR
                                             { key: 'tool_hr_title', label: 'Titre Outil FC', value: `Calculateur de Zones de Fréquence Cardiaque` },
+                                            { key: 'tool_hr_meta_desc', label: 'Meta Description SEO Outil FC', value: `Déterminez vos zones de fréquence cardiaque d'entraînement avec la méthode de Karvonen. Optimisez vos séances de cardio selon votre FC de repos et FC Max.` },
                                             { key: 'tool_hr_intro', label: 'Intro Outil FC', value: `Définissez vos 5 zones d'intensité cardiaque (de l'échauffement à l'effort maximal) basées sur votre FC Max et FC de repos.` },
                                             {
                                                 key: 'tool_hr_content', label: 'Contenu SEO Outil FC', value: `
@@ -1619,7 +1629,7 @@ export default function AdminPage() {
 <ul>
     <li>💙 <strong>Zone 1-2 (Endurance Fondamentale) :</strong> L'allure d'aisance respiratoire, idéale pour la récupération et le volume. Brûle principalement les graisses.</li>
     <li>💚 <strong>Zone 3 (Seuil Aérobie) :</strong> Travail du rythme, prépare aux courses type marathon.</li>
-    <li>🧡 <strong>Zone 4 (Seuil Anaérobie) :</strong> Effort intense mais tenable, pour repousser la fatigue.</li>
+    <li>🧡 <strong>Zone 4 (Seuil Anaérobie) :</strong> Effort intense but tenable, pour repousser la fatigue.</li>
     <li>❤️ <strong>Zone 5 (VMA / Sprint) :</strong> Effort maximal, pour développer la puissance du moteur.</li>
 </ul>
 <p>La méthode de Karvonen utilisée ici prend en compte votre <strong>fréquence cardiaque de repos</strong> pour plus de précision que le simple "220 - âge".</p>

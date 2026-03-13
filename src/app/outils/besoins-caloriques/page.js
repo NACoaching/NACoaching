@@ -15,13 +15,16 @@ export const revalidate = 0;
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/besoins-caloriques');
+    const title = article.title || 'Calculateur de Besoins Caloriques';
+    const description = article.meta_desc || article.intro || 'Calculez vos besoins caloriques journaliers.';
+
     return {
-        title: `${article.title || 'Calculateur de Besoins Caloriques'} | NA Coaching`,
-        description: article.intro || 'Calculez vos besoins caloriques journaliers.',
+        title: `${title} | NA Coaching`,
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
         openGraph: {
-            title: article.title || 'Calculateur de Besoins Caloriques',
-            description: article.intro || 'Calculez vos besoins caloriques journaliers.',
+            title: title,
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
