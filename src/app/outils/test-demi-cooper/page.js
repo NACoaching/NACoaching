@@ -16,14 +16,14 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Test Demi-Cooper (6 min) — Estimez VMA & VO2max'} | NA Coaching`,
         description: article.meta_desc || article.intro || "Évaluez votre VMA et votre VO2max avec le test du demi-Cooper (6 minutes). Obtenez vos allures d'entraînement personnalisées pour le running.",
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: article.title || 'Test Demi-Cooper (6 min)',
             description: article.intro || "Évaluez votre VMA et VO2max avec un test terrain simple.",
             images: [article.image || '/logo.png'],
             type: 'website',
         },
-        alternates: { canonical: 'https://www.na-coaching.com/outils/test-demi-cooper' },
+        alternates: { canonical: 'https://www.na-coaching.com/outils/test-demi-cooper/' },
     };
 }
 

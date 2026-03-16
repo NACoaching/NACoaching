@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 import { supabase } from '@/lib/supabaseClient';
 
-const siteUrl = 'https://www.na-coaching.com';
+const siteUrl = 'https://www.na-coaching.com/';
 
 export async function generateMetadata() {
   const { data } = await supabase.from('site_content').select('*');

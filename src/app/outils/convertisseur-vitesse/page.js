@@ -21,7 +21,7 @@ export async function generateMetadata() {
     return {
         title: `${title} | NA Coaching`,
         description: description,
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: title,
             description: description,
@@ -29,7 +29,7 @@ export async function generateMetadata() {
             type: 'website',
         },
         alternates: {
-            canonical: 'https://www.na-coaching.com/outils/convertisseur-vitesse',
+            canonical: 'https://www.na-coaching.com/outils/convertisseur-vitesse/',
         }
     }
 }

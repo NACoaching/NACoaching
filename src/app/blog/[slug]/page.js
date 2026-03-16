@@ -60,7 +60,7 @@ export async function generateMetadata({ params }) {
             images: [article.image],
         },
         alternates: {
-            canonical: `https://www.na-coaching.com/blog/${article.slug || article.id}`,
+            canonical: `https://www.na-coaching.com/blog/${article.slug || article.id}/`,
         },
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
     }
@@ -154,15 +154,15 @@ export default async function ArticlePage({ params }) {
     if (!article) return <div className="p-20 text-center">Article introuvable.</div>;
 
     if (isId && article.slug) {
-        redirect(`/blog/${article.slug}`);
+        redirect(`/blog/${article.slug}/`);
     }
 
     // Redirect tools to their interactive page if a CTA exists
     if (article.category === 'Outils' && article.cta) {
-        redirect(article.cta);
+        redirect(article.cta.endsWith('/') ? article.cta : `${article.cta}/`);
     }
 
-    const currentUrl = `https://www.na-coaching.com/blog/${article.slug || article.id}`;
+    const currentUrl = `https://www.na-coaching.com/blog/${article.slug || article.id}/`;
 
     const coachName = getContent('coach_name') || 'Nolwen Albanesi';
     const coachImage = getContent('coach_image') || '/logo.png';
@@ -178,14 +178,14 @@ export default async function ArticlePage({ params }) {
         author: {
             '@type': 'Person',
             name: coachName,
-            url: 'https://www.na-coaching.com/coach',
+            url: 'https://www.na-coaching.com/coach/',
             jobTitle: 'Coach Sportif - Master EOPS',
-            sameAs: ['https://www.na-coaching.com/coach']
+            sameAs: ['https://www.na-coaching.com/coach/']
         },
         publisher: {
             '@type': 'Organization',
             name: 'NA Coaching',
-            url: 'https://www.na-coaching.com',
+            url: 'https://www.na-coaching.com/',
             logo: {
                 '@type': 'ImageObject',
                 url: 'https://www.na-coaching.com/logo.png'

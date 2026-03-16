@@ -34,8 +34,8 @@ export async function getToolArticle(slug) {
         '/outils/frequence-cardiaque': 'hr',
         '/outils/acwr': 'acwr',
         '/outils/macros-avancees': 'macros',
-        '/outils/predicteur-vitesse': 'pred',
-        '/outils/rpe': 'rpe',
+        '/outils/predictateur-performance': 'pred',
+        '/outils/rpe-1rm': 'rpe',
         '/outils/score-recuperation': 'recovery',
         '/outils/test-demi-cooper': 'demi',
         '/outils/volume-effectif': 'volume'

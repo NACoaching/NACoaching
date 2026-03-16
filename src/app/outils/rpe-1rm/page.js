@@ -7,6 +7,7 @@ import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
 import RelatedTools from '@/components/RelatedTools';
 import ToolArticleContent from '@/components/ToolArticleContent';
+import Breadcrumb from '@/components/Breadcrumb';
 import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
@@ -16,14 +17,14 @@ export async function generateMetadata() {
     return {
         title: `${article.title || 'Convertisseur RPE / % 1RM — Intensité & Force'} | NA Coaching`,
         description: article.meta_desc || article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
-        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com' }],
+        authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: article.title || 'Convertisseur RPE / % 1RM',
             description: article.intro || "Calculez votre intensité relative pour la force athlétique.",
             images: [article.image || '/logo.png'],
             type: 'website',
         },
-        alternates: { canonical: 'https://www.na-coaching.com/outils/rpe-1rm' },
+        alternates: { canonical: 'https://www.na-coaching.com/outils/rpe-1rm/' },
     };
 }
 
@@ -91,7 +92,13 @@ export default async function RPEPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
-                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
+                <Breadcrumb items={[
+                    { label: 'Accueil', href: '/' },
+                    { label: 'Outils', href: '/outils/' },
+                    { label: article.title || 'Convertisseur RPE' }
+                ]} />
+
+                <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mt-6 mb-8 group font-bold uppercase text-xs">
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 

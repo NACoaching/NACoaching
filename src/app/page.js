@@ -10,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata = {
   alternates: {
-    canonical: 'https://www.na-coaching.com',
+    canonical: 'https://www.na-coaching.com/',
   },
 };
 
