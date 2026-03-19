@@ -9,6 +9,7 @@ import ToolArticleContent from "@/components/ToolArticleContent";
 import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import RelatedTools from "@/components/RelatedTools";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const revalidate = 0;
 
@@ -20,7 +21,7 @@ export async function generateMetadata() {
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: article.title || 'Calculateur ACWR',
-            description: article.intro || 'Prévenez les blessures en surveillant votre charge d\'entraînement.',
+            description: article.meta_desc || article.intro || 'Prévenez les blessures en surveillant votre charge d\'entraînement.',
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -105,7 +106,13 @@ export default async function ACWRPage() {
             )}
             <div className="max-w-4xl mx-auto px-6">
                 <AnimWrapper>
-                    <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-700 hover:text-[#FF6B00] transition mb-8 font-bold uppercase text-sm">
+                    <Breadcrumb items={[
+                        { label: 'Accueil', href: '/' },
+                        { label: 'Outils', href: '/outils/' },
+                        { label: article.title || 'Calculateur ACWR' }
+                    ]} />
+
+                    <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-700 hover:text-[#FF6B00] transition mt-8 mb-8 font-bold uppercase text-sm">
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 

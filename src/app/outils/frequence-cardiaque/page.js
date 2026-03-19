@@ -10,6 +10,7 @@ import AffiliateCard from "@/components/AffiliateCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import RelatedTools from "@/components/RelatedTools";
 import HomeFAQ from "@/components/HomeFAQ";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const revalidate = 0;
 
@@ -20,11 +21,11 @@ export async function generateMetadata() {
 
     return {
         title: `${title} | NA Coaching`,
-        description: description,
+        description: article.meta_desc || description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: title,
-            description: description,
+            description: article.meta_desc || description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -110,7 +111,13 @@ export default async function CalculatorHeartRatePage() {
             />
             <div className="max-w-4xl mx-auto px-6">
                 <AnimWrapper>
-                    <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mb-8 font-bold uppercase text-sm">
+                    <Breadcrumb items={[
+                        { label: 'Accueil', href: '/' },
+                        { label: 'Outils', href: '/outils/' },
+                        { label: article.title || 'Zones Cardiaques' }
+                    ]} />
+
+                    <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mt-8 mb-8 font-bold uppercase text-sm">
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 

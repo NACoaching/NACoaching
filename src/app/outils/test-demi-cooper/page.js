@@ -7,6 +7,7 @@ import { getToolArticle, getToolRelatedArticles } from '@/lib/getToolArticle';
 import RelatedArticles from '@/components/RelatedArticles';
 import RelatedTools from '@/components/RelatedTools';
 import ToolArticleContent from '@/components/ToolArticleContent';
+import Breadcrumb from '@/components/Breadcrumb';
 import { supabase } from '@/lib/supabaseClient';
 
 export const revalidate = 0;
@@ -19,7 +20,7 @@ export async function generateMetadata() {
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: article.title || 'Test Demi-Cooper (6 min)',
-            description: article.intro || "Évaluez votre VMA et VO2max avec un test terrain simple.",
+            description: article.meta_desc || article.intro || "Évaluez votre VMA et VO2max avec un test terrain simple.",
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -91,7 +92,13 @@ export default async function DemiCooperPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
-                <Link href="/outils" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mb-8 group font-bold uppercase text-xs">
+                <Breadcrumb items={[
+                    { label: 'Accueil', href: '/' },
+                    { label: 'Outils', href: '/outils/' },
+                    { label: article.title || 'Test Demi-Cooper' }
+                ]} />
+
+                <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mt-8 mb-8 group font-bold uppercase text-xs">
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
