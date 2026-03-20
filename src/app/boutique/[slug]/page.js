@@ -44,7 +44,7 @@ export async function generateMetadata({ params }) {
             images: firstImage ? [firstImage] : [],
         },
         alternates: {
-            canonical: `https://www.na-coaching.com/boutique/${product.slug || product.id}`,
+            canonical: `https://www.na-coaching.com/boutique/${product.slug || product.id}/`,
         }
     }
 }

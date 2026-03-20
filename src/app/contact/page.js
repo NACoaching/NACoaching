@@ -7,7 +7,7 @@ export const metadata = {
     title: 'Contact — Coaching Personnalisé & Suivi Sportif',
     description: 'Contactez votre coach sportif pour un programme personnalisé, un suivi en musculation, running ou réathlétisation. Réponse rapide garantie.',
     alternates: {
-        canonical: 'https://www.na-coaching.com/contact',
+        canonical: 'https://www.na-coaching.com/contact/',
     },
 };
 

@@ -11,7 +11,7 @@ export const metadata = {
         type: 'website',
     },
     alternates: {
-        canonical: 'https://www.na-coaching.com/labo',
+        canonical: 'https://www.na-coaching.com/labo/',
     }
 };
 

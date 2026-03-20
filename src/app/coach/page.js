@@ -18,7 +18,7 @@ export async function generateMetadata() {
             url: 'https://www.na-coaching.com/coach',
             type: 'profile',
         },
-        alternates: { canonical: 'https://www.na-coaching.com/coach' },
+        alternates: { canonical: 'https://www.na-coaching.com/coach/' },
     };
 }
 

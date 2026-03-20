@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
             type: 'website',
         },
         alternates: {
-            canonical: `https://www.na-coaching.com/labo/${encodeURIComponent(category)}`,
+            canonical: `https://www.na-coaching.com/labo/${encodeURIComponent(category)}/`,
         },
     };
 }

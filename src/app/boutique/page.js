@@ -12,7 +12,7 @@ export const metadata = {
         type: 'website',
     },
     alternates: {
-        canonical: 'https://www.na-coaching.com/boutique',
+        canonical: 'https://www.na-coaching.com/boutique/',
     }
 };
 

@@ -4,7 +4,7 @@ import AnimWrapper from "@/components/AnimWrapper";
 export const metadata = {
     title: 'Politique de Confidentialité',
     description: 'Politique de confidentialité de NA Coaching : collecte de données, cookies, droits RGPD et protection de la vie privée.',
-    alternates: { canonical: 'https://www.na-coaching.com/politique-confidentialite' },
+    alternates: { canonical: 'https://www.na-coaching.com/politique-confidentialite/' },
     robots: { index: false, follow: true },
 };
 
