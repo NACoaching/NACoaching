@@ -95,18 +95,6 @@ export default async function sitemap() {
             changeFrequency: 'monthly',
             priority: 0.7,
         },
-        {
-            url: `${baseUrl}/mentions-legales/`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.1,
-        },
-        {
-            url: `${baseUrl}/politique-confidentialite/`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.1,
-        },
         ...blogUrls,
         ...toolUrls,
         ...productUrls,
