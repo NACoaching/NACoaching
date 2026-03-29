@@ -5,7 +5,6 @@ export const metadata = {
     title: 'Mentions Légales',
     description: 'Mentions légales du site NA Coaching : éditeur, hébergeur, propriété intellectuelle et conditions d\'utilisation.',
     alternates: { canonical: 'https://www.na-coaching.com/mentions-legales/' },
-    robots: { index: false, follow: true },
 };
 
 export const revalidate = 0;

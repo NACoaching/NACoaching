@@ -24,12 +24,23 @@ export default async function sitemap() {
             priority: 0.8,
         }));
 
-    // Get unique categories for Labo category pages
-    const categories = [...new Set((articles || []).map(a => a.category).filter(Boolean))];
+    // Get unique categories for Labo category pages and normalize them to avoid duplicates
+    const categoriesRaw = [...new Set((articles || []).map(a => a.category).filter(Boolean))];
+    const categories = Array.from(new Map(categoriesRaw.map(cat => [cat.toLowerCase().trim(), cat])).values());
+
+    // Helper to create clean SEO-friendly slugs (no accents, lowercase)
+    const slugify = (str) => str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+
     const categoryUrls = categories
         .filter(cat => !cat.toLowerCase().includes('volume'))
         .map(category => ({
-            url: `${baseUrl}/labo/${encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))}/`,
+            url: `${baseUrl}/labo/${slugify(category)}/`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.75,
@@ -39,9 +50,13 @@ export default async function sitemap() {
     const volumeCategories = categories.filter(cat => cat.toLowerCase().includes('volume'));
     const volumeUrls = volumeCategories.map(vol => {
         // Basic slugification for volumes (e.g. "Volume 1 : La Science de la Force" -> "1-la-science-de-la-force")
-        const cleanSlug = vol.toLowerCase().replace('volume ', '').replace(' :', '').replace(/ /g, '-').replace(/'/g, '');
+        const cleanSlug = slugify(vol.replace(/volume\s*\d*\s*:/gi, '').replace(/volume\s*\d*/gi, '').trim());
+        // For volumes, we might want to keep the number if it's there
+        const volNumber = vol.match(/volume\s*(\d+)/i)?.[1] || '';
+        const finalSlug = volNumber ? `${volNumber}-${cleanSlug}` : cleanSlug;
+
         return {
-            url: `${baseUrl}/labo/volume/${cleanSlug}/`,
+            url: `${baseUrl}/labo/volume/${finalSlug}/`,
             lastModified: new Date(),
             changeFrequency: 'daily', // High priority for pillar pages
             priority: 0.95,
