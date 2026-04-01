@@ -21,7 +21,16 @@ export function autoLinkContent(content, glossary = [], currentPath = '') {
         return placeholder;
     });
 
-    // 2. Identify and protect Headers (lines starting with #)
+    // 2. Identify and protect HTML Anchor tags <a>...</a> and other tags
+    const htmlTagRegex = /<a\s+[^>]*>([\s\S]*?)<\/a>|<[^>]+>/gi;
+    const htmlTags = [];
+    processedContent = processedContent.replace(htmlTagRegex, (match) => {
+        const placeholder = `__HTML_TAG_PLACEHOLDER_${htmlTags.length}__`;
+        htmlTags.push(match);
+        return placeholder;
+    });
+
+    // 3. Identify and protect Headers (lines starting with #)
     const headerRegex = /^(#+.*)$/gm;
     const headers = [];
     processedContent = processedContent.replace(headerRegex, (match) => {
@@ -30,22 +39,19 @@ export function autoLinkContent(content, glossary = [], currentPath = '') {
         return placeholder;
     });
 
-    // 3. Process each glossary item
+    // 4. Process each glossary item
     glossary.forEach(item => {
         // Skip link if it points to the current page
         if (currentPath && item.url === currentPath) return;
 
-        // Keywords can be a string (comma separated) or an array
         const keywordsArray = typeof item.keywords === 'string'
             ? item.keywords.split(',').map(k => k.trim())
             : (Array.isArray(item.keywords) ? item.keywords : []);
 
         keywordsArray.forEach(keyword => {
             if (!keyword) return;
-            // Full word boundary, case insensitive
             const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
 
-            // Limit to first occurrence per keyword for better readability
             let replaced = false;
             processedContent = processedContent.replace(regex, (match) => {
                 if (replaced) return match;
@@ -55,12 +61,17 @@ export function autoLinkContent(content, glossary = [], currentPath = '') {
         });
     });
 
-    // 4. Restore Headers
+    // 5. Restore Headers
     headers.forEach((header, i) => {
         processedContent = processedContent.replace(`__HEADER_PLACEHOLDER_${i}__`, header);
     });
 
-    // 5. Restore Links
+    // 6. Restore HTML Tags
+    htmlTags.forEach((tag, i) => {
+        processedContent = processedContent.replace(`__HTML_TAG_PLACEHOLDER_${i}__`, tag);
+    });
+
+    // 7. Restore Links
     links.forEach((link, i) => {
         processedContent = processedContent.replace(`__LINK_PLACEHOLDER_${i}__`, link);
     });
