@@ -35,6 +35,14 @@ export default function ToolArticleContent({ content, glossary = [], currentPath
                         li: ({ node, ...props }) => <li className="pl-2" {...props} />,
                         strong: ({ node, ...props }) => <strong className="font-black text-black" {...props} />,
                         p: ({ node, ...props }) => <p className="mb-4" {...props} />,
+                        table: ({ node, ...props }) => (
+                            <div className="overflow-x-auto my-8 border border-zinc-200 rounded-sm">
+                                <table className="w-full border-collapse" {...props} />
+                            </div>
+                        ),
+                        thead: ({ node, ...props }) => <thead className="bg-zinc-50 border-b-2 border-zinc-200" {...props} />,
+                        th: ({ node, ...props }) => <th className="text-left py-3 px-4 font-black uppercase text-xs text-zinc-600 tracking-widest" {...props} />,
+                        td: ({ node, ...props }) => <td className="py-3 px-4 text-sm border-b border-zinc-100" {...props} />,
                     }}
                 >
                     {processedContent}
