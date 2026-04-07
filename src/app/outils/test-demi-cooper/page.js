@@ -108,7 +108,7 @@ export default async function DemiCooperPage() {
 
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-3xl md:text-5xl font-black uppercase mb-8 leading-tight text-zinc-950 text-center">
-                        TEST DEMI-COOPER GRATUIT — MESUREZ VOTRE VMA EN 6 MINUTES | NA COACHING
+                        {article.title || 'Test Demi-Cooper (6 min)'}
                     </h1>
                     
                     <p className="text-zinc-800 font-medium text-xl mb-12 leading-relaxed text-center">

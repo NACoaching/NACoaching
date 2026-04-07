@@ -25,7 +25,7 @@ export async function generateMetadata() {
         description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: title,
+            title: seoTitle,
             description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
