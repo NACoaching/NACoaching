@@ -102,22 +102,22 @@ export default async function DemiCooperPage() {
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    <div className="lg:col-span-7">
+                <div className="max-w-4xl mx-auto">
+                    <h1 className="text-3xl md:text-5xl font-black uppercase mb-8 leading-tight text-zinc-950 text-center">
+                        TEST DEMI-COOPER GRATUIT — MESUREZ VOTRE VMA EN 6 MINUTES | NA COACHING
+                    </h1>
+                    
+                    <p className="text-zinc-800 font-medium text-xl mb-12 leading-relaxed text-center">
+                        {article.intro || "Calculez votre Vitesse Maximale Aérobie (VMA) et estimez votre VO2max avec précision grâce à ce test de terrain simple et efficace."}
+                    </p>
+
+                    <div className="mb-16">
                         <HalfCooperTest hints={article.tool_hints} />
                     </div>
 
-                    <div className="lg:col-span-5">
-                        <div className="prose prose-zinc max-w-none">
-                            <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
-                                {article.title || "Test Demi-Cooper (6 min)"}
-                            </h1>
-                            <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
-                                {article.intro}
-                            </p>
-                            <div className="h-px bg-zinc-200 mb-8" />
-                            <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
-                        </div>
+                    <div className="prose prose-zinc max-w-none">
+                        <div className="h-px bg-zinc-200 mb-12" />
+                        <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
                     </div>
                 </div>
 
