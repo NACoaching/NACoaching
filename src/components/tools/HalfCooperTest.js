@@ -65,7 +65,7 @@ export default function HalfCooperTest({ hints = {} }) {
                     placeholder="Ex: 1550"
                     value={distance}
                     onChange={(e) => setDistance(e.target.value)}
-                    className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                    className="w-full border p-3 rounded text-sm text-black focus:border-[#FF6B00] outline-none"
                     required
                 />
             </div>
