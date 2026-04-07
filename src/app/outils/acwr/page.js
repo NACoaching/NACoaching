@@ -11,7 +11,7 @@ import RelatedArticles from "@/components/RelatedArticles";
 import RelatedTools from "@/components/RelatedTools";
 import Breadcrumb from "@/components/Breadcrumb";
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/acwr');

@@ -7,7 +7,7 @@ export const metadata = {
     alternates: { canonical: 'https://www.na-coaching.com/mentions-legales/' },
 };
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export default async function MentionsLegales() {
     const { data } = await supabase.from('site_content').select('value').eq('key', 'legal_mentions').single();

@@ -3,7 +3,7 @@ import AnimWrapper from '@/components/AnimWrapper';
 import { supabase } from '@/lib/supabaseClient';
 import { Award, BookOpen, Activity, HeartPulse, Star, ChevronRight, Dumbbell, Target, Zap, Shield } from 'lucide-react';
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const { data: content } = await supabase.from('site_content').select('*');

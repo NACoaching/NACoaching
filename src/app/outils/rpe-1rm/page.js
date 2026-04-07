@@ -10,7 +10,7 @@ import ToolArticleContent from '@/components/ToolArticleContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import { supabase } from '@/lib/supabaseClient';
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/rpe-1rm');

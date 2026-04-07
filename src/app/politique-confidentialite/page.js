@@ -7,7 +7,7 @@ export const metadata = {
     alternates: { canonical: 'https://www.na-coaching.com/politique-confidentialite/' },
 };
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export default async function PolitiqueConfidentialite() {
     const { data } = await supabase.from('site_content').select('value').eq('key', 'privacy_policy').single();
