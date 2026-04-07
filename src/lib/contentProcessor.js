@@ -39,6 +39,15 @@ export function autoLinkContent(content, glossary = [], currentPath = '') {
         return placeholder;
     });
 
+    // 3b. Identify and protect Markdown table rows (lines starting with |)
+    const tableRowRegex = /^(\|.*)$/gm;
+    const tableRows = [];
+    processedContent = processedContent.replace(tableRowRegex, (match) => {
+        const placeholder = `__TABLE_ROW_PLACEHOLDER_${tableRows.length}__`;
+        tableRows.push(match);
+        return placeholder;
+    });
+
     // 4. Process each glossary item
     glossary.forEach(item => {
         // Skip link if it points to the current page
@@ -64,6 +73,11 @@ export function autoLinkContent(content, glossary = [], currentPath = '') {
     // 5. Restore Headers
     headers.forEach((header, i) => {
         processedContent = processedContent.replace(`__HEADER_PLACEHOLDER_${i}__`, header);
+    });
+
+    // 5b. Restore Table Rows
+    tableRows.forEach((row, i) => {
+        processedContent = processedContent.replace(`__TABLE_ROW_PLACEHOLDER_${i}__`, row);
     });
 
     // 6. Restore HTML Tags
