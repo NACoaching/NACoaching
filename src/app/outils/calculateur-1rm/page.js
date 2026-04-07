@@ -121,14 +121,11 @@ export default async function Calculator1RMPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {article.title || 'Calculateur 1RM (Max Rep)'}
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-12 text-zinc-950 text-center">
+                        {article.title || 'Calculateur 1RM'}
                     </h1>
-                    <p className="text-xl text-zinc-600 mb-12">
-                        {article.intro || "Estimez votre charge maximale théorique pour calibrer vos entraînements de force et d'hypertrophie."}
-                    </p>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-12">
                         <Calculator1RM hints={article.tool_hints} />
                     </div>
 

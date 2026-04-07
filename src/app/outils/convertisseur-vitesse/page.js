@@ -121,11 +121,11 @@ export default async function SpeedConverterPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {article.title || 'Convertisseur Vitesse / Allure'}
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'Convertisseur de Vitesse'}
                     </h1>
-                    <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
-                        {article.intro || "Passez facilement des km/h aux min/km pour calibrer vos séances de course à pied."}
+                    <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed text-center max-w-2xl mx-auto">
+                        {article.intro || "Passez instantanément des km/h au min/km pour mieux gérer vos allures de course."}
                     </p>
 
                     <div className="mb-16">

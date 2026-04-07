@@ -40,7 +40,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Heart size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase">Zones Cardiaques</h3>
+                    <h3 className="text-xl font-black uppercase text-black">Calculateur de Zones FC : Maîtrise ton intensité (Karvonen)</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
@@ -58,7 +58,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                                 type="number"
                                 value={age}
                                 onChange={(e) => setAge(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-red-500 transition shadow-inner text-black"
                                 placeholder="Ex: 25"
                                 required
                             />

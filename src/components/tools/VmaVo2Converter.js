@@ -67,7 +67,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Wind size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase">VMA ➔ VO2max</h3>
+                    <h3 className="text-xl font-black uppercase text-black">Convertisseur VMA / VO2max : Estime ton potentiel aérobie</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">

@@ -121,10 +121,10 @@ export default async function CalculatorHeartRatePage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
                         {article.title || 'Zones de Fréquence Cardiaque'}
                     </h1>
-                    <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
+                    <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed text-center max-w-2xl mx-auto">
                         {article.intro || "Optimisez votre entraînement en ciblant les bonnes zones d'intensité grâce à la formule de Karvonen."}
                     </p>
 
