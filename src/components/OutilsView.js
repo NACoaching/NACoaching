@@ -19,6 +19,16 @@ const iconMap = {
     '/outils/predictateur-performance': { icon: Trophy, color: "text-blue-500", bg: "bg-blue-50" },
 };
 
+const titleOverrides = {
+    '/outils/calculateur-1rm': "Calculateur 1RM : Évalue ta Force Maximale & Optimise tes Charges",
+    '/outils/besoins-caloriques': "Calculateur Calories & TDEE : Guide Expert du Métabolisme",
+    '/outils/convertisseur-vitesse': "Convertisseur de Vitesse Running : Maîtrise tes Allures (min/km & km/h)",
+    '/outils/vma-vo2': "Convertisseur VMA / VO2max : Estime ton Potentiel Aérobie & Physiologique",
+    '/outils/frequence-cardiaque': "Calculateur de Zones FC : Maîtrise ton intensité (Karvonen)",
+    '/outils/acwr': "Calculateur ACWR : Évitez le surentraînement et les blessures",
+    '/outils/test-demi-cooper': "Test Demi-Cooper : Calcule ta VMA et VO2max en 6 min",
+};
+
 // Hidden keywords to improve search matching
 const searchKeywords = {
     '/outils/besoins-caloriques': 'calories kcal metabolisme',
@@ -133,7 +143,7 @@ export default function OutilsView({ tools, siteContent = {} }) {
                                         </div>
 
                                         <h3 className="text-2xl font-black uppercase mb-3 text-zinc-900 group-hover:text-[#FF6B00] transition-colors">
-                                            {tool.title}
+                                            {titleOverrides[tool.cta] || tool.title}
                                         </h3>
 
                                         {tool.subcategory && (
