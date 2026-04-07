@@ -16,15 +16,16 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/besoins-caloriques');
-    const title = article.title || 'Calculateur de Besoins Caloriques';
+    const displayTitle = article.title || 'Besoins Caloriques';
+    const seoTitle = article.seo_title || displayTitle;
     const description = article.meta_desc || article.intro || 'Calculez vos besoins caloriques journaliers.';
 
     return {
-        title: `${title} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: title,
+            title: seoTitle,
             description: description,
             images: [article.image || '/logo.png'],
             type: 'website',

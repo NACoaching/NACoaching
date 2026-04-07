@@ -16,11 +16,12 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/vma-vo2');
-    const title = article.title || 'Convertisseur VMA / VO2max';
+    const displayTitle = article.title || 'Convertisseur VMA / VO2max';
+    const seoTitle = article.seo_title || displayTitle;
     const description = article.meta_desc || article.intro || 'Estimez votre VMA et VO2max.';
 
     return {
-        title: `${title} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {

@@ -16,15 +16,16 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/frequence-cardiaque');
-    const title = article.title || 'Zones de Fréquence Cardiaque';
-    const description = article.meta_desc || article.intro || 'Calculez vos zones d\'intensité.';
+    const displayTitle = article.title || 'Zones Cardiaques';
+    const seoTitle = article.seo_title || displayTitle;
+    const description = article.meta_desc || article.intro || 'Calculez vos zones de fréquence cardiaque (Karvonen).';
 
     return {
-        title: `${title} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: title,
+            title: seoTitle,
             description: article.meta_desc || description,
             images: [article.image || '/logo.png'],
             type: 'website',

@@ -16,11 +16,12 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/calculateur-1rm');
-    const title = article.title || 'Calculateur 1RM';
+    const displayTitle = article.title || 'Calculateur 1RM';
+    const seoTitle = article.seo_title || displayTitle;
     const description = article.meta_desc || article.intro || 'Estimez votre 1RM en musculation.';
     
     return {
-        title: `${title} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {

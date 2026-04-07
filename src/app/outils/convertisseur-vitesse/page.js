@@ -16,15 +16,16 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/convertisseur-vitesse');
-    const title = article.title || 'Convertisseur Vitesse';
-    const description = article.meta_desc || article.intro || 'Convertissez instantanément votre vitesse.';
+    const displayTitle = article.title || 'Convertisseur Vitesse';
+    const seoTitle = article.seo_title || displayTitle;
+    const description = article.meta_desc || article.intro || 'Convertissez km/h en min/km.';
 
     return {
-        title: `${title} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: title,
+            title: seoTitle,
             description: article.meta_desc || description,
             images: [article.image || '/logo.png'],
             type: 'website',

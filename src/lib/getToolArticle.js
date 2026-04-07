@@ -18,6 +18,7 @@ export async function getToolArticle(slug) {
         .from('articles')
         .select('*')
         .eq('cta', slug)
+        .eq('category', 'Outils')
         .order('id', { ascending: false });
 
     const article = articlesData && articlesData.length > 0
@@ -77,8 +78,10 @@ export async function getToolArticle(slug) {
     const autoLinks = await getAutoLinks();
 
     return {
-        // PRIORITÉ : Admin SEO spécifiques > Titre Article (Admin) > Anciens SEO Manuels
-        title: adminSeoOverrides.title || article?.title || seoOverrides.title || '',
+        // PRIORITÉ : Titre Article (Admin) > Anciens SEO Manuels
+        title: article?.title || seoOverrides.title || '',
+        // PRIORITÉ : Admin SEO spécifiques > Title (pour le fallback)
+        seo_title: adminSeoOverrides.title || '',
         meta_desc: adminSeoOverrides.meta_desc || seoOverrides.meta_desc || '', 
         // PRIORITÉ : Intro Article (Admin/Backoffice) > Anciens SEO Manuels
         intro: article?.excerpt || seoOverrides.intro || '',
