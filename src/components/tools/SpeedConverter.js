@@ -78,7 +78,7 @@ export default function SpeedConverter({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <ArrowRightLeft size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase">Convertisseur Allure</h3>
+                    <h3 className="text-xl font-black uppercase text-black">Convertisseur de Vitesse : Allures, km/h & min/km</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
