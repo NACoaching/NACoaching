@@ -18,13 +18,29 @@ export async function getToolArticle(slug) {
         .from('articles')
         .select('*')
         .eq('cta', slug)
-        .order('id', { ascending: true });
+        .order('id', { ascending: false });
 
     const article = articlesData && articlesData.length > 0
         ? (articlesData.find(a => a.content && a.content.trim().length > 0) || articlesData[0])
         : null;
 
-    // 2. Chercher des overrides SEO dans site_content
+    // 2. Chercher des overrides SEO gérées par l'admin (backoffice)
+    let adminSeoOverrides = {};
+    if (article) {
+        const { data: adminSeoData } = await supabase
+            .from('site_content')
+            .select('key, value')
+            .in('key', [`article_${article.id}_seo_title`, `article_${article.id}_seo_desc`]);
+        
+        if (adminSeoData) {
+            adminSeoData.forEach(item => {
+                if (item.key.endsWith('_title')) adminSeoOverrides.title = item.value;
+                if (item.key.endsWith('_desc')) adminSeoOverrides.meta_desc = item.value;
+            });
+        }
+    }
+
+    // 3. Chercher les anciens overrides SEO manuels dans site_content
     // On déduit l'ID de l'outil à partir du slug
     const slugToToolId = {
         '/outils/calculateur-1rm': '1rm',
@@ -61,10 +77,12 @@ export async function getToolArticle(slug) {
     const autoLinks = await getAutoLinks();
 
     return {
-        title: seoOverrides.title || article?.title || '',
-        meta_desc: seoOverrides.meta_desc || '', // Nouvelle propriété
-        intro: seoOverrides.intro || article?.excerpt || '',
-        content: seoOverrides.content || article?.content || '',
+        // PRIORITÉ : Admin SEO spécifiques > Titre Article (Admin) > Anciens SEO Manuels
+        title: adminSeoOverrides.title || article?.title || seoOverrides.title || '',
+        meta_desc: adminSeoOverrides.meta_desc || seoOverrides.meta_desc || '', 
+        // PRIORITÉ : Intro Article (Admin/Backoffice) > Anciens SEO Manuels
+        intro: article?.excerpt || seoOverrides.intro || '',
+        content: article?.content || '',  // Le contenu vient TOUJOURS de l'article (admin)
         related_title: article?.related_title || '',
         related_subtitle: article?.related_subtitle || '',
         related_articles: article?.related_articles || [],
