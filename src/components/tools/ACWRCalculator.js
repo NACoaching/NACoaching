@@ -76,8 +76,8 @@ export default function ACWRCalculator({ hints = {} }) {
                                 type="number"
                                 value={acute}
                                 onChange={(e) => setAcute(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                                placeholder="Ex: 350"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-red-500 transition shadow-inner text-black"
+                                placeholder="Total de la semaine (km, min...)"
                                 required
                             />
                         </div>

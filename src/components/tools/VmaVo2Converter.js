@@ -85,7 +85,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                             step="0.1"
                             value={vma}
                             onChange={handleVmaChange}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black"
                             placeholder="Ex: 15.5"
                         />
                     </div>
@@ -99,7 +99,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                             step="0.1"
                             value={vo2max}
                             onChange={handleVo2maxChange}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black"
                             placeholder="Ex: 50.2"
                         />
                     </div>

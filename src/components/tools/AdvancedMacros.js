@@ -100,7 +100,7 @@ export default function AdvancedMacros({ hints = {} }) {
                             required
                             value={calories}
                             onChange={(e) => setCalories(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-orange-500 transition shadow-inner text-black"
                             placeholder="Ex: 2500"
                         />
                     </div>

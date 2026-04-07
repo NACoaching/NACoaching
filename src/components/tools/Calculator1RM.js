@@ -46,7 +46,7 @@ export default function Calculator1RM({ hints = {} }) {
                             type="number"
                             value={weight}
                             onChange={(e) => setWeight(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm text-black focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 80"
                             required
                         />
@@ -60,7 +60,7 @@ export default function Calculator1RM({ hints = {} }) {
                             type="number"
                             value={reps}
                             onChange={(e) => setReps(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm text-black focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 5"
                             required
                         />

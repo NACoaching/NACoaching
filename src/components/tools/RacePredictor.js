@@ -81,15 +81,15 @@ export default function RacePredictor({ hints = {} }) {
                     <label className="block text-xs font-black uppercase text-zinc-900 mb-2">Temps Réalisé</label>
                     <div className="flex items-center gap-2">
                         <div className="flex-1 min-w-0 text-center">
-                            <input type="number" placeholder="HH" value={hours} onChange={e => setHours(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center" />
+                            <input type="number" placeholder="HH" value={hours} onChange={e => setHours(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center text-black" />
                             <span className="text-[10px] uppercase font-black text-zinc-600">h</span>
                         </div>
                         <div className="flex-1 min-w-0 text-center">
-                            <input type="number" placeholder="MM" value={mins} onChange={e => setMins(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center" />
+                            <input type="number" placeholder="MM" value={mins} onChange={e => setMins(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center text-black" />
                             <span className="text-[10px] uppercase font-black text-zinc-600">m</span>
                         </div>
                         <div className="flex-1 min-w-0 text-center">
-                            <input type="number" placeholder="SS" value={secs} onChange={e => setSecs(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center" />
+                            <input type="number" placeholder="SS" value={secs} onChange={e => setSecs(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center text-black" />
                             <span className="text-[10px] uppercase font-black text-zinc-600">s</span>
                         </div>
                     </div>

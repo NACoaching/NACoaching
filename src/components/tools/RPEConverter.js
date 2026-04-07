@@ -83,7 +83,7 @@ export default function RPEConverter({ hints = {} }) {
                         placeholder="Ex: 100"
                         value={weight}
                         onChange={(e) => setWeight(e.target.value)}
-                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner"
+                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner text-black"
                     />
                 </div>
 
@@ -98,7 +98,7 @@ export default function RPEConverter({ hints = {} }) {
                             type="number"
                             value={max}
                             onChange={(e) => setMax(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm text-black focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 100"
                             required
                         />
@@ -113,7 +113,7 @@ export default function RPEConverter({ hints = {} }) {
                             step="0.5"
                             value={targetRpe}
                             onChange={(e) => setTargetRpe(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm text-black focus:border-[#FF6B00] outline-none"
                             placeholder="Ex: 8"
                             required
                         />
@@ -129,7 +129,7 @@ export default function RPEConverter({ hints = {} }) {
                         type="number"
                         value={reps}
                         onChange={(e) => setReps(e.target.value)}
-                        className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                        className="w-full border p-3 rounded text-sm text-black focus:border-[#FF6B00] outline-none"
                         placeholder="Ex: 5"
                         required
                     />

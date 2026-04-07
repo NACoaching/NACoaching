@@ -53,7 +53,7 @@ export default function CalculatorCalories({ hints = {} }) {
                                 type="number"
                                 value={age}
                                 onChange={(e) => setAge(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-orange-500 transition shadow-inner text-black"
                                 placeholder="Ex: 30"
                                 required
                             />
@@ -84,8 +84,8 @@ export default function CalculatorCalories({ hints = {} }) {
                                 type="number"
                                 value={weight}
                                 onChange={(e) => setWeight(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
-                                placeholder="Ex: 75"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-orange-500 transition shadow-inner text-black"
+                                placeholder="Ex: 80"
                                 required
                             />
                         </div>
@@ -98,7 +98,7 @@ export default function CalculatorCalories({ hints = {} }) {
                                 type="number"
                                 value={height}
                                 onChange={(e) => setHeight(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-orange-500 transition shadow-inner text-black"
                                 placeholder="Ex: 180"
                                 required
                             />

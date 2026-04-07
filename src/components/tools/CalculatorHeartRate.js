@@ -72,7 +72,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                                 type="number"
                                 value={restHR}
                                 onChange={(e) => setRestHR(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black"
                                 placeholder="Ex: 60"
                                 required
                             />

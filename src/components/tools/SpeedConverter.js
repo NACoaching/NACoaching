@@ -96,7 +96,7 @@ export default function SpeedConverter({ hints = {} }) {
                             step="0.1"
                             value={kmh}
                             onChange={handleKmhChange}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black"
                             placeholder="Ex: 12.5"
                         />
                     </div>

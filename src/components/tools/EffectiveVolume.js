@@ -57,7 +57,7 @@ export default function EffectiveVolume({ hints = {} }) {
                                             type="number"
                                             value={volumes[m.id]}
                                             onChange={(e) => setVolumes({ ...volumes, [m.id]: Math.max(0, parseInt(e.target.value) || 0) })}
-                                            className="w-20 bg-zinc-50 border border-zinc-200 p-2 rounded-lg font-bold text-center focus:outline-none focus:border-emerald-500 transition"
+                                            className="w-20 bg-zinc-50 border border-zinc-200 p-2 rounded-lg font-bold text-center focus:outline-none focus:border-emerald-500 transition text-black"
                                         />
                                         <span className="text-xs font-bold text-zinc-600 uppercase">séries / sem</span>
                                     </div>
