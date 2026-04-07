@@ -43,7 +43,7 @@ export default function HalfCooperTest({ hints = {} }) {
                     <Timer size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-black">Test Demi-Cooper (6 min)</h2>
+                    <h2 className="text-2xl font-black uppercase text-black italic">Test Demi-Cooper : Calcule ta VMA et VO2max en 6 min</h2>
                     <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Calcul de VMA & VO2max</p>
                 </div>
             </div>

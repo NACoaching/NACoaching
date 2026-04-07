@@ -29,7 +29,7 @@ export default function Calculator1RM({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Dumbbell size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase">Calculateur 1RM</h3>
+                    <h3 className="text-xl font-black uppercase text-black">Calculateur 1RM : Évalue ta Force Maximale & Optimise tes Charges</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">

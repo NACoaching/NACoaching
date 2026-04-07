@@ -35,7 +35,7 @@ export default function CalculatorCalories({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Flame size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase">Calculateur Calories</h3>
+                    <h3 className="text-xl font-black uppercase text-black">Calculateur Calories & TDEE : Guide Expert du Métabolisme</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
