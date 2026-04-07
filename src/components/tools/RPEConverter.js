@@ -155,7 +155,7 @@ export default function RPEConverter({ hints = {} }) {
             <div className="mt-8 p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex gap-4 items-start">
                 <Info size={18} className="text-[#FF6B00] shrink-0 mt-0.5" />
                 <p className="text-xs text-zinc-900 leading-relaxed font-medium italic">
-                    Basé sur l'échelle de **Mike Tuchscherer (RTS)**. Un RPE 10 signifie aucune répétition supplémentaire possible, un RPE 9 signifie qu'il restait 1 répétition en réserve (RIR 1).
+                    Basé sur l'échelle de <strong className="font-black">Mike Tuchscherer (RTS)</strong>. Un RPE 10 signifie aucune répétition supplémentaire possible, un RPE 9 signifie qu'il restait 1 répétition en réserve (RIR 1).
                 </p>
             </div>
         </div>

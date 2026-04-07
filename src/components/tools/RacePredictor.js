@@ -127,7 +127,7 @@ export default function RacePredictor({ hints = {} }) {
                 <div className="flex gap-4 items-start">
                     <Info size={18} className="text-[#FF6B00] shrink-0 mt-0.5" />
                     <p className="text-[10px] text-zinc-900 leading-relaxed font-medium italic">
-                        La **formule de Riegel** est l'étalon d'or pour prédire les performances en endurance. Elle suppose un entraînement adéquat pour la distance visée. Plus l'écart entre votre distance de référence et l'objectif est grand, plus la marge d'erreur augmente.
+                        La <strong className="font-black">formule de Riegel</strong> est l'étalon d'or pour prédire les performances en endurance. Elle suppose un entraînement adéquat pour la distance visée. Plus l'écart entre votre distance de référence et l'objectif est grand, plus la marge d'erreur augmente.
                     </p>
                 </div>
             </div>

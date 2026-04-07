@@ -38,7 +38,7 @@ export default function EffectiveVolume({ hints = {} }) {
             </div>
 
             <div className="space-y-6 mb-10">
-                <p className="text-sm text-zinc-800 font-medium italic mb-6">Indiquez le nombre de **séries effectives** (amenées à proximité de l'échec) par semaine pour chaque groupe musculaire.</p>
+                <p className="text-sm text-zinc-800 font-medium italic mb-6">Indiquez le nombre de <strong className="font-black">séries effectives</strong> (amenées à proximité de l'échec) par semaine pour chaque groupe musculaire.</p>
 
                 {muscles.map((m) => {
                     const status = getStatus(volumes[m.id]);
@@ -81,15 +81,15 @@ export default function EffectiveVolume({ hints = {} }) {
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100">
                     <h4 className="text-[10px] font-black uppercase text-zinc-900 mb-2">Guide de lecture</h4>
                     <ul className="space-y-2">
-                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" /> **6-10 séries** : Minimum pour progresser.</li>
-                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500" /> **12-20 séries** : Zone de gain maximal.</li>
-                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-500" /> **20+ séries** : Haut volume (avancés uniquement).</li>
+                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" /> <strong className="font-black">6-10 séries</strong> : Minimum pour progresser.</li>
+                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500" /> <strong className="font-black">12-20 séries</strong> : Zone de gain maximal.</li>
+                        <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-500" /> <strong className="font-black">20+ séries</strong> : Haut volume (avancés uniquement).</li>
                     </ul>
                 </div>
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex gap-3 items-start">
                     <Info size={16} className="text-[#FF6B00] shrink-0 mt-0.5" />
                     <p className="text-[10px] text-zinc-900 leading-relaxed font-medium italic">
-                        Ces données sont basées sur les travaux de **Dr. Mike Israetel** et **James Krieger**. Notez que la récupération dépend aussi de votre sommeil et de votre nutrition.
+                        Ces données sont basées sur les travaux de <strong className="font-black">Dr. Mike Israetel</strong> et <strong className="font-black">James Krieger</strong>. Notez que la récupération dépend aussi de votre sommeil et de votre nutrition.
                     </p>
                 </div>
             </div>

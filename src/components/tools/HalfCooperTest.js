@@ -51,7 +51,7 @@ export default function HalfCooperTest({ hints = {} }) {
             <div className="mb-8 p-4 bg-orange-50 rounded-xl border border-orange-100 flex gap-4 items-start">
                 <Zap size={20} className="text-orange-500 shrink-0 mt-0.5" />
                 <p className="text-xs text-orange-800 leading-relaxed font-medium">
-                    **Le test** : Parcourez la plus grande distance possible en **exactement 6 minutes** sur terrain plat.
+                    <strong className="font-black">Le test</strong> : Parcourez la plus grande distance possible en <strong className="font-black">exactement 6 minutes</strong> sur terrain plat.
                 </p>
             </div>
 
@@ -108,7 +108,7 @@ export default function HalfCooperTest({ hints = {} }) {
                 <div className="flex gap-4 items-start">
                     <Info size={18} className="text-[#FF6B00] shrink-0 mt-0.5" />
                     <p className="text-[10px] text-zinc-900 leading-relaxed font-medium italic">
-                        La **VMA** (Vitesse Maximale Aérobie) est la vitesse à laquelle vous consommez le maximum d'oxygène (**VO2max**). Elle est la base de programmation pour le running moderne.
+                        La <strong className="font-black">VMA</strong> (Vitesse Maximale Aérobie) est la vitesse à laquelle vous consommez le maximum d'oxygène (<strong className="font-black">VO2max</strong>). Elle est la base de programmation pour le running moderne.
                     </p>
                 </div>
             </div>
