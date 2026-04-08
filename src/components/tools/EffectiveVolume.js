@@ -32,8 +32,10 @@ export default function EffectiveVolume({ hints = {} }) {
                     <Layers size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-black">Calculateur de Volume Effectif</h2>
-                    <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Optimisation de l'hypertrophie</p>
+                    <h2 className="text-3xl font-black uppercase text-black leading-none">
+                        VOLUME <span className="text-[#FF6B00]">EFFECTIF</span>
+                    </h2>
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mt-1">Optimisation Hypertrophie & MRV</p>
                 </div>
             </div>
 

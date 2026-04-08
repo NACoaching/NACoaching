@@ -15,12 +15,15 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/macros-avancees');
+    const displayTitle = article.title || 'Calculateur de Macros';
+    const seoTitle = article.seo_title || displayTitle;
+
     return {
-        title: `${article.title || 'Calculateur de Macros Avancé — Protéines, Lipides & Glucides'} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || article.intro || 'Calculez précisément vos besoins en protéines, lipides et glucides selon votre poids de corps et vos objectifs. Outil gratuit pour sportifs.',
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Calculateur de Macros Avancé',
+            title: seoTitle,
             description: article.meta_desc || article.intro || 'Calculez vos macronutriments pour la musculation et la performance.',
             images: [article.image || '/logo.png'],
             type: 'website',
@@ -116,11 +119,11 @@ export default async function MacrosAvanceesPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {article.title || 'Calculateur de Macros Avancé'}
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'Calculateur de Macros'}
                     </h1>
-                    <p className="text-xl text-zinc-800 mb-12 font-medium">
-                        {article.intro || "Allez plus loin qu'un simple calcul de calories. Définissez vos ratios de protéines et lipides selon votre poids de corps."}
+                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                        {article.intro || "Allez au-delà des calories. Déterminez votre répartition idéale de macronutriments (P/L/G) pour optimiser votre composition corporelle."}
                     </p>
 
                     <div className="mb-16">

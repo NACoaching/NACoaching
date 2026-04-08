@@ -14,12 +14,15 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/predictateur-performance');
+    const displayTitle = article.title || 'Prédicteur Performance';
+    const seoTitle = article.seo_title || displayTitle;
+
     return {
-        title: `${article.title || 'Prédicteur de Performance Running — 5km, 10km, Semi & Marathon'} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || article.intro || "Prédisez vos temps sur 5km, 10km, Semi-Marathon et Marathon à partir d'un chrono de référence. Formule de Riegel pour vos objectifs course à pied.",
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Prédicteur de Performance Running',
+            title: seoTitle,
             description: article.meta_desc || article.intro || "Prédisez vos temps de course sur toutes les distances.",
             images: [article.image || '/logo.png'],
             type: 'website',
@@ -102,22 +105,20 @@ export default async function RacePredictorPage() {
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    <div className="lg:col-span-12">
+                <div className="max-w-4xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'Prédicteur de Performance'}
+                    </h1>
+                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                        {article.intro || "Estimez vos chronos sur toutes les distances du 5km au Marathon grâce à la formule de Riegel."}
+                    </p>
+
+                    <div className="mb-16">
                         <RacePredictor hints={article.tool_hints} />
                     </div>
 
-                    <div className="lg:col-span-5">
-                        <div className="prose prose-zinc max-w-none">
-                            <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
-                                {article.title || "Prédicteur de Performance"}
-                            </h1>
-                            <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
-                                {article.intro}
-                            </p>
-                            <div className="h-px bg-zinc-200 mb-8" />
-                            <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
-                        </div>
+                    <div className="prose prose-zinc max-w-none">
+                        <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
                     </div>
                 </div>
 

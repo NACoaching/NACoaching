@@ -39,9 +39,14 @@ export default function AdvancedMacros({ hints = {} }) {
     return (
         <div className="max-w-xl mx-auto">
             <div className="bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-2xl">
-                <h2 className="text-3xl font-black uppercase mb-8 flex items-center gap-3 italic text-black">
-                    <Apple className="text-[#FF6B00]" /> Macros Avancées
-                </h2>
+                <div className="text-center mb-10">
+                    <h2 className="text-4xl font-black uppercase mb-3 italic text-black">
+                        ALGO <span className="text-[#FF6B00]">MACROS</span>
+                    </h2>
+                    <p className="text-zinc-600 max-w-md mx-auto font-bold uppercase text-[10px] tracking-[0.2em]">
+                        Optimise ta nutrition pour la performance
+                    </p>
+                </div>
 
                 <form onSubmit={calculate} className="space-y-8">
                     <div className="grid grid-cols-2 gap-4">

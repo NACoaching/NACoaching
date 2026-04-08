@@ -15,12 +15,15 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/score-recuperation');
+    const displayTitle = article.title || 'Score de Récupération';
+    const seoTitle = article.seo_title || displayTitle;
+
     return {
-        title: `${article.title || 'Score de Récupération — Évaluez Votre Readiness'} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || article.intro || 'Évaluez votre état de forme quotidien (sommeil, stress, fatigue) pour savoir si vous devez pousser ou récupérer. Outil gratuit.',
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Score de Récupération',
+            title: seoTitle,
             description: article.meta_desc || article.intro || 'Calculez votre readiness pour optimiser vos entraînements.',
             images: [article.image || '/logo.png'],
             type: 'website',
@@ -116,11 +119,11 @@ export default async function RecoveryScorePage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
-                        {article.title || 'Score de Récupération (Readiness)'}
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'Score de Récupération'}
                     </h1>
-                    <p className="text-xl text-zinc-600 mb-12">
-                        {article.intro || "Sommeil, stress, fatigue... Calculez votre état de forme du jour pour savoir s'il faut pousser ou lever le pied."}
+                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                        {article.intro || "Optimisez votre charge d'entraînement en évaluant scientifiquement votre état de forme quotidien (Readiness)."}
                     </p>
 
                     <div className="mb-16">

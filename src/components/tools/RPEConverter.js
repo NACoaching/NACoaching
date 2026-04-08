@@ -38,8 +38,10 @@ export default function RPEConverter({ hints = {} }) {
                     <Target size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-black">Convertisseur RPE / % 1RM</h2>
-                    <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Optimisation de l'intensité</p>
+                    <h2 className="text-3xl font-black uppercase text-black leading-none">
+                        CONVERTISSEUR <span className="text-[#FF6B00]">RPE</span>
+                    </h2>
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mt-1">Autorégulation & Intensité Relative</p>
                 </div>
             </div>
 

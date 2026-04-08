@@ -63,10 +63,10 @@ export default function RecoveryScore({ hints = {} }) {
 
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-black uppercase mb-4 italic text-black">
-                        Recovery <span className="text-[#FF6B00]">Score</span>
+                        SCORE DE <span className="text-[#FF6B00]">RÉCUPÉRATION</span>
                     </h2>
-                    <p className="text-zinc-700 max-w-md mx-auto">
-                        Auto-évaluation scientifique de ta readiness pour adapter ta séance en moins de 60 secondes.
+                    <p className="text-zinc-600 max-w-md mx-auto font-bold uppercase text-[10px] tracking-[0.2em]">
+                        Évalue ta readiness & optimise ta charge
                     </p>
                 </div>
 

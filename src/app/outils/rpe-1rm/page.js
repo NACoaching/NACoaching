@@ -14,12 +14,15 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/rpe-1rm');
+    const displayTitle = article.title || 'Convertisseur RPE';
+    const seoTitle = article.seo_title || displayTitle;
+
     return {
-        title: `${article.title || 'Convertisseur RPE / % 1RM — Intensité & Force'} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Convertisseur RPE / % 1RM',
+            title: seoTitle,
             description: article.intro || "Calculez votre intensité relative pour la force athlétique.",
             images: [article.image || '/logo.png'],
             type: 'website',
@@ -102,22 +105,20 @@ export default async function RPEPage() {
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    <div className="lg:col-span-7">
+                <div className="max-w-4xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'Convertisseur RPE / % 1RM'}
+                    </h1>
+                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                        {article.intro || "Maîtrisez l'autorégulation de votre entraînement en convertissant votre RPE en intensité relative."}
+                    </p>
+
+                    <div className="mb-16">
                         <RPEConverter hints={article.tool_hints} />
                     </div>
 
-                    <div className="lg:col-span-5">
-                        <div className="prose prose-zinc max-w-none">
-                            <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
-                                {article.title || "Convertisseur RPE / % 1RM"}
-                            </h1>
-                            <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
-                                {article.intro}
-                            </p>
-                            <div className="h-px bg-zinc-200 mb-8" />
-                            <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
-                        </div>
+                    <div className="prose prose-zinc max-w-none">
+                        <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
                     </div>
                 </div>
 

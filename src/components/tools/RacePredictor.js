@@ -58,8 +58,10 @@ export default function RacePredictor({ hints = {} }) {
                     <Trophy size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-black">Prédicteur de Performance</h2>
-                    <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Running • Formule de Riegel</p>
+                    <h2 className="text-3xl font-black uppercase text-black leading-none">
+                        PRÉDICTEUR <span className="text-[#FF6B00]">RUNNING</span>
+                    </h2>
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mt-1">Potentiel Chrono & Formule de Riegel</p>
                 </div>
             </div>
 

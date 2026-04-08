@@ -14,12 +14,15 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/volume-effectif');
+    const displayTitle = article.title || 'Volume Effectif';
+    const seoTitle = article.seo_title || displayTitle;
+
     return {
-        title: `${article.title || 'Calculateur Volume Effectif — Séries par Muscle'} | NA Coaching`,
+        title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
         description: article.meta_desc || article.intro || "Calculez votre volume d'entraînement hebdomadaire par groupe musculaire. Identifiez vos zones de maintenance, de progression et de sur-reaching.",
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Calculateur Volume Effectif',
+            title: seoTitle,
             description: article.meta_desc || article.intro || "Optimisez vos séries par muscle pour l'hypertrophie.",
             images: [article.image || '/logo.png'],
             type: 'website',
@@ -102,22 +105,20 @@ export default async function VolumePage() {
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    <div className="lg:col-span-8">
+                <div className="max-w-4xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'Calculateur de Volume Effectif'}
+                    </h1>
+                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                        {article.intro || "Optimisez vos séries par muscle pour l'hypertrophie en identifiant vos zones de volume optimal."}
+                    </p>
+
+                    <div className="mb-16">
                         <EffectiveVolume hints={article.tool_hints} />
                     </div>
 
-                    <div className="lg:col-span-4">
-                        <div className="prose prose-zinc max-w-none">
-                            <h1 className="text-4xl font-black uppercase mb-6 leading-tight">
-                                {article.title || "Calculateur de Volume Effectif"}
-                            </h1>
-                            <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed">
-                                {article.intro}
-                            </p>
-                            <div className="h-px bg-zinc-200 mb-8" />
-                            <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
-                        </div>
+                    <div className="prose prose-zinc max-w-none">
+                        <ToolArticleContent content={article.content} glossary={article.auto_links} currentPath={article.current_path} />
                     </div>
                 </div>
 
