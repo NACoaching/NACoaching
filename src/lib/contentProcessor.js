@@ -10,7 +10,9 @@
 export function autoLinkContent(content, glossary = [], currentPath = '') {
     if (!content || !glossary || glossary.length === 0) return content;
 
-    let processedContent = content;
+    // Fix common Markdown issue: parsing text directly followed by `---` as a Setext heading (H2)
+    // We force an empty line before `---` to ensure it is treated as a horizontal rule.
+    let processedContent = content.replace(/([^\n])\n---/g, '$1\n\n---');
 
     // 1. Identify and protect existing Markdown links [text](url) or [text]
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)|\[([^\]]+)\]/g;
