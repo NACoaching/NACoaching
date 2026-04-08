@@ -40,7 +40,7 @@ export default function AdvancedMacros({ hints = {} }) {
         <div className="max-w-xl mx-auto">
             <div className="bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-2xl">
                 <div className="text-center mb-10">
-                    <h2 className="text-4xl font-black uppercase mb-3 italic text-black">
+                    <h2 className="text-4xl font-bold uppercase mb-3 italic text-black">
                         ALGO <span className="text-[#FF6B00]">MACROS</span>
                     </h2>
                     <p className="text-zinc-600 max-w-md mx-auto font-bold uppercase text-[10px] tracking-[0.2em]">
@@ -189,7 +189,7 @@ export default function AdvancedMacros({ hints = {} }) {
 
             <div className="mt-8 bg-zinc-900 text-zinc-200 p-6 rounded-2xl flex items-start gap-4">
                 <InfoIcon size={20} className="shrink-0 mt-1 text-[#FF6B00]" />
-                <p className="text-[10px] font-black leading-relaxed uppercase tracking-tight">
+                <p className="text-[10px] font-bold leading-relaxed uppercase tracking-tight">
                     Le ratio glucidique est ajusté automatiquement après avoir fixé vos besoins en protéines (essentiels pour la structure) et lipides (essentiels pour le système hormonal).
                 </p>
             </div>

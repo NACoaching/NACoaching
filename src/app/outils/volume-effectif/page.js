@@ -106,8 +106,8 @@ export default async function VolumePage() {
                 </Link>
 
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
-                        {article.title || 'Calculateur de Volume Effectif'}
+                    <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'VOLUME EFFECTIF'}
                     </h1>
                     <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
                         {article.intro || "Optimisez vos séries par muscle pour l'hypertrophie en identifiant vos zones de volume optimal."}

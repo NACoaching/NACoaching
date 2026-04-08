@@ -58,7 +58,7 @@ export default function RacePredictor({ hints = {} }) {
                     <Trophy size={24} />
                 </div>
                 <div>
-                    <h2 className="text-3xl font-black uppercase text-black leading-none">
+                    <h2 className="text-3xl font-bold uppercase text-black leading-none">
                         PRÉDICTEUR <span className="text-[#FF6B00]">RUNNING</span>
                     </h2>
                     <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mt-1">Potentiel Chrono & Formule de Riegel</p>
@@ -112,7 +112,7 @@ export default function RacePredictor({ hints = {} }) {
                                 </div>
                                 <div className="text-right">
                                     <div className="text-[10px] font-black text-zinc-800 uppercase">Allure cible</div>
-                                    <div className="text-md font-black text-black">{p.pace} min/km</div>
+                                    <div className="text-md font-bold text-black">{p.pace} min/km</div>
                                 </div>
                             </div>
                         ))}

@@ -106,8 +106,8 @@ export default async function RacePredictorPage() {
                 </Link>
 
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
-                        {article.title || 'Prédicteur de Performance'}
+                    <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-zinc-950 text-center">
+                        {article.title || 'PRÉDICTEUR RUNNING'}
                     </h1>
                     <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
                         {article.intro || "Estimez vos chronos sur toutes les distances du 5km au Marathon grâce à la formule de Riegel."}

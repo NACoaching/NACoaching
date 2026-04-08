@@ -62,7 +62,7 @@ export default function RecoveryScore({ hints = {} }) {
                 </div>
 
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-black uppercase mb-4 italic text-black">
+                    <h2 className="text-4xl font-bold uppercase mb-4 italic text-black">
                         SCORE DE <span className="text-[#FF6B00]">RÉCUPÉRATION</span>
                     </h2>
                     <p className="text-zinc-600 max-w-md mx-auto font-bold uppercase text-[10px] tracking-[0.2em]">
@@ -79,14 +79,14 @@ export default function RecoveryScore({ hints = {} }) {
                                         <q.icon size={20} />
                                     </div>
                                     <div>
-                                        <div className="flex items-center gap-1 font-black uppercase text-sm tracking-tight text-zinc-900">
+                                        <div className="flex items-center gap-1 font-bold uppercase text-sm tracking-tight text-zinc-900">
                                             {q.label}
                                             <Tooltip text={hints[q.key]} />
                                         </div>
                                         <div className="text-[10px] text-zinc-700 font-bold uppercase">{q.desc}</div>
                                     </div>
                                 </div>
-                                <span className="text-2xl font-black italic text-[#FF6B00]">{scores[q.key]}/5</span>
+                                <span className="text-2xl font-bold italic text-[#FF6B00]">{scores[q.key]}/5</span>
                             </div>
                             <div className="grid grid-cols-5 gap-2">
                                 {[1, 2, 3, 4, 5].map((val) => (
@@ -109,7 +109,7 @@ export default function RecoveryScore({ hints = {} }) {
                 <div className="mt-12 flex flex-col md:flex-row gap-4">
                     <button
                         onClick={calculateResult}
-                        className="flex-grow bg-black text-white font-black py-5 rounded-2xl uppercase tracking-[0.2em] hover:bg-[#FF6B00] hover:text-black transition-all shadow-xl flex items-center justify-center gap-3"
+                        className="flex-grow bg-black text-white font-bold py-5 rounded-2xl uppercase tracking-[0.2em] hover:bg-[#FF6B00] hover:text-black transition-all shadow-xl flex items-center justify-center gap-3"
                     >
                         Obtenir mon score <ChevronRight size={20} />
                     </button>
@@ -126,10 +126,10 @@ export default function RecoveryScore({ hints = {} }) {
                 {result !== null && (
                     <AnimWrapper delay={0.2}>
                         <div className={`mt-12 p-8 rounded-3xl border-4 ${getRecommendation(result).bg} ${getRecommendation(result).color.replace('text', 'border')} flex flex-col items-center text-center`}>
-                            <div className={`text-7xl font-black italic mb-2 tracking-tighter ${getRecommendation(result).color}`}>
+                            <div className={`text-7xl font-bold italic mb-2 tracking-tighter ${getRecommendation(result).color}`}>
                                 {result.toFixed(1)}<span className="text-2xl opacity-60">/10</span>
                             </div>
-                            <h3 className={`text-2xl font-black uppercase mb-4 ${getRecommendation(result).color}`}>
+                            <h3 className={`text-2xl font-bold uppercase mb-4 ${getRecommendation(result).color}`}>
                                 {getRecommendation(result).title}
                             </h3>
                             <p className="text-zinc-600 leading-relaxed font-medium">
