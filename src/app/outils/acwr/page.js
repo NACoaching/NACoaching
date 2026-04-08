@@ -120,7 +120,7 @@ export default async function ACWRPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-[#FF6B00]">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#FF6B00]">
                         {article.title || 'Calculateur ACWR (Fatigue/Charge)'}
                     </h1>
                     <p className="text-xl text-zinc-800 mb-12 font-medium">
@@ -138,7 +138,7 @@ export default async function ACWRPage() {
                         <div className="mt-12 border-t border-zinc-200 pt-12 flex flex-col items-center">
                             <div className="flex items-center gap-2 mb-8">
                                 <Info size={16} className="text-[#FF6B00]" />
-                                <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
+                                <h4 className="text-sm font-bold tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                             </div>
 
                             <div className="max-w-md w-full mx-auto">

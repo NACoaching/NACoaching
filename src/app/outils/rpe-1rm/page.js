@@ -109,7 +109,7 @@ export default async function RPEPage() {
                     <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-zinc-950 text-center">
                         {article.title || 'CONVERTISSEUR RPE'}
                     </h1>
-                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-zinc-700 font-normal text-zinc-600 text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
                         {article.intro || "Maîtrisez l'autorégulation de votre entraînement en convertissant votre RPE en intensité relative."}
                     </p>
 
@@ -127,7 +127,7 @@ export default async function RPEPage() {
                     <div className="mt-12 border-t border-zinc-200 pt-12 text-left flex flex-col items-center">
                         <div className="flex items-center gap-2 mb-8">
                             <Info size={16} className="text-[#FF6B00]" />
-                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
+                            <h4 className="text-sm font-bold tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                         </div>
 
                         <div className="max-w-md w-full mx-auto">

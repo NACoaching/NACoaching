@@ -107,7 +107,7 @@ export default async function DemiCooperPage() {
                 </Link>
 
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-3xl md:text-5xl font-black uppercase mb-8 leading-tight text-zinc-950 text-center">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-8 leading-tight text-zinc-950 text-center">
                         {article.title || 'Test Demi-Cooper (6 min)'}
                     </h1>
                     
@@ -130,7 +130,7 @@ export default async function DemiCooperPage() {
                     <div className="mt-12 border-t border-zinc-200 pt-12 text-left flex flex-col items-center">
                         <div className="flex items-center gap-2 mb-8">
                             <Info size={16} className="text-[#FF6B00]" />
-                            <h4 className="text-sm font-black uppercase tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
+                            <h4 className="text-sm font-bold tracking-wider text-zinc-700 font-bold">Expertise Matériel</h4>
                         </div>
 
                         <div className="max-w-md w-full mx-auto">

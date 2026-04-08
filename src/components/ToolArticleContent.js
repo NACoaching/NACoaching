@@ -27,13 +27,13 @@ export default function ToolArticleContent({ content, glossary = [], currentPath
                             }
                             return <a target="_blank" rel="noopener noreferrer" className="text-[#FF6B00] font-bold hover:underline" {...props} />;
                         },
-                        h1: ({ node, ...props }) => <h2 className="text-3xl font-bold mt-12 mb-6 text-black border-l-8 border-black pl-6 italic" {...props} />,
-                        h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mt-12 mb-6 text-black border-b-2 border-zinc-100 pb-2" {...props} />,
+                        h1: ({ node, ...props }) => <h2 className="text-3xl font-bold mt-12 mb-6 text-zinc-900 border-l-8 border-[#FF6B00] pl-6 italic" {...props} />,
+                        h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mt-12 mb-6 text-zinc-900 border-b-2 border-zinc-100 pb-2" {...props} />,
                         h3: ({ node, ...props }) => <h3 className="text-xl font-bold mt-8 mb-4 text-black tracking-wide" {...props} />,
                         h4: ({ node, ...props }) => <h4 className="text-lg font-bold mt-6 mb-3 text-black" {...props} />,
                         ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-6 space-y-2" {...props} />,
                         li: ({ node, ...props }) => <li className="pl-2" {...props} />,
-                        strong: ({ node, ...props }) => <strong className="font-bold text-black" {...props} />,
+                        strong: ({ node, ...props }) => <strong className="font-bold text-zinc-950" {...props} />,
                         p: ({ node, ...props }) => <p className="mb-4" {...props} />,
                         table: ({ node, ...props }) => (
                             <div className="overflow-x-auto my-8 border border-zinc-200 rounded-sm">

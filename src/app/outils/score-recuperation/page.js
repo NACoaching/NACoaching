@@ -119,11 +119,11 @@ export default async function RecoveryScorePage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
-                        {article.title || 'Score de Récupération'}
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-950 text-center">
+                        {article.title || 'SCORE DE RÉCUPÉRATION'}
                     </h1>
-                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
-                        {article.intro || "Optimisez votre charge d'entraînement en évaluant scientifiquement votre état de forme quotidien (Readiness)."}
+                    <p className="text-zinc-600 font-normal text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                        {article.intro || "Évaluez votre état de forme quotidien avec l'échelle de Hooper. Apprenez à écouter votre corps pour maximiser vos gains."}
                     </p>
 
                     <div className="mb-16">

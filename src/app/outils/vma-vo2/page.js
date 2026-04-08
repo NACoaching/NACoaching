@@ -122,10 +122,10 @@ export default async function VmaVo2ConverterPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-6 text-zinc-950 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-950 text-center">
                         {article.title || 'Convertisseur VMA / VO2max'}
                     </h1>
-                    <p className="text-zinc-800 font-medium text-lg mb-8 leading-relaxed text-center max-w-2xl mx-auto">
+                    <p className="text-zinc-800 font-normal text-zinc-600 text-lg mb-8 leading-relaxed text-center max-w-2xl mx-auto">
                         {article.intro || "Analysez votre potentiel aérobie en reliant votre vitesse maximale à votre consommation d'oxygène."}
                     </p>
 
@@ -142,7 +142,7 @@ export default async function VmaVo2ConverterPage() {
                             <div className="flex items-center gap-2 mb-8">
                                 <span className="flex items-center gap-2">
                                     <Info size={16} className="text-[#FF6B00]" />
-                                    <h4 className="text-sm font-black uppercase tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
+                                    <h4 className="text-sm font-bold tracking-wider text-zinc-500 font-bold">Expertise Matériel</h4>
                                 </span>
                             </div>
 

@@ -119,10 +119,10 @@ export default async function MacrosAvanceesPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-zinc-950 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-950 text-center">
                         {article.title || 'ALGO MACROS'}
                     </h1>
-                    <p className="text-zinc-700 font-medium text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-zinc-600 font-normal text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
                         {article.intro || "Allez au-delà des calories. Déterminez votre répartition idéale de macronutriments (P/L/G) pour optimiser votre composition corporelle."}
                     </p>
 
