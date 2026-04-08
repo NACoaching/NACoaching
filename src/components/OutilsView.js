@@ -27,6 +27,11 @@ const titleOverrides = {
     '/outils/frequence-cardiaque': "Calculateur de Zones FC : Maîtrise ton intensité (Karvonen)",
     '/outils/acwr': "Calculateur ACWR : Évitez le surentraînement et les blessures",
     '/outils/test-demi-cooper': "Test Demi-Cooper : Calcule ta VMA et VO2max en 6 min",
+    '/outils/score-recuperation': "Score de Récupération : Optimise ta Readiness & ta Forme",
+    '/outils/macros-avancees': "Calculateur de Macros : Optimise ton ratio Protéines, Lipides, Glucides",
+    '/outils/volume-effectif': "Volume Effectif : Calcule ton nombre de séries par muscle",
+    '/outils/rpe-1rm': "Convertisseur RPE & % 1RM : Maîtrise l'intensité relative",
+    '/outils/predictateur-performance': "Prédicteur de Performance : Prédis tes temps sur Marathon et Semi",
 };
 
 // Hidden keywords to improve search matching
