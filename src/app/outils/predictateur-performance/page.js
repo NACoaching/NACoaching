@@ -101,12 +101,12 @@ export default async function RacePredictorPage() {
                     { label: article.title || 'Prédicteur Performance' }
                 ]} />
 
-                <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mt-8 mb-8 group font-bold uppercase text-xs">
+                <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mt-8 mb-8 group font-bold  text-xs">
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour aux outils
                 </Link>
 
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-zinc-950 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold  mb-6 text-zinc-950 text-center">
                         {article.title || 'PRÉDICTEUR RUNNING'}
                     </h1>
                     <p className="text-zinc-700 font-normal text-zinc-600 text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
