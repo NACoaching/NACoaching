@@ -78,7 +78,7 @@ export default function SpeedConverter({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <ArrowRightLeft size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase text-black">Convertisseur de Vitesse Running : Maîtrise tes Allures (min/km & km/h)</h3>
+                    <h3 className="text-xl font-bold text-zinc-950">Convertisseur de Vitesse Running : Maîtrise tes Allures (min/km & km/h)</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
@@ -87,7 +87,7 @@ export default function SpeedConverter({ hints = {} }) {
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                             Vitesse (km/h)
                             <Tooltip text={hints.vitesse || hints.speed} />
                         </label>
@@ -101,7 +101,7 @@ export default function SpeedConverter({ hints = {} }) {
                         />
                     </div>
                     <div>
-                        <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                             Allure (min/km)
                             <Tooltip text={hints.allure || hints.pace} />
                         </label>

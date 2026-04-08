@@ -118,7 +118,7 @@ export default async function SpeedConverterPage() {
                         { label: article.title || 'Vitesse / Allure' }
                     ]} />
 
-                    <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mt-8 mb-8 font-bold uppercase text-sm">
+                    <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FF6B00] transition mt-8 mb-8 font-bold text-sm">
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 

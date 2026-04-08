@@ -57,7 +57,7 @@ export default function ACWRCalculator({ hints = {} }) {
                     <Activity size={120} />
                 </div>
 
-                <h2 className="text-3xl font-black uppercase mb-6 flex items-center gap-3 italic text-black">
+                <h2 className="text-3xl font-bold uppercase mb-6 flex items-center gap-3 italic text-black">
                     <Activity className="text-[#FF6B00]" /> ACWR Calculator
                 </h2>
 
@@ -68,7 +68,7 @@ export default function ACWRCalculator({ hints = {} }) {
                 <form onSubmit={calculateACWR} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Charge Aiguë (7j)
                                 <Tooltip text={hints.aigue || hints.acute} />
                             </label>
@@ -82,7 +82,7 @@ export default function ACWRCalculator({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Charge Chronique (28j)
                                 <Tooltip text={hints.chronique || hints.chronic} />
                             </label>
@@ -97,7 +97,7 @@ export default function ACWRCalculator({ hints = {} }) {
                         </div>
                     </div>
 
-                    <button type="submit" className="w-full bg-black text-white font-black py-5 rounded-xl uppercase tracking-widest hover:bg-[#FF6B00] hover:text-black transition-all shadow-lg hover:shadow-[#FF6B00]/40">
+                    <button type="submit" className="w-full bg-black text-white font-bold py-5 rounded-xl uppercase tracking-widest hover:bg-[#FF6B00] hover:text-black transition-all shadow-lg hover:shadow-[#FF6B00]/40">
                         Calculer mon ratio
                     </button>
                 </form>
@@ -106,8 +106,8 @@ export default function ACWRCalculator({ hints = {} }) {
                     <AnimWrapper delay={0.1}>
                         <div className={`mt-8 p-6 rounded-2xl border ${getStatus(result).bg} ${getStatus(result).color.replace('text', 'border')}`}>
                             <div className="flex items-center justify-between mb-4">
-                                <span className="font-black uppercase tracking-tighter text-sm">Verdict Scientifique</span>
-                                <span className="text-3xl font-black italic">{result.toFixed(2)}</span>
+                                <span className="font-bold uppercase tracking-tighter text-sm">Verdict Scientifique</span>
+                                <span className="text-3xl font-bold italic">{result.toFixed(2)}</span>
                             </div>
 
                             <div className="flex gap-4 items-start">
@@ -115,7 +115,7 @@ export default function ACWRCalculator({ hints = {} }) {
                                     {React.createElement(getStatus(result).icon, { size: 24 })}
                                 </div>
                                 <div>
-                                    <h4 className="font-black uppercase text-lg leading-none mb-2">
+                                    <h4 className="font-bold uppercase text-lg leading-none mb-2">
                                         {getStatus(result).text}
                                     </h4>
                                     <p className="text-sm opacity-80 leading-relaxed">

@@ -67,7 +67,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Wind size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase text-black">Convertisseur VMA / VO2max : Estime ton Potentiel Aérobie & Physiologique</h3>
+                    <h3 className="text-xl font-bold text-zinc-950">Convertisseur VMA / VO2max : Estime ton Potentiel Aérobie & Physiologique</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
@@ -76,7 +76,7 @@ export default function VmaVo2Converter({ hints = {} }) {
 
                 <div className="space-y-4 mb-6">
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-700 mb-1">
                             Ta VMA (km/h)
                             <Tooltip text={hints.vma} />
                         </label>
@@ -90,7 +90,7 @@ export default function VmaVo2Converter({ hints = {} }) {
                         />
                     </div>
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-700 mb-1">
                             Ta VO2max (ml/kg/min)
                             <Tooltip text={hints.vo2max} />
                         </label>
@@ -108,14 +108,14 @@ export default function VmaVo2Converter({ hints = {} }) {
                 {vo2Rel && (
                     <div className="mt-auto bg-white border border-zinc-200 p-4 rounded-lg space-y-3">
                         <div className="text-center">
-                            <span className="block text-xs font-bold uppercase text-zinc-600">VO2max Relatif</span>
-                            <span className="text-6xl font-black text-[#FF6B00]">{vo2Rel}</span>
+                            <span className="block text-xs font-bold text-zinc-600">VO2max Relatif</span>
+                            <span className="text-6xl font-bold text-[#FF6B00]">{vo2Rel}</span>
                             <span className="block text-[10px] text-zinc-600">ml/kg/min</span>
                         </div>
                         {vo2Abs && (
                             <div className="text-center border-t border-zinc-100 pt-3">
-                                <span className="block text-xs font-bold uppercase text-zinc-600">VO2max Absolu</span>
-                                <span className="text-2xl font-black text-zinc-800">{vo2Abs}</span>
+                                <span className="block text-xs font-bold text-zinc-600">VO2max Absolu</span>
+                                <span className="text-2xl font-bold text-zinc-800">{vo2Abs}</span>
                                 <span className="block text-[10px] text-zinc-600">L/min</span>
                             </div>
                         )}

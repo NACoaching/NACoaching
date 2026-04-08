@@ -32,10 +32,10 @@ export default function EffectiveVolume({ hints = {} }) {
                     <Layers size={24} />
                 </div>
                 <div>
-                    <h2 className="text-3xl font-bold uppercase text-zinc-900 leading-none">
+                    <h2 className="text-3xl font-bold text-zinc-900 leading-none">
                         VOLUME <span className="text-[#FF6B00]">EFFECTIF</span>
                     </h2>
-                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] mt-1">Optimisation Hypertrophie & MRV</p>
+                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Optimisation Hypertrophie & MRV</p>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@ export default function EffectiveVolume({ hints = {} }) {
                         <div key={m.id} className="group">
                             <div className="flex justify-between items-end mb-3">
                                 <div>
-                                    <label className="flex items-center text-xs font-bold uppercase text-zinc-900 mb-1">
+                                    <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                         {m.name}
                                         <Tooltip text={hints[m.id]} />
                                     </label>
@@ -81,7 +81,7 @@ export default function EffectiveVolume({ hints = {} }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100">
-                    <h4 className="text-[10px] font-bold uppercase text-zinc-900 mb-2">Guide de lecture</h4>
+                    <h4 className="text-[10px] font-bold text-zinc-900 mb-2">Guide de lecture</h4>
                     <ul className="space-y-2">
                         <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" /> <strong className="font-bold">6-10 séries</strong> : Minimum pour progresser.</li>
                         <li className="text-[11px] text-zinc-800 font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500" /> <strong className="font-bold">12-20 séries</strong> : Zone de gain maximal.</li>

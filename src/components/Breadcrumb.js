@@ -32,11 +32,11 @@ export default function Breadcrumb({ items = [] }) {
                     <span key={index} className="flex items-center gap-1.5">
                         {index > 0 && <ChevronRight size={12} className="text-zinc-700 flex-shrink-0" />}
                         {item.href && index < items.length - 1 ? (
-                            <Link href={item.href} className="hover:text-[#FF6B00] transition uppercase tracking-wider">
+                            <Link href={item.href} className="hover:text-[#FF6B00] transition">
                                 {item.label}
                             </Link>
                         ) : (
-                            <span className="text-zinc-700 uppercase tracking-wider line-clamp-1">{item.label}</span>
+                            <span className="text-zinc-700 line-clamp-1">{item.label}</span>
                         )}
                     </span>
                 ))}

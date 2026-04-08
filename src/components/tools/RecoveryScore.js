@@ -65,7 +65,7 @@ export default function RecoveryScore({ hints = {} }) {
                     <h2 className="text-4xl font-bold uppercase mb-4 italic text-black">
                         SCORE DE <span className="text-[#FF6B00]">RÉCUPÉRATION</span>
                     </h2>
-                    <p className="text-zinc-600 max-w-md mx-auto font-bold uppercase text-[10px] tracking-[0.2em]">
+                    <p className="text-zinc-600 max-w-md mx-auto font-bold uppercase text-[10px] tracking-widest">
                         Évalue ta readiness & optimise ta charge
                     </p>
                 </div>
@@ -79,11 +79,11 @@ export default function RecoveryScore({ hints = {} }) {
                                         <q.icon size={20} />
                                     </div>
                                     <div>
-                                        <div className="flex items-center gap-1 font-bold uppercase text-sm tracking-tight text-zinc-900">
+                                        <div className="flex items-center gap-1 font-bold text-sm tracking-tight text-zinc-900">
                                             {q.label}
                                             <Tooltip text={hints[q.key]} />
                                         </div>
-                                        <div className="text-[10px] text-zinc-700 font-bold uppercase">{q.desc}</div>
+                                        <div className="text-[10px] text-zinc-500 font-bold">{q.desc}</div>
                                     </div>
                                 </div>
                                 <span className="text-2xl font-bold italic text-[#FF6B00]">{scores[q.key]}/5</span>
@@ -93,7 +93,7 @@ export default function RecoveryScore({ hints = {} }) {
                                     <button
                                         key={val}
                                         onClick={() => handleScore(q.key, val)}
-                                        className={`h-12 rounded-xl border-2 transition-all font-black text-lg ${scores[q.key] === val
+                                        className={`h-12 rounded-xl border-2 transition-all font-bold text-lg ${scores[q.key] === val
                                             ? 'bg-black text-white border-black scale-105'
                                             : 'bg-zinc-50 border-zinc-100 text-zinc-600 hover:border-zinc-300'
                                             }`}
@@ -109,7 +109,7 @@ export default function RecoveryScore({ hints = {} }) {
                 <div className="mt-12 flex flex-col md:flex-row gap-4">
                     <button
                         onClick={calculateResult}
-                        className="flex-grow bg-black text-white font-bold py-5 rounded-2xl uppercase tracking-[0.2em] hover:bg-[#FF6B00] hover:text-black transition-all shadow-xl flex items-center justify-center gap-3"
+                        className="flex-grow bg-[#FF6B00] text-black font-bold py-5 rounded-2xl uppercase tracking-widest hover:bg-black hover:text-white transition-all shadow-xl flex items-center justify-center gap-3"
                     >
                         Obtenir mon score <ChevronRight size={20} />
                     </button>
@@ -140,8 +140,8 @@ export default function RecoveryScore({ hints = {} }) {
                 )}
             </div>
 
-            <p className="mt-8 text-center text-zinc-600 text-xs font-bold uppercase tracking-widest">
-                Based on Hooper-Mackinnon Scale for Athlete Monitoring
+            <p className="mt-8 text-center text-zinc-400 text-[10px] font-bold">
+                Basé sur l'Échelle de Hooper-Mackinnon pour le Monitoring Athlétique
             </p>
         </div>
     );

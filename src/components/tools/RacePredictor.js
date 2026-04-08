@@ -58,16 +58,16 @@ export default function RacePredictor({ hints = {} }) {
                     <Trophy size={24} />
                 </div>
                 <div>
-                    <h2 className="text-3xl font-bold uppercase text-black leading-none">
+                    <h2 className="text-3xl font-bold text-zinc-950 leading-none">
                         PRÉDICTEUR <span className="text-[#FF6B00]">RUNNING</span>
                     </h2>
-                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mt-1">Potentiel Chrono & Formule de Riegel</p>
+                    <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-1">Potentiel Chrono & Formule de Riegel</p>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
-                    <label className="block text-xs font-black uppercase text-zinc-900 mb-2">Distance de Référence</label>
+                    <label className="block text-xs font-bold text-zinc-900 mb-2">Distance de Référence</label>
                     <select
                         value={refDist}
                         onChange={(e) => setRefDist(parseInt(e.target.value))}
@@ -80,19 +80,19 @@ export default function RacePredictor({ hints = {} }) {
                 </div>
 
                 <div>
-                    <label className="block text-xs font-black uppercase text-zinc-900 mb-2">Temps Réalisé</label>
+                    <label className="block text-xs font-bold text-zinc-900 mb-2">Temps Réalisé</label>
                     <div className="flex items-center gap-2">
                         <div className="flex-1 min-w-0 text-center">
                             <input type="number" placeholder="HH" value={hours} onChange={e => setHours(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center text-black" />
-                            <span className="text-[10px] uppercase font-black text-zinc-600">h</span>
+                            <span className="text-[10px] uppercase font-bold text-zinc-600">h</span>
                         </div>
                         <div className="flex-1 min-w-0 text-center">
                             <input type="number" placeholder="MM" value={mins} onChange={e => setMins(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center text-black" />
-                            <span className="text-[10px] uppercase font-black text-zinc-600">m</span>
+                            <span className="text-[10px] uppercase font-bold text-zinc-600">m</span>
                         </div>
                         <div className="flex-1 min-w-0 text-center">
                             <input type="number" placeholder="SS" value={secs} onChange={e => setSecs(e.target.value)} className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg font-bold text-center text-black" />
-                            <span className="text-[10px] uppercase font-black text-zinc-600">s</span>
+                            <span className="text-[10px] uppercase font-bold text-zinc-600">s</span>
                         </div>
                     </div>
                 </div>
@@ -100,18 +100,18 @@ export default function RacePredictor({ hints = {} }) {
 
             {predictions ? (
                 <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-xs font-black uppercase text-zinc-900 tracking-widest mb-4">Tes Prédictions Théoriques</h3>
+                    <h3 className="text-xs font-bold text-zinc-900 tracking-widest mb-4">Tes Prédictions Théoriques</h3>
                     <div className="space-y-3">
                         {predictions.map((p) => (
                             <div key={p.id} className={`flex items-center justify-between p-4 rounded-xl border transition-all ${p.isRef ? 'bg-blue-50 border-blue-200' : 'bg-zinc-50 border-zinc-100'}`}>
                                 <div>
-                                    <div className="text-xs font-black uppercase text-zinc-900 flex items-center gap-2">
+                                    <div className="text-xs font-bold text-zinc-900 flex items-center gap-2">
                                         {p.name} {p.isRef && <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full text-[8px]">RÉfÉrence</span>}
                                     </div>
-                                    <div className="text-xl font-black text-zinc-900 leading-tight mt-1">{p.time}</div>
+                                    <div className="text-xl font-bold text-zinc-900 leading-tight mt-1">{p.time}</div>
                                 </div>
                                 <div className="text-right">
-                                    <div className="text-[10px] font-black text-zinc-800 uppercase">Allure cible</div>
+                                    <div className="text-[10px] font-bold text-zinc-800 uppercase">Allure cible</div>
                                     <div className="text-md font-bold text-black">{p.pace} min/km</div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@ export default function RacePredictor({ hints = {} }) {
             ) : (
                 <div className="p-12 border-2 border-dashed border-zinc-100 rounded-2xl flex flex-col items-center justify-center text-center opacity-50">
                     <Clock size={40} className="text-zinc-500 mb-4" />
-                    <p className="text-sm font-black text-zinc-700 uppercase tracking-widest">Entrez votre temps de référence</p>
+                    <p className="text-sm font-bold text-zinc-700 uppercase tracking-widest">Entrez votre temps de référence</p>
                 </div>
             )}
 
@@ -129,7 +129,7 @@ export default function RacePredictor({ hints = {} }) {
                 <div className="flex gap-4 items-start">
                     <Info size={18} className="text-[#FF6B00] shrink-0 mt-0.5" />
                     <p className="text-[10px] text-zinc-900 leading-relaxed font-medium italic">
-                        La <strong className="font-black">formule de Riegel</strong> est l'étalon d'or pour prédire les performances en endurance. Elle suppose un entraînement adéquat pour la distance visée. Plus l'écart entre votre distance de référence et l'objectif est grand, plus la marge d'erreur augmente.
+                        La <strong className="font-bold">formule de Riegel</strong> est l'étalon d'or pour prédire les performances en endurance. Elle suppose un entraînement adéquat pour la distance visée. Plus l'écart entre votre distance de référence et l'objectif est grand, plus la marge d'erreur augmente.
                     </p>
                 </div>
             </div>

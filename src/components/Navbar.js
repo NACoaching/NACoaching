@@ -26,7 +26,7 @@ export default function Navbar({ initialLogoUrl = '/logo.png' }) {
     return (
         <nav className="fixed w-full z-50 bg-black text-white py-4 px-6 border-b border-white/10">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <Link href="/" className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2 z-50 relative">
+                <Link href="/" className="text-2xl font-bold tracking-tight cursor-pointer flex items-center gap-2 z-50 relative">
                     {logoUrl ? <Image src={logoUrl} alt="NA Coaching" width={40} height={40} className="object-contain" priority /> : <span className="text-xl font-bold">NA</span>}
                     <span className="hidden sm:inline">NA <span className="text-[#FF6B00]">COACHING</span></span>
                 </Link>
@@ -63,12 +63,12 @@ export default function Navbar({ initialLogoUrl = '/logo.png' }) {
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                         className="fixed inset-0 bg-black z-40 flex flex-col items-center justify-center space-y-8"
                     >
-                        <Link href="/" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Accueil</Link>
-                        <Link href="/labo" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Le Labo</Link>
-                        <Link href="/outils" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Outils</Link>
-                        <Link href="/boutique" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Boutique</Link>
-                        <Link href="/coach" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Le Coach</Link>
-                        <Link href="/contact" onClick={() => setIsOpen(false)} className="text-3xl font-black uppercase hover:text-[#FF6B00]">Contact</Link>
+                        <Link href="/" onClick={() => setIsOpen(false)} className="text-3xl font-bold uppercase hover:text-[#FF6B00]">Accueil</Link>
+                        <Link href="/labo" onClick={() => setIsOpen(false)} className="text-3xl font-bold uppercase hover:text-[#FF6B00]">Le Labo</Link>
+                        <Link href="/outils" onClick={() => setIsOpen(false)} className="text-3xl font-bold uppercase hover:text-[#FF6B00]">Outils</Link>
+                        <Link href="/boutique" onClick={() => setIsOpen(false)} className="text-3xl font-bold uppercase hover:text-[#FF6B00]">Boutique</Link>
+                        <Link href="/coach" onClick={() => setIsOpen(false)} className="text-3xl font-bold uppercase hover:text-[#FF6B00]">Le Coach</Link>
+                        <Link href="/contact" onClick={() => setIsOpen(false)} className="text-3xl font-bold uppercase hover:text-[#FF6B00]">Contact</Link>
 
                         <div className="pt-8">
                             <a href="https://instagram.com/na_coaching_" target="_blank" className="bg-[#FF6B00] p-4 rounded-full inline-block">

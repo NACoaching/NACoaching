@@ -46,7 +46,7 @@ export default function ShareResults({ title, value, subtitle, zones }) {
             <button
                 onClick={handleDownload}
                 disabled={isGenerating}
-                className="w-full flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest text-[#FF6B00] hover:text-black transition-colors"
+                className="w-full flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-[#FF6B00] hover:text-black transition-colors"
             >
                 {isGenerating ? "Génération..." : <>Partager ma perf <Camera size={16} /></>}
             </button>

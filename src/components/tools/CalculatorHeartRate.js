@@ -40,7 +40,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Heart size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase text-black">Calculateur de Zones FC : Maîtrise ton intensité (Karvonen)</h3>
+                    <h3 className="text-xl font-bold text-zinc-950">Calculateur de Zones FC : Maîtrise ton intensité (Karvonen)</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
@@ -50,7 +50,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                 <form onSubmit={calculateZones} className="space-y-4 mb-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Ton Âge
                                 <Tooltip text={hints.age} />
                             </label>
@@ -64,7 +64,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 FC Repos (bpm)
                                 <Tooltip text={hints.repos || hints.rest_hr} />
                             </label>
@@ -78,7 +78,7 @@ export default function CalculatorHeartRate({ hints = {} }) {
                             />
                         </div>
                     </div>
-                    <button type="submit" className="w-full bg-black text-white font-black py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
+                    <button type="submit" className="w-full bg-black text-white font-bold py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
                         Calculer
                     </button>
                 </form>
@@ -88,10 +88,10 @@ export default function CalculatorHeartRate({ hints = {} }) {
                         {zones.map((zone, index) => (
                             <div key={index} className={`flex justify-between items-center p-3 border-b border-zinc-100 last:border-0 text-xs ${zone.color}`}>
                                 <div>
-                                    <span className="font-black block uppercase text-zinc-900">{zone.name}</span>
+                                    <span className="font-bold block uppercase text-zinc-900">{zone.name}</span>
                                     <span className="opacity-90 font-bold">{zone.range}</span>
                                 </div>
-                                <div className="text-right font-black text-lg text-black">
+                                <div className="text-right font-bold text-lg text-black">
                                     {zone.min}-{zone.max} <span className="text-[10px] font-bold text-zinc-700 uppercase">bpm</span>
                                 </div>
                             </div>

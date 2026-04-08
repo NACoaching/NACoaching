@@ -43,20 +43,20 @@ export default function HalfCooperTest({ hints = {} }) {
                     <Timer size={24} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black uppercase text-black italic">Test Demi-Cooper : Calcule ta VMA et VO2max en 6 min</h2>
-                    <p className="text-xs font-black text-zinc-900 uppercase tracking-widest">Calcul de VMA & VO2max</p>
+                    <h2 className="text-2xl font-bold text-zinc-950 italic">Test Demi-Cooper : Calcule ta VMA et VO2max en 6 min</h2>
+                    <p className="text-xs font-bold text-zinc-900 uppercase tracking-widest">Calcul de VMA & VO2max</p>
                 </div>
             </div>
 
             <div className="mb-8 p-4 bg-orange-50 rounded-xl border border-orange-100 flex gap-4 items-start">
                 <Zap size={20} className="text-orange-500 shrink-0 mt-0.5" />
                 <p className="text-xs text-orange-800 leading-relaxed font-medium">
-                    <strong className="font-black">Le test</strong> : Parcourez la plus grande distance possible en <strong className="font-black">exactement 6 minutes</strong> sur terrain plat.
+                    <strong className="font-bold">Le test</strong> : Parcourez la plus grande distance possible en <strong className="font-bold">exactement 6 minutes</strong> sur terrain plat.
                 </p>
             </div>
 
             <div className="mb-10">
-                <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                     Distance parcourue (m)
                     <Tooltip text={hints.distance} />
                 </label>
@@ -74,24 +74,24 @@ export default function HalfCooperTest({ hints = {} }) {
                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="bg-zinc-900 text-white p-8 rounded-2xl text-center">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block mb-2">Ta VMA</span>
-                            <div className="text-5xl font-black text-orange-500">{results.vma}</div>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">Ta VMA</span>
+                            <div className="text-5xl font-bold text-orange-500">{results.vma}</div>
                             <span className="text-[10px] text-zinc-400 font-bold uppercase">km/h</span>
                         </div>
                         <div className="bg-zinc-50 border border-zinc-100 p-8 rounded-2xl text-center">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-900 block mb-2">VO2max Estimé</span>
-                            <div className="text-5xl font-black text-black">{results.vo2max}</div>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-900 block mb-2">VO2max Estimé</span>
+                            <div className="text-5xl font-bold text-black">{results.vo2max}</div>
                             <span className="text-[10px] text-zinc-900 font-bold uppercase whitespace-nowrap">ml/kg/min</span>
                         </div>
                     </div>
 
                     <div className="border-t border-zinc-100 pt-6">
-                        <h4 className="text-xs font-black uppercase text-zinc-900 mb-4 tracking-widest">Tes Allures d'Entraînement</h4>
+                        <h4 className="text-xs font-bold text-zinc-900 mb-4 tracking-widest">Tes Allures d'Entraînement</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {results.paces.map((p, i) => (
                                 <div key={i} className="flex justify-between items-center bg-zinc-50 p-4 rounded-xl border border-zinc-100">
-                                    <span className="text-[10px] font-black text-zinc-900 uppercase max-w-[120px]">{p.label}</span>
-                                    <span className="text-md font-black text-black">{p.pace} min/km</span>
+                                    <span className="text-[10px] font-bold text-zinc-900 uppercase max-w-[120px]">{p.label}</span>
+                                    <span className="text-md font-bold text-black">{p.pace} min/km</span>
                                 </div>
                             ))}
                         </div>
@@ -108,7 +108,7 @@ export default function HalfCooperTest({ hints = {} }) {
                 <div className="flex gap-4 items-start">
                     <Info size={18} className="text-[#FF6B00] shrink-0 mt-0.5" />
                     <p className="text-[10px] text-zinc-900 leading-relaxed font-medium italic">
-                        La <strong className="font-black">VMA</strong> (Vitesse Maximale Aérobie) est la vitesse à laquelle vous consommez le maximum d'oxygène (<strong className="font-black">VO2max</strong>). Elle est la base de programmation pour le running moderne.
+                        La <strong className="font-bold">VMA</strong> (Vitesse Maximale Aérobie) est la vitesse à laquelle vous consommez le maximum d'oxygène (<strong className="font-bold">VO2max</strong>). Elle est la base de programmation pour le running moderne.
                     </p>
                 </div>
             </div>

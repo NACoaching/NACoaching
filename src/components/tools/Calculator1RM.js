@@ -29,7 +29,7 @@ export default function Calculator1RM({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Dumbbell size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase text-black">Calculateur 1RM : Évalue ta Force Maximale & Optimise tes Charges</h3>
+                    <h3 className="text-xl font-bold text-zinc-950">Calculateur 1RM : Évalue ta Force Maximale & Optimise tes Charges</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
@@ -38,7 +38,7 @@ export default function Calculator1RM({ hints = {} }) {
 
                 <form onSubmit={calculate1RM} className="space-y-4 mb-6">
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-700 mb-1">
                             Poids soulevé (kg)
                             <Tooltip text={hints.poids || hints.weight} />
                         </label>
@@ -52,7 +52,7 @@ export default function Calculator1RM({ hints = {} }) {
                         />
                     </div>
                     <div>
-                        <label className="flex items-center text-xs font-bold uppercase text-zinc-700 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-700 mb-1">
                             Répétitions
                             <Tooltip text={hints.reps || hints.repetitions} />
                         </label>
@@ -65,7 +65,7 @@ export default function Calculator1RM({ hints = {} }) {
                             required
                         />
                     </div>
-                    <button type="submit" className="w-full bg-black text-white font-black py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
+                    <button type="submit" className="w-full bg-black text-white font-bold py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
                         Calculer
                     </button>
                 </form>
@@ -73,8 +73,8 @@ export default function Calculator1RM({ hints = {} }) {
                 {result && (
                     <div className="mt-auto bg-white border border-zinc-200 p-4 rounded-lg">
                         <div className="text-center mb-4">
-                            <span className="block text-xs font-bold uppercase text-zinc-600">Ton 1RM estimé</span>
-                            <span className="text-6xl font-black text-[#FF6B00]">{result} kg</span>
+                            <span className="block text-xs font-bold text-zinc-600">Ton 1RM estimé</span>
+                            <span className="text-6xl font-bold text-[#FF6B00]">{result} kg</span>
                         </div>
                         <div className="grid grid-cols-4 gap-2 text-center text-xs">
                             <div className="bg-zinc-50 p-2 rounded">

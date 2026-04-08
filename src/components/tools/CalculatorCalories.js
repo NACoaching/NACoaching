@@ -35,7 +35,7 @@ export default function CalculatorCalories({ hints = {} }) {
                     <div className="bg-[#FF6B00] p-2 rounded text-white">
                         <Flame size={24} />
                     </div>
-                    <h3 className="text-xl font-black uppercase text-black">Calculateur Calories & TDEE : Guide Expert du Métabolisme</h3>
+                    <h3 className="text-xl font-bold text-zinc-950">Calculateur Calories & TDEE : Guide Expert du Métabolisme</h3>
                 </div>
 
                 <p className="text-zinc-600 mb-6 text-sm">
@@ -45,7 +45,7 @@ export default function CalculatorCalories({ hints = {} }) {
                 <form onSubmit={calculateCalories} className="space-y-4 mb-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Âge
                                 <Tooltip text={hints.age} />
                             </label>
@@ -59,7 +59,7 @@ export default function CalculatorCalories({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Sexe
                                 <Tooltip text={hints.sexe || hints.gender} />
                             </label>
@@ -76,7 +76,7 @@ export default function CalculatorCalories({ hints = {} }) {
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Poids (kg)
                                 <Tooltip text={hints.poids || hints.weight} />
                             </label>
@@ -90,7 +90,7 @@ export default function CalculatorCalories({ hints = {} }) {
                             />
                         </div>
                         <div>
-                            <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                            <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                                 Taille (cm)
                                 <Tooltip text={hints.taille || hints.height} />
                             </label>
@@ -106,7 +106,7 @@ export default function CalculatorCalories({ hints = {} }) {
                     </div>
 
                     <div>
-                        <label className="flex items-center text-xs font-black uppercase text-zinc-900 mb-1">
+                        <label className="flex items-center text-xs font-bold text-zinc-900 mb-1">
                             Niveau d'activité
                             <Tooltip text={hints.activite || hints.activity} />
                         </label>
@@ -123,7 +123,7 @@ export default function CalculatorCalories({ hints = {} }) {
                         </select>
                     </div>
 
-                    <button type="submit" className="w-full bg-black text-white font-black py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
+                    <button type="submit" className="w-full bg-black text-white font-bold py-3 rounded uppercase hover:bg-[#FF6B00] hover:text-black transition">
                         Calculer
                     </button>
                 </form>
@@ -131,18 +131,18 @@ export default function CalculatorCalories({ hints = {} }) {
                 {result && (
                     <div className="mt-auto bg-white border border-zinc-200 p-4 rounded-lg">
                         <div className="text-center mb-4">
-                            <span className="block text-xs font-black uppercase text-zinc-900">Maintenance (TDEE)</span>
-                            <span className="text-4xl font-black text-[#FF6B00]">{result} kcal</span>
+                            <span className="block text-xs font-bold text-zinc-900">Maintenance (TDEE)</span>
+                            <span className="text-4xl font-bold text-[#FF6B00]">{result} kcal</span>
                         </div>
                         <div className="flex justify-between text-center gap-2">
                             <div className="bg-zinc-50 p-2 rounded flex-1">
-                                <span className="block text-[10px] font-black uppercase text-zinc-900">Sèche</span>
+                                <span className="block text-[10px] font-bold text-zinc-900">Sèche</span>
                                 <span className="font-bold text-zinc-900">{result - 300}</span>
                             </div>
                             <div className="bg-zinc-100 p-3 rounded text-center">
-                                <span className="block text-[10px] font-black uppercase text-zinc-900">Prise de Masse</span>
-                                <span className="text-lg font-black text-black">{Math.round(result * 1.15)}</span>
-                                <span className="text-[10px] font-bold uppercase text-zinc-600 block">kcal/jour</span>
+                                <span className="block text-[10px] font-bold text-zinc-900">Prise de Masse</span>
+                                <span className="text-lg font-bold text-black">{Math.round(result * 1.15)}</span>
+                                <span className="text-[10px] font-bold text-zinc-600 block">kcal/jour</span>
                             </div>
                         </div>
                         <ShareResults title="Mes Besoins" value={result + "kcal"} subtitle="Maintien Quotidien" />
