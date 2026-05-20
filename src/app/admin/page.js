@@ -2235,22 +2235,22 @@ export default function AdminPage() {
                                             <label className="block text-[10px] font-black uppercase text-zinc-400">Extrait / Introduction de l'outil (Paragraphe sous le H1)</label>
                                             <textarea required name="excerpt" value={articleForm.excerpt} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-20 focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Court résumé introductif" />
                                         </div>
-                                        <div className="space-y-1 relative">
-                                            <label className="block text-[10px] font-black uppercase text-zinc-400 flex justify-between">
-                                                <span>Contenu principal (Gérez vos H2 & H3 ici)</span>
-                                                <span className="text-[#FF6B00] font-bold">Markdown supporté</span>
+                                        <div className="space-y-0">
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400 flex justify-between mb-1">
+                                                <span>Contenu principal (Markdown supporté)</span>
+                                                <span className="text-[#FF6B00] font-bold">Raccourcis d'édition en bas</span>
                                             </label>
-                                            <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-48 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Rédigez votre contenu ici..." />
-                                            <div className="text-[10px] text-zinc-400 mt-1 flex justify-between items-start bg-zinc-50 p-2 rounded border border-zinc-200 leading-relaxed">
-                                                <div>
-                                                    <span className="font-bold text-[#FF6B00]">Titres SEO (H2/H3) :</span><br />
-                                                    • Utilisez <code className="bg-zinc-200 px-1 rounded font-mono font-bold text-zinc-700">## Mon titre</code> pour un titre de section (<span className="text-zinc-600 font-bold">H2</span>)<br />
-                                                    • Utilisez <code className="bg-zinc-200 px-1 rounded font-mono font-bold text-zinc-700">### Mon sous-titre</code> pour une sous-section (<span className="text-zinc-600 font-bold">H3</span>)<br />
-                                                    <span className="text-red-500 font-bold">Ne mettez pas de # Titre (H1) ici !</span>
+                                            <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-48 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Rédigez votre contenu ici..." />
+                                            <div className="flex justify-between items-center bg-zinc-50 px-3 py-2 rounded-b-xl border-x border-b border-zinc-200 text-xs">
+                                                <div className="flex items-center gap-3 text-zinc-500">
+                                                    <span className="font-bold text-[10px] text-zinc-400 uppercase">Raccourcis :</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] font-bold text-zinc-600">**Gras**</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] italic text-zinc-600">*Italique*</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">- Liste</span>
                                                 </div>
-                                                <div className="text-right flex flex-col items-end gap-2">
-                                                    <label className="cursor-pointer text-[#FF6B00] hover:underline flex items-center gap-1 font-bold">
-                                                        <Plus size={10} /> Insérer Image
+                                                <div>
+                                                    <label className="cursor-pointer bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold transition shadow-sm text-[11px]">
+                                                        <Plus size={12} strokeWidth={3} className="text-[#FF6B00]" /> Insérer Image
                                                         <input
                                                             type="file"
                                                             accept="image/*"
@@ -2267,8 +2267,19 @@ export default function AdminPage() {
                                                             }}
                                                         />
                                                     </label>
-                                                    <span>**Gras**, *Italique*, - Liste</span>
                                                 </div>
+                                            </div>
+                                            <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-xs text-zinc-600 space-y-2 mt-2">
+                                                <div className="font-bold text-zinc-800 flex items-center gap-1.5 uppercase text-[10px] tracking-wider">
+                                                    <Info size={14} className="text-[#FF6B00]" />
+                                                    <span>Structure SEO des Titres (H2 & H3)</span>
+                                                </div>
+                                                <p className="text-[11px] leading-relaxed text-zinc-500">
+                                                    Le titre principal de votre article est déjà généré en <strong className="text-zinc-700">H1</strong>. Pour le corps du texte, utilisez :<br />
+                                                    • <code className="bg-zinc-200/60 px-1 py-0.5 rounded font-mono font-bold text-zinc-800">## Mon titre de section</code> pour vos titres principaux (<strong className="text-zinc-700">H2</strong>)<br />
+                                                    • <code className="bg-zinc-200/60 px-1 py-0.5 rounded font-mono font-bold text-zinc-800">### Mon sous-titre</code> pour vos sous-sections (<strong className="text-zinc-700">H3</strong>)<br />
+                                                    <span className="text-red-500 font-bold block mt-1">⚠️ Ne mettez pas de titre avec un seul dièse (#) ici !</span>
+                                                </p>
                                             </div>
                                         </div>
 
@@ -2468,28 +2479,38 @@ export default function AdminPage() {
                                         <textarea required name="description" value={productForm.description} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Description" />
                                         <textarea required name="features" value={productForm.features} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Caractéristiques (séparées par une virgule)" />
 
-                                        <div className="relative">
-                                            <textarea name="content" value={productForm.content} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-40 font-mono text-xs" placeholder="Description détaillée (Page Produit) - Markdown supporté" />
-                                            <div className="text-[10px] text-zinc-400 mt-1 flex justify-between items-center">
-                                                <span>**Gras**, *Italique*, # Titre, ## Sous-titre, - Liste, --- Séparateur, &gt; [!TIP] Bulle Info</span>
-                                                <label className="cursor-pointer text-[#FF6B00] hover:underline flex items-center gap-1">
-                                                    <Plus size={10} /> Insérer Image
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        className="hidden"
-                                                        onChange={async (e) => {
-                                                            const file = e.target.files[0];
-                                                            if (!file) return;
-                                                            const fileName = `product-content-${Date.now()}.${file.name.split('.').pop()}`;
-                                                            const { error } = await supabase.storage.from('images').upload(fileName, file);
-                                                            if (error) { alert(error.message); return; }
-                                                            const { data } = supabase.storage.from('images').getPublicUrl(fileName);
-                                                            const markdown = `\n![Description](${data.publicUrl})\n`;
-                                                            setProductForm(prev => ({ ...prev, content: (prev.content || '') + markdown }));
-                                                        }}
-                                                    />
-                                                </label>
+                                        <div className="space-y-0">
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Description détaillée (Page Produit)</label>
+                                            <textarea name="content" value={productForm.content} onChange={handleProductChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-40 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Description détaillée (Page Produit) - Markdown supporté" />
+                                            <div className="flex justify-between items-center bg-zinc-50 px-3 py-2 rounded-b-xl border-x border-b border-zinc-200 text-xs">
+                                                <div className="flex flex-wrap items-center gap-2 text-zinc-500">
+                                                    <span className="font-bold text-[10px] text-zinc-400 uppercase">Raccourcis :</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] font-bold text-zinc-600">**Gras**</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] italic text-zinc-600">*Italique*</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">## Titre</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">- Liste</span>
+                                                    <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">&gt; [!TIP] Bulle Info</span>
+                                                </div>
+                                                <div>
+                                                    <label className="cursor-pointer bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold transition shadow-sm text-[11px] shrink-0">
+                                                        <Plus size={12} strokeWidth={3} className="text-[#FF6B00]" /> Insérer Image
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            className="hidden"
+                                                            onChange={async (e) => {
+                                                                const file = e.target.files[0];
+                                                                if (!file) return;
+                                                                const fileName = `product-content-${Date.now()}.${file.name.split('.').pop()}`;
+                                                                const { error } = await supabase.storage.from('images').upload(fileName, file);
+                                                                if (error) { alert(error.message); return; }
+                                                                const { data } = supabase.storage.from('images').getPublicUrl(fileName);
+                                                                const markdown = `\n![Description](${data.publicUrl})\n`;
+                                                                setProductForm(prev => ({ ...prev, content: (prev.content || '') + markdown }));
+                                                            }}
+                                                        />
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
 
