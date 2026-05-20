@@ -2271,7 +2271,7 @@ export default function AdminPage() {
                                                                 const { error } = await supabase.storage.from('images').upload(fileName, file);
                                                                 if (error) { alert(error.message); return; }
                                                                 const { data } = supabase.storage.from('images').getPublicUrl(fileName);
-                                                                const markdown = `\n![Description](${data.publicUrl})\n`;
+                                                                const markdown = `\n![Légende de l'image](${data.publicUrl})\n`;
                                                                 
                                                                 const textarea = document.getElementById('article-content');
                                                                 if (textarea) {
@@ -2525,7 +2525,7 @@ export default function AdminPage() {
                                                                 const { error } = await supabase.storage.from('images').upload(fileName, file);
                                                                 if (error) { alert(error.message); return; }
                                                                 const { data } = supabase.storage.from('images').getPublicUrl(fileName);
-                                                                const markdown = `\n![Description](${data.publicUrl})\n`;
+                                                                const markdown = `\n![Légende de l'image](${data.publicUrl})\n`;
                                                                 
                                                                 const textarea = document.getElementById('product-content');
                                                                 if (textarea) {

@@ -214,8 +214,8 @@ export default async function ArticlePage({ params }) {
                         {article.title}
                     </h1>
 
-                    <div className="relative w-full aspect-video mb-12 rounded-sm shadow-2xl overflow-hidden">
-                        {article.image ? (
+                    {article.image && (
+                        <div className="relative w-full aspect-video mb-12 rounded-sm shadow-2xl overflow-hidden">
                             <Image
                                 src={article.image}
                                 alt={article.title}
@@ -223,12 +223,8 @@ export default async function ArticlePage({ params }) {
                                 className="object-cover"
                                 priority
                             />
-                        ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-zinc-100 text-zinc-300">
-                                <span className="text-4xl font-black opacity-20">NA</span>
-                            </div>
-                        )}
-                    </div>
+                        </div>
+                    )}
 
                     <div className="prose prose-zinc prose-lg max-w-none">
                         <p className="text-xl font-medium text-zinc-600 mb-8 leading-relaxed">
