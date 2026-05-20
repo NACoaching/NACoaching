@@ -214,21 +214,17 @@ export default async function ArticlePage({ params }) {
                         {article.title}
                     </h1>
 
-                    {(() => {
-                        const coverSrc = article.image || extractFirstImageFromContent(article.content);
-                        if (!coverSrc) return null;
-                        return (
-                            <div className="relative w-full aspect-video mb-12 rounded-sm shadow-2xl overflow-hidden">
-                                <Image
-                                    src={coverSrc}
-                                    alt={article.title}
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
-                            </div>
-                        );
-                    })()}
+                    {article.image && (
+                        <div className="relative w-full aspect-video mb-12 rounded-sm shadow-2xl overflow-hidden">
+                            <Image
+                                src={article.image}
+                                alt={article.title}
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                    )}
 
                     <div className="prose prose-zinc prose-lg max-w-none">
                         <p className="text-xl font-medium text-zinc-600 mb-8 leading-relaxed">
