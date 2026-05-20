@@ -68,17 +68,17 @@ export default function LaboView({ articles, siteContent }) {
                             <h3 className="text-2xl font-black uppercase tracking-tight text-black">L'Encyclopédie Suprême</h3>
                             <div className="h-0.5 bg-gradient-to-r from-[#FF6B00]/20 to-transparent flex-grow"></div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                             {/* Volume 1 */}
-                            <Link href="/labo/volume/1-la-science-de-la-force" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-10 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
+                            <Link href="/labo/volume/1-la-science-de-la-force" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/10 rounded-full blur-[100px] -mr-16 -mt-16 group-hover:bg-[#FF6B00]/20 transition-all duration-700"></div>
                                 <div className="relative z-10">
                                     <div className="bg-[#FF6B00] text-black font-black uppercase tracking-tighter text-[10px] py-1 px-3 rounded-full w-fit mb-6">Volume 01</div>
-                                    <h4 className="text-3xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
+                                    <h4 className="text-2xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
                                         La Science de la Force
                                     </h4>
-                                    <p className="text-zinc-400 text-sm leading-relaxed max-w-[280px]">
+                                    <p className="text-zinc-400 text-xs leading-relaxed">
                                         Mécanique musculaire, hypertrophie et programmation. Le guide suprême pour devenir plus fort.
                                     </p>
                                 </div>
@@ -88,14 +88,14 @@ export default function LaboView({ articles, siteContent }) {
                             </Link>
 
                             {/* Volume 2 */}
-                            <Link href="/labo/volume/2-la-science-de-lendurance" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-10 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
+                            <Link href="/labo/volume/2-la-science-de-lendurance" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/10 rounded-full blur-[100px] -mr-16 -mt-16 group-hover:bg-[#FF6B00]/20 transition-all duration-700"></div>
                                 <div className="relative z-10">
                                     <div className="bg-[#FF6B00] text-black font-black uppercase tracking-tighter text-[10px] py-1 px-3 rounded-full w-fit mb-6">Volume 02</div>
-                                    <h4 className="text-3xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
+                                    <h4 className="text-2xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
                                         La Science de l'Endurance
                                     </h4>
-                                    <p className="text-zinc-400 text-sm leading-relaxed max-w-[280px]">
+                                    <p className="text-zinc-400 text-xs leading-relaxed">
                                         VMA, seuils et physiologie cardio-vasculaire. Optimisez votre moteur aérobie à l'infini.
                                     </p>
                                 </div>
@@ -105,14 +105,14 @@ export default function LaboView({ articles, siteContent }) {
                             </Link>
 
                             {/* Volume 3 */}
-                            <Link href="/labo/volume/3-la-science-de-la-sante" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-10 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
+                            <Link href="/labo/volume/3-la-science-de-la-sante" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/10 rounded-full blur-[100px] -mr-16 -mt-16 group-hover:bg-[#FF6B00]/20 transition-all duration-700"></div>
                                 <div className="relative z-10">
                                     <div className="bg-[#FF6B00] text-black font-black uppercase tracking-tighter text-[10px] py-1 px-3 rounded-full w-fit mb-6">Volume 03</div>
-                                    <h4 className="text-3xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
+                                    <h4 className="text-2xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
                                         La Science de la Santé
                                     </h4>
-                                    <p className="text-zinc-400 text-sm leading-relaxed max-w-[280px]">
+                                    <p className="text-zinc-400 text-xs leading-relaxed">
                                         Nutrition, longévité et récupération profonde. Les secrets pour durer et exceller biologiquement.
                                     </p>
                                 </div>
@@ -120,6 +120,25 @@ export default function LaboView({ articles, siteContent }) {
                                     Explorer l'expertise <ArrowLeft className="w-4 h-4 rotate-180 group-hover:translate-x-2 transition-transform" />
                                 </div>
                             </Link>
+
+                            {/* Volume 4 */}
+                            <Link href="/labo/volume/4-anecdotes-sportives" className="group relative overflow-hidden rounded-3xl bg-zinc-950 p-8 border border-zinc-800 hover:border-[#FF6B00]/50 transition-all duration-500 flex flex-col justify-between min-h-[300px] shadow-2xl">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B00]/10 rounded-full blur-[100px] -mr-16 -mt-16 group-hover:bg-[#FF6B00]/20 transition-all duration-700"></div>
+                                <div className="relative z-10">
+                                    <div className="bg-[#FF6B00] text-black font-black uppercase tracking-tighter text-[10px] py-1 px-3 rounded-full w-fit mb-6">Volume 04</div>
+                                    <h4 className="text-2xl font-black uppercase text-white mb-4 group-hover:text-[#FF6B00] transition-colors leading-[0.9] tracking-tighter">
+                                        Anecdotes Sportives
+                                    </h4>
+                                    <p className="text-zinc-400 text-xs leading-relaxed">
+                                        Histoires insolites, secrets des champions et résumés surprenants. La culture sportive sous un autre angle.
+                                    </p>
+                                </div>
+                                <div className="relative z-10 mt-8 flex items-center gap-3 text-white text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-[#FF6B00] transition-colors">
+                                    Explorer l'expertise <ArrowLeft className="w-4 h-4 rotate-180 group-hover:translate-x-2 transition-transform" />
+                                </div>
+                            </Link>
+
+
 
                         </div>
                     </div>

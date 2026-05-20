@@ -1392,7 +1392,8 @@ export default function AdminPage() {
                             {[
                                 { key: 'volume_seo_volume-1-la-science-de-la-force', label: 'Volume 1 - Force (SEO)' },
                                 { key: 'volume_seo_volume-2-la-science-de-lendurance', label: 'Volume 2 - Endurance (SEO)' },
-                                { key: 'volume_seo_volume-3-la-science-de-la-sante', label: 'Volume 3 - Santé (SEO)' }
+                                { key: 'volume_seo_volume-3-la-science-de-la-sante', label: 'Volume 3 - Santé (SEO)' },
+                                { key: 'volume_seo_volume-4-anecdotes-sportives', label: 'Volume 4 - Anecdotes Sportives (SEO)' }
                             ].map(field => {
                                 const itemValue = siteContent.find(c => c.key === field.key)?.value || '';
                                 return (
