@@ -94,3 +94,16 @@ export function autoLinkContent(content, glossary = [], currentPath = '') {
 
     return processedContent;
 }
+
+/**
+ * Extracts the URL of the first image found in Markdown content.
+ * Used as a fallback cover image when article.image is not set.
+ *
+ * @param {string} content - Markdown content
+ * @returns {string|null} - URL of the first image, or null
+ */
+export function extractFirstImageFromContent(content) {
+    if (!content) return null;
+    const match = content.match(/!\[.*?\]\((https?:\/\/[^)]+)\)/);
+    return match ? match[1] : null;
+}

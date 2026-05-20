@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import AnimWrapper from '@/components/AnimWrapper';
 import { notFound } from 'next/navigation';
+import { extractFirstImageFromContent } from '@/lib/contentProcessor';
 
 export const revalidate = 10;
 
@@ -139,19 +140,23 @@ export default async function LaboCategoryPage({ params }) {
                                     <AnimWrapper key={article.id} delay={index * 0.1}>
                                         <Link href={href} className="group cursor-pointer flex flex-col h-full">
                                             <div className="aspect-[4/3] bg-zinc-200 mb-6 overflow-hidden relative rounded-lg">
-                                                {article.image ? (
-                                                    <Image
-                                                        src={article.image}
-                                                        alt={article.title}
-                                                        fill
-                                                        className="object-cover group-hover:scale-105 transition duration-500"
-                                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                    />
-                                                ) : (
-                                                    <div className="w-full h-full flex items-center justify-center bg-zinc-100">
-                                                        <span className="text-zinc-400 font-bold uppercase text-sm">NA Coaching</span>
-                                                    </div>
-                                                )}
+                                                {(() => {
+                                                    const coverSrc = article.image || extractFirstImageFromContent(article.content);
+                                                    if (coverSrc) return (
+                                                        <Image
+                                                            src={coverSrc}
+                                                            alt={article.title}
+                                                            fill
+                                                            className="object-cover group-hover:scale-105 transition duration-500"
+                                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                        />
+                                                    );
+                                                    return (
+                                                        <div className="w-full h-full flex items-center justify-center bg-zinc-100">
+                                                            <span className="text-zinc-400 font-bold uppercase text-sm">NA Coaching</span>
+                                                        </div>
+                                                    );
+                                                })()}
                                             </div>
                                             <div className="flex flex-col flex-grow">
                                                 <span className="text-[#FF6B00] text-xs font-black uppercase tracking-widest mb-2">{article.category}</span>

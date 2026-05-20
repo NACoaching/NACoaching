@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import AnimWrapper from "@/components/AnimWrapper";
 import { ArrowLeft } from 'lucide-react';
-
 import Image from 'next/image';
+import { extractFirstImageFromContent } from '@/lib/contentProcessor';
 
 // Map tool slugs to emojis for visual flair
 const toolIcons = {
@@ -219,23 +219,28 @@ export default function LaboView({ articles, siteContent }) {
                             <AnimWrapper key={article.id} delay={index * 0.1}>
                                 <Link href={href} className="group cursor-pointer flex flex-col h-full bg-white p-6 rounded-xl border border-zinc-100 hover:border-[#FF6B00] transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05),0_0_20px_rgba(255,107,0,0.05)]">
                                     <div className="aspect-[4/3] bg-zinc-200 mb-6 overflow-hidden relative rounded-lg">
-                                        {article.image ? (
-                                            <Image
-                                                src={article.image}
-                                                alt={article.title}
-                                                fill
-                                                className="object-cover group-hover:scale-105 transition duration-700 ease-out"
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            />
-                                        ) : isTool ? (
-                                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800">
-                                                <span className="text-7xl group-hover:scale-110 transition-transform duration-500">{getToolIcon(article.cta)}</span>
-                                            </div>
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center bg-zinc-100 text-zinc-700">
-                                                <span className="text-4xl font-black opacity-20">NA</span>
-                                            </div>
-                                        )}
+                                        {(() => {
+                                            const coverSrc = article.image || extractFirstImageFromContent(article.content);
+                                            if (coverSrc) return (
+                                                <Image
+                                                    src={coverSrc}
+                                                    alt={article.title}
+                                                    fill
+                                                    className="object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                />
+                                            );
+                                            if (isTool) return (
+                                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800">
+                                                    <span className="text-7xl group-hover:scale-110 transition-transform duration-500">{getToolIcon(article.cta)}</span>
+                                                </div>
+                                            );
+                                            return (
+                                                <div className="w-full h-full flex items-center justify-center bg-zinc-100 text-zinc-700">
+                                                    <span className="text-4xl font-black opacity-20">NA</span>
+                                                </div>
+                                            );
+                                        })()}
                                     </div>
                                     <div className="flex-grow">
                                         <div className="text-[#FF6B00] text-xs font-black uppercase mb-2 tracking-widest">
