@@ -62,7 +62,7 @@ export async function generateMetadata({ params }) {
             type: 'website'
         },
         alternates: {
-            canonical: `https://www.na-coaching.com/labo/volume/${slug}`,
+            canonical: `https://www.na-coaching.com/labo/volume/${slug}/`,
         }
     };
 }
