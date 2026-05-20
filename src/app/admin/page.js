@@ -2240,7 +2240,7 @@ export default function AdminPage() {
                                                 <span>Contenu principal (Markdown supporté)</span>
                                                 <span className="text-[#FF6B00] font-bold">Raccourcis d'édition en bas</span>
                                             </label>
-                                            <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-48 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Rédigez votre contenu ici..." />
+                                            <textarea id="article-content" required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-48 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Rédigez votre contenu ici..." />
                                             <div className="flex justify-between items-center bg-zinc-50 px-3 py-2 rounded-b-xl border-x border-b border-zinc-200 text-xs">
                                                 <div className="flex items-center gap-3 text-zinc-500">
                                                     <span className="font-bold text-[10px] text-zinc-400 uppercase">Raccourcis :</span>
@@ -2263,7 +2263,18 @@ export default function AdminPage() {
                                                                 if (error) { alert(error.message); return; }
                                                                 const { data } = supabase.storage.from('images').getPublicUrl(fileName);
                                                                 const markdown = `\n![Description](${data.publicUrl})\n`;
-                                                                setArticleForm(prev => ({ ...prev, content: prev.content + markdown }));
+                                                                
+                                                                const textarea = document.getElementById('article-content');
+                                                                if (textarea) {
+                                                                    const start = textarea.selectionStart;
+                                                                    const end = textarea.selectionEnd;
+                                                                    setArticleForm(prev => ({
+                                                                        ...prev,
+                                                                        content: prev.content.substring(0, start) + markdown + prev.content.substring(end)
+                                                                    }));
+                                                                } else {
+                                                                    setArticleForm(prev => ({ ...prev, content: prev.content + markdown }));
+                                                                }
                                                             }}
                                                         />
                                                     </label>
@@ -2481,7 +2492,7 @@ export default function AdminPage() {
 
                                         <div className="space-y-0">
                                             <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Description détaillée (Page Produit)</label>
-                                            <textarea name="content" value={productForm.content} onChange={handleProductChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-40 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Description détaillée (Page Produit) - Markdown supporté" />
+                                            <textarea id="product-content" name="content" value={productForm.content} onChange={handleProductChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-40 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Description détaillée (Page Produit) - Markdown supporté" />
                                             <div className="flex justify-between items-center bg-zinc-50 px-3 py-2 rounded-b-xl border-x border-b border-zinc-200 text-xs">
                                                 <div className="flex flex-wrap items-center gap-2 text-zinc-500">
                                                     <span className="font-bold text-[10px] text-zinc-400 uppercase">Raccourcis :</span>
@@ -2506,7 +2517,19 @@ export default function AdminPage() {
                                                                 if (error) { alert(error.message); return; }
                                                                 const { data } = supabase.storage.from('images').getPublicUrl(fileName);
                                                                 const markdown = `\n![Description](${data.publicUrl})\n`;
-                                                                setProductForm(prev => ({ ...prev, content: (prev.content || '') + markdown }));
+                                                                
+                                                                const textarea = document.getElementById('product-content');
+                                                                if (textarea) {
+                                                                    const start = textarea.selectionStart;
+                                                                    const end = textarea.selectionEnd;
+                                                                    const currentVal = productForm.content || '';
+                                                                    setProductForm(prev => ({
+                                                                        ...prev,
+                                                                        content: currentVal.substring(0, start) + markdown + currentVal.substring(end)
+                                                                    }));
+                                                                } else {
+                                                                    setProductForm(prev => ({ ...prev, content: (prev.content || '') + markdown }));
+                                                                }
                                                             }}
                                                         />
                                                     </label>
