@@ -2235,21 +2235,22 @@ export default function AdminPage() {
                                             <label className="block text-[10px] font-black uppercase text-zinc-400">Extrait / Introduction de l'outil (Paragraphe sous le H1)</label>
                                             <textarea required name="excerpt" value={articleForm.excerpt} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-20 focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Court résumé introductif" />
                                         </div>
+
                                         <div className="space-y-0">
                                             <label className="block text-[10px] font-black uppercase text-zinc-400 flex justify-between mb-1">
                                                 <span>Contenu principal (Markdown supporté)</span>
                                                 <span className="text-[#FF6B00] font-bold">Raccourcis d'édition en bas</span>
                                             </label>
                                             <textarea id="article-content" required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-48 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Rédigez votre contenu ici..." />
-                                            <div className="flex justify-between items-center bg-zinc-50 px-3 py-2 rounded-b-xl border-x border-b border-zinc-200 text-xs">
-                                                <div className="flex items-center gap-3 text-zinc-500">
-                                                    <span className="font-bold text-[10px] text-zinc-400 uppercase">Raccourcis :</span>
+                                            <div className="flex flex-col gap-2.5 sm:flex-row sm:justify-between sm:items-center bg-zinc-50 px-3 py-2.5 rounded-b-xl border-x border-b border-zinc-200 text-xs">
+                                                <div className="flex flex-wrap items-center gap-2 text-zinc-500">
+                                                    <span className="font-bold text-[10px] text-zinc-400 uppercase mr-1">Raccourcis :</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] font-bold text-zinc-600">**Gras**</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] italic text-zinc-600">*Italique*</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">- Liste</span>
                                                 </div>
-                                                <div>
-                                                    <label className="cursor-pointer bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold transition shadow-sm text-[11px]">
+                                                <div className="w-full sm:w-auto flex justify-end">
+                                                    <label className="w-full sm:w-auto cursor-pointer bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] px-3 py-1.5 rounded-lg flex items-center justify-center gap-1.5 font-bold transition shadow-sm text-[11px] select-none">
                                                         <Plus size={12} strokeWidth={3} className="text-[#FF6B00]" /> Insérer Image
                                                         <input
                                                             type="file"
@@ -2488,22 +2489,22 @@ export default function AdminPage() {
                                             </div>
                                         </div>
                                         <textarea required name="description" value={productForm.description} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Description" />
-                                        <textarea required name="features" value={productForm.features} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Caractéristiques (séparées par une virgule)" />
+                                                               <textarea required name="features" value={productForm.features} onChange={handleProductChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Caractéristiques (séparées par une virgule)" />
 
                                         <div className="space-y-0">
                                             <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Description détaillée (Page Produit)</label>
                                             <textarea id="product-content" name="content" value={productForm.content} onChange={handleProductChange} className="w-full border border-zinc-200 p-2 rounded-t-xl rounded-b-none text-sm h-40 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Description détaillée (Page Produit) - Markdown supporté" />
-                                            <div className="flex justify-between items-center bg-zinc-50 px-3 py-2 rounded-b-xl border-x border-b border-zinc-200 text-xs">
+                                            <div className="flex flex-col gap-2.5 sm:flex-row sm:justify-between sm:items-center bg-zinc-50 px-3 py-2.5 rounded-b-xl border-x border-b border-zinc-200 text-xs">
                                                 <div className="flex flex-wrap items-center gap-2 text-zinc-500">
-                                                    <span className="font-bold text-[10px] text-zinc-400 uppercase">Raccourcis :</span>
+                                                    <span className="font-bold text-[10px] text-zinc-400 uppercase mr-1">Raccourcis :</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] font-bold text-zinc-600">**Gras**</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] italic text-zinc-600">*Italique*</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">## Titre</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">- Liste</span>
                                                     <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-100 text-[10px] text-zinc-600">&gt; [!TIP] Bulle Info</span>
                                                 </div>
-                                                <div>
-                                                    <label className="cursor-pointer bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold transition shadow-sm text-[11px] shrink-0">
+                                                <div className="w-full sm:w-auto flex justify-end">
+                                                    <label className="w-full sm:w-auto cursor-pointer bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 hover:border-[#FF6B00] hover:text-[#FF6B00] px-3 py-1.5 rounded-lg flex items-center justify-center gap-1.5 font-bold transition shadow-sm text-[11px] select-none shrink-0">
                                                         <Plus size={12} strokeWidth={3} className="text-[#FF6B00]" /> Insérer Image
                                                         <input
                                                             type="file"
