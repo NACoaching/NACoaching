@@ -287,7 +287,7 @@ export default function AdminPage() {
     const [autoLinks, setAutoLinks] = useState([]);
     const [newAutoLink, setNewAutoLink] = useState({ keywords: '', url: '', is_active: true });
     const [articleForm, setArticleForm] = useState({
-        title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '', cta_title: '', cta_text: '',
+        title: '', category: '', subcategory: '', slug: '', excerpt: '', content: '', image: '', cta: '', cta_image: '', cta_title: '', cta_text: '',
         affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
         related_title: '', related_subtitle: '', related_articles: [],
         tool_hints: {},
@@ -523,7 +523,7 @@ export default function AdminPage() {
         setEditingItem({ type, id: item.id });
         if (type === 'article') {
             setArticleForm({
-                title: item.title, category: item.category, subcategory: item.subcategory || '', excerpt: item.excerpt,
+                title: item.title, category: item.category, subcategory: item.subcategory || '', slug: item.slug || '', excerpt: item.excerpt,
                 content: item.content, image: item.image, cta: item.cta || '', cta_image: item.cta_image || '', cta_title: item.cta_title || '', cta_text: item.cta_text || '', date: item.date,
                 is_published: item.is_published || false,
                 affiliate_link: item.affiliate_link || '',
@@ -554,7 +554,7 @@ export default function AdminPage() {
     const cancelEdit = () => {
         setEditingItem(null);
         setArticleForm({
-            title: '', category: '', subcategory: '', excerpt: '', content: '', image: '', cta: '', cta_image: '', cta_title: '', cta_text: '',
+            title: '', category: '', subcategory: '', slug: '', excerpt: '', content: '', image: '', cta: '', cta_image: '', cta_title: '', cta_text: '',
             is_published: false,
             affiliate_link: '', affiliate_text: '', affiliate_image: '', affiliate_title: '',
             related_title: '', related_subtitle: '', related_articles: [],
@@ -581,7 +581,7 @@ export default function AdminPage() {
         e.preventDefault();
 
         const { seo_title, seo_description, ...mainArticleData } = articleForm;
-        const dataToSave = { ...mainArticleData, slug: generateSlug(articleForm.title) };
+        const dataToSave = { ...mainArticleData, slug: generateSlug(articleForm.slug || articleForm.title) };
 
         let articleId = editingItem?.id;
         let error;
@@ -2164,6 +2164,13 @@ export default function AdminPage() {
                                                 <span className="text-[#FF6B00] font-bold">Requis (H1 unique)</span>
                                             </label>
                                             <input required name="title" value={articleForm.title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Ex: Convertisseur de Vitesse Running" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400 flex justify-between">
+                                                <span>Adresse URL personnalisée / Slug (Optionnel)</span>
+                                                <span className="text-zinc-400 font-bold">Généré depuis le titre si vide</span>
+                                            </label>
+                                            <input name="slug" value={articleForm.slug || ''} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none font-mono text-xs" placeholder="Ex: kathrine-switzer-dossard-261-boston" />
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="space-y-1">
