@@ -2157,11 +2157,22 @@ export default function AdminPage() {
 
                                 {activeTab === 'articles' ? (
                                     <form onSubmit={handleArticleSubmit} className="space-y-4">
-                                        <input required name="title" value={articleForm.title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Titre" />
-                                        <input required name="category" value={articleForm.category} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm" placeholder="Catégorie (ex: Volume 3...)" />
                                         <div className="space-y-1">
-                                            <label className="block text-[10px] font-black uppercase text-zinc-400">Chapitre / Sous-catégorie</label>
-                                            <input name="subcategory" value={articleForm.subcategory} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm shrink" placeholder="Ex: Anatomie, Nutrition, Chapitre 1..." title="Sert de titre de chapitre dans l'encyclopédie" />
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400 flex justify-between">
+                                                <span>Titre de l'article / outil (Génère la balise H1)</span>
+                                                <span className="text-[#FF6B00] font-bold">Requis (H1 unique)</span>
+                                            </label>
+                                            <input required name="title" value={articleForm.title} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Ex: Convertisseur de Vitesse Running" />
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="space-y-1">
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400">Catégorie</label>
+                                                <input required name="category" value={articleForm.category} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Ex: Outils, Volume 3..." />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400">Sous-catégorie / Chapitre</label>
+                                                <input name="subcategory" value={articleForm.subcategory} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm shrink focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Ex: Anatomie, Nutrition..." title="Sert de titre de chapitre dans l'encyclopédie" />
+                                            </div>
                                         </div>
                                         {/* TOOL HINTS MANAGEMENT (MOVED UP FOR VISIBILITY) */}
                                         {(articleForm.category?.toLowerCase() === 'outils' || articleForm.category?.toLowerCase() === 'outil') && (
@@ -2220,29 +2231,44 @@ export default function AdminPage() {
                                             </div>
                                         )}
 
-                                        <textarea required name="excerpt" value={articleForm.excerpt} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-20" placeholder="Extrait" />
-                                        <div className="relative">
-                                            <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-40 font-mono text-xs" placeholder="Contenu (Markdown supporté)" />
-                                            <div className="text-[10px] text-zinc-400 mt-1 flex justify-between items-center">
-                                                <span>**Gras**, *Italique*, # Titre, ## Sous-titre, - Liste, --- Séparateur, &gt; [!TIP] Bulle Info</span>
-                                                <label className="cursor-pointer text-[#FF6B00] hover:underline flex items-center gap-1">
-                                                    <Plus size={10} /> Insérer Image
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        className="hidden"
-                                                        onChange={async (e) => {
-                                                            const file = e.target.files[0];
-                                                            if (!file) return;
-                                                            const fileName = `content-${Date.now()}.${file.name.split('.').pop()}`;
-                                                            const { error } = await supabase.storage.from('images').upload(fileName, file);
-                                                            if (error) { alert(error.message); return; }
-                                                            const { data } = supabase.storage.from('images').getPublicUrl(fileName);
-                                                            const markdown = `\n![Description](${data.publicUrl})\n`;
-                                                            setArticleForm(prev => ({ ...prev, content: prev.content + markdown }));
-                                                        }}
-                                                    />
-                                                </label>
+                                        <div className="space-y-1">
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400">Extrait / Introduction de l'outil (Paragraphe sous le H1)</label>
+                                            <textarea required name="excerpt" value={articleForm.excerpt} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-20 focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Court résumé introductif" />
+                                        </div>
+                                        <div className="space-y-1 relative">
+                                            <label className="block text-[10px] font-black uppercase text-zinc-400 flex justify-between">
+                                                <span>Contenu principal (Gérez vos H2 & H3 ici)</span>
+                                                <span className="text-[#FF6B00] font-bold">Markdown supporté</span>
+                                            </label>
+                                            <textarea required name="content" value={articleForm.content} onChange={handleArticleChange} className="w-full border p-2 rounded text-sm h-48 font-mono text-xs focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none" placeholder="Rédigez votre contenu ici..." />
+                                            <div className="text-[10px] text-zinc-400 mt-1 flex justify-between items-start bg-zinc-50 p-2 rounded border border-zinc-200 leading-relaxed">
+                                                <div>
+                                                    <span className="font-bold text-[#FF6B00]">Titres SEO (H2/H3) :</span><br />
+                                                    • Utilisez <code className="bg-zinc-200 px-1 rounded font-mono font-bold text-zinc-700">## Mon titre</code> pour un titre de section (<span className="text-zinc-600 font-bold">H2</span>)<br />
+                                                    • Utilisez <code className="bg-zinc-200 px-1 rounded font-mono font-bold text-zinc-700">### Mon sous-titre</code> pour une sous-section (<span className="text-zinc-600 font-bold">H3</span>)<br />
+                                                    <span className="text-red-500 font-bold">Ne mettez pas de # Titre (H1) ici !</span>
+                                                </div>
+                                                <div className="text-right flex flex-col items-end gap-2">
+                                                    <label className="cursor-pointer text-[#FF6B00] hover:underline flex items-center gap-1 font-bold">
+                                                        <Plus size={10} /> Insérer Image
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            className="hidden"
+                                                            onChange={async (e) => {
+                                                                const file = e.target.files[0];
+                                                                if (!file) return;
+                                                                const fileName = `content-${Date.now()}.${file.name.split('.').pop()}`;
+                                                                const { error } = await supabase.storage.from('images').upload(fileName, file);
+                                                                if (error) { alert(error.message); return; }
+                                                                const { data } = supabase.storage.from('images').getPublicUrl(fileName);
+                                                                const markdown = `\n![Description](${data.publicUrl})\n`;
+                                                                setArticleForm(prev => ({ ...prev, content: prev.content + markdown }));
+                                                            }}
+                                                        />
+                                                    </label>
+                                                    <span>**Gras**, *Italique*, - Liste</span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -2385,23 +2411,33 @@ export default function AdminPage() {
                                         <div className="border border-zinc-200 p-3 rounded bg-[#FF6B00]/5 space-y-3">
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Optimisation SEO (Google)</h3>
                                             <div>
-                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Titre SEO spécifique (Optionnel)</label>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1 flex justify-between">
+                                                    <span>Titre SEO spécifique (Google Title)</span>
+                                                    <span className={`${(articleForm.seo_title?.length >= 50 && articleForm.seo_title?.length <= 60) ? 'text-green-600 font-bold' : (articleForm.seo_title?.length > 60) ? 'text-red-500 font-bold animate-pulse' : 'text-zinc-400'}`}>
+                                                        {articleForm.seo_title?.length || 0} / 60 caractères recommandé
+                                                    </span>
+                                                </label>
                                                 <input
                                                     name="seo_title"
                                                     value={articleForm.seo_title || ''}
                                                     onChange={handleArticleChange}
-                                                    className="w-full border p-2 rounded text-sm bg-white"
-                                                    placeholder="Titre qui apparaîtra sur Google"
+                                                    className="w-full border p-2 rounded text-sm bg-white focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
+                                                    placeholder="Titre qui apparaîtra sur Google (50-60 chars)"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Meta Description SEO (Optionnel)</label>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1 flex justify-between">
+                                                    <span>Meta Description SEO (Google Desc)</span>
+                                                    <span className={`${(articleForm.seo_description?.length >= 120 && articleForm.seo_description?.length <= 150) ? 'text-green-600 font-bold' : (articleForm.seo_description?.length > 150) ? 'text-red-500 font-bold animate-pulse' : 'text-zinc-400'}`}>
+                                                        {articleForm.seo_description?.length || 0} / 150 caractères recommandé
+                                                    </span>
+                                                </label>
                                                 <textarea
                                                     name="seo_description"
                                                     value={articleForm.seo_description || ''}
                                                     onChange={handleArticleChange}
-                                                    className="w-full border p-2 rounded text-sm bg-white h-20"
-                                                    placeholder="Description qui apparaîtra sur Google"
+                                                    className="w-full border p-2 rounded text-sm bg-white h-20 focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
+                                                    placeholder="Description d'affichage sur Google (120-150 chars)"
                                                 />
                                             </div>
                                         </div>
@@ -2533,22 +2569,32 @@ export default function AdminPage() {
                                         <div className="border border-zinc-200 p-3 rounded bg-[#FF6B00]/5 space-y-3">
                                             <h3 className="text-xs font-black uppercase text-[#FF6B00]">Optimisation SEO (Google)</h3>
                                             <div>
-                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Titre SEO spécifique (Optionnel)</label>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1 flex justify-between">
+                                                    <span>Titre SEO spécifique (Google Title)</span>
+                                                    <span className={`${(productForm.seo_title?.length >= 50 && productForm.seo_title?.length <= 60) ? 'text-green-600 font-bold' : (productForm.seo_title?.length > 60) ? 'text-red-500 font-bold animate-pulse' : 'text-zinc-400'}`}>
+                                                        {productForm.seo_title?.length || 0} / 60 caractères recommandé
+                                                    </span>
+                                                </label>
                                                 <input
                                                     name="seo_title"
                                                     value={productForm.seo_title || ''}
                                                     onChange={handleProductChange}
-                                                    className="w-full border p-2 rounded text-sm bg-white"
+                                                    className="w-full border p-2 rounded text-sm bg-white focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
                                                     placeholder="Titre qui apparaîtra sur Google"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1">Meta Description SEO (Optionnel)</label>
+                                                <label className="block text-[10px] font-black uppercase text-zinc-400 mb-1 flex justify-between">
+                                                    <span>Meta Description SEO (Google Desc)</span>
+                                                    <span className={`${(productForm.seo_description?.length >= 120 && productForm.seo_description?.length <= 150) ? 'text-green-600 font-bold' : (productForm.seo_description?.length > 150) ? 'text-red-500 font-bold animate-pulse' : 'text-zinc-400'}`}>
+                                                        {productForm.seo_description?.length || 0} / 150 caractères recommandé
+                                                    </span>
+                                                </label>
                                                 <textarea
                                                     name="seo_description"
                                                     value={productForm.seo_description || ''}
                                                     onChange={handleProductChange}
-                                                    className="w-full border p-2 rounded text-sm bg-white h-20"
+                                                    className="w-full border p-2 rounded text-sm bg-white h-20 focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
                                                     placeholder="Description qui apparaîtra sur Google"
                                                 />
                                             </div>
