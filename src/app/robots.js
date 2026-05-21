@@ -4,7 +4,7 @@ export default function robots() {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/admin/', '/api/'],
+                disallow: ['/admin/', '/api/', '/success'],
             }
         ],
         sitemap: 'https://www.na-coaching.com/sitemap.xml',
