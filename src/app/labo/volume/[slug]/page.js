@@ -169,33 +169,58 @@ export default async function VolumePage({ params }) {
 
                                 {/* Article Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {chapterArticles.map(article => (
-                                        <article key={article.id} className="group bg-zinc-950 p-6 rounded-lg border border-zinc-800/50 hover:border-[#FF6B00] transition-all hover:bg-zinc-900 flex flex-col justify-between">
-                                            <div>
-                                                <div className="flex justify-between items-start mb-4">
-                                                    <span className={`text-[10px] uppercase font-black px-2 py-1 rounded ${article.is_published ? 'bg-green-500/10 text-green-500 border border-green-500/20' : 'bg-orange-500/10 text-orange-500 border border-orange-500/20'}`}>
-                                                        {article.is_published ? 'Publié' : 'En rédaction'}
-                                                    </span>
+                                    {chapterArticles.map(article => {
+                                        const cardContent = (
+                                            <article className="h-full flex flex-col justify-between relative z-10">
+                                                <div>
+                                                    <div className="flex justify-between items-start mb-4">
+                                                        <span className={`text-[10px] uppercase font-black px-2 py-1 rounded ${article.is_published ? 'bg-green-500/10 text-green-500 border border-green-500/20' : 'bg-orange-500/10 text-orange-500 border border-orange-500/20'}`}>
+                                                            {article.is_published ? 'Publié' : 'En rédaction'}
+                                                        </span>
+                                                    </div>
+                                                    <h3 className="text-lg font-bold text-white mb-2 leading-snug group-hover:text-[#FF6B00] transition-colors line-clamp-2">
+                                                        {article.title}
+                                                    </h3>
+                                                    <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed mb-6">
+                                                        {article.excerpt}
+                                                    </p>
                                                 </div>
-                                                <h3 className="text-lg font-bold text-white mb-2 leading-snug group-hover:text-[#FF6B00] transition-colors line-clamp-2">
-                                                    {article.title}
-                                                </h3>
-                                                <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed mb-6">
-                                                    {article.excerpt}
-                                                </p>
-                                            </div>
 
-                                            {article.is_published ? (
-                                                <Link href={`/blog/${article.slug || article.id}`} className="mt-auto text-xs font-black uppercase text-white hover:text-[#FF6B00] flex items-center gap-2 group/link w-fit">
-                                                    Lire l&apos;article <ArrowLeft className="w-4 h-4 rotate-180 group-hover/link:translate-x-1 transition-transform" />
+                                                {article.is_published ? (
+                                                    <div className="mt-auto text-xs font-black uppercase text-white group-hover:text-[#FF6B00] flex items-center gap-2 transition-colors">
+                                                        Lire l&apos;article <ArrowLeft className="w-4 h-4 rotate-180 group-hover:translate-x-1.5 transition-transform" />
+                                                    </div>
+                                                ) : (
+                                                    <div className="mt-auto text-xs font-bold uppercase text-zinc-500 flex items-center gap-2">
+                                                        Bientôt disponible <Clock className="w-3 h-3" />
+                                                    </div>
+                                                )}
+                                            </article>
+                                        );
+
+                                        if (article.is_published) {
+                                            return (
+                                                <Link 
+                                                    key={article.id} 
+                                                    href={`/blog/${article.slug || article.id}`} 
+                                                    className="group relative overflow-hidden bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-[#FF6B00]/70 transition-all duration-300 hover:bg-zinc-900/60 hover:-translate-y-1 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-[#FF6B00]/5 min-h-[220px]"
+                                                >
+                                                    {/* Decorative background glow */}
+                                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6B00]/5 rounded-full blur-[50px] -mr-8 -mt-8 group-hover:bg-[#FF6B00]/10 transition-all duration-500 z-0"></div>
+                                                    {cardContent}
                                                 </Link>
-                                            ) : (
-                                                <div className="mt-auto text-xs font-bold uppercase text-zinc-600 flex items-center gap-2 cursor-not-allowed">
-                                                    Bientôt disponible <Clock className="w-3 h-3" />
+                                            );
+                                        } else {
+                                            return (
+                                                <div 
+                                                    key={article.id} 
+                                                    className="relative overflow-hidden bg-zinc-950/40 p-6 rounded-2xl border border-zinc-900/80 flex flex-col justify-between min-h-[220px] opacity-50 cursor-not-allowed"
+                                                >
+                                                    {cardContent}
                                                 </div>
-                                            )}
-                                        </article>
-                                    ))}
+                                            );
+                                        }
+                                    })}
                                 </div>
                             </section>
                         ))
