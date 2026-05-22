@@ -5,6 +5,7 @@ import Image from 'next/image';
 import AnimWrapper from '@/components/AnimWrapper';
 import { Award, Activity, UserCheck, HeartPulse, ChevronRight, ArrowRight, Dumbbell, Flame, Wind, Heart } from 'lucide-react';
 import HomeFAQ from '@/components/HomeFAQ';
+import { extractFirstImageFromContent } from '@/lib/contentProcessor';
 
 export const revalidate = 3600;
 
@@ -219,7 +220,7 @@ export default async function HomePage() {
                     <div className="bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 h-full flex flex-col hover:-translate-y-2 border border-zinc-100/50">
                       <div className="relative h-64 overflow-hidden w-full m-2 rounded-t-[1.75rem] rounded-b-xl">
                         <Image
-                          src={article.image || "/api/placeholder/400/320"}
+                          src={article.image || extractFirstImageFromContent(article.content) || "/logo.png"}
                           alt={article.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
