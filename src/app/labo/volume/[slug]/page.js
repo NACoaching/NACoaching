@@ -181,7 +181,7 @@ export default async function VolumePage({ params }) {
                                                     <h3 className="text-lg font-bold text-white mb-2 leading-snug group-hover:text-[#FF6B00] transition-colors line-clamp-2">
                                                         {article.title}
                                                     </h3>
-                                                    <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed mb-6">
+                                                    <p className="text-zinc-400 text-sm line-clamp-3 leading-relaxed mb-6">
                                                         {article.excerpt}
                                                     </p>
                                                 </div>
@@ -203,10 +203,10 @@ export default async function VolumePage({ params }) {
                                                 <Link 
                                                     key={article.id} 
                                                     href={`/blog/${article.slug || article.id}`} 
-                                                    className="group relative overflow-hidden bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-[#FF6B00]/70 transition-all duration-300 hover:bg-zinc-900/60 hover:-translate-y-1 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-[#FF6B00]/5 min-h-[220px]"
+                                                    className="group relative overflow-hidden bg-zinc-900/60 p-6 rounded-2xl border border-zinc-800 hover:border-[#FF6B00] transition-all duration-300 hover:bg-zinc-800/50 hover:-translate-y-1 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-[#FF6B00]/10 min-h-[220px]"
                                                 >
                                                     {/* Decorative background glow */}
-                                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6B00]/5 rounded-full blur-[50px] -mr-8 -mt-8 group-hover:bg-[#FF6B00]/10 transition-all duration-500 z-0"></div>
+                                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6B00]/5 rounded-full blur-[50px] -mr-8 -mt-8 group-hover:bg-[#FF6B00]/15 transition-all duration-500 z-0"></div>
                                                     {cardContent}
                                                 </Link>
                                             );
@@ -214,7 +214,7 @@ export default async function VolumePage({ params }) {
                                             return (
                                                 <div 
                                                     key={article.id} 
-                                                    className="relative overflow-hidden bg-zinc-950/40 p-6 rounded-2xl border border-zinc-900/80 flex flex-col justify-between min-h-[220px] opacity-50 cursor-not-allowed"
+                                                    className="relative overflow-hidden bg-zinc-900/20 p-6 rounded-2xl border border-zinc-900/80 flex flex-col justify-between min-h-[220px] opacity-40 cursor-not-allowed"
                                                 >
                                                     {cardContent}
                                                 </div>
