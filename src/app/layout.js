@@ -65,12 +65,14 @@ export default async function RootLayout({ children }) {
   const { data } = await supabase.from('site_content').select('value').eq('key', 'logo_url').single();
   const initialLogoUrl = data?.value || '/logo.png';
 
+  const logoUrl = initialLogoUrl.startsWith('http') ? initialLogoUrl : `${siteUrl.replace(/\/$/, '')}${initialLogoUrl}`;
+
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "NA Coaching",
     "url": siteUrl,
-    "logo": `${siteUrl}${initialLogoUrl}`,
+    "logo": logoUrl,
     "sameAs": [
       "https://www.instagram.com/na_coaching_/",
       "https://www.youtube.com/@nacoaching"

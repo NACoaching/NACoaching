@@ -97,7 +97,7 @@ export default async function ProductPage({ params }) {
         image: firstImage ? [firstImage] : [],
         offers: {
             '@type': 'Offer',
-            price: (product.discount_price || product.price) ? (product.discount_price || product.price).replace(/[^0-9.,]/g, '').replace(',', '.') : '0', // Keep only numbers
+            price: (product.discount_price || product.price) ? parseFloat((product.discount_price || product.price).replace(/[^0-9.,]/g, '').replace(',', '.')) : 0, // Keep only numbers
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
             url: `https://www.na-coaching.com/boutique/${product.slug || product.id}/`,
