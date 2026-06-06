@@ -95,12 +95,47 @@ export default async function ProductPage({ params }) {
         name: product.title,
         description: product.description,
         image: firstImage ? [firstImage] : [],
+        sku: product.slug || `PPL-${product.id}`,
+        brand: {
+            '@type': 'Brand',
+            name: 'NA Coaching'
+        },
         offers: {
             '@type': 'Offer',
             price: (product.discount_price || product.price) ? parseFloat((product.discount_price || product.price).replace(/[^0-9.,]/g, '').replace(',', '.')) : 0, // Keep only numbers
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
             url: `https://www.na-coaching.com/boutique/${product.slug || product.id}/`,
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: 0,
+                    currency: 'EUR'
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'FR'
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        value: 0,
+                        unitCode: 'DAY'
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        value: 0,
+                        unitCode: 'DAY'
+                    }
+                }
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'FR',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted'
+            }
         }
     };
 
