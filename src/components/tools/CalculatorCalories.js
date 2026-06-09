@@ -66,10 +66,10 @@ export default function CalculatorCalories({ hints = {} }) {
                             <select
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none bg-white"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none bg-white text-zinc-950 font-semibold"
                             >
-                                <option value="male">Homme</option>
-                                <option value="female">Femme</option>
+                                <option value="male" className="text-zinc-950 bg-white">Homme</option>
+                                <option value="female" className="text-zinc-950 bg-white">Femme</option>
                             </select>
                         </div>
                     </div>
@@ -113,13 +113,13 @@ export default function CalculatorCalories({ hints = {} }) {
                         <select
                             value={activity}
                             onChange={(e) => setActivity(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none bg-white"
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none bg-white text-zinc-950 font-semibold"
                         >
-                            <option value="1.2">Sédentaire (Bureau, peu de sport)</option>
-                            <option value="1.375">Légèrement actif (1-3 fois/semaine)</option>
-                            <option value="1.55">Modérément actif (3-5 fois/semaine)</option>
-                            <option value="1.725">Très actif (6-7 fois/semaine)</option>
-                            <option value="1.9">Extrêmement actif (Physique + Sport)</option>
+                            <option value="1.2" className="text-zinc-950 bg-white">Sédentaire (Bureau, peu de sport)</option>
+                            <option value="1.375" className="text-zinc-950 bg-white">Légèrement actif (1-3 fois/semaine)</option>
+                            <option value="1.55" className="text-zinc-950 bg-white">Modérément actif (3-5 fois/semaine)</option>
+                            <option value="1.725" className="text-zinc-950 bg-white">Très actif (6-7 fois/semaine)</option>
+                            <option value="1.9" className="text-zinc-950 bg-white">Extrêmement actif (Physique + Sport)</option>
                         </select>
                     </div>
 

@@ -90,7 +90,7 @@ export default function ACWRCalculator({ hints = {} }) {
                                 type="number"
                                 value={chronic}
                                 onChange={(e) => setChronic(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-zinc-950 font-semibold placeholder:text-zinc-400 bg-white"
                                 placeholder="Ex: 300"
                                 required
                             />

@@ -113,7 +113,7 @@ export default function SpeedConverter({ hints = {} }) {
                                     const s = minkm.split(':')[1] || '00';
                                     handleMinkmChange({ target: { value: `${e.target.value}:${s}` } });
                                 }}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black font-semibold placeholder:text-zinc-400 bg-white"
                                 placeholder="Min"
                             />
                             <input
@@ -123,7 +123,7 @@ export default function SpeedConverter({ hints = {} }) {
                                     const m = minkm.split(':')[0] || '0';
                                     handleMinkmChange({ target: { value: `${m}:${e.target.value}` } });
                                 }}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-black font-semibold placeholder:text-zinc-400 bg-white"
                                 placeholder="Sec"
                             />
                         </div>

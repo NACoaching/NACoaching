@@ -71,10 +71,10 @@ export default function RacePredictor({ hints = {} }) {
                     <select
                         value={refDist}
                         onChange={(e) => setRefDist(parseInt(e.target.value))}
-                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner"
+                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner text-black"
                     >
                         {DISTANCES.map(d => (
-                            <option key={d.id} value={d.meters}>{d.name}</option>
+                            <option key={d.id} value={d.meters} className="text-black bg-white">{d.name}</option>
                         ))}
                     </select>
                 </div>

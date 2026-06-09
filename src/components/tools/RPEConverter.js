@@ -51,10 +51,10 @@ export default function RPEConverter({ hints = {} }) {
                     <select
                         value={reps}
                         onChange={(e) => setReps(parseInt(e.target.value))}
-                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner"
+                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner text-black"
                     >
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(r => (
-                            <option key={r} value={r}>{r} rep{r > 1 ? 's' : ''}</option>
+                            <option key={r} value={r} className="text-black bg-white">{r} rep{r > 1 ? 's' : ''}</option>
                         ))}
                     </select>
                 </div>
@@ -67,10 +67,10 @@ export default function RPEConverter({ hints = {} }) {
                     <select
                         value={rpe}
                         onChange={(e) => setRpe(parseFloat(e.target.value))}
-                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner"
+                        className="w-full bg-zinc-50 border border-zinc-200 p-4 rounded-xl font-bold focus:outline-none focus:border-blue-500 transition shadow-inner text-black"
                     >
                         {Object.keys(rpeChart).sort((a, b) => b - a).map(v => (
-                            <option key={v} value={v}>RPE {v}</option>
+                            <option key={v} value={v} className="text-black bg-white">RPE {v}</option>
                         ))}
                     </select>
                 </div>

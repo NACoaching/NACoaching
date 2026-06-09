@@ -59,7 +59,7 @@ export default function AdvancedMacros({ hints = {} }) {
                                 type="number"
                                 value={weight}
                                 onChange={(e) => setWeight(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-zinc-950 font-semibold placeholder:text-zinc-400 bg-white"
                                 placeholder="Ex: 75"
                                 required
                             />
@@ -73,7 +73,7 @@ export default function AdvancedMacros({ hints = {} }) {
                                 type="number"
                                 value={bodyFat}
                                 onChange={(e) => setBodyFat(e.target.value)}
-                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                                className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-zinc-950 font-semibold placeholder:text-zinc-400 bg-white"
                                 placeholder="Ex: 15"
                             />
                         </div>
@@ -87,11 +87,11 @@ export default function AdvancedMacros({ hints = {} }) {
                         <select
                             value={goal}
                             onChange={(e) => setGoal(e.target.value)}
-                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none"
+                            className="w-full border p-3 rounded text-sm focus:border-[#FF6B00] outline-none text-zinc-950 font-semibold bg-white"
                         >
-                            <option value="loss">Perte de poids</option>
-                            <option value="maintenance">Maintien</option>
-                            <option value="gain">Prise de masse</option>
+                            <option value="loss" className="text-zinc-950 bg-white">Perte de poids</option>
+                            <option value="maintenance" className="text-zinc-950 bg-white">Maintien</option>
+                            <option value="gain" className="text-zinc-950 bg-white">Prise de masse</option>
                         </select>
                     </div>
 
