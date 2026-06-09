@@ -27,11 +27,58 @@ export default function LaboView({ articles, siteContent }) {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
     const [searchQuery, setSearchQuery] = useState("");
 
+    // Helper to normalize and stem words for search
+    const getSearchRoot = (str) => {
+        if (!str) return "";
+        return str
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+    };
+
+    // Stem specific common suffixes for smart matching
+    const stemWord = (word) => {
+        let w = getSearchRoot(word);
+        if (w.endsWith('s') && w.length > 3) w = w.slice(0, -1);
+        if (w.endsWith('x') && w.length > 3) w = w.slice(0, -1);
+        if (w.endsWith('ique') && w.length > 4) w = w.slice(0, -4);
+        if (w.endsWith('iques') && w.length > 5) w = w.slice(0, -5);
+        if (w.endsWith('ie') && w.length > 3) w = w.slice(0, -2);
+        if (w.endsWith('ies') && w.length > 4) w = w.slice(0, -3);
+        return w;
+    };
+
     const filteredArticles = articles.filter(article => {
         if (article.is_published === false) return false;
 
-        const matchesSearch = (article.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            article.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()));
+        const searchTerms = searchQuery.trim().split(/\s+/).filter(t => t.length > 0);
+        
+        const matchesSearch = searchTerms.every(term => {
+            const termRoot = stemWord(term);
+            
+            const checkField = (field) => {
+                if (!field) return false;
+                const normalizedField = getSearchRoot(field);
+                
+                // 1. Direct substring check on normalized field
+                if (normalizedField.includes(termRoot)) return true;
+                
+                // 2. Word-by-word stemmed check for cross-root matches (e.g. "calorie" query matching "calorique" text)
+                const words = normalizedField.split(/[\s,.'"-]+/).filter(w => w.length > 0);
+                return words.some(w => {
+                    const stemmedW = stemWord(w);
+                    return stemmedW.includes(termRoot) || termRoot.includes(stemmedW);
+                });
+            };
+
+            return (
+                checkField(article.title) ||
+                checkField(article.excerpt) ||
+                checkField(article.content) ||
+                checkField(article.subcategory) ||
+                checkField(article.category)
+            );
+        });
 
         if (!matchesSearch) return false;
 
