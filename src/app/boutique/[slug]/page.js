@@ -121,12 +121,14 @@ export default async function ProductPage({ params }) {
                     '@type': 'ShippingDeliveryTime',
                     handlingTime: {
                         '@type': 'QuantitativeValue',
-                        value: 0,
+                        minValue: 0,
+                        maxValue: 0,
                         unitCode: 'DAY'
                     },
                     transitTime: {
                         '@type': 'QuantitativeValue',
-                        value: 0,
+                        minValue: 0,
+                        maxValue: 0,
                         unitCode: 'DAY'
                     }
                 }
