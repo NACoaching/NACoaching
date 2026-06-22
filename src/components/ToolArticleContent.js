@@ -2,6 +2,8 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import { autoLinkContent } from '@/lib/contentProcessor';
 
 /**
@@ -17,8 +19,8 @@ export default function ToolArticleContent({ content, glossary = [], currentPath
         <article className="prose prose-zinc prose-sm md:prose-base max-w-none text-zinc-900">
             <div className="text-zinc-600 leading-relaxed font-normal">
                 <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
+                    remarkPlugins={[remarkGfm, remarkMath]}
+                    rehypePlugins={[rehypeRaw, rehypeKatex]}
                     components={{
                         a: ({ node, ...props }) => {
                             const isInternal = props.href?.startsWith('/') || props.href?.includes('na-coaching.com');

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import { Star, ChevronRight, Loader2, Check, ArrowLeft, ShieldCheck, Zap, Lock, Award, ChevronDown } from 'lucide-react';
 import AnimWrapper from '@/components/AnimWrapper';
 import ProductGallery from '@/components/ProductGallery';
@@ -174,6 +176,8 @@ export default function ProductClientView({ initialProduct, initialReviews, site
                             <div className="prose prose-zinc prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-a:text-[#FF6B00] prose-strong:text-black prose-img:rounded-xl">
                                 {product.content ? (
                                     <ReactMarkdown
+                                        remarkPlugins={[remarkMath]}
+                                        rehypePlugins={[rehypeKatex]}
                                         components={{
                                             img: ({ node, ...props }) => (
                                                 <span className="block relative h-64 md:h-96 my-8 rounded-xl overflow-hidden">

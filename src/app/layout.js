@@ -6,6 +6,7 @@ import CookieBanner from "@/components/CookieBanner";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
+import "katex/dist/katex.min.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

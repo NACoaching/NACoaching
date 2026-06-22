@@ -7,6 +7,8 @@ import ShareButtons from '@/components/ShareButtons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumb from '@/components/Breadcrumb';
 import AuthorBio from '@/components/AuthorBio';
@@ -232,8 +234,8 @@ export default async function ArticlePage({ params }) {
                         </p>
                         <div className="text-zinc-800 leading-loose">
                             <ReactMarkdown
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeRaw]}
+                                remarkPlugins={[remarkGfm, remarkMath]}
+                                rehypePlugins={[rehypeRaw, rehypeKatex]}
                                 components={{
                                     a: ({ node, ...props }) => {
                                         const isInternal = props.href?.startsWith('/') || props.href?.includes('na-coaching.com');
