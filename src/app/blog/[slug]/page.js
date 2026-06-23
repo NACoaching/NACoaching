@@ -268,6 +268,15 @@ export default async function ArticlePage({ params }) {
                                     ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-6 space-y-2" {...props} />,
                                     li: ({ node, ...props }) => <li className="pl-2" {...props} />,
                                     strong: ({ node, ...props }) => <strong className="font-black text-black" {...props} />,
+                                    table: ({ node, ...props }) => (
+                                         <div className="overflow-x-auto my-8 border border-zinc-200 rounded-xl shadow-sm text-sm">
+                                             <table className="w-full border-collapse" {...props} />
+                                         </div>
+                                     ),
+                                     thead: ({ node, ...props }) => <thead className="bg-zinc-50 border-b border-zinc-200" {...props} />,
+                                     th: ({ node, ...props }) => <th className="text-left py-3.5 px-4 font-black text-xs text-zinc-600 tracking-wider uppercase" {...props} />,
+                                     tr: ({ node, ...props }) => <tr className="border-b border-zinc-200 last:border-0 hover:bg-zinc-50/50 transition-colors" {...props} />,
+                                     td: ({ node, ...props }) => <td className="py-3.5 px-4 text-zinc-800" {...props} />,
                                 }}
                             >
                                 {autoLinkContent(article.content, autoLinks, "/blog/" + (article.slug || article.id))}
