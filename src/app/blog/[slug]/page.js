@@ -212,7 +212,7 @@ export default async function ArticlePage({ params }) {
                     ]} />
 
                     <div className="text-[#FF6B00] text-sm font-black uppercase tracking-widest mb-4 mt-6">{article.category}</div>
-                    <h1 className="text-4xl md:text-5xl font-black uppercase leading-tight mb-8 italic border-l-8 border-[#FF6B00] pl-6 text-black">
+                    <h1 className="text-2xl md:text-4xl font-black uppercase leading-tight mb-8 italic border-l-8 border-[#FF6B00] pl-6 text-black">
                         {article.title}
                     </h1>
 
@@ -228,8 +228,8 @@ export default async function ArticlePage({ params }) {
                         </div>
                     )}
 
-                    <div className="prose prose-zinc prose-lg max-w-none">
-                        <p className="text-xl font-medium text-zinc-600 mb-8 leading-relaxed">
+                    <div className="prose prose-zinc prose-sm md:prose-base max-w-none">
+                        <p className="text-base md:text-lg font-medium text-zinc-600 mb-8 leading-relaxed">
                             {article.excerpt}
                         </p>
                         <div className="text-zinc-800 leading-loose">
@@ -261,9 +261,9 @@ export default async function ArticlePage({ params }) {
                                             )}
                                         </figure>
                                     ),
-                                    h1: ({ node, ...props }) => <h2 className="text-3xl font-black uppercase mt-12 mb-6 text-[#FF6B00] border-l-8 border-[#FF6B00] pl-6 italic" {...props} />,
-                                    h2: ({ node, ...props }) => <h2 className="text-2xl font-black uppercase mt-12 mb-6 text-black border-b-2 border-zinc-100 pb-2" {...props} />,
-                                    h3: ({ node, ...props }) => <h3 className="text-xl font-black uppercase mt-8 mb-4 text-zinc-500 tracking-wider" {...props} />,
+                                    h1: ({ node, ...props }) => <h2 className="text-xl md:text-2xl font-black uppercase mt-12 mb-6 text-[#FF6B00] border-l-6 border-[#FF6B00] pl-4 italic" {...props} />,
+                                    h2: ({ node, ...props }) => <h2 className="text-lg md:text-xl font-black uppercase mt-10 mb-5 text-black border-b-2 border-zinc-100 pb-2" {...props} />,
+                                    h3: ({ node, ...props }) => <h3 className="text-base md:text-lg font-black uppercase mt-8 mb-4 text-zinc-500 tracking-wider" {...props} />,
                                     h4: ({ node, ...props }) => <h4 className="text-lg font-bold mt-6 mb-3 text-black" {...props} />,
                                     ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-6 space-y-2" {...props} />,
                                     li: ({ node, ...props }) => <li className="pl-2" {...props} />,
