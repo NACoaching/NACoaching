@@ -2473,6 +2473,28 @@ export default function AdminPage() {
                                             </div>
                                         </div>
 
+                                        {/* AUTO-LINKS SUGGESTIONS CHEATSHEET */}
+                                        {autoLinks.length > 0 && (
+                                            <div className="border border-zinc-200 p-4 rounded bg-orange-50/20 space-y-2">
+                                                <h4 className="text-[10px] font-black uppercase text-zinc-400">💡 Rappel : Mots-clés reliés automatiquement</h4>
+                                                <p className="text-[9px] text-zinc-500 leading-normal">
+                                                    Insérez naturellement ces mots dans vos textes pour créer automatiquement des liens vers vos outils.
+                                                </p>
+                                                <div className="flex flex-wrap gap-1">
+                                                    {autoLinks
+                                                        .flatMap(l => (l.keywords || '').split(',').map(k => k.trim()))
+                                                        .filter((v, i, a) => a.indexOf(v) === i && v !== "")
+                                                        .sort()
+                                                        .map((kw, idx) => (
+                                                            <span key={idx} className="bg-white border border-zinc-200 text-[9px] font-bold text-zinc-700 px-1.5 py-0.5 rounded shadow-sm">
+                                                                {kw}
+                                                            </span>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        )}
+
                                         <div className="flex gap-2">
                                             {editingItem && (
                                                 <button type="button" onClick={cancelEdit} className="w-full bg-zinc-200 text-zinc-600 font-bold py-3 rounded uppercase hover:bg-zinc-300 transition">Annuler</button>
