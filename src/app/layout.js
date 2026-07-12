@@ -33,7 +33,7 @@ export async function generateMetadata() {
     metadataBase: new URL(siteUrl),
     title: {
       default: "NA Coaching | Coach Expert EOPS — Musculation, Running & Réathlétisation",
-      template: `%s | ${content.site_title || "NA Coaching"}`
+      template: "%s"
     },
     description: content.site_description || "Atteignez vos sommets athlétiques avec l'expertise d'un coach Master EOPS. Programmes sur-mesure, outils scientifiques gratuits et articles spécialisés pour transformer vos performances.",
     openGraph: {
