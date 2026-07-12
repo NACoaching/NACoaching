@@ -179,7 +179,7 @@ export default async function HomePage() {
                   <div className="w-16 h-16 rounded-2xl bg-orange-50/80 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-orange-100 transition-all duration-300">
                     <exp.icon className="text-[#FF6B00]" size={28} />
                   </div>
-                  <h3 className="font-bold text-zinc-900 text-lg mb-1">{exp.title}</h3>
+                  <p className="font-bold text-zinc-900 text-lg mb-1">{exp.title}</p>
                 </div>
               </AnimWrapper>
             ))}

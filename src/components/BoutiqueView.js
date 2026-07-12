@@ -27,7 +27,7 @@ export default function BoutiqueView({ products, siteContent, allReviews }) {
             <div className="max-w-7xl mx-auto px-6">
                 <AnimWrapper>
                     <div className="text-center mb-12">
-                        <h2 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">{siteContent.shop_title || 'La Boutique'}</h2>
+                        <h1 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">{siteContent.shop_title || 'La Boutique'}</h1>
                         <p className="text-zinc-600 max-w-xl mx-auto italic">
                             {siteContent.shop_subtitle || 'Programmes basés sur la science.'}
                         </p>

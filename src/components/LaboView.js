@@ -100,7 +100,7 @@ export default function LaboView({ articles, siteContent }) {
                 <AnimWrapper>
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                         <div>
-                            <h2 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">{siteContent?.about_title || 'Le Labo'}</h2>
+                            <h1 className="text-5xl font-black uppercase mb-4 text-[#FF6B00]">{siteContent?.about_title || 'Le Labo'}</h1>
                             <p className="text-zinc-600 max-w-xl text-lg font-medium leading-relaxed">
                                 {siteContent?.about_text || 'Vulgarisation scientifique et conseils d\'experts.'}
                             </p>
