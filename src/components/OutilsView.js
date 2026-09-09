@@ -22,7 +22,7 @@ const iconMap = {
 const titleOverrides = {
     '/outils/calculateur-1rm': "Calculateur 1RM : Évalue ta Force Maximale & Optimise tes Charges",
     '/outils/besoins-caloriques': "Calculateur Calories & TDEE : Guide Expert du Métabolisme",
-    '/outils/convertisseur-vitesse': "Convertisseur de Vitesse Running : Maîtrise tes Allures (min/km & km/h)",
+    '/outils/convertisseur-vitesse': "Convertisseur de Vitesse Running : km/h, min/km & m/s (Allures & Fractionné)",
     '/outils/vma-vo2': "Convertisseur VMA / VO2max : Estime ton Potentiel Aérobie & Physiologique",
     '/outils/frequence-cardiaque': "Calculateur de Zones FC : Maîtrise ton intensité (Karvonen)",
     '/outils/acwr': "Calculateur ACWR : Évitez le surentraînement et les blessures",
@@ -38,6 +38,7 @@ const titleOverrides = {
 const searchKeywords = {
     '/outils/besoins-caloriques': 'calories kcal metabolisme',
     '/outils/calculateur-1rm': 'rm repetition max',
+    '/outils/convertisseur-vitesse': 'vitesse allure m/s ms metre seconde km/h minkm fractionne 15/15 30/30 tempo piste distance plot',
     '/outils/frequence-cardiaque': 'fc fcm bpm',
     '/outils/macros-avancees': 'macronutriments proteines glucides lipides diete',
     '/outils/rpe-1rm': 'rir fatigue',
