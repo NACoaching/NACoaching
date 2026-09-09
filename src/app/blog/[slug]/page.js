@@ -86,7 +86,21 @@ export default async function ArticlePage({ params }) {
     ]);
 
     const article = articleRes.data;
-    const autoLinks = autoLinksRes.data || [];
+    let autoLinks = autoLinksRes.data || [];
+    const speedLinkIdx = autoLinks.findIndex(l => l.url === '/outils/convertisseur-vitesse');
+    const extraSpeedKw = 'km/h en m/s, m/s en km/h, convertisseur m/s, mètres par seconde, distance 15/15, fractionné 15/15, 15/15';
+    if (speedLinkIdx >= 0) {
+        autoLinks[speedLinkIdx] = {
+            ...autoLinks[speedLinkIdx],
+            keywords: `${autoLinks[speedLinkIdx].keywords || ''}, ${extraSpeedKw}`
+        };
+    } else {
+        autoLinks.push({
+            url: '/outils/convertisseur-vitesse',
+            keywords: `convertir son allure, calculer son allure, vitesse, allures, allure, 14 km/h, convertisseur de vitesse, ${extraSpeedKw}`,
+            is_active: true
+        });
+    }
     // Emoji mapping for tools based on their URL
     const toolEmojis = {
         '/outils/rpe-1rm': '💪',

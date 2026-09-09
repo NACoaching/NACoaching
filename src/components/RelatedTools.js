@@ -45,7 +45,7 @@ const TOOLS = {
         cluster: 'cardio',
     },
     'convertisseur-vitesse': {
-        name: 'Vitesse / Allure',
+        name: 'Vitesse, Allure & m/s',
         href: '/outils/convertisseur-vitesse',
         icon: Timer,
         cluster: 'cardio',

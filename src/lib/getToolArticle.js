@@ -153,5 +153,21 @@ export async function getAutoLinks() {
         .select('keywords, url')
         .eq('is_active', true);
 
-    return data || [];
+    const links = data ? [...data] : [];
+    const speedLinkIdx = links.findIndex(l => l.url === '/outils/convertisseur-vitesse');
+    const extraSpeedKw = 'km/h en m/s, m/s en km/h, convertisseur m/s, mètres par seconde, distance 15/15, fractionné 15/15, 15/15';
+    if (speedLinkIdx >= 0) {
+        links[speedLinkIdx] = {
+            ...links[speedLinkIdx],
+            keywords: `${links[speedLinkIdx].keywords || ''}, ${extraSpeedKw}`
+        };
+    } else {
+        links.push({
+            url: '/outils/convertisseur-vitesse',
+            keywords: `convertir son allure, calculer son allure, vitesse, allures, allure, 14 km/h, convertisseur de vitesse, ${extraSpeedKw}`,
+            is_active: true
+        });
+    }
+
+    return links;
 }
