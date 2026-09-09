@@ -1,7 +1,7 @@
 "use client";
 import Tooltip from "@/components/Tooltip";
 import React, { useState } from 'react';
-import { ArrowRightLeft, Timer, Sparkles, MapPin, Gauge } from 'lucide-react';
+import { ArrowRightLeft, Sparkles, MapPin } from 'lucide-react';
 import AnimWrapper from "@/components/AnimWrapper";
 
 export default function SpeedConverter({ hints = {} }) {
@@ -112,12 +112,9 @@ export default function SpeedConverter({ hints = {} }) {
                 {/* 3 Interactive Inputs */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Vitesse km/h */}
-                    <div className="bg-zinc-50/80 border border-zinc-200/80 p-4 rounded-xl focus-within:border-[#FF6B00] focus-within:bg-white transition">
-                        <label className="flex items-center justify-between text-xs font-bold text-zinc-800 mb-1.5">
-                            <span className="flex items-center gap-1.5">
-                                <Gauge size={15} className="text-[#FF6B00]" />
-                                Vitesse (km/h)
-                            </span>
+                    <div className="bg-zinc-50/80 border border-zinc-200/80 p-4 rounded-xl hover:border-[#FF6B00] hover:bg-orange-50/10 focus-within:border-[#FF6B00] focus-within:bg-white focus-within:shadow-xs transition duration-200">
+                        <label className="flex items-center justify-between text-xs font-bold text-zinc-900 mb-1.5">
+                            <span>Vitesse (km/h)</span>
                             <Tooltip text={hints.vitesse || hints.speed || "Vitesse standard sur tapis de course, vélo ou voiture. Ex: 15 km/h."} />
                         </label>
                         <div className="relative">
@@ -127,26 +124,20 @@ export default function SpeedConverter({ hints = {} }) {
                                 min="0"
                                 value={kmh}
                                 onChange={handleKmhChange}
-                                className="w-full bg-white border border-zinc-200 py-2.5 px-3 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition"
+                                className="w-full bg-white border border-zinc-200 py-2.5 pl-3 pr-14 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 placeholder="Ex: 15"
                             />
-                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-600 pointer-events-none">
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-400 pointer-events-none select-none">
                                 km/h
                             </span>
                         </div>
-                        <span className="text-[11px] text-zinc-600 mt-1 block">Tapis de course, route, vélo</span>
+                        <span className="text-[11px] text-zinc-500 mt-1 block">Tapis de course, route, vélo</span>
                     </div>
 
                     {/* Vitesse m/s */}
-                    <div className="bg-orange-50/50 border border-orange-200/70 p-4 rounded-xl focus-within:border-[#FF6B00] focus-within:bg-white transition relative">
-                        <span className="absolute -top-2.5 right-3 bg-[#FF6B00] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
-                            Piste & 15/15
-                        </span>
+                    <div className="bg-zinc-50/80 border border-zinc-200/80 p-4 rounded-xl hover:border-[#FF6B00] hover:bg-orange-50/10 focus-within:border-[#FF6B00] focus-within:bg-white focus-within:shadow-xs transition duration-200">
                         <label className="flex items-center justify-between text-xs font-bold text-zinc-900 mb-1.5">
-                            <span className="flex items-center gap-1.5">
-                                <MapPin size={15} className="text-[#FF6B00]" />
-                                Vitesse (m/s)
-                            </span>
+                            <span>Vitesse (m/s)</span>
                             <Tooltip text={hints.ms || hints.m_s || "Mètres par seconde : la métrique essentielle pour le fractionné court (15/15, 30/30) et le balisage de plots sur piste. 1 m/s = 3.6 km/h."} />
                         </label>
                         <div className="relative">
@@ -156,23 +147,20 @@ export default function SpeedConverter({ hints = {} }) {
                                 min="0"
                                 value={ms}
                                 onChange={handleMsChange}
-                                className="w-full bg-white border border-orange-200 py-2.5 px-3 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition"
+                                className="w-full bg-white border border-zinc-200 py-2.5 pl-3 pr-14 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 placeholder="Ex: 4.17"
                             />
-                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-600 pointer-events-none">
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-400 pointer-events-none select-none">
                                 m/s
                             </span>
                         </div>
-                        <span className="text-[11px] text-orange-600/90 font-medium mt-1 block">Distance parcourue par seconde</span>
+                        <span className="text-[11px] text-zinc-500 mt-1 block">Distance parcourue par seconde</span>
                     </div>
 
                     {/* Allure min/km */}
-                    <div className="bg-zinc-50/80 border border-zinc-200/80 p-4 rounded-xl focus-within:border-[#FF6B00] focus-within:bg-white transition">
-                        <label className="flex items-center justify-between text-xs font-bold text-zinc-800 mb-1.5">
-                            <span className="flex items-center gap-1.5">
-                                <Timer size={15} className="text-[#FF6B00]" />
-                                Allure (min/km)
-                            </span>
+                    <div className="bg-zinc-50/80 border border-zinc-200/80 p-4 rounded-xl hover:border-[#FF6B00] hover:bg-orange-50/10 focus-within:border-[#FF6B00] focus-within:bg-white focus-within:shadow-xs transition duration-200">
+                        <label className="flex items-center justify-between text-xs font-bold text-zinc-900 mb-1.5">
+                            <span>Allure (min/km)</span>
                             <Tooltip text={hints.allure || hints.pace || "Allure GPS en minutes et secondes par kilomètre. Ex: 4:00 min/km."} />
                         </label>
                         <div className="flex gap-2">
@@ -186,10 +174,10 @@ export default function SpeedConverter({ hints = {} }) {
                                         const s = minkm.includes(':') ? minkm.split(':')[1] || '00' : '00';
                                         handleMinkmChange(`${e.target.value}:${s}`);
                                     }}
-                                    className="w-full bg-white border border-zinc-200 py-2.5 px-3 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition text-center"
+                                    className="w-full bg-white border border-zinc-200 py-2.5 pl-2 pr-8 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                     placeholder="Min"
                                 />
-                                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-zinc-600 pointer-events-none font-bold">
+                                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 pointer-events-none select-none font-bold">
                                     min
                                 </span>
                             </div>
@@ -204,15 +192,15 @@ export default function SpeedConverter({ hints = {} }) {
                                         const m = minkm.includes(':') ? minkm.split(':')[0] || '0' : '0';
                                         handleMinkmChange(`${m}:${e.target.value}`);
                                     }}
-                                    className="w-full bg-white border border-zinc-200 py-2.5 px-3 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition text-center"
+                                    className="w-full bg-white border border-zinc-200 py-2.5 pl-2 pr-8 rounded-lg text-lg font-bold text-zinc-950 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] outline-none transition text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                     placeholder="Sec"
                                 />
-                                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-zinc-600 pointer-events-none font-bold">
+                                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 pointer-events-none select-none font-bold">
                                     sec
                                 </span>
                             </div>
                         </div>
-                        <span className="text-[11px] text-zinc-600 mt-1 block">Montres GPS (Garmin, Coros, Strava)</span>
+                        <span className="text-[11px] text-zinc-500 mt-1 block">Montres GPS (Garmin, Coros, Strava)</span>
                     </div>
                 </div>
 
@@ -303,7 +291,7 @@ export default function SpeedConverter({ hints = {} }) {
                                     placeholder="ex: 40"
                                     value={customSeconds}
                                     onChange={(e) => setCustomSeconds(e.target.value)}
-                                    className="w-16 bg-zinc-800 border border-zinc-700 text-white text-xs px-2 py-1.5 rounded-lg text-center font-bold focus:border-[#FF6B00] outline-none"
+                                    className="w-16 bg-zinc-800 border border-zinc-700 text-white text-xs px-2 py-1.5 rounded-lg text-center font-bold focus:border-[#FF6B00] outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                                 <span className="text-xs text-zinc-400">sec</span>
                             </div>
