@@ -38,7 +38,7 @@ export async function generateMetadata() {
 
 const softwareJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
+    '@type': 'WebApplication',
     'name': 'Convertisseur VMA VO2max NA Coaching',
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
@@ -46,6 +46,11 @@ const softwareJsonLd = {
         '@type': 'Offer',
         'price': '0',
         'priceCurrency': 'EUR'
+    },
+    'author': {
+        '@type': 'Person',
+        'name': 'NA Coaching (Master EOPS)',
+        'url': 'https://www.na-coaching.com/coach/'
     },
     'description': 'Outil gratuit pour convertir la VMA en VO2max et inversement.'
 };

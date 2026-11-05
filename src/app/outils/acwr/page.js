@@ -15,17 +15,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/acwr');
-    const displayTitle = article.title || 'Calculateur ACWR';
+    const displayTitle = article.title || 'Calculateur ACWR Gratuit : Ratio Charge & Prévention Blessure';
     const seoTitle = article.seo_title || displayTitle;
-    const description = article.meta_desc || article.intro || 'Évitez le surentraînement avec l\'ACWR.';
+    const description = article.meta_desc || article.intro || 'Calculez votre ratio ACWR (charge aiguë sur chronique). Identifiez la zone optimale de progression (Sweet Spot) et évitez le surentraînement en sport.';
 
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
-        description: article.meta_desc || article.intro || 'Surveillez votre ratio de charge aiguë/chronique (ACWR) pour prévenir les blessures et le surentraînement. Outil gratuit pour sportifs.',
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Calculateur ACWR',
-            description: article.meta_desc || article.intro || 'Prévenez les blessures en surveillant votre charge d\'entraînement.',
+            title: seoTitle,
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -35,14 +35,19 @@ export async function generateMetadata() {
 
 const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'Calculateur ACWR NA Coaching',
+    '@type': 'WebApplication',
+    'name': 'Calculateur ACWR Gratuit : Ratio Charge & Prévention Blessure',
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
     'offers': {
         '@type': 'Offer',
         'price': '0',
         'priceCurrency': 'EUR'
+    },
+    'author': {
+        '@type': 'Person',
+        'name': 'NA Coaching (Master EOPS)',
+        'url': 'https://www.na-coaching.com/coach/'
     },
     'description': 'Outil gratuit pour calculer son Acute:Chronic Workload Ratio (ACWR) et prévenir le surentraînement.'
 };

@@ -14,16 +14,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/predictateur-performance');
-    const displayTitle = article.title || 'Prédicteur Performance';
+    const displayTitle = article.title || 'Prédicteur de Course : Formule de Riegel (10km, Semi, Marathon)';
     const seoTitle = article.seo_title || displayTitle;
+    const description = article.meta_desc || article.intro || "Prédisez vos chronos sur 10 km, semi-marathon et marathon grâce à la formule de Riegel. Estimation fiable du temps de passage et calcul des allures cibles.";
 
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
-        description: article.meta_desc || article.intro || "Prédisez vos temps sur 5km, 10km, Semi-Marathon et Marathon à partir d'un chrono de référence. Formule de Riegel pour vos objectifs course à pied.",
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: seoTitle,
-            description: article.meta_desc || article.intro || "Prédisez vos temps de course sur toutes les distances.",
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -83,10 +84,20 @@ export default async function RacePredictorPage() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": article.title || "Prédicteur de Performance Running",
-        "description": article.intro,
-        "applicationCategory": "FitnessApplication",
-        "operatingSystem": "Web"
+        "name": article.title || "Prédicteur de Course : Formule de Riegel",
+        "description": article.intro || "Prédisez vos chronos sur 10 km, semi-marathon et marathon grâce à la formule de Riegel.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "NA Coaching (Master EOPS)",
+            "url": "https://www.na-coaching.com/coach/"
+        }
     };
 
     return (

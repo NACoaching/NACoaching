@@ -14,16 +14,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/rpe-1rm');
-    const displayTitle = article.title || 'Convertisseur RPE';
+    const displayTitle = article.title || 'Tableau RPE Musculation & Convertisseur RIR (Échelle 1 à 10)';
     const seoTitle = article.seo_title || displayTitle;
+    const description = article.meta_desc || article.intro || "Tableau RPE complet et convertisseur RIR en pourcentage du 1RM. Estimez vos charges d'entraînement et autorégulez vos séances sans échec musculaire.";
 
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
-        description: article.meta_desc || article.intro || "Calculez votre intensité relative (% de 1RM) à partir de votre RPE et de vos répétitions. L'outil indispensable pour la force athlétique.",
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: seoTitle,
-            description: article.intro || "Calculez votre intensité relative pour la force athlétique.",
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -83,10 +84,20 @@ export default async function RPEPage() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": article.title,
-        "description": article.intro,
-        "applicationCategory": "FitnessApplication",
-        "operatingSystem": "Web"
+        "name": article.title || "Tableau RPE Musculation & Convertisseur RIR",
+        "description": article.intro || "Tableau RPE complet et convertisseur RIR en pourcentage du 1RM pour l'autorégulation de vos entraînements.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "NA Coaching (Master EOPS)",
+            "url": "https://www.na-coaching.com/coach/"
+        }
     };
 
     return (
@@ -98,7 +109,7 @@ export default async function RPEPage() {
                 <Breadcrumb items={[
                     { label: 'Accueil', href: '/' },
                     { label: 'Outils', href: '/outils/' },
-                    { label: article.title || 'Convertisseur RPE' }
+                    { label: article.title || 'Tableau RPE Musculation' }
                 ]} />
 
                 <Link href="/outils/" className="inline-flex items-center gap-2 text-zinc-600 hover:text-[#FF6B00] transition mt-6 mb-8 group font-bold  text-xs">
@@ -107,11 +118,22 @@ export default async function RPEPage() {
 
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-4xl md:text-5xl font-bold  mb-6 text-zinc-950 text-center">
-                        {article.title || 'CONVERTISSEUR RPE'}
+                        {article.title || 'TABLEAU RPE MUSCULATION & CONVERTISSEUR RIR'}
                     </h1>
-                    <p className="text-zinc-700 font-normal text-zinc-600 text-lg mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-zinc-700 font-normal text-zinc-600 text-lg mb-8 text-center max-w-2xl mx-auto leading-relaxed">
                         {article.intro || "Maîtrisez l'autorégulation de votre entraînement en convertissant votre RPE en intensité relative."}
                     </p>
+
+                    {/* Intent Clarification & Cross-link Banner to 1RM Calculator */}
+                    <div className="bg-orange-50/80 border border-orange-200 rounded-xl p-4 mb-8 text-sm text-zinc-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+                        <div className="flex items-center gap-2.5">
+                            <span className="text-xl">🏋️</span>
+                            <span><strong>Besoin de calculer votre charge maximale brute en kg ?</strong> Utilisez notre calculateur 1RM direct avec formules Brzycki & Epley.</span>
+                        </div>
+                        <Link href="/outils/calculateur-1rm/" className="whitespace-nowrap font-bold text-[#FF6B00] hover:text-[#e05e00] hover:underline flex items-center gap-1 text-xs uppercase tracking-wider">
+                            Calculateur 1RM en kg →
+                        </Link>
+                    </div>
 
                     <div className="mb-16">
                         <RPEConverter hints={article.tool_hints} />

@@ -16,9 +16,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/calculateur-1rm');
-    const displayTitle = article.title || 'Calculateur 1RM';
+    const displayTitle = article.title || 'Calculateur 1RM Musculation : Formules Brzycki & Epley';
     const seoTitle = article.seo_title || displayTitle;
-    const description = article.meta_desc || article.intro || 'Estimez votre 1RM en musculation.';
+    const description = article.meta_desc || article.intro || 'Calculez votre charge maximale (1RM) avec les formules Brzycki et Epley. Tableau des pourcentages et calcul immédiat pour planifier vos cycles de force.';
     
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
@@ -38,8 +38,8 @@ export async function generateMetadata() {
 
 const softwareJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'Calculateur 1RM NA Coaching',
+    '@type': 'WebApplication',
+    'name': 'Calculateur 1RM Musculation : Formules Brzycki & Epley',
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
     'offers': {
@@ -47,7 +47,12 @@ const softwareJsonLd = {
         'price': '0',
         'priceCurrency': 'EUR'
     },
-    'description': 'Outil gratuit pour calculer sa répétition maximale (1RM) en musculation.'
+    'author': {
+        '@type': 'Person',
+        'name': 'NA Coaching (Master EOPS)',
+        'url': 'https://www.na-coaching.com/coach/'
+    },
+    'description': 'Outil gratuit pour calculer sa répétition maximale (1RM) en musculation selon les formules de Brzycki et Epley.'
 };
 
 const DEFAULT_FAQ_DATA = [
@@ -122,9 +127,20 @@ export default async function Calculator1RMPage() {
                         <ArrowLeft size={16} /> Retour aux outils
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-bold mb-12 text-zinc-950 text-center">
-                        {article.title || 'Calculateur 1RM'}
+                    <h1 className="text-4xl md:text-5xl font-bold mb-8 text-zinc-950 text-center">
+                        {article.title || 'CALCULATEUR 1RM MUSCULATION'}
                     </h1>
+
+                    {/* Intent Clarification & Cross-link Banner to RPE */}
+                    <div className="bg-orange-50/80 border border-orange-200 rounded-xl p-4 mb-8 text-sm text-zinc-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+                        <div className="flex items-center gap-2.5">
+                            <span className="text-xl">📊</span>
+                            <span><strong>Vous programmez au ressenti d'effort ou RIR ?</strong> Utilisez notre tableau d'autorégulation RPE pour calibrer vos séances au jour le jour.</span>
+                        </div>
+                        <Link href="/outils/rpe-1rm/" className="whitespace-nowrap font-bold text-[#FF6B00] hover:text-[#e05e00] hover:underline flex items-center gap-1 text-xs uppercase tracking-wider">
+                            Tableau RPE & RIR →
+                        </Link>
+                    </div>
 
                     <div className="lg:col-span-12">
                         <Calculator1RM hints={article.tool_hints} />

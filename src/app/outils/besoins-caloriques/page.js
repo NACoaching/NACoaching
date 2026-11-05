@@ -16,9 +16,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/besoins-caloriques');
-    const displayTitle = article.title || 'Besoins Caloriques';
+    const displayTitle = article.title || 'Calculateur TDEE Gratuit : Calories Journalières & Métabolisme';
     const seoTitle = article.seo_title || displayTitle;
-    const description = article.meta_desc || article.intro || 'Calculez vos besoins caloriques journaliers.';
+    const description = article.meta_desc || article.intro || 'Calculez gratuitement votre dépense énergétique totale (TDEE) et votre métabolisme de base. Ajustez votre apport calorique exact pour sécher ou prendre du muscle.';
 
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
@@ -38,8 +38,8 @@ export async function generateMetadata() {
 
 const softwareJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'Calculateur Besoins Caloriques NA Coaching',
+    '@type': 'WebApplication',
+    'name': 'Calculateur TDEE Gratuit : Calories Journalières & Métabolisme',
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
     'offers': {
@@ -47,7 +47,12 @@ const softwareJsonLd = {
         'price': '0',
         'priceCurrency': 'EUR'
     },
-    'description': 'Outil gratuit pour calculer ses besoins caloriques journaliers (TDEE).'
+    'author': {
+        '@type': 'Person',
+        'name': 'NA Coaching (Master EOPS)',
+        'url': 'https://www.na-coaching.com/coach/'
+    },
+    'description': 'Outil gratuit pour calculer ses besoins caloriques journaliers (TDEE) et métabolisme de base.'
 };
 
 const DEFAULT_FAQ_DATA = [

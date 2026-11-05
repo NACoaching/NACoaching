@@ -16,17 +16,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/frequence-cardiaque');
-    const displayTitle = article.title || 'Zones Cardiaques';
+    const displayTitle = article.title || 'Formule de Karvonen : Calculateur Zones Cardio en Ligne';
     const seoTitle = article.seo_title || displayTitle;
-    const description = article.meta_desc || article.intro || 'Calculez vos zones de fréquence cardiaque (Karvonen).';
+    const description = article.meta_desc || article.intro || 'Calculez vos 5 zones de fréquence cardiaque avec la formule de Karvonen (FC Réserve). Optimisez votre endurance fondamentale et vos séances sans approximations.';
 
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
-        description: article.meta_desc || description,
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
             title: seoTitle,
-            description: article.meta_desc || description,
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -38,8 +38,8 @@ export async function generateMetadata() {
 
 const softwareJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'Calculateur Zones Cardiaques NA Coaching',
+    '@type': 'WebApplication',
+    'name': 'Formule de Karvonen : Calculateur Zones Cardio en Ligne',
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
     'offers': {
@@ -47,7 +47,12 @@ const softwareJsonLd = {
         'price': '0',
         'priceCurrency': 'EUR'
     },
-    'description': 'Outil gratuit pour calculer ses zones de fréquence cardiaque avec la méthode Karvonen.'
+    'author': {
+        '@type': 'Person',
+        'name': 'NA Coaching (Master EOPS)',
+        'url': 'https://www.na-coaching.com/coach/'
+    },
+    'description': 'Outil gratuit pour calculer ses zones de fréquence cardiaque avec la formule de Karvonen.'
 };
 
 const DEFAULT_FAQ_DATA = [

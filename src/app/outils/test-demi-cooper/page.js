@@ -14,17 +14,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
     const article = await getToolArticle('/outils/test-demi-cooper');
-    const displayTitle = article.title || 'Test Demi-Cooper';
+    const displayTitle = article.title || 'Test Demi-Cooper : Calcule ta VMA en 6 min (Tableau Gratuit)';
     const seoTitle = article.seo_title || displayTitle;
-    const description = article.meta_desc || article.intro || 'Calculez votre VMA avec le Test Demi-Cooper (6 min).';
+    const description = article.meta_desc || article.intro || "Calculez votre VMA et VO2max avec le test Demi-Cooper (6 min). Barème officiel de performance, tableau d'allures et protocole complet par un coach EOPS.";
 
     return {
         title: seoTitle.includes('NA Coaching') ? seoTitle : `${seoTitle} | NA Coaching`,
-        description: article.meta_desc || article.intro || "Évaluez votre VMA et votre VO2max avec le test du demi-Cooper (6 minutes). Obtenez vos allures d'entraînement personnalisées pour le running.",
+        description: description,
         authors: [{ name: 'NA Coaching (Master EOPS)', url: 'https://www.na-coaching.com/' }],
         openGraph: {
-            title: article.title || 'Test Demi-Cooper (6 min)',
-            description: article.meta_desc || article.intro || "Évaluez votre VMA et VO2max avec un test terrain simple.",
+            title: article.title || 'Test Demi-Cooper : Calcule ta VMA en 6 min (Tableau Gratuit)',
+            description: description,
             images: [article.image || '/logo.png'],
             type: 'website',
         },
@@ -84,15 +84,56 @@ export default async function DemiCooperPage() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": article.title,
-        "description": article.intro,
-        "applicationCategory": "FitnessApplication",
-        "operatingSystem": "Web"
+        "name": article.title || "Test Demi-Cooper : Calculateur VMA",
+        "description": article.intro || "Calculez votre VMA et VO2max avec le test Demi-Cooper (6 min).",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "NA Coaching (Master EOPS)",
+            "url": "https://www.na-coaching.com/coach/"
+        }
+    };
+
+    const howToJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Comment réaliser le test Demi-Cooper (6 minutes) pour calculer sa VMA",
+        "description": "Protocole officiel en 3 étapes pour mesurer sa Vitesse Maximale Aérobie (VMA) et estimer son VO2max avec le test Demi-Cooper.",
+        "totalTime": "PT30M",
+        "estimatedCost": {
+            "@type": "MonetaryAmount",
+            "currency": "EUR",
+            "value": "0"
+        },
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Échauffement progressif (15 minutes)",
+                "text": "Effectuez 10 minutes de footing léger à allure d'endurance fondamentale, suivi de 3 à 5 minutes de gammes athlétiques (montées de genoux, talons-fesses) et 2 à 3 accélérations progressives sur 50 mètres pour préparer le système cardiovasculaire."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Course à allure maximale continue pendant 6 minutes",
+                "text": "Sur une piste d'athlétisme étalonnée (400 m) ou un parcours plat mesuré au GPS, partez à une allure rapide mais régulière et parcourez la plus grande distance possible pendant exactement 6 minutes."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Mesure de la distance et calcul de la VMA",
+                "text": "Relevez la distance totale parcourue en mètres à la 6ème minute. Divisez cette distance par 100 pour obtenir votre VMA en km/h (ex : 1500 mètres en 6 min = 15 km/h de VMA). Entrez ce résultat dans notre calculateur pour obtenir vos allures d'entraînement personnalisées."
+            }
+        ]
     };
 
     return (
         <div className="min-h-screen bg-zinc-50 pt-32 pb-20">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
             <div className="max-w-7xl mx-auto px-6">
