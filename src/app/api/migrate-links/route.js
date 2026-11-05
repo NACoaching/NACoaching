@@ -101,15 +101,15 @@ export async function GET(req) {
             // Mettre à jour la table articles
             const { error: artErr } = await supabaseAdmin
                 .from('articles')
-                .update({ title: tool.title })
+                .update({ title: tool.title, excerpt: tool.meta_desc })
                 .eq('id', tool.id);
 
-            // Upsert dans site_content pour compatibilité maximale
+            // Upsert dans site_content pour compatibilité maximale avec la colonne label requise
             const siteContentItems = [
-                { key: `article_${tool.id}_seo_title`, value: tool.title },
-                { key: `article_${tool.id}_seo_desc`, value: tool.meta_desc },
-                { key: `tool_${tool.toolId}_title`, value: tool.title },
-                { key: `tool_${tool.toolId}_meta_desc`, value: tool.meta_desc }
+                { key: `article_${tool.id}_seo_title`, value: tool.title, label: `SEO Title: ${tool.title}` },
+                { key: `article_${tool.id}_seo_desc`, value: tool.meta_desc, label: `SEO Desc: ${tool.title}` },
+                { key: `tool_${tool.toolId}_title`, value: tool.title, label: `Titre Outil: ${tool.title}` },
+                { key: `tool_${tool.toolId}_meta_desc`, value: tool.meta_desc, label: `Meta Desc Outil: ${tool.title}` }
             ];
 
             const { error: scErr } = await supabaseAdmin
