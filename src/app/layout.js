@@ -83,6 +83,9 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="fr">
+      <head>
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-50 font-sans text-zinc-900 selection:bg-orange-500 selection:text-white`}>
         <script
           type="application/ld+json"
